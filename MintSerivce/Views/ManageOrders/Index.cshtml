@@ -1,0 +1,296 @@
+﻿@using System.Linq;
+@using MintSerivce.Models
+@model ViewModel
+@{
+    ViewBag.Title = "Returned Orders";
+}
+<div class="container" style="width:1200px; padding-top:20px">
+    <ul class="nav nav-tabs" style="padding-top:15px;" id="myTab">
+        <li class="active"><a data-toggle="tab" href="#RETURNORDER">UPDATE ORDERS ADDRESS</a></li>
+        <li><a data-toggle="tab" href="#MANAGESKU">UPDATE SKU BUFFER</a></li>
+        <li><a data-toggle="tab" href="#CreateSKU">CREATE NEW SKU</a></li>
+        <li><a data-toggle="tab" href="#RemoveSKU">REMOVE EXISTING SKU</a></li>
+        <li><a data-toggle="tab" href="#MANAGEDISPATCHORDER">MANAGE DISPATCH</a></li>
+        @*<li><a data-toggle="tab" href="#MANAGEACCESSORIES">MANAGE ACCESSORIES</a></li>*@
+    </ul>
+    <div class="tab-content" style="border-width:thin;border-style:solid;border-color:gray;width:1200px;padding-top:10px;">
+        <div class="form-group" style="padding-left:10px;color:orange;width:auto;align-items:center;text-align:center;vertical-align:top">
+            @if (TempData["ValidationErrors"] != null)
+            {
+                <p><h6> @TempData["ValidationErrors"].ToString()</h6></p>
+            }
+        </div>
+        <div id="RETURNORDER" class="tab-pane fade in active" role="tabpanel" style="text-align:left;padding-left:20px;width:1000px; ">
+            @using (Html.BeginForm("UpdateOrderAddress", "ManageOrders", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+
+                <label class="control-label">Order Id</label><br>
+                @Html.DropDownListFor(model => Model.OrdersListItemModel, Model.OrdersListItemModel, "Select Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })<br /><br />
+
+
+                <label class="control-label">First Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                @Html.EditorFor(model => model.FirstName, "", new { style = "width:150px" })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                <br /><br />
+                <label class="control-label">Surname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                @Html.EditorFor(model => model.Surname, "", new { style = "width:150px" })
+                @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                <br /><br />
+                <label class="control-label">Saluation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                @Html.EditorFor(model => model.Salutation, "", new { style = "width:150px" })
+                @Html.ValidationMessageFor(model => Model.Salutation, "", new { @class = "text-danger" })
+                <br /><br />
+
+                <label class="control-label">Contact Number&nbsp;&nbsp;</label>
+                @Html.EditorFor(model => model.ContactNumber, "", new { style = "width:150px" })
+                @Html.ValidationMessageFor(model => Model.ContactNumber, "", new { @class = "text-danger" })
+                <br /><br />
+
+                <label class="control-label">State&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                @Html.EditorFor(model => model.State, "", new { style = "width:150px" })
+                @Html.ValidationMessageFor(model => Model.State, "", new { @class = "text-danger" })
+                <br /><br />
+
+                <label class="control-label">Address Line 1&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                @Html.EditorFor(model => model.AddressLine1, "", new { style = "width:150px" })
+                @Html.ValidationMessageFor(model => Model.AddressLine1, "", new { @class = "text-danger" })
+                <br /><br />
+
+                <label class="control-label">Locality&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                @Html.EditorFor(model => model.Locality, "", new { style = "width:150px" })
+                @Html.ValidationMessageFor(model => Model.AddressLine1, "", new { @class = "text-danger" })
+                <br /><br />
+
+                <label class="control-label">Postal Code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                @Html.EditorFor(model => model.Postcode, "", new { style = "width:150px" })
+                @Html.ValidationMessageFor(model => Model.Postcode, "", new { @class = "text-danger" })
+                <br /><br />
+
+                <input type="submit" class="btn btn-primary" id="update" style="padding-left:20px" value="Update Address"> @*onclick="return ShowProgress();" onclick="DisplayProgressMessage(this,'Processing Order...')"*@<br /><br />
+
+                @*<div class="row">
+
+                    <div class="col-md-10 col-sm-offset-0">
+                        <table class="table table-bordered" table-responsive table-hover" id="mainTable">
+                            <thead style="background-color:#959ca1;color:white">
+                                <tr>
+                                    <th>VerserOrder</th>
+                                    <th>First Name</th>
+                                    <th>Surname</th>
+                                    <th>Saluation</th>
+                                    <th>Contact Number</th>
+                                    <th>State</th>
+                                    <th>Address Line 1</th>
+                                    <th>Locality</th>
+                                    <th>Post Code</th>
+                                    <th style="width:10px"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.OrderViewModel)
+                                {
+                                <tr>
+
+
+                                    <td style="width:90px;"><span>@Html.DisplayTextFor(modelItem => item.VerserOrderID) </span>
+                                    <input type="text" id="txtVerserOrderID" value="@item.VerserOrderID" style="display:none;width:90px;" readonly />
+                                    </td>
+                                    <td style="width:90px;"><span>@Html.DisplayTextFor(modelItem => item.FirstName)</span>
+                                    <input type="text" id="txtFirstName" value="@item.FirstName" style="display:none;width:90px;" /></td>
+
+                                    <td style="width:80px;"><span>@Html.DisplayTextFor(modelItem => item.Surname)</span>
+                                    <input type="text" id="txtSurname" value="@item.Surname" style="display:none;width:80px;" /></td>
+
+                                    <td style="width:30px;"><span>@Html.DisplayTextFor(modelItem => item.Salutation)</span>
+                                    <input type="text" id="txtSalutation" value="@item.Salutation" style="display:none;width:30px;" /></td>
+
+                                    <td style="width:100px;"><span>@Html.DisplayTextFor(modelItem => item.ContactNumber)</span>
+                                    <input type="text" id="txtContactNumber" value="@item.ContactNumber" style="display:none;width:100px;" /></td>
+
+                                    <td style="width:40px;"><span>@Html.DisplayTextFor(modelItem => item.State)</span>
+                                    <input type="text" id="txtState" value="@item.State" style="display:none;width:40px;" /></td>
+
+                                    <td style="width:140px;"><span>@Html.DisplayTextFor(modelItem => item.AddressLine1)</span>
+                                    <input type="text" id="txtAddressLine1" value="@item.AddressLine1" style="display:none;width:140px;" /></td>
+
+                                    <td style="width:80px;"><span>@Html.DisplayTextFor(modelItem => item.Locality)</span>
+                                    <input type="text" id="txtLocality" value="@item.Locality" style="display:none;width:80px;" /></td>
+
+                                    <td style="width:40px;"><span>@Html.DisplayTextFor(modelItem => item.Postcode)</span>
+                                    <input type="text" id="txtPostcode" value="@item.Postcode" style="display:none;width:40px;" /></td>
+
+
+                                    <td style="width:40px;">
+                                        <a class="Edit btn btn-warning a-btn-slide-text" href="javascript:;">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                            <span>Edit</span>
+                                        </a>
+
+                                        <a class="Update btn btn-success a-btn-slide-text" href="javascript:;" style="display:none" id="Update">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                            <span>Update</span>
+                                        </a><br />
+
+                                        <a class="Cancel btn btn-danger a-btn-slide-text" href="javascript:;" style="display:none">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            <span><strong>Cancel</strong></span>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+            </div>*@
+            }
+        </div>
+        <div id="MANAGEDISPATCHORDER" class="tab-pane fade">
+            @using (Html.BeginForm("OrderSummary", "ManageOrders", FormMethod.Post))
+            {
+                <button type="submit" class="btn btn-primary">PRINT TODAY SHIPMENT ORDER SUMMARY</button>
+                if (TempData["OrderFilePath"] != null)
+                {
+                    @*@Html.ActionLink("Shipment Order PDF", "Download", "ReturnedOrders", new { file = TempData["OrderFileName"].ToString() }, null)*@
+                    <br />
+                    <img style="width:45px" src="~/Images/PDF.png" /> <a href="javascript: w=window.open('@TempData["OrderFilePath"].ToString()');">Print Shipment Order Summary</a>
+                }
+            }
+
+
+            <span id="staticText">https://customers.verser.com.au/MintStarTrackOrderSummaryFiles/OrderSummary-</span>
+            <input type="text" id="datevalueEnter" name="dateValueEnter" placeholder="Enter Date in ddmmyyyy format" /> <span id="trailer">.pdf</span>
+
+            <p><a id="downloadfile" href="downloadfile" target="_blank">  Download File</a></p>
+        </div>
+
+        <div id="MANAGESKU" class="tab-pane fade">
+            @using (Html.BeginForm("UpdateSKUBuffer", "ManageOrders", FormMethod.Post))
+            {
+                <div class="form-group" style="padding-left:20px;padding-top:15px">
+                    <label class="control-label">SKU ID</label><br>
+                    @Html.DropDownListFor(model => Model.ListItemModel, Model.ListItemModel, "Select SKU", new { @class = "form-control", @id = "ddlSKUID", @multiple = "multiple" })<br>
+                    <label class="control-label">SKU Buffer</label><br>
+                    <input type="text" id="SKUBufferID" name="SKUBuffer" class="form-control" /><br>
+                </div>
+                <div class="form-group" style="padding-left:20px;">
+                    <button type="submit" class="btn btn-primary">UPDATE SKU</button>
+                </div>
+            }
+        </div>
+        <div id="MANAGEACCESSORIES" class="tab-pane fade">
+            @Html.Partial("ManageAccessories")
+        </div>
+        <div id="CreateSKU" class="tab-pane fade">
+            @Html.Partial("CreateSKU")
+        </div>
+        <div id="RemoveSKU" class="tab-pane fade">
+            @Html.Partial("RemoveSKU")
+        </div>
+    </div>
+</div>
+
+
+
+<link href="~/Content/bootstrap-3.1.4.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+   
+    <script src="~/Scripts/datatables.min.js"></script>
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+      
+        $('#mainTable').DataTable();
+        $('.dataTables_filter').addClass('pull-right');
+
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        var today = dd + + mm + + yyyy;
+        // document.getElementById('DATE').value = today;
+        // var text = "https://customers.verser.com.au/MintStarTrackOrderSummaryFiles/OrderSummary-" + today + ".pdf";
+
+        $("#downloadfile").click(function () {
+            var text1 = $("#staticText").text() + $("#datevalueEnter").val() + $("#trailer").text();
+            //  text1 = text1.replace("11122018", today);
+
+            //alert(text1);
+            document.getElementById("downloadfile").href = text1;;
+            //alert("test");
+            // $('a[href="#downloadFile"]').val("https://customers.verser.com.au/MintStarTrackOrderSummaryFiles/OrderSummary-11122018.PDF");
+        });
+
+
+
+    });
+    $('#mainTable').on('click', 'tbody td:not(:first-child)', function (e) {
+        editor.inline(this);
+    });
+    $('#ddlSKUID').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 250,
+        buttonWidth: '280px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true
+    });
+    $('#ddlSKUID').removeAttr('multiple')
+    $('#ddlSKUID').multiselect('rebuild');
+
+    $('#ddlOrderID').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 250,
+        buttonWidth: '280px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true
+    });
+    $('#ddlOrderID').removeAttr('multiple')
+    $('#ddlOrderID').multiselect('rebuild');
+
+
+    //$("body").on("click", "#Update", function () {
+    //    var OrderViewModel = {};
+       
+    //    OrderViewModel.VerserOrderID = $("#ddlOrderID").val();
+    //    OrderViewModel.FirstName = $("#txtFirstName").val();
+    //    OrderViewModel.Surname = $("#txtSurname").val();
+    //    OrderViewModel.Salutation = $("#txtSalutation").val();
+    //    OrderViewModel.ContactNumber =$("#txtContactNumber").val();
+    //    OrderViewModel.State = $("#txtState").val();
+    //    OrderViewModel.AddressLine1 = $("#txtAddressLine1").val();
+    //    OrderViewModel.Locality = $("#txtLocality").val();
+    //    OrderViewModel.Postcode = $("#txtPostcode").val();
+
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "./UpdateOrderAddress",
+    //        data: JSON.stringify(OrderViewModel),
+    //        contentType: "application/json; charset=utf-8",
+    //        dataType: "json"
+    //    });
+    //});
+</script>
+<style>
+   
+
+</style>
+

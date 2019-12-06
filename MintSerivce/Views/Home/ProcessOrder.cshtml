@@ -1,0 +1,278 @@
+﻿@model MintSerivce.Models.SelectedOrderModel
+@{
+    ViewBag.Title = "ProcessOrder";
+ }
+
+
+<div class="loading" align="center" style="padding-top:20px;" >
+   Order Completing, Please Wait...<br />
+    <br />
+    <img src="~/Content/Images/Loader.gif" alt="loading" />
+</div>
+<body>
+    <div class="container" style="width:710px; padding-top:20px">
+        <h5 class="text-center font-weight-bold pt-4 pb-5" style="color:navy;padding-top:20px;"><strong>PROCESS ORDER  </strong></h5>     
+        <ul class="nav nav-tabs" style="padding-top:15px;" id="myTab">
+            <li class="active"><a data-toggle="tab" href="#ADDPHONETOORDER">PHONE AND SIM ORDER</a></li>
+            <li><a data-toggle="tab" href="#PHONEORDER">PHONE ORDER</a></li>   
+            <li><a data-toggle="tab" href="#SIMORDER">SIM ORDER</a></li>
+                    
+            <li><a data-toggle="tab" href="#PRINTSHIPMENTLABEL">PRINT SHIPMENT LABEL</a></li>
+        </ul>
+        <div class="tab-content" style="border-width:thin;border-style:solid;border-color:gray;width:710px;padding-top:10px;">          
+             <div class="form-group" style="padding-left:20px;color:orange;width:auto;align-items:center;text-align:center;">
+                @if (Model.ResultMessage != null)
+                {
+                <p><h5> @Model.ResultMessage</h5></p>               
+                }
+            </div>
+            <div id="ADDPHONETOORDER" class="tab-pane fade in active" role="tabpanel" style="text-align:left;padding-left:20px;">
+              
+                    @using (Html.BeginForm("AddMobileToOrder", "Home", FormMethod.Post))
+                    {
+                <div class="form-group">
+                    <label for="usr">SSN:</label>
+                    @Html.EditorFor(model => model.SSN, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" }, id = "SSN", tabindex = "1" })
+                    @Html.HiddenFor(Model => Model.VerserOrderID)
+                    @Html.HiddenFor(Model => Model.PhoneAndSim)
+                    @Html.ValidationMessageFor(model => model.SSN, null, new { @class = "text-danger" })
+
+                </div>
+                    <div class="form-group">
+                        <label for="usr">SIM:</label>
+                        @Html.EditorFor(model => model.SIM, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" }, id = "SIM", tabindex = "2" })
+                        @Html.ValidationMessageFor(model => model.SIM, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+
+                        <input type="submit" class="btn btn-primary" id="ADDPHONE" style="padding-left:20px" value="COMPLETE ORDER" onclick="return ShowProgress(this);" > @*onclick="return ShowProgress();" onclick="DisplayProgressMessage(this,'Processing Order...')"*@
+                    </div>
+                    }
+
+            </div>
+            <div id="PHONEORDER" class="tab-pane fade" role="tabpanel">
+               
+                    @using (Html.BeginForm("PhoneOnlyOrder", "Home", FormMethod.Post))
+                    {                 
+                    <div class="form-group" style="padding-left:20px;padding-top:15px">
+                        <label for="usr">SSN:</label>
+                        @Html.EditorFor(model => model.SSN, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus", id="phoneOnlySSN" }})         
+                       @Html.ValidationMessageFor(model => model.SSN, null, new { @class = "text-danger" })                                       
+                        @Html.HiddenFor(Model => Model.VerserOrderID, new { id = "_VerserOrderID" })
+                    </div>
+                    <div class="form-group" style="padding-left:20px;">
+                        <button type="submit" class="btn btn-primary" id="PhoneOnly" onclick="return ShowProgressPhoneOnly(this);" >COMPLETE ORDER</button>
+                         @*onclick="return ShowProgressPhoneOnly(this);"*@
+                    </div>
+                    }
+            </div>        
+            <div id="SIMORDER" class="tab-pane fade" role="tabpanel">
+               
+                        @using (Html.BeginForm("AddSimToOrder", "Home", FormMethod.Post))
+                        {
+                    <div class="form-group" style="padding-left:20px;padding-top:15px">
+                        <label for="usr">SIM:</label>                        
+                        @Html.HiddenFor(Model => Model.VerserOrderID)
+                        @Html.EditorFor(model => model.SIM, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" }, id = "SIM", tabindex = "2" })
+                    </div>
+                    <div class="form-group" style="padding-left:20px;">
+                        <button type="submit" class="btn btn-primary" id="SimOnlyOrder">COMPLETE SIM ORDER</button>
+                    </div>
+                         }
+            </div>
+            <div id="PRINTSHIPMENTLABEL" class="tab-pane fade" role="tabpanel">
+                <div class="form-group" style="padding-left:20px;padding-top:15px">
+                    @using (Html.BeginForm("GetOrderShipmentLabel", "Home", FormMethod.Post))
+                  {
+                    @Html.HiddenFor(Model => Model.VerserOrderID)
+                    <button type="submit" class="btn btn-primary">ORDER SHIPMENT LABEL</button>
+                  }
+                </div>
+                <div>
+                    @if (Model.ShipLabelURL != null)
+                    {
+                    <div style="padding-left:30px;padding-bottom:15px;"> 
+                                              
+                        @*var opts = 'width=700,height=500,toolbar=0,menubar=0,location=1,status=1,scrollbars=1,resizable=1,left=0,top=0';
+                        var newWindow = window.open(yourUrl,'name',opts);
+                        newWindow.print();*@
+                        <a href="javascript: w=window.open('@Model.ShipLabelURL');" class="btn-success btn-md btn-circle">Print Shipment Label</a>                      
+                    </div>
+                    }
+                </div>
+                @*<div class="form-group" style="padding-left:20px;">
+                    @using (Html.BeginForm("PrintOrdergreetings", "Home", FormMethod.Post))
+                    {
+                    @Html.HiddenFor(Model => Model.VerserOrderID)
+                    <button type="submit" class="btn btn-primary">PRINT ORDER GREETINGS</button>
+                    }
+                </div>*@
+
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<style>
+     .loading {
+            font-family: Arial;
+            font-size: 10pt;
+            color:white;
+            background-color:black;
+            border: 5px solid #67CFF5;
+            width: 300px;   
+            display: none;
+            position: fixed;
+            font-weight:600;        
+            font-size:medium;   
+            z-index: 999;
+        }
+     .loading-bg{
+    background-color:lightgray;
+    opacity:0.5;
+     }
+    /*.navbar-fixed-top{
+      width: 100%;
+      height: 60px;
+      background: #000;
+      color: white;
+      text-transform: uppercase;
+      text-align: center;
+      position: fixed;
+      overflow: hidden;
+    }*/
+
+</style>
+
+@section scripts
+    {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+
+    //$(document).ready(function () {
+    //    if (location.hash) {
+    //        $("a[href='" + location.hash + "']").tab("show");
+    //    }
+    //    $(document.body).on("click", "a[data-toggle]", function (event) {
+    //        location.hash = this.getAttribute("href");
+    //    });
+    //});
+    //$(window).on("popstate", function () {
+    //    var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
+    //    $("a[href='" + anchor + "']").tab("show");
+    //});
+        //events = [];
+        //$.ajax({
+        //    type: "POST",
+        //    url: "./SearchEvents",
+        //    data: { 'candidateId': $('#ddlCandidateId').val(), 'warehouseId': $('#ddlWarehouseId').val(), 'opportunityId': $('#ddlOpportunityId').val() },
+        //    success: function (data) {
+        //        $.each(data, function (i, v) {
+        //            events.push({
+        //                eventID: v.ID,
+        //                title: v.CandidateName,
+        //                description: v.Activity,
+        //                start: moment(v.StartTime),
+        //                end: v.EndTime != null ? moment(v.EndTime) : null,
+        //                color: v.Colour,
+        //                allDay: v.IsFullDay
+        //            });
+        //        })
+        //        GenerateCalender(events);
+        //    },
+        //    error: function (error) {
+        //        alert('search failed');
+        //    }
+        //})
+  
+    //function DisplayProgressMessage(ctl,msg)
+    //{
+    //    $(ctl).prop("disabled", true).text(msg);
+    //    $(".loading").removeClass("hidden");
+    //    $("body").addClass("loading-bg");
+
+    //}    
+    //function ValidateSIM()
+    //   {
+    //    if (document.getElementById("SIM").value == "")
+    //    {
+    //        $('#ValidationModal').modal('show');
+    //       // alert("SIM Should Not Be Empty");
+    //    }
+    //}
+    //$(document).ready(function () {
+    //    $('a[data-toggle="tab"]').on('click', function (e) {
+    //        window.localStorage.setItem('activeTab', $(e.target).attr('href'));
+    //    });
+    //    var activeTab = window.localStorage.getItem('activeTab');
+    //    if (activeTab) {
+    //        $('#ProcessOrderTab a[href="' + activeTab + '"]').tab('show');
+    //        window.localStorage.removeItem("activeTab");
+    //    }
+    //});
+
+    //$("ul.nav-tabs > li > a").on("shown.bs.tab", function (e) {
+    //    var id = $(e.target).attr("href").substr(1);
+    //    window.location.hash = id;
+    //    $.cookie("selectedTabId", hash);
+    //    showTab();
+    //});
+
+    //function showTab() {
+    //    if ($.cookie("selectedTabId") != null) {
+    //        $('#nav-tabs-wrapper a[href="' + $.cookie("selectedTabId") + '"]').tab('show');
+    //    }
+    //    else {
+    //        $('#nav-tabs-wrapper a[href="default"]').tab('show'); // show default
+    //    }
+    //}    
+
+    function ShowProgressPhoneOnly(ctl) {
+
+
+        if (document.getElementById("phoneOnlySSN").value == "") {
+        }
+        else
+        {
+            modal = document.createElement("DIV");
+            modal.className = "modal";
+            document.body.appendChild(modal);
+            loading = document.getElementsByClassName("loading")[0];
+            loading.style.display = "block";
+            var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+            var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+            loading.style.top = top + "px";
+            loading.style.left = left + "px";
+            $(ctl).addClass('disabled', true);
+            $("body").addClass("loading-bg");
+            return true;
+        };
+    }
+
+       // var modal, loading;
+        function ShowProgress(ctl) {
+       if (document.getElementById("SIM").value == "" || document.getElementById("SSN").value == "") {}
+       else
+       {
+                modal = document.createElement("DIV");
+                modal.className = "modal";
+                document.body.appendChild(modal);
+                loading = document.getElementsByClassName("loading")[0];
+                loading.style.display = "block";
+                var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+                var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+                loading.style.top = top + "px";
+                loading.style.left = left + "px";
+                $(ctl).addClass('disabled', true);
+                $("body").addClass("loading-bg");
+                return true;
+            };
+        }
+</script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
+
+
+    }

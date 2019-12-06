@@ -1,0 +1,60 @@
+﻿@*@model MintSerivce.Models.SKUModel*@
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+       @using (Html.BeginForm("CreateSKU", "ManageOrders", FormMethod.Post))
+       {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("SKU", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" id="SKU" name="SKU" class="form-control"  />
+                       @*@Html.ValidationMessageFor(model => model.SKU, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Make", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Make, new { htmlAttributes = new { @class = "form-control" } })*@
+                <input type="text" id="Make" name="Make" class="form-control" />
+
+                @*@Html.ValidationMessageFor(model => model.Make, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Model", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })*@
+                <input type="text" id="Model" name="Model" class="form-control" />
+                @*@Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Capacity", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Capacity, new { htmlAttributes = new { @class = "form-control" } })*@
+                <input type="text" id="Capacity" name="Capacity" class="form-control" />
+                @*@Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Colour", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Colour, new { htmlAttributes = new { @class = "form-control" } })*@
+                <input type="text" id="Colour" name="Colour" class="form-control" />
+                @*@Html.ValidationMessageFor(model => model.Colour, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+       }
+    </div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

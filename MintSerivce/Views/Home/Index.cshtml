@@ -1,0 +1,143 @@
+﻿@using System.Linq;
+
+@model IEnumerable<MintSerivce.Models.OrderViewModel>
+@*<div class="loading" align="center">
+    Loading. Please wait.<br />
+    <br />
+    <img src="~/Content/Images/Loader.gif" alt="loading" />
+</div>*@
+<div class="row">
+    <Div style="padding-top:5px">
+        <div class="col-md-10 col-sm-offset-0">
+
+            <table class="table table-bordered" table-responsive table-hover" id="mainTable">
+                <thead style="background-color:#959ca1;color:white">
+                    <tr>
+                        <th>Order</th>
+                        <th>Job</th>
+                        <th>TIABOrder</th>
+                        <th>SKU</th>
+                        <th>Customer</th>
+                        <th>Address</th>
+                        <th>Suburb</th>
+                        <th>Postcode</th>
+                        <th>Status</th>
+                        <th>OrderType</th>
+                        <th>ProcessOrders</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+            @foreach (var item in Model)
+            {
+                        <tr> <td>
+                            <a href="@Url.Action("Assets",new { SKU=item.SKU })">
+                                @Html.DisplayFor(modelItem => item.VerserOrderID)
+                            </a>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SKU)</td>
+                            <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Locality)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Postcode)</td>
+                            <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
+                            <td>@Html.DisplayFor(modelItem => item.OrderType)</td>
+                            <td>
+                                <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID})">
+                                    <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
+                                </a>
+
+
+                                @*@if (item.OrderType == "PhoneSim")
+                                {
+                                <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab="ADDPHONETOORDER" })">
+                                    <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
+                                </a>
+                                }
+                                else if (item.OrderType == "PhoneOnly")
+                                {
+                                    <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab= "PHONEORDER#PHONEORDER" })">
+                                        <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab= "SIMORDER" })">
+                                        <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
+                                    </a>
+                                }*@
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </Div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
+    <script src="~/Scripts/datatables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#mainTable').DataTable();
+            $('.dataTables_filter').addClass('pull-right');
+        });      
+
+   
+    </script>
+}
+<style>    
+.dataTables_filter label, .dataTables_filter input {
+    color:gray;
+    font-size:smaller;    
+}
+
+.dataTables_length{
+    color:gray;
+    font-size:x-small;
+}
+.navbar-fixed-top{
+  width: 100%;
+  height: 55px;
+  background: #000;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  position: fixed;
+  overflow: hidden;
+}
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: black;
+            z-index: 99;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            -moz-opacity: 0.8;
+            min-height: 100%;
+            width: 100%;
+        }
+ 
+        .loading {
+            font-family: Arial;
+            font-size: 10pt;
+            border: 5px solid #67CFF5;
+            width: 200px;
+            height: 100px;
+            display: none;
+            position: fixed;
+            background-color: White;
+            z-index: 999;
+        }
+   
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">

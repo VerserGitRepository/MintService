@@ -1,0 +1,49 @@
+﻿
+@using System.Linq
+@model MintSerivce.Models.SKUStock
+@{
+    ViewBag.Title = "Assets";
+}
+<div class="row">
+    <Div style="padding-top:20px">
+        <div class="col-md-10 col-sm-offset-0">
+
+            <table class="table table-bordered" table-responsive table-hover" id="mainTable">
+                <thead style="background-color:#959ca1;color:white">
+                    <tr>
+
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Colour</th>
+                        <th>Capacity</th>
+                        <th>SKU</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayFor(model => model.Make)</td>
+                        <td>@Html.DisplayFor(model => model.Model)</td>
+                        <td>@Html.DisplayFor(model => model.Colour)</td>
+                        <td>@Html.DisplayFor(model => model.Capacity)</td>
+                        <td>@Html.DisplayFor(model => model.SKU)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </Div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
+    <script src="~/Scripts/datatables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#mainTable').DataTable();
+            $('.dataTables_filter').addClass('pull-right');
+        });
+    </script>
+}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
