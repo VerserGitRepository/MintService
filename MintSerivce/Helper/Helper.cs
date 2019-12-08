@@ -413,6 +413,7 @@ namespace MintSerivce.Helper
         public static string UpdateOrderAddress(UpdateOrderAddressDto theModel)
         {
             string response = string.Empty;
+            var _ReturnDto = new ReturnDto();
             string uri = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["UpdateOrderAddress"];
             string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
             try
@@ -432,7 +433,9 @@ namespace MintSerivce.Helper
                         else
                         {
                             response = resp.Result.Content.ReadAsStringAsync().Result;
-                            response = JsonConvert.DeserializeObject<string>(response);
+                            _ReturnDto = JsonConvert.DeserializeObject<ReturnDto>(response);
+
+                            response = _ReturnDto.ErrorMessage;
                         }
                     }
                 }
@@ -447,7 +450,7 @@ namespace MintSerivce.Helper
         {
             var response = new List<ListItemModel>();
             
-            string OnOrderlist = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["OrderList"];
+            string OnOrderlist = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["Orderslist"];
             string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
             try
             {

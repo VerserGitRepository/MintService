@@ -25,7 +25,6 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,6 +50,7 @@
     </Reference>
     <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.8.6.0\lib\net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -201,9 +201,6 @@
     <Compile Include="Membership\User.cs" />
     <Compile Include="MintServiceAutoMapper.cs" />
     <Compile Include="Models\DispatchedOrderDto.cs" />
-    <Compile Include="Models\UpdateOrderAddressValidatorDto.cs" />
-    <Compile Include="Models\UpdateOrderAddressDto.cs" />
-    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Models\ListItemModel.cs" />
     <Compile Include="Models\ManualOrderModel.cs" />
     <Compile Include="Models\OrderDispatchViewModel.cs" />
@@ -211,12 +208,16 @@
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\PhoneOnlyModel.cs" />
     <Compile Include="Models\RequiredIfAttribute.cs" />
+    <Compile Include="Models\ReturnDto.cs" />
     <Compile Include="Models\SelectedOrderModel.cs" />
     <Compile Include="Models\ShipLabelDTO.cs" />
     <Compile Include="Models\SIMViewModel.cs" />
     <Compile Include="Models\SKUModel.cs" />
     <Compile Include="Models\SKUStock.cs" />
+    <Compile Include="Models\UpdateOrderAddressDto.cs" />
+    <Compile Include="Models\UpdateOrderAddressValidatorDto.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

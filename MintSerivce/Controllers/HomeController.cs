@@ -124,10 +124,9 @@ namespace MintSerivce.Controllers
             else
             {
                 selectedOrderDetails.UserName = Session["User"].ToString();
-
-                if (selectedOrderDetails.PhoneAndSim ==true && selectedOrderDetails.SIM ==null )
+                if (selectedOrderDetails.PhoneAndSim == true && selectedOrderDetails.SIM == null)
                 {
-                    return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrderDetails.VerserOrderID, ResultMessage = selectedOrderDetails.ResultMessage="SIM Is Required!" });
+                    return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrderDetails.VerserOrderID, ResultMessage = selectedOrderDetails.ResultMessage = "SIM Is Required!" });
                 }
                 string Results = ProcessOrderService(selectedOrderDetails).Result;
                 System.Threading.Thread.Sleep(5000);

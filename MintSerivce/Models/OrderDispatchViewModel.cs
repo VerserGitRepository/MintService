@@ -17,7 +17,7 @@ namespace MintSerivce.Models
         public string State { get; set; }
         public string AddressLine1 { get; set; }
         public string Locality { get; set; }
-        public int Postcode { get; set; }
+        public string Postcode { get; set; }
         public string SKU { get; set; }
         public int? ContactNumber { get; set; }
         public string JMS_JobNo { get; set; }
