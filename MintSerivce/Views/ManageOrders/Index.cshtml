@@ -31,7 +31,7 @@
                 @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })<br /><br />
                 //@Html.HiddenFor(Model => Model.VerserOrderID,)
 
-                <label class="control-label">First Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                @*<label class="control-label">First Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 @Html.EditorFor(model => model.FirstName, "", new { style = "width:150px" })
                 @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                 <br /><br />
@@ -47,12 +47,7 @@
                 <label class="control-label">Contact Number&nbsp;&nbsp;</label>
                 @Html.EditorFor(model => model.ContactNumber, "", new { style = "width:150px" })
                 @Html.ValidationMessageFor(model => Model.ContactNumber, "", new { @class = "text-danger" })
-                <br /><br />
-
-                <label class="control-label">State&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                @Html.EditorFor(model => model.State, "", new { style = "width:150px" })
-                @Html.ValidationMessageFor(model => Model.State, "", new { @class = "text-danger" })
-                <br /><br />
+                <br /><br />*@
 
                 <label class="control-label">Address Line 1&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 @Html.EditorFor(model => model.AddressLine1, "", new { style = "width:150px" })
@@ -63,7 +58,10 @@
                 @Html.EditorFor(model => model.Locality, "", new { style = "width:150px" })
                 @Html.ValidationMessageFor(model => Model.Locality, "", new { @class = "text-danger" })
                 <br /><br />
-
+                <label class="control-label">State&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    @Html.EditorFor(model => model.State, "", new { style = "width:150px" })
+                    @Html.ValidationMessageFor(model => Model.State, "", new { @class = "text-danger" })
+                    <br /><br />
                 <label class="control-label">Postal Code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 @Html.EditorFor(model => model.Postcode, "", new { style = "width:150px" })
                 @Html.ValidationMessageFor(model => Model.Postcode, "", new { @class = "text-danger" })
@@ -97,7 +95,7 @@
                 <div class="form-group" style="padding-left:20px;padding-top:15px">
                     <label class="control-label">SKU ID</label><br>
                     @Html.DropDownListFor(model => Model.ListItemModel, Model.ListItemModel, "Select SKU", new { @class = "form-control", @id = "ddlSKUID", @multiple = "multiple" })<br>
-                    <label class="control-label">SKU Buffer</label><br>
+                    <br><br><label class="control-label">SKU Buffer</label><br>
                     <input type="text" id="SKUBufferID" name="SKUBuffer" class="form-control" /><br>
                 </div>
                 <div class="form-group" style="padding-left:20px;">

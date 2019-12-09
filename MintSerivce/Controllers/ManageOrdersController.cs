@@ -94,21 +94,16 @@ namespace MintSerivce.Controllers
         [HttpPost]
         public ActionResult UpdateOrderAddress(ViewModel theModel)
         {
-            UpdateOrderAddressValidatorDto obj = new UpdateOrderAddressValidatorDto();
+            var _Validator = new UpdateOrderAddressValidatorDto();
 
-            UpdateOrderAddressDto obj1 = new UpdateOrderAddressDto();
-            obj1.FirstName = theModel.FirstName;
-
-            obj1.FirstName = theModel.FirstName;
-            obj1.Surname = theModel.Surname;
-            obj1.AddressLine1 = theModel.AddressLine1;
-            obj1.ContactNumber = theModel.ContactNumber;
-            obj1.Locality = theModel.Locality;
-            obj1.Postcode = theModel.Postcode;
-            obj1.Salutation = theModel.Salutation;
-            obj1.VerserOrderID = theModel.VerserOrderID;
-            obj1.State = theModel.State;
-            ValidationResult result = obj.Validate(theModel);
+            var _UpdateOrderAddressData = new UpdateOrderAddressDto();
+    
+            _UpdateOrderAddressData.AddressLine1 = theModel.AddressLine1;            
+            _UpdateOrderAddressData.Locality = theModel.Locality;
+            _UpdateOrderAddressData.Postcode = theModel.Postcode;           
+            _UpdateOrderAddressData.VerserOrderID = theModel.VerserOrderID;
+            _UpdateOrderAddressData.State = theModel.State;
+            ValidationResult result = _Validator.Validate(theModel);
             if (!result.IsValid)
             {
                 foreach (ValidationFailure failure in result.Errors)
@@ -118,7 +113,7 @@ namespace MintSerivce.Controllers
             }
             else
             {
-                var ReturnFileName = Helper.Helper.UpdateOrderAddress(obj1);
+                var ReturnFileName = Helper.Helper.UpdateOrderAddress(_UpdateOrderAddressData);
                 if (ReturnFileName != null)
                 {
                     ReturnFileName = ReturnFileName.Trim('"');
