@@ -96,6 +96,7 @@ namespace MintSerivce.Controllers
         {
             var _Validator = new UpdateOrderAddressValidatorDto();
 
+
             var _UpdateOrderAddressData = new UpdateOrderAddressDto();
     
             _UpdateOrderAddressData.AddressLine1 = theModel.AddressLine1;            
@@ -104,7 +105,7 @@ namespace MintSerivce.Controllers
             _UpdateOrderAddressData.VerserOrderID = theModel.VerserOrderID;
             _UpdateOrderAddressData.State = theModel.State;
             ValidationResult result = _Validator.Validate(theModel);
-            if (!result.IsValid)
+  if (!result.IsValid)
             {
                 foreach (ValidationFailure failure in result.Errors)
                 {

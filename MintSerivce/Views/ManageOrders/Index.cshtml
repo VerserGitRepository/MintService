@@ -29,25 +29,7 @@
 
                 <label class="control-label">Order Id</label><br>
                 @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })<br /><br />
-                //@Html.HiddenFor(Model => Model.VerserOrderID,)
-
-                @*<label class="control-label">First Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                @Html.EditorFor(model => model.FirstName, "", new { style = "width:150px" })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-                <br /><br />
-                <label class="control-label">Surname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                @Html.EditorFor(model => model.Surname, "", new { style = "width:150px" })
-                @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
-                <br /><br />
-                <label class="control-label">Saluation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                @Html.EditorFor(model => model.Salutation, "", new { style = "width:150px" })
-                @Html.ValidationMessageFor(model => Model.Salutation, "", new { @class = "text-danger" })
-                <br /><br />
-
-                <label class="control-label">Contact Number&nbsp;&nbsp;</label>
-                @Html.EditorFor(model => model.ContactNumber, "", new { style = "width:150px" })
-                @Html.ValidationMessageFor(model => Model.ContactNumber, "", new { @class = "text-danger" })
-                <br /><br />*@
+      
 
                 <label class="control-label">Address Line 1&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 @Html.EditorFor(model => model.AddressLine1, "", new { style = "width:150px" })
@@ -59,6 +41,7 @@
                 @Html.ValidationMessageFor(model => Model.Locality, "", new { @class = "text-danger" })
                 <br /><br />
                 <label class="control-label">State&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+
                     @Html.EditorFor(model => model.State, "", new { style = "width:150px" })
                     @Html.ValidationMessageFor(model => Model.State, "", new { @class = "text-danger" })
                     <br /><br />
@@ -66,10 +49,7 @@
                 @Html.EditorFor(model => model.Postcode, "", new { style = "width:150px" })
                 @Html.ValidationMessageFor(model => Model.Postcode, "", new { @class = "text-danger" })
                 <br /><br />
-
                 <input type="submit" class="btn btn-primary" id="update" style="padding-left:20px" value="Update Address"> @*onclick="return ShowProgress();" onclick="DisplayProgressMessage(this,'Processing Order...')"*@<br /><br />
-
-                
             }
         </div>
         <div id="MANAGEDISPATCHORDER" class="tab-pane fade">

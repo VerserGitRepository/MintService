@@ -13,11 +13,12 @@ namespace MintSerivce.Models
                  .Must(isPostLength).WithMessage("Postcode Length Should Be Between 3 To 4 Digits!").Must(isPostCodeNumber).WithMessage("Postcode Must Be Number!").Matches(@"^(?=.*?[1-9])\d+(\.\d+)?$").WithMessage("Postcode Must Have Atleast One Number!");
 
             RuleFor(c => c.AddressLine1).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty").NotNull().WithMessage("{PropertyName} is Null").Length(1, 42)
+
                 .WithMessage("{PropertyName} Length Should Be Between 1 to 40 Character");             
 
             RuleFor(d => d.Locality).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty").Length(1, 40)
-               .WithMessage("{PropertyName} is Invalid").Must(BeAValidChar).WithMessage("{PropertyName} is Invalid Character");
-         
+               .WithMessage("{PropertyName} is Invalid").Must(BeAValidChar).WithMessage("{PropertyName} is Invalid Character")        
+             .WithMessage("{PropertyName} Length Should Be Between 1 to 40 Character");
 
             RuleFor(d => d.State).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty").NotNull().WithMessage("{PropertyName} is Null").Length(2, 3)
               .WithMessage("{PropertyName} Length Should Be Between 2 to 3 Character").Must(BeAValidChar).WithMessage("{PropertyName} is Invalid Character");
