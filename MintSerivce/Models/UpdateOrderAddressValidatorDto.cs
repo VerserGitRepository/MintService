@@ -14,17 +14,17 @@ namespace MintSerivce.Models
             RuleFor(c => c.AddressLine1).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty").NotNull().WithMessage("{PropertyName} is Null").Length(1, 42)
                 .WithMessage("{PropertyName} Length Should Be Between 1 to 40 Character");
 
-            RuleFor(d => d.FirstName).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty").NotNull().WithMessage("{PropertyName} is Null").Length(1, 20)
-                .WithMessage("{PropertyName} Length Should Be Between 1 to 20 Character").Matches(@"^[a-zA-Z-' ]*$").WithMessage("{PropertyName} is Invalid Character");
+            //RuleFor(d => d.FirstName).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty").NotNull().WithMessage("{PropertyName} is Null").Length(1, 20)
+            //    .WithMessage("{PropertyName} Length Should Be Between 1 to 20 Character").Matches(@"^[a-zA-Z-' ]*$").WithMessage("{PropertyName} is Invalid Character");
 
-            RuleFor(e => e.ContactNumber).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty")
-             .Must(isContactNumbervalidLength).WithMessage("{PropertyName} is Invalid Length").Must(isNumeric).WithMessage("{PropertyName} Length Should Be Between 8 to 11 Numbers");            
+            //RuleFor(e => e.ContactNumber).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty")
+            // .Must(isContactNumbervalidLength).WithMessage("{PropertyName} is Invalid Length").Must(isNumeric).WithMessage("{PropertyName} Length Should Be Between 8 to 11 Numbers");            
 
             RuleFor(d => d.Locality).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty").Length(1, 40)
                .WithMessage("{PropertyName} is Invalid").Must(BeAValidChar).WithMessage("{PropertyName} is Invalid Character");
 
-            RuleFor(d => d.Surname).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty").NotNull().WithMessage("{PropertyName} is Null").Length(1, 20)
-               .WithMessage("{PropertyName} Length Should Be Between 1 to 20").Matches(@"^[a-zA-Z- ']*$").WithMessage("{PropertyName} is Invalid Character");
+            //RuleFor(d => d.Surname).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty").NotNull().WithMessage("{PropertyName} is Null").Length(1, 20)
+            //   .WithMessage("{PropertyName} Length Should Be Between 1 to 20").Matches(@"^[a-zA-Z- ']*$").WithMessage("{PropertyName} is Invalid Character");
 
             RuleFor(d => d.State).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty").NotNull().WithMessage("{PropertyName} is Null").Length(2, 3)
               .WithMessage("{PropertyName} Length Should Be Between 2 to 3 Character").Must(BeAValidChar).WithMessage("{PropertyName} is Invalid Character");

@@ -97,15 +97,15 @@ namespace MintSerivce.Controllers
             UpdateOrderAddressValidatorDto obj = new UpdateOrderAddressValidatorDto();
 
             UpdateOrderAddressDto obj1 = new UpdateOrderAddressDto();
-            obj1.FirstName = theModel.FirstName;
+            //obj1.FirstName = theModel.FirstName;
 
-            obj1.FirstName = theModel.FirstName;
-            obj1.Surname = theModel.Surname;
+            //obj1.FirstName = theModel.FirstName;
+            //obj1.Surname = theModel.Surname;
+            //obj1.ContactNumber = theModel.ContactNumber;
+            //obj1.Salutation = theModel.Salutation;
             obj1.AddressLine1 = theModel.AddressLine1;
-            obj1.ContactNumber = theModel.ContactNumber;
             obj1.Locality = theModel.Locality;
             obj1.Postcode = theModel.Postcode;
-            obj1.Salutation = theModel.Salutation;
             obj1.VerserOrderID = theModel.VerserOrderID;
             obj1.State = theModel.State;
             ValidationResult result = obj.Validate(theModel);
