@@ -27,8 +27,8 @@
                 @Html.AntiForgeryToken()
 
 
-                <label class="control-label">Order Id</label><br>
-                @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })<br /><br />
+                @*<label class="control-label">Order Id</label><br>*@
+                @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })<br /><br />
       
 
                 <label class="control-label">Address Line 1&nbsp;&nbsp;&nbsp;&nbsp;</label>

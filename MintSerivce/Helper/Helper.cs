@@ -434,8 +434,11 @@ namespace MintSerivce.Helper
                         {
                             response = resp.Result.Content.ReadAsStringAsync().Result;
                             _ReturnDto = JsonConvert.DeserializeObject<ReturnDto>(response);
-
                             response = _ReturnDto.ErrorMessage;
+                            if (string.IsNullOrEmpty(response))
+                            {
+                                response = _ReturnDto.OrderStatus;
+                            }
                         }
                     }
                 }
