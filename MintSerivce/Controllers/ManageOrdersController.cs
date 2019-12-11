@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using FluentValidation.Results;
 using MintSerivce.Helper;
 using MintSerivce.Models;
+using MintSerivce.ValidationHelper;
 
 namespace MintSerivce.Controllers
 {
@@ -52,16 +53,27 @@ namespace MintSerivce.Controllers
         }
         public ActionResult UpdateSKUBuffer(string ListItemModel, string SKUBuffer)
         {
+            var _buffermodel = new UpdateSKUBufferModel();          
+         
             if (!string.IsNullOrEmpty(ListItemModel) && !string.IsNullOrEmpty(SKUBuffer))
             {
-                string returnMessage = Helper.Helper.UpdateSKUBufferValue(ListItemModel, SKUBuffer);
-                TempData["ValidationErrors"] = returnMessage;
+                _buffermodel.BufferCount = SKUBuffer;
+                _buffermodel.SKU = ListItemModel;
+                var _validate = new UpdateSKUBufferValidator();
+                var returnvalidation = _validate.Validate(_buffermodel);
+                if (returnvalidation.IsValid ==true)
+                {
+                    TempData["ValidationErrors"] = Helper.Helper.UpdateSKUBufferValue(ListItemModel, SKUBuffer);
+                }
+                else
+                {
+                    TempData["ValidationErrors"] = returnvalidation.Errors.FirstOrDefault().ErrorMessage;
+                }
             }
             else
             {
-                TempData["ValidationErrors"] = "Please Supply SKU Details To Update!";
+                TempData["ValidationErrors"] = "SKU And Buffer Value Should Not Be Empty!";
             }
-
             return RedirectToAction("Index", "ManageOrders");
         }
         public ActionResult CreateSKU()
