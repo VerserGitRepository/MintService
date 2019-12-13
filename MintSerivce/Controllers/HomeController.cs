@@ -138,10 +138,14 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrderDetails.VerserOrderID, ResultMessage = selectedOrderDetails.ResultMessage });
             }
         }
-        public ActionResult AddSimToOrder(SelectedOrderModel selectedOrder)
+        public ActionResult ProcessSimOrder(SelectedOrderModel selectedOrder)
         {
+            if (selectedOrder.SIM == null)
+            {
+                return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage = "SIM Is Required!" });
+            }
             selectedOrder.UserName = Session["User"].ToString();
-            string result = AddSimOrder(selectedOrder).Result;
+            string result = ProcessSimOrderService(selectedOrder).Result;
             if (!string.IsNullOrEmpty(result))
             {
                 result = result.Replace('"', ' ').Trim();
@@ -315,7 +319,7 @@ namespace MintSerivce.Controllers
             }
             return returnmessage;
         }
-        public async Task<string> AddSimOrder(SelectedOrderModel selectedorder)
+        public async Task<string> ProcessSimOrderService(SelectedOrderModel selectedorder)
         {
             string returnmessage = string.Empty;
             string BaseUri = ConfigurationManager.AppSettings["baseUri"] + ConfigurationManager.AppSettings["rootSite"];
@@ -323,7 +327,7 @@ namespace MintSerivce.Controllers
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.PostAsJsonAsync("inventorycontrol/MintServiceOrder/AddSimToMintOrder", selectedorder).Result;
+                HttpResponseMessage response = client.PostAsJsonAsync("inventorycontrol/MintServiceOrder/ProcessSimOrder", selectedorder).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     returnmessage = Convert.ToString(await response.Content.ReadAsStringAsync());
