@@ -26,6 +26,10 @@
                         {
                             <h6 style="color:green;text-align:center">@TempData["ManualOrder"].ToString()</h6>
                         }
+                        @if (TempData["OrderError"] != null)
+                        {
+                            <h6 style="color:red;text-align:center">@TempData["OrderError"].ToString()</h6>
+                        }
                     </div>
                     <div class="col-sm-6" style="padding-top:20px;">
                         <label>TIABOrderID:</label>
@@ -92,16 +96,12 @@
             }
 
         </div>
-        <div id="RORDER" class="tab-pane fade" role="tabpanel">
+      
+          <div id="RORDER" class="tab-pane fade" role="tabpanel">
 
-            @*@using (Html.BeginForm("AddPhoneOnlyOrder", "Home", FormMethod.Post))
-            {
-            }*@
-
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("ReturnedOrder", "ManualOrder", FormMethod.Post))
             {
                 <div class="container" style="padding-top:20px;color:gray">
-
                     <div>
                         @if (TempData["ManualOrder"] != null)
                         {
@@ -167,7 +167,8 @@
                         @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
                     </div>
                     <div class="col-sm-6">
-                        <button type="submit" class="btn btn-primary" disabled="disabled">Complete Order</button>
+                        <button type="submit" class="btn btn-primary" >Complete Return Order</button>
+                        @*disabled="disabled"*@
                     </div>
                 </div>
             }

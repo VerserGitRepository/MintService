@@ -341,6 +341,45 @@ namespace MintSerivce.Helper
             }
             return response;
         }
+
+        public static OrderReplacementReturnDto CreateReturnOrder(ManualOrderModel NewManualOrder)
+        {
+            var ordermodel = new List<OrderReplacementReturnDto>();
+             var _NewManualOrder = new List<ManualOrderModel>();
+            _NewManualOrder.Add(NewManualOrder);
+            var response = string.Empty;
+
+            string CreateOrderURi = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["CreateReturnOrder"];
+            string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var resp = client.PostAsJsonAsync(CreateOrderURi, _NewManualOrder);
+                    resp.Wait(TimeSpan.FromSeconds(10));
+                    if (resp.IsCompleted)
+                    {
+                        if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            Console.WriteLine("Authorization failed. Token expired or invalid.");
+                        }
+                        else
+                        {
+                            response = resp.Result.Content.ReadAsStringAsync().Result;
+                            ordermodel = JsonConvert.DeserializeObject<List<OrderReplacementReturnDto>>(response);
+                            
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response = ex.Message;
+            }
+            return ordermodel.FirstOrDefault();
+        }
+
         public static string UpdateSKUBufferValue(string SKU, string SKUBuffer)
         {           
             string response = string.Empty;
@@ -374,7 +413,6 @@ namespace MintSerivce.Helper
             }
             return response;
         }
-
         public static List<ListItemModel> SKUList()
         {
             var response =  new List<ListItemModel>();

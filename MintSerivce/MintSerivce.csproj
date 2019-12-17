@@ -206,6 +206,7 @@
     <Compile Include="Models\ManualOrderModel.cs" />
     <Compile Include="Models\OrderDispatchViewModel.cs" />
     <Compile Include="Models\OrderDto.cs" />
+    <Compile Include="Models\OrderReplacementReturnDto.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\PhoneOnlyModel.cs" />
     <Compile Include="Models\RequiredIfAttribute.cs" />
@@ -534,7 +535,6 @@
     <Content Include="Views\ManageOrders\CreateSKU.cshtml" />
     <Content Include="Views\ManageOrders\RemoveSKU.cshtml" />
     <Content Include="Views\ReturnedOrders\ReturnedOrders.cshtml" />
-    <Content Include="Views\Home\PartialReturnedOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
