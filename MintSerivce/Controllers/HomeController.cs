@@ -267,6 +267,45 @@ namespace MintSerivce.Controllers
             }
             return ordermodel;
         }
+
+        public static List<OrderDispatchViewModel> DispatchedThnReturnedOrderList()
+        {
+
+            List<OrderDispatchViewModel> ordermodel = new List<OrderDispatchViewModel>();
+            string response = string.Empty;
+            string OnOrderlist = ConfigurationManager.AppSettings["rooturi"] + ConfigurationManager.AppSettings["DispatchedThnReturnedOrders"];
+            string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var resp = client.GetAsync(OnOrderlist);
+
+                    resp.Wait(TimeSpan.FromSeconds(10));
+
+                    if (resp.IsCompleted)
+                    {
+                        if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            Console.WriteLine("Authorization failed. Token expired or invalid.");
+                        }
+                        else
+                        {
+                            response = resp.Result.Content.ReadAsStringAsync().Result;
+
+                            ordermodel = JsonConvert.DeserializeObject<List<OrderDispatchViewModel>>(response);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return ordermodel;
+        }
+
         public static List<SKUStock> AvailableSKU()
         {
             List<SKUStock> ordermodel = new List<SKUStock>();
