@@ -534,6 +534,7 @@
     <Content Include="Views\ManageOrders\CreateSKU.cshtml" />
     <Content Include="Views\ManageOrders\RemoveSKU.cshtml" />
     <Content Include="Views\ReturnedOrders\ReturnedOrders.cshtml" />
+    <Content Include="Views\Home\PartialReturnedOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
