@@ -11,7 +11,8 @@ namespace MintSerivce.Models
         public string VerserOrderID { get; set; }
 
         [Required(ErrorMessage = "TIAB Order Is Mandatory")]
-        public string TIABOrderID { get; set; }   
+        public string TIABOrderID { get; set; }
+        [Required(ErrorMessage = "FirstName Is Mandatory")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Surname Is Mandatory")]
         public string Surname { get; set; }

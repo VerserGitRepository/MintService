@@ -30,9 +30,9 @@ namespace MintSerivce.Controllers
               string returnmessage=Helper.Helper.CreateOrder(manualOrder);
                 TempData["ManualOrder"] = returnmessage.ToString();
                 ModelState.Clear();
-             return View();
+                return RedirectToAction("index", "ManualOrder");
             }
-            return View();
+            return RedirectToAction("index", "ManualOrder");
         }
 
         [HttpPost]
@@ -61,7 +61,7 @@ namespace MintSerivce.Controllers
                 }
                
             }
-            return View();
+            return RedirectToAction("index", "ManualOrder");
         }
 
     }   

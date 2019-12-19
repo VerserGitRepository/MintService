@@ -107,14 +107,20 @@
                         {
                             <h6 style="color:green;text-align:center">@TempData["ManualOrder"].ToString()</h6>
                         }
+                        @if (TempData["OrderError"] != null)
+                        {
+                            <h6 style="color:red;text-align:center">@TempData["OrderError"].ToString()</h6>
+                        }
                     </div>
                     <div class="col-sm-6" style="padding-top:20px;">
                         <label>TIABOrderID:</label>
                         @Html.EditorFor(model => model.TIABOrderID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
+                        @Html.ValidationMessageFor(model => model.TIABOrderID, null, new { @class = "text-danger" })
                     </div>
                     <div class="col-sm-6" style="padding-top:20px;">
                         <label>VerserOrderID:</label>
                         @Html.EditorFor(model => model.VerserOrderID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
+                        @Html.ValidationMessageFor(model => model.VerserOrderID, null, new { @class = "text-danger" })
                     </div>
                     <div class="col-sm-6">
                         <label>FirstName:</label>
@@ -166,9 +172,8 @@
                         @Html.EditorFor(model => model.OrderType, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
                     </div>
-                    <div class="col-sm-6">
-                        <button type="submit" class="btn btn-primary" >Complete Return Order</button>
-                        @*disabled="disabled"*@
+                    <div class="col-sm-6">                       
+                        <button type="submit" class="btn btn-primary" >Complete Return Order</button>                       
                     </div>
                 </div>
             }
@@ -178,3 +183,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
 
+@section scripts
+    {
+    @Scripts.Render("~/bundles/jqueryval")
+}
