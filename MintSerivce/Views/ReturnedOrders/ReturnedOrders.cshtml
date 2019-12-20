@@ -115,11 +115,11 @@
             success: function (data) {
               
                 var $description = $('<div/>');
-                $description.append($('<p/>').html('<b>SKU:</b>' + data.SKU));
-                $description.append($('<p/>').html('<b>Make:</b>' + data.Make));
-                $description.append($('<p/>').html('<b>Model:</b>' + data.Model));
-                $description.append($('<p/>').html('<b>Capacity:</b>' + data.Capacity));
-                $description.append($('<p/>').html('<b>Colour:</b>' + data.Colour));
+                $description.append('<b>SKU:</b>' + data.SKU).append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+                $description.append('<b>Make:</b>' + data.Make).append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')
+                $description.append('<b>Model:</b>' + data.Model).append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;').append('<br/>');
+                $description.append('<b>Capacity:</b>' + data.Capacity).append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+                $description.append('<b>Colour:</b>' + data.Colour).append('&nbsp;&nbsp;&nbsp;&nbsp;');
               
         $.confirm({
             boxWidth: '400px',
