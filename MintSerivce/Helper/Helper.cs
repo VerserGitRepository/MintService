@@ -520,5 +520,108 @@ namespace MintSerivce.Helper
             }
             return response;
         }
+        public static List<ListItemModel> CancelOrdersList()
+        {
+            var response = new List<ListItemModel>();
+
+            string OnOrderlist = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["CancelOrderslist"];
+            string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var resp = client.GetAsync(OnOrderlist);
+                    resp.Wait(TimeSpan.FromSeconds(10));
+
+                    if (resp.IsCompleted)
+                    {
+                        if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            Console.WriteLine("Authorization failed. Token expired or invalid.");
+                        }
+                        else
+                        {
+                            response = JsonConvert.DeserializeObject<List<ListItemModel>>(resp.Result.Content.ReadAsStringAsync().Result);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return response;
+        }
+        public static List<CancelOrderModel> CancelOrder(CancelOrderModel order)
+        {
+           
+            var response = string.Empty;
+            List<CancelOrderModel> theList = new List<CancelOrderModel>();
+            theList.Add(order);
+            string CancelOrderURi = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["CancelOrder"];
+            string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var resp = client.PostAsJsonAsync(CancelOrderURi, theList);
+                    resp.Wait(TimeSpan.FromSeconds(10));
+                    if (resp.IsCompleted)
+                    {
+                        if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            Console.WriteLine("Authorization failed. Token expired or invalid.");
+                        }
+                        else
+                        {
+                            response = resp.Result.Content.ReadAsStringAsync().Result;
+                            theList = JsonConvert.DeserializeObject<List<CancelOrderModel>>(response);
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response = ex.Message;
+            }
+            return theList;
+        }
+        public static OrderViewModel GetOrderDetails(string orderId)
+        {
+            OrderViewModel ordermodel = new OrderViewModel();
+            string response = string.Empty;
+            string OnOrderlist = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["GetOrderDetails"];
+            OnOrderlist = OnOrderlist.Replace("{}", orderId);
+            string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var resp = client.GetAsync(OnOrderlist);
+                    resp.Wait(TimeSpan.FromSeconds(10));
+
+                    if (resp.IsCompleted)
+                    {
+                        if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            Console.WriteLine("Authorization failed. Token expired or invalid.");
+                        }
+                        else
+                        {
+                            response = resp.Result.Content.ReadAsStringAsync().Result;
+                            ordermodel = JsonConvert.DeserializeObject <OrderViewModel>(response);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return ordermodel;
+        }
     }
 }

@@ -15,8 +15,15 @@ namespace MintSerivce.Controllers
             {
                 string username = Session["User"].ToString();
                 if (username == "VerserMintAdmin@verser.com.au")
-                {                  
-                    return View();
+                {
+                    ManualOrderModel model = new ManualOrderModel();
+                    List<ListItemModel> ordersList =  Helper.Helper.CancelOrdersList(); ;
+                    model.OrdersListItemModel = new List<SelectListItem>();
+                    foreach (ListItemModel item in ordersList)
+                    {
+                        model.OrdersListItemModel.Add(new SelectListItem { Text = item.Value });
+                    }
+                    return View(model);
                 }
             }
             return RedirectToAction("Index", "Home");
@@ -62,6 +69,32 @@ namespace MintSerivce.Controllers
                
             }
             return RedirectToAction("index", "ManualOrder");
+        }
+        [HttpPost]
+        public ActionResult CancelOrder(ManualOrderModel manualorder)
+        {
+            try
+            {
+
+                CancelOrderModel model = new CancelOrderModel { ErrorMessage = string.Empty, OrderStatus =string.Empty, TIABOrderID = string.Empty, VerserOrderID = manualorder.VerserOrderID };
+                var returnModel = Helper.Helper.CancelOrder(model);
+                if (returnModel != null && returnModel.First().ErrorMessage != null)
+                {
+                    TempData["ManualOrder"] = returnModel.First().ErrorMessage;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["OrderError"] = "Error has occurred while processing the request.";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("index", "ManualOrder");
+            }
+        
+            
         }
 
     }   

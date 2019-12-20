@@ -461,6 +461,12 @@ namespace MintSerivce.Controllers
             }
             return RedirectToAction("StockAvailable", "Home");
         }
+        [HttpGet]
+        public ActionResult GetOrderDetails(string orderId)
+        {
+            OrderViewModel model = Helper.Helper.GetOrderDetails(orderId);
 
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 }

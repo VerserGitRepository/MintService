@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+
 namespace MintSerivce.Models
 {
     public class ManualOrderModel
@@ -47,5 +49,7 @@ namespace MintSerivce.Models
         //public Nullable<DateTime> OrderShippedDate { get; set; }
         //public string JMS_JobNo { get; set; }
         //public int? JMS_JOBID { get; set; }
+        public List<SelectListItem> OrdersListItemModel { get; set; }
+        
     }
 }

@@ -50,33 +50,33 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>
-                    <a href="javascript:ShowOrderDetails('@item.VerserOrderID')">@item.VerserOrderID</a>
-                    </td>
-                    <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
-                    <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
-                    <td>@Html.DisplayFor(modelItem => item.VerserReturnOrderID)</td>
-                    <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>
-                    @*<td>@Html.DisplayFor(modelItem => item.SKU)</td>*@
-                    <td>@Html.DisplayFor(modelItem => item.ReturnSSN)</td>
-                    <td>@Html.DisplayFor(modelItem => item.ReplacementSSN)</td>
-                    <td>@Html.DisplayFor(modelItem => item.ReturnedIMEI)</td>
-                    <td>@Html.DisplayFor(modelItem => item.ReplacementIMEI)</td>
-                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Surname)</td>
-                    <td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Locality)</td>
-                    <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
-                    <td>@Html.DisplayFor(modelItem => item.OrderDispatchno)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Ordershipment_Consignment_Id)</td>
-                    <td>@item.OrderShippedDate.Value.ToShortDateString()</td>
-                    <td>
-                        <a href="@item.OrderShipmentURL" target="_blank" class="btn-primary btn-sm">Print</a>
-                    </td>
-                    @*<td><input type="submit" value="Print" class="btn-primary btn-sm" /></td>*@
+                    <tr>
+                        <td>
+                            <a href="javascript:ShowOrderDetails('@item.VerserOrderID')">@item.VerserOrderID</a>
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.VerserReturnOrderID)</td>
+                        <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>
+                        @*<td>@Html.DisplayFor(modelItem => item.SKU)</td>*@
+                        <td>@Html.DisplayFor(modelItem => item.ReturnSSN)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ReplacementSSN)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ReturnedIMEI)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ReplacementIMEI)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Surname)</td>
+                        <td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Locality)</td>
+                        <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
+                        <td>@Html.DisplayFor(modelItem => item.OrderDispatchno)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Ordershipment_Consignment_Id)</td>
+                        <td>@item.OrderShippedDate.Value.ToShortDateString()</td>
+                        <td>
+                            <a href="@item.OrderShipmentURL" target="_blank" class="btn-primary btn-sm">Print</a>
+                        </td>
+                        @*<td><input type="submit" value="Print" class="btn-primary btn-sm" /></td>*@
 
-                </tr>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -136,7 +136,6 @@
         }
         });
     }
-   
     function ShowOrderDetails(orderId) {
         var sliderURL = '@Url.Action("GetOrderDetails", "Home")'
         $.ajax({

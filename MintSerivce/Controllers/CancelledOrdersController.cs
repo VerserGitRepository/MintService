@@ -15,26 +15,26 @@ using System.Web.UI.WebControls;
 
 namespace MintSerivce.Controllers
 {
-    public class ReturnedOrdersController : Controller
+    public class CancelledOrdersController : Controller
     {
         // GET: ReturnedOrders
-        public ActionResult ReturnedOrders()
+        public ActionResult CancelledOrders()
         {
             if (Session["User"] == null)
             {
                 return RedirectToAction("Login", "Login");
             }
-            var dispatchedorders = DispatchedThnReturnedOrderList();
+            var dispatchedorders = CancelledOrderList();
             return View(dispatchedorders);
             
         }
 
-        public static List<OrderDispatchViewModel> DispatchedThnReturnedOrderList()
+        public static List<OrderDispatchViewModel> CancelledOrderList()
         {
 
             List<OrderDispatchViewModel> ordermodel = new List<OrderDispatchViewModel>();
             string response = string.Empty;
-            string OnOrderlist = ConfigurationManager.AppSettings["rooturi"] + ConfigurationManager.AppSettings["DispatchedThnReturnedOrders"];
+            string OnOrderlist = ConfigurationManager.AppSettings["rooturi"] + ConfigurationManager.AppSettings["CancelledOrders"];
             string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
             try
             {
@@ -65,42 +65,6 @@ namespace MintSerivce.Controllers
                 throw;
             }
             return ordermodel;
-        }
-
-        [HttpPost]
-        public ActionResult ExportDispatchToExcel()
-        {
-            List<OrderDispatchViewModel> DispatchOrdersList = new List<OrderDispatchViewModel>();
-            if (System.Web.HttpContext.Current.Session["User"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-            else
-            {
-                DispatchOrdersList = DispatchedThnReturnedOrderList();
-                GridView gv = new GridView();
-                gv.DataSource = DispatchOrdersList;
-                gv.DataBind();
-                Response.ClearContent();
-                Response.Buffer = true;
-                Response.AddHeader("content-disposition", "attachment; filename=DispatchedOrdersList.xls");
-                Response.ContentType = "application/ms-excel";
-                Response.Charset = "";
-                StringWriter sw = new StringWriter();
-                HtmlTextWriter htw = new System.Web.UI.HtmlTextWriter(sw);
-                gv.RenderControl(htw);
-                Response.Output.Write(sw.ToString());
-                Response.Flush();
-                Response.End();
-            }
-            return RedirectToAction("ReturnedOrders", "ReturnedOrders");
-        }
-
-        [HttpGet]
-        public ActionResult ShowSKU(string SKUId)
-        {
-            var result = HomeController.AvailableSKU().Where(item => item.SKU == SKUId).FirstOrDefault();
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        }        
     }
 }
