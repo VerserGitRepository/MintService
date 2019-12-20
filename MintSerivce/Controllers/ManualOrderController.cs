@@ -50,7 +50,7 @@ namespace MintSerivce.Controllers
                 if (manualOrder.VerserOrderID !=null)
                 {
                   var returnmessage = Helper.Helper.CreateReturnOrder(manualOrder);
-                    if (returnmessage != null && returnmessage.ErrorMessage !=null)
+                    if (returnmessage != null && returnmessage.ErrorMessage !=null && returnmessage.OrderStatus == "ERROR")
                     {
                         TempData["OrderError"] = $"{returnmessage.VerserOrderID} {returnmessage.ErrorMessage}";
                     }
