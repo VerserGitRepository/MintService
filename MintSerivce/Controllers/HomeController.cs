@@ -59,7 +59,7 @@ namespace MintSerivce.Controllers
             SimModel.ShipLabelURL = URL;
             return View(SimModel);
         }
-        public ActionResult ProcessOrder(string VerserOrderID, string ResultMessage, string URL)
+        public ActionResult ProcessOrder(string VerserOrderID, string ResultMessage, string URL, string OrderType)
         {
             if (Session["User"] == null)
             {
@@ -70,6 +70,7 @@ namespace MintSerivce.Controllers
             selectedorder.ResultMessage = ResultMessage;
             selectedorder.UserName = Session["User"].ToString();
             selectedorder.PhoneAndSim = true;
+            selectedorder.OrderType = OrderType;
             if (URL != null)
             {
                 URL = URL.Trim('"');

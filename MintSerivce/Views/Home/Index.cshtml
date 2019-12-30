@@ -47,7 +47,7 @@
                             <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
                             <td>@Html.DisplayFor(modelItem => item.OrderType)</td>
                             <td>
-                                <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID})">
+                                <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID, OrderType = item.OrderType})">
                                     <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
                                 </a>
 
