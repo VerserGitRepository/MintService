@@ -79,7 +79,7 @@ namespace MintSerivce.Controllers
                 var returnModel = Helper.Helper.CancelOrder(model);
                 if (returnModel != null && returnModel.First().ErrorMessage != null)
                 {
-                    TempData["ManualOrder"] = returnModel.First().ErrorMessage;
+                    TempData["ManualOrder"] = $"{manualorder.VerserOrderID} Order Successfully Cancelled !";
                     return RedirectToAction("Index");
                 }
                 else
@@ -103,7 +103,7 @@ namespace MintSerivce.Controllers
                 var returnModel = Helper.Helper.OrderOnHold(model);
                 if (returnModel != null && returnModel.First().ErrorMessage != null)
                 {
-                    TempData["OnholdOrder"] = returnModel.First().ErrorMessage;
+                    TempData["ManualOrder"] = $"{manualorder.VerserOrderID} Order Status Successfully Updated To On Hold";
                     return RedirectToAction("Index");
                 }
                 else
@@ -126,7 +126,7 @@ namespace MintSerivce.Controllers
                 var returnModel = Helper.Helper.UpdateOnOrder(model);
                 if (returnModel != null && returnModel.First().ErrorMessage != null)
                 {
-                    TempData["OnholdOrder"] = returnModel.First().ErrorMessage;
+                    TempData["ManualOrder"]   = $"{manualorder.VerserOrderID} Order Status Successfully Updated To On Order"; 
                     return RedirectToAction("Index");
                 }
                 else
