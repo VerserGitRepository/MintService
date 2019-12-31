@@ -5,8 +5,8 @@
 }
 @using System.Linq;
 @model IEnumerable<MintSerivce.Models.OrderDispatchViewModel>
-<div class="row" style="margin-left:-130px;margin-right:200px">
-    <div style="padding-top:15px;width:131%;">
+<div class="row" style="margin-left:0px;margin-right:0px">
+    <div style="padding-top:15px;width:79%;">
         @using (Html.BeginForm("ExportDispatchToExcel", "Home", FormMethod.Post))
         {
             <div align="right">
@@ -19,7 +19,7 @@
 </div>
 
      @*<div class="container" style="margin-left:2px;padding-top:30px">*@
-<div class="row" style="margin-left:-140px;width:130%">
+<div class="row" style="margin-left:-0px;width:97%">
     @*class="pull-left"*@
 
     <div class="col-md-12" @*style="width:100%;margin-left:-140px;"*@>
@@ -27,24 +27,14 @@
         <table class="table table-bordered" table-responsive table-hover" id="mainTable" style="width:50%;">
             <thead style="background-color:#959ca1;color:white">
                 <tr>
-                    <th>ORDER</th>
-                    <th>JOB</th>
-                    <th>TIAB-ORD</th>
-                    <th>RP-ORDER</th>
-                    <th>SKU</th>
-                    <th>RN-SSN</th>
-                    <th>RP-SSN</th>
-                    <th>RN-IMEI</th>
-                    <th>RP-IMEI</th>
+                    <th>ORDER</th>                  
+                    <th>TIABID</th>                   
+                    <th>SKU</th>                  
                     <th>CUSTOMER</th>
                     <th>SURNAME</th>
                     <th>ADDRESS</th>
                     <th>SUBURB</th>
-                    <th>STATUS</th>
-                    <th>DISPATCH</th>
-                    <th>CONSIGNMENT</th>
-                    <th>SHIPPED</th>
-                    <th>LABEL</th>
+                    <th>STATUS</th>      
                 </tr>
             </thead>
             <tbody>
@@ -53,29 +43,15 @@
                     <tr>
                         <td>
                             <a href="javascript:ShowOrderDetails('@item.VerserOrderID')">@item.VerserOrderID</a>
-                        </td>
-                        <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
+                        </td>                     
                         <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
-                        <td>@Html.DisplayFor(modelItem => item.VerserReturnOrderID)</td>
-                        <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>
-                        @*<td>@Html.DisplayFor(modelItem => item.SKU)</td>*@
-                        <td>@Html.DisplayFor(modelItem => item.ReturnSSN)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ReplacementSSN)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ReturnedIMEI)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ReplacementIMEI)</td>
+                        <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>                    
                         <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
                         <td>@Html.DisplayFor(modelItem => item.Surname)</td>
                         <td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>
                         <td>@Html.DisplayFor(modelItem => item.Locality)</td>
-                        <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
-                        <td>@Html.DisplayFor(modelItem => item.OrderDispatchno)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Ordershipment_Consignment_Id)</td>
-                        <td>@item.OrderShippedDate.Value.ToShortDateString()</td>
-                        <td>
-                            <a href="@item.OrderShipmentURL" target="_blank" class="btn-primary btn-sm">Print</a>
-                        </td>
-                        @*<td><input type="submit" value="Print" class="btn-primary btn-sm" /></td>*@
-
+                        <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>                                   
+                    
                     </tr>
                 }
             </tbody>
@@ -85,7 +61,7 @@
 @*</div>*@
 <style>
     .row {
-        margin-left: -130px;
+        margin-left: -0px;
         margin-right: 175px;
     }
 </style>
@@ -147,22 +123,20 @@
                 var $description = $('<div/>');
                 $description.append($('<p/>').html('<b>TIABOrderID:</b>' + data.TIABOrderID));
                 $description.append($('<p/>').html('<b>VerserOrderID:</b>' + data.VerserOrderID));
+                $description.append($('<p/>').html('<b>SSN:</b>' + data.SSN));              
                 $description.append($('<p/>').html('<b>FirstName:</b>' + data.FirstName));
-                $description.append($('<p/>').html('<b>Surname:</b>' + data.Surname));
-                $description.append($('<p/>').html('<b>Salutation:</b>' + data.Salutation));
                 $description.append($('<p/>').html('<b>State:</b>' + data.State));
                 $description.append($('<p/>').html('<b>AddressLine1:</b>' + data.AddressLine1));
                 $description.append($('<p/>').html('<b>Locality:</b>' + data.Locality));
                 $description.append($('<p/>').html('<b>Postcode:</b>' + data.Postcode));
                 $description.append($('<p/>').html('<b>SKU:</b>' + data.SKU));
                 $description.append($('<p/>').html('<b>ContactNumber:</b>' + data.ContactNumber));
-     
-                $description.append($('<p/>').html('<b>OrderType:</b>' + data.OrderType));
-                $description.append($('<p/>').html('<b>OrderDate:</b>' + data.OrderDate));
                 $description.append($('<p/>').html('<b>OrderStatus:</b>' + data.OrderStatus));
+                $description.append($('<p/>').html('<b>Dispatch:</b>' + data.OrderDispatchno));
+                $description.append($('<p/>').html('<b>Consignment:</b>' + data.Ordershipment_Consignment_Id));
            
         $.confirm({
-            boxWidth: '400px',
+            boxWidth: '330px',
             useBootstrap: false,
             title: 'Order Details',
             content: $description,

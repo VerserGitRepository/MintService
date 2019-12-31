@@ -75,7 +75,6 @@ namespace MintSerivce.Controllers
         {
             try
             {
-
                 CancelOrderModel model = new CancelOrderModel { ErrorMessage = string.Empty, OrderStatus =string.Empty, TIABOrderID = string.Empty, VerserOrderID = manualorder.VerserOrderID };
                 var returnModel = Helper.Helper.CancelOrder(model);
                 if (returnModel != null && returnModel.First().ErrorMessage != null)
@@ -92,10 +91,56 @@ namespace MintSerivce.Controllers
             catch (Exception)
             {
                 return RedirectToAction("index", "ManualOrder");
-            }
-        
-            
+            } 
         }
 
+        [HttpPost]
+        public ActionResult OrderPutOnHold(ManualOrderModel manualorder)
+        {
+            try
+            {
+                CancelOrderModel model = new CancelOrderModel { ErrorMessage = string.Empty, OrderStatus = string.Empty, TIABOrderID = string.Empty, VerserOrderID = manualorder.VerserOrderID };
+                var returnModel = Helper.Helper.OrderOnHold(model);
+                if (returnModel != null && returnModel.First().ErrorMessage != null)
+                {
+                    TempData["OnholdOrder"] = returnModel.First().ErrorMessage;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["OrderError"] = "Error has occurred while processing the request.";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("index", "ManualOrder");
+            }
+        }
+        [HttpPost]
+        public ActionResult UpdateToOnOrder(ManualOrderModel manualorder)
+        {
+            try
+            {
+                CancelOrderModel model = new CancelOrderModel { ErrorMessage = string.Empty, OrderStatus = string.Empty, TIABOrderID = string.Empty, VerserOrderID = manualorder.VerserOrderID };
+                var returnModel = Helper.Helper.UpdateOnOrder(model);
+                if (returnModel != null && returnModel.First().ErrorMessage != null)
+                {
+                    TempData["OnholdOrder"] = returnModel.First().ErrorMessage;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["OrderError"] = "Error has occurred while processing the request.";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("index", "ManualOrder");
+            }
+        }
+
+        
     }   
 }

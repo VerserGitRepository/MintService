@@ -7,6 +7,8 @@
     <ul class="nav nav-tabs" style="padding-top:15px;" id="myTab">
         <li class="active"><a data-toggle="tab" href="#MORDER">MANUAL ORDER</a></li>
         <li><a data-toggle="tab" href="#RORDER">RETURN ORDER</a></li>
+        <li><a data-toggle="tab" href="#OHORDER">UPDATE ORDER ON HOLD</a></li>
+        <li><a data-toggle="tab" href="#ONORDER">UPDATE ORDER ON ORDER</a></li>
         <li><a data-toggle="tab" href="#CORDER">CANCEL ORDER</a></li>
     </ul>
     <div class="tab-content" style="border-width:thin;border-style:solid;border-color:gray;width:100%;padding-top:5px;">
@@ -199,6 +201,47 @@
                 }
             </div>
         </div>
+
+        <div id="OHORDER" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
+            <div class="form-horizontal">
+                @using (Html.BeginForm("OrderPutOnHold", "ManualOrder", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+
+                        @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlohOrderID", @multiple = "multiple" })<br /><br />
+                        <div class="col-md-10">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="UPDATE" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div id="ONORDER" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
+            <div class="form-horizontal">
+                @using (Html.BeginForm("UpdateToOnOrder", "ManualOrder", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+
+                        @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlONOrderID", @multiple = "multiple" })<br /><br />
+                        <div class="col-md-10">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="UPDATE" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
     </div>
 </div>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
@@ -225,4 +268,26 @@
     });
     $('#ddlOrderID').removeAttr('multiple')
     $('#ddlOrderID').multiselect('rebuild');
+
+    $('#ddlohOrderID').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 280,
+        buttonWidth: '370px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true
+    });
+    $('#ddlohOrderID').removeAttr('multiple')
+    $('#ddlohOrderID').multiselect('rebuild');
+
+    $('#ddlONOrderID').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 280,
+        buttonWidth: '370px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true
+    });
+    $('#ddlONOrderID').removeAttr('multiple')
+    $('#ddlONOrderID').multiselect('rebuild');
+
+    
 </script>

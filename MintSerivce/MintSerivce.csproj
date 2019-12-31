@@ -186,6 +186,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="AutoMapperConfig.cs" />
+    <Compile Include="Controllers\CancelledOrdersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManualOrderController.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Membership\AuthorisationManager.cs" />
     <Compile Include="Membership\User.cs" />
     <Compile Include="MintServiceAutoMapper.cs" />
+    <Compile Include="Models\CancelOrderModel.cs" />
     <Compile Include="Models\DispatchedOrderDto.cs" />
     <Compile Include="Models\ListItemModel.cs" />
     <Compile Include="Models\ManualOrderModel.cs" />
@@ -228,6 +230,7 @@
     <Content Include="Content\bootstrap-3.1.4.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\confirm.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -412,6 +415,7 @@
     <None Include="Properties\PublishProfiles\mint.pubxml" />
     <None Include="Properties\PublishProfiles\Web Deploy To Prod.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\confirm.js" />
     <Content Include="Scripts\copy_csv_xls_pdf.swf" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
@@ -535,6 +539,7 @@
     <Content Include="Views\ManageOrders\CreateSKU.cshtml" />
     <Content Include="Views\ManageOrders\RemoveSKU.cshtml" />
     <Content Include="Views\ReturnedOrders\ReturnedOrders.cshtml" />
+    <Content Include="Views\CancelledOrders\CancelledOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

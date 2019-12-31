@@ -555,7 +555,6 @@ namespace MintSerivce.Helper
         }
         public static List<CancelOrderModel> CancelOrder(CancelOrderModel order)
         {
-           
             var response = string.Empty;
             List<CancelOrderModel> theList = new List<CancelOrderModel>();
             theList.Add(order);
@@ -589,9 +588,80 @@ namespace MintSerivce.Helper
             }
             return theList;
         }
-        public static OrderViewModel GetOrderDetails(string orderId)
+        
+        public static List<CancelOrderModel> OrderOnHold(CancelOrderModel order)
         {
-            OrderViewModel ordermodel = new OrderViewModel();
+            var response = string.Empty;
+            List<CancelOrderModel> theList = new List<CancelOrderModel>();
+            theList.Add(order);
+            string CancelOrderURi = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["OrderOnHold"];
+            string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var resp = client.PostAsJsonAsync(CancelOrderURi, theList);
+                    resp.Wait(TimeSpan.FromSeconds(10));
+                    if (resp.IsCompleted)
+                    {
+                        if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            Console.WriteLine("Authorization failed. Token expired or invalid.");
+                        }
+                        else
+                        {
+                            response = resp.Result.Content.ReadAsStringAsync().Result;
+                            theList = JsonConvert.DeserializeObject<List<CancelOrderModel>>(response);
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response = ex.Message;
+            }
+            return theList;
+        }
+        public static List<CancelOrderModel> UpdateOnOrder(CancelOrderModel order)
+        {
+            var response = string.Empty;
+            List<CancelOrderModel> theList = new List<CancelOrderModel>();
+            theList.Add(order);
+            string CancelOrderURi = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["UpdateToOnOrder"];
+            string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var resp = client.PostAsJsonAsync(CancelOrderURi, theList);
+                    resp.Wait(TimeSpan.FromSeconds(10));
+                    if (resp.IsCompleted)
+                    {
+                        if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            Console.WriteLine("Authorization failed. Token expired or invalid.");
+                        }
+                        else
+                        {
+                            response = resp.Result.Content.ReadAsStringAsync().Result;
+                            theList = JsonConvert.DeserializeObject<List<CancelOrderModel>>(response);
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response = ex.Message;
+            }
+            return theList;
+        }
+        public static OrderDispatchViewModel GetOrderDetails(string orderId)
+        {
+            var ordermodel = new OrderDispatchViewModel();
             string response = string.Empty;
             string OnOrderlist = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["GetOrderDetails"];
             OnOrderlist = OnOrderlist.Replace("{}", orderId);
@@ -613,7 +683,7 @@ namespace MintSerivce.Helper
                         else
                         {
                             response = resp.Result.Content.ReadAsStringAsync().Result;
-                            ordermodel = JsonConvert.DeserializeObject <OrderViewModel>(response);
+                            ordermodel = JsonConvert.DeserializeObject <OrderDispatchViewModel>(response);
                         }
                     }
                 }

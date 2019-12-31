@@ -465,7 +465,7 @@ namespace MintSerivce.Controllers
         [HttpGet]
         public ActionResult GetOrderDetails(string orderId)
         {
-            OrderViewModel model = Helper.Helper.GetOrderDetails(orderId);
+            OrderDispatchViewModel model = Helper.Helper.GetOrderDetails(orderId);
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
