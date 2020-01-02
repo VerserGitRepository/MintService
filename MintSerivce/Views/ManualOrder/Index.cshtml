@@ -117,11 +117,6 @@
                         <h6 style="color:red;text-align:center">@TempData["OrderError"].ToString()</h6>
                     }
                 </div>
-                <div>
-                    <label>Replacement Needed:</label>
-                    @Html.CheckBoxFor(model => model.ReturnAndReplacement)
-
-                </div>
                 <div class="col-sm-6" style="padding-top:20px;">
                     <label>TIABOrderID:</label>
                     @Html.EditorFor(model => model.TIABOrderID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
@@ -183,8 +178,14 @@
                     @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
                 </div>
                 <div class="col-sm-6">
+                    <label>Replacement ?&nbsp;&nbsp;</label>
+                    @Html.CheckBoxFor(model => model.IsReplacement, new { style = "transform: scale(2.0);-webkit-transform: scale(2.0);" } )
+
+                </div>
+                <div class="col-sm-6">
                     <button type="submit" class="btn btn-primary">Complete Return Order</button>
                 </div>
+                <br />
             </div>
             }
         </div>

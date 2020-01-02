@@ -47,10 +47,10 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td><a href="javascript:ShowSKU('@item.SKU')">@item.VerserOrderID</a></td>
+                        <td>@Html.DisplayFor(modelItem => item.VerserOrderID)</td>
                         <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
                         <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
-                        <td>@Html.DisplayFor(modelItem => item.SKU)</td>
+                        <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>
                         <td>@Html.DisplayFor(modelItem => item.SSN)</td>
                         <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
                         <td>@Html.DisplayFor(modelItem => item.Surname)</td>
