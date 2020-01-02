@@ -170,5 +170,28 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("index", "ManualOrder");
             }
         }
+
+        public ActionResult OrderReturn(ManualOrderModel manualorder)
+        {
+            try
+            {
+                var SimActivateReuestModel = new SimActivationModel { IsActivation = true, VerserOrderID = manualorder.VerserOrderID };
+                var returnModel = Helper.Helper.ReturnOnlyOrderHelper(SimActivateReuestModel);
+                if (returnModel != null )
+                {
+                    TempData["ManualOrder"] = $"{manualorder.VerserOrderID} {returnModel}";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["OrderError"] = "Error has occurred while processing the request.";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("index", "ManualOrder");
+            }
+        }
     }   
 }
