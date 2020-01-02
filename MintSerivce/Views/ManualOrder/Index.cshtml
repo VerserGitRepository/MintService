@@ -6,11 +6,11 @@
 
     <ul class="nav nav-tabs" style="padding-top:15px;" id="myTab">
         <li class="active"><a data-toggle="tab" href="#MORDER">MANUAL ORDER</a></li>
-        <li><a data-toggle="tab" href="#RORDER">RETURN ORDER</a></li>
-        <li><a data-toggle="tab" href="#OHORDER">UPDATE ORDER ON HOLD</a></li>
-        <li><a data-toggle="tab" href="#ONORDER">UPDATE ORDER ON ORDER</a></li>
-        <li><a data-toggle="tab" href="#RORDER">RETURN & REPLACEMENT ORDER</a></li>
+        <li><a data-toggle="tab" href="#RORDER">RETURN & REPLACEMENT  ORDER</a></li>
+        <li><a data-toggle="tab" href="#OHORDER">UPDATE TO ON HOLD</a></li>
+        <li><a data-toggle="tab" href="#ONORDER">UPDATE TO ON ORDER</a></li>     
         <li><a data-toggle="tab" href="#CORDER">CANCEL ORDER</a></li>
+        <li><a data-toggle="tab" href="#SIMACTIVATE">SIM REACTIVATE</a></li>        
     </ul>
     <div class="tab-content" style="border-width:thin;border-style:solid;border-color:gray;width:100%;padding-top:5px;">
         <div class="form-group" style="padding-left:20px;color:orange;width:auto;align-items:center;text-align:center;">
@@ -243,6 +243,28 @@
                 }
             </div>
         </div>
+
+        <div id="SIMACTIVATE" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
+            <div class="form-horizontal">
+                @using (Html.BeginForm("ReactivateOrderSIM", "ManualOrder", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+
+                        @Html.DropDownListFor(model => Model.VerserOrderID, Model.DispatchedOrderListItems, "Select Verser Order", new { @class = "form-control", @id = "ddlSIMActivateOrderID", @multiple = "multiple" })<br /><br />
+                        <div class="col-md-10">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="UPDATE" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
     </div>
 </div>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
@@ -252,7 +274,6 @@
 <script src="~/Scripts/bootstrap-multiselect.js"></script>
 <link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
 
 @section scripts
@@ -290,5 +311,15 @@
     $('#ddlONOrderID').removeAttr('multiple')
     $('#ddlONOrderID').multiselect('rebuild');
 
-    
+    $('#ddlSIMActivateOrderID').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 280,
+        buttonWidth: '370px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true
+    });
+    $('#ddlSIMActivateOrderID').removeAttr('multiple')
+    $('#ddlSIMActivateOrderID').multiselect('rebuild');
+
+    ddlSIMActivateOrderID
 </script>

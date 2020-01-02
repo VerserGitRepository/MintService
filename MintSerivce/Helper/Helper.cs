@@ -520,6 +520,9 @@ namespace MintSerivce.Helper
             }
             return response;
         }
+
+        
+
         public static List<ListItemModel> CancelOrdersList()
         {
             var response = new List<ListItemModel>();
@@ -550,6 +553,39 @@ namespace MintSerivce.Helper
             catch (Exception ex)
             {
 
+            }
+            return response;
+        }
+
+        public static List<ListItemModel> DispatchedOrderNumbers()
+        {
+            var response = new List<ListItemModel>();
+
+            string OnOrderlist = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["DispatchedOrderNumbers"];
+            string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var resp = client.GetAsync(OnOrderlist);
+                    resp.Wait(TimeSpan.FromSeconds(10));
+
+                    if (resp.IsCompleted)
+                    {
+                        if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            Console.WriteLine("Authorization failed. Token expired or invalid.");
+                        }
+                        else
+                        {
+                            response = JsonConvert.DeserializeObject<List<ListItemModel>>(resp.Result.Content.ReadAsStringAsync().Result);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
             }
             return response;
         }
@@ -658,6 +694,42 @@ namespace MintSerivce.Helper
                 response = ex.Message;
             }
             return theList;
+        }
+
+
+        public static SimActivateResponseDto SimReActivateHelper(SimActivationModel order)
+        {
+            var response = string.Empty;
+            var returnresponse = new SimActivateResponseDto();
+            
+            string simactivationURi = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["SimReActivate"];
+            string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var resp = client.PostAsJsonAsync(simactivationURi, order);
+                    resp.Wait(TimeSpan.FromSeconds(10));
+                    if (resp.IsCompleted)
+                    {
+                        if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            Console.WriteLine("Authorization failed. Token expired or invalid.");
+                        }
+                        else
+                        {
+                            response = resp.Result.Content.ReadAsStringAsync().Result;
+                            returnresponse = JsonConvert.DeserializeObject<SimActivateResponseDto>(response);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response = ex.Message;
+            }
+            return returnresponse;
         }
         public static OrderDispatchViewModel GetOrderDetails(string orderId)
         {

@@ -50,6 +50,8 @@ namespace MintSerivce.Models
         //public string JMS_JobNo { get; set; }
         //public int? JMS_JOBID { get; set; }
         public List<SelectListItem> OrdersListItemModel { get; set; }
-        
+
+        public List<SelectListItem> DispatchedOrderListItems { get; set; }
+
     }
 }

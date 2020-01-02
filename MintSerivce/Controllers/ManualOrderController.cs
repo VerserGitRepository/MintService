@@ -17,11 +17,20 @@ namespace MintSerivce.Controllers
                 if (username == "VerserMintAdmin@verser.com.au")
                 {
                     ManualOrderModel model = new ManualOrderModel();
-                    List<ListItemModel> ordersList =  Helper.Helper.CancelOrdersList(); ;
+                    List<ListItemModel> ordersList =  Helper.Helper.CancelOrdersList();
+                    List<ListItemModel> DispatchedOrdersList = Helper.Helper.DispatchedOrderNumbers();
+
                     model.OrdersListItemModel = new List<SelectListItem>();
+                    model.DispatchedOrderListItems = new List<SelectListItem>(); 
+
                     foreach (ListItemModel item in ordersList)
                     {
                         model.OrdersListItemModel.Add(new SelectListItem { Text = item.Value });
+                    }
+
+                    foreach (ListItemModel item in DispatchedOrdersList)
+                    {
+                        model.DispatchedOrderListItems.Add(new SelectListItem { Text = item.Value });
                     }
                     return View(model);
                 }
@@ -41,7 +50,6 @@ namespace MintSerivce.Controllers
             }
             return RedirectToAction("index", "ManualOrder");
         }
-
         [HttpPost]
         public ActionResult ReturnedOrder(ManualOrderModel manualOrder)
         {
@@ -93,7 +101,6 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("index", "ManualOrder");
             } 
         }
-
         [HttpPost]
         public ActionResult OrderPutOnHold(ManualOrderModel manualorder)
         {
@@ -140,7 +147,28 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("index", "ManualOrder");
             }
         }
-
-        
+        [HttpPost]
+        public ActionResult ReactivateOrderSIM(ManualOrderModel manualorder)
+        {
+            try
+            {
+                var SimActivateReuestModel = new SimActivationModel { IsActivation = true,  VerserOrderID = manualorder.VerserOrderID };
+                var returnModel = Helper.Helper.SimReActivateHelper(SimActivateReuestModel);
+                if (returnModel != null && returnModel.IsActivated == true)
+                {
+                    TempData["ManualOrder"] = $"{manualorder.VerserOrderID} {returnModel.Message}";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["OrderError"] = "Error has occurred while processing the request.";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("index", "ManualOrder");
+            }
+        }
     }   
 }
