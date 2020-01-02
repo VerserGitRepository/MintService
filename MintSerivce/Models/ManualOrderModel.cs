@@ -40,6 +40,7 @@ namespace MintSerivce.Models
         public string ContactNumber { get; set; }      
         [Required(ErrorMessage = "OrderType Is Mandatory")]
         public string OrderType { get; set; }
+        public bool ReturnAndReplacement { get; set; }
         //public Nullable<DateTime> OrderDate { get; set; }
         //public string OrderStatus { get; set; }
         //public string Ordershipment_Id { get; set; }

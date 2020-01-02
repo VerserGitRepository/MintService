@@ -196,7 +196,7 @@ namespace MintSerivce.Controllers
                 AssetDetails.Capacity = skustock.Capacity;
                 AssetDetails.SKU = skustock.SKU;
             }
-            return View(AssetDetails);
+            return PartialView("Assets",AssetDetails);
         }
         public static List<OrderViewModel> GetOrderList()
         {

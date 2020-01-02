@@ -2,10 +2,10 @@
 
 @model IEnumerable<MintSerivce.Models.OrderViewModel>
 @*<div class="loading" align="center">
-    Loading. Please wait.<br />
-    <br />
-    <img src="~/Content/Images/Loader.gif" alt="loading" />
-</div>*@
+        Loading. Please wait.<br />
+        <br />
+        <img src="~/Content/Images/Loader.gif" alt="loading" />
+    </div>*@
 <div class="row">
     <Div style="padding-top:5px">
         <div class="col-md-10 col-sm-offset-0">
@@ -29,13 +29,12 @@
                 </thead>
                 <tbody>
 
-            @foreach (var item in Model)
-            {
-                        <tr> <td>
-                            <a href="@Url.Action("Assets",new { SKU=item.SKU })">
-                                @Html.DisplayFor(modelItem => item.VerserOrderID)
-                            </a>
-                            </td>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td><a href="javascript:ShowSKU('@item.SKU')">@item.VerserOrderID</a></td>
+
                             <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
                             <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
                             <td>@Html.DisplayFor(modelItem => item.SKU)</td>
@@ -53,23 +52,23 @@
 
 
                                 @*@if (item.OrderType == "PhoneSim")
-                                {
-                                <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab="ADDPHONETOORDER" })">
-                                    <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
-                                </a>
-                                }
-                                else if (item.OrderType == "PhoneOnly")
-                                {
-                                    <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab= "PHONEORDER#PHONEORDER" })">
+                                    {
+                                    <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab="ADDPHONETOORDER" })">
                                         <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
                                     </a>
-                                }
-                                else
-                                {
-                                    <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab= "SIMORDER" })">
-                                        <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
-                                    </a>
-                                }*@
+                                    }
+                                    else if (item.OrderType == "PhoneOnly")
+                                    {
+                                        <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab= "PHONEORDER#PHONEORDER" })">
+                                            <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab= "SIMORDER" })">
+                                            <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
+                                        </a>
+                                    }*@
 
                             </td>
                         </tr>
@@ -84,62 +83,89 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
     <script src="~/Scripts/datatables.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
+    <script src="~/Scripts/confirm.js"></script>
+    <link href="~/Content/confirm.css" rel="stylesheet" />
     <script type="text/javascript">
         $(document).ready(function () {
             $('#mainTable').DataTable();
             $('.dataTables_filter').addClass('pull-right');
-        });      
+        });
 
-   
+   function ShowSKU(SKUId) {
+        var sliderURL = '@Url.Action("Assets", "Home")'
+        $.ajax({
+            type: "GET",
+            url: sliderURL,
+            data: { "SKU": SKUId },
+            success: function (data) {
+
+
+
+        $.confirm({
+            boxWidth: '470px',
+            useBootstrap: false,
+            title: '',
+            content: data,
+            closeIcon: true,
+            backgroundDismiss: true,
+            buttons: {
+                yes: { isHidden: true }
+            }
+        });
+
+        }
+        });
+    }
     </script>
 }
-<style>    
-.dataTables_filter label, .dataTables_filter input {
-    color:gray;
-    font-size:smaller;    
-}
+<style>
+    .dataTables_filter label, .dataTables_filter input {
+        color: gray;
+        font-size: smaller;
+    }
 
-.dataTables_length{
-    color:gray;
-    font-size:x-small;
-}
-.navbar-fixed-top{
-  width: 100%;
-  height: 55px;
-  background: #000;
-  color: white;
-  text-transform: uppercase;
-  text-align: center;
-  position: fixed;
-  overflow: hidden;
-}
+    .dataTables_length {
+        color: gray;
+        font-size: x-small;
+    }
 
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: black;
-            z-index: 99;
-            opacity: 0.8;
-            filter: alpha(opacity=80);
-            -moz-opacity: 0.8;
-            min-height: 100%;
-            width: 100%;
-        }
- 
-        .loading {
-            font-family: Arial;
-            font-size: 10pt;
-            border: 5px solid #67CFF5;
-            width: 200px;
-            height: 100px;
-            display: none;
-            position: fixed;
-            background-color: White;
-            z-index: 999;
-        }
-   
+    .navbar-fixed-top {
+        width: 100%;
+        height: 55px;
+        background: #000;
+        color: white;
+        text-transform: uppercase;
+        text-align: center;
+        position: fixed;
+        overflow: hidden;
+    }
+
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: black;
+        z-index: 99;
+        opacity: 0.8;
+        filter: alpha(opacity=80);
+        -moz-opacity: 0.8;
+        min-height: 100%;
+        width: 100%;
+    }
+
+    .loading {
+        font-family: Arial;
+        font-size: 10pt;
+        border: 5px solid #67CFF5;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        background-color: White;
+        z-index: 999;
+    }
 </style>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
