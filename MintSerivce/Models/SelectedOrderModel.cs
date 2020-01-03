@@ -22,7 +22,7 @@ namespace MintSerivce.Models
         [MinLength(8, ErrorMessage = "SIM Must Be Minimum 7 Digits Length")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "SIM Must Be Numeric")]
         public string SIM { get; set; }
-        [Required(AllowEmptyStrings =false,ErrorMessage ="Consignment Number is mandatory.")]
+        //[Required(AllowEmptyStrings =false,ErrorMessage ="Consignment Number is mandatory.")]
         public string ConsignmentNumber { get; set; }
         public string DispatchNo { get; set; }
         public string ResultMessage { get; set; }
