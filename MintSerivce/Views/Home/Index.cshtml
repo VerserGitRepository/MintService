@@ -46,29 +46,35 @@
                         <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
                         <td>@Html.DisplayFor(modelItem => item.OrderType)</td>
                         <td>
-                            <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID, OrderType = item.OrderType})">
-                                <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
-                            </a>
-
+                            @if (item.OrderStatus != "On Hold")
+                            {
+                                <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID, OrderType = item.OrderType })">
+                                    <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
+                                </a>
+                            }
+                            else
+                            {
+                                <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order" onclick="ShowAlertMessage();">
+                            }
 
                             @*@if (item.OrderType == "PhoneSim")
-            {
-            <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab="ADDPHONETOORDER" })">
+        {
+        <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab="ADDPHONETOORDER" })">
+            <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
+        </a>
+        }
+        else if (item.OrderType == "PhoneOnly")
+        {
+            <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab= "PHONEORDER#PHONEORDER" })">
                 <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
             </a>
-            }
-            else if (item.OrderType == "PhoneOnly")
-            {
-                <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab= "PHONEORDER#PHONEORDER" })">
-                    <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
-                </a>
-            }
-            else
-            {
-                <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab= "SIMORDER" })">
-                    <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
-                </a>
-            }*@
+        }
+        else
+        {
+            <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID,tab= "SIMORDER" })">
+                <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="Process Order">
+            </a>
+        }*@
 
                         </td>
                     </tr>
@@ -116,6 +122,20 @@
         });
 
         }
+        });
+        }
+         function ShowAlertMessage() {        
+        $.confirm({
+            boxWidth: '470px',
+            useBootstrap: false,
+            title: '',
+            content: "The request cannot be processed for Assets with On Hold Status",
+            closeIcon: true,
+            backgroundDismiss: true,
+            buttons: {
+                yes: { isHidden: true }
+            }      
+        
         });
     }
     </script>
