@@ -357,7 +357,7 @@ namespace MintSerivce.Helper
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                     var resp = client.PostAsJsonAsync(CreateOrderURi, _NewManualOrder);
-                    resp.Wait(TimeSpan.FromSeconds(10));
+                    resp.Wait(TimeSpan.FromSeconds(200));
                     if (resp.IsCompleted)
                     {
                         if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
@@ -696,7 +696,6 @@ namespace MintSerivce.Helper
             return theList;
         }
 
-
         public static SimActivateResponseDto SimReActivateHelper(SimActivationModel order)
         {
             var response = string.Empty;
@@ -731,6 +730,39 @@ namespace MintSerivce.Helper
             }
             return returnresponse;
         }
+        public static string ReturnOnlyOrderHelper(SimActivationModel order)
+        {
+            var response = string.Empty;         
+            string simactivationURi = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["OrderReturn"];
+            string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var resp = client.PostAsJsonAsync(simactivationURi, order);
+                    resp.Wait(TimeSpan.FromSeconds(10));
+                    if (resp.IsCompleted)
+                    {
+                        if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            Console.WriteLine("Authorization failed. Token expired or invalid.");
+                        }
+                        else
+                        {
+                            response = resp.Result.Content.ReadAsStringAsync().Result;
+                            response = JsonConvert.DeserializeObject<string>(response);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response = ex.Message;
+            }
+            return response;
+        }
+
         public static OrderDispatchViewModel GetOrderDetails(string orderId)
         {
             var ordermodel = new OrderDispatchViewModel();
