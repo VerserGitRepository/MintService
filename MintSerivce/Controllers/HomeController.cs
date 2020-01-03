@@ -27,7 +27,7 @@ namespace MintSerivce.Controllers
             }
             var orderslist = GetOrderList();
 
-            var simorderslist = Helper.Helper.SIMOrdersList();
+            
 
             return View(orderslist);
         }
@@ -39,6 +39,15 @@ namespace MintSerivce.Controllers
             }
             var dispatchedorders = DispachedOrderList();
             return View(dispatchedorders);
+        }
+        public ActionResult SimOrders()
+        {
+            if (Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            var simorderslist = Helper.Helper.SIMOrdersList();
+            return View(simorderslist);
         }
         public ActionResult StockAvailable()
         {
