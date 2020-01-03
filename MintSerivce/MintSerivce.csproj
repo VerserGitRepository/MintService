@@ -217,6 +217,7 @@
     <Compile Include="Models\ShipLabelDTO.cs" />
     <Compile Include="Models\SimActivateResponseDto.cs" />
     <Compile Include="Models\SimActivationModel.cs" />
+    <Compile Include="Models\SIMOrderModel.cs" />
     <Compile Include="Models\SIMViewModel.cs" />
     <Compile Include="Models\SKUModel.cs" />
     <Compile Include="Models\SKUStock.cs" />

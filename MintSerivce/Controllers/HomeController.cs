@@ -26,6 +26,9 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("Login", "Login");
             }
             var orderslist = GetOrderList();
+
+            var simorderslist = Helper.Helper.SIMOrdersList();
+
             return View(orderslist);
         }
         public ActionResult DispatchedOrders()
@@ -164,26 +167,7 @@ namespace MintSerivce.Controllers
             }
             return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = VerserOrderID, ResultMessage = "Order Shipment Label Doesn't Exist For This Order", URL = "" });
         }
-        public ActionResult PrintOrdergreetings(string VerserOrderID)
-        {
-            var Order = GetOrdergreeting(VerserOrderID).Result;
-            if (Order != null)
-            {
-                var date = Convert.ToDateTime(Order.OrderDate).ToString("dd/MM/yyyy");
-                TempData["PrintData"] = "Hello " + Order.FirstName + "," +
-                   Environment.NewLine +
-                   Environment.NewLine + " Your Order Is Been processed and Shipped To Following Address" +
-                   Environment.NewLine + Order.AddressLine1 + " " + Order.Locality + " " + Order.State + " " + Order.Postcode +
-                   Environment.NewLine + " Your OrderID : " + Order.TIABOrderID + ", Ordered Device " + Order.SKU +
-                   Environment.NewLine + "Date :" + date +
-                   Environment.NewLine +
-                   Environment.NewLine + "Thank You.";
-
-                this.TestPrint();
-                return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = VerserOrderID });
-            }
-            return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = VerserOrderID, ResultMessage = "Order Greeting Label failed to Beacuse No Order Exist" });
-        }
+        
         public ActionResult Assets(string SKU)
         {
             SKUStock AssetDetails = new SKUStock();
@@ -388,6 +372,7 @@ namespace MintSerivce.Controllers
             }
             return returnmessage;
         }
+
         public void TestPrint()
         {
             var x = new PrintDocument();
@@ -406,7 +391,27 @@ namespace MintSerivce.Controllers
             var topMargin = e.MarginBounds.Top;
             e.Graphics.DrawString(PrintContent, printFont, Brushes.Black, leftMargin, topMargin);
         }
-        
+        public ActionResult PrintOrdergreetings(string VerserOrderID)
+        {
+            var Order = GetOrdergreeting(VerserOrderID).Result;
+            if (Order != null)
+            {
+                var date = Convert.ToDateTime(Order.OrderDate).ToString("dd/MM/yyyy");
+                TempData["PrintData"] = "Hello " + Order.FirstName + "," +
+                   Environment.NewLine +
+                   Environment.NewLine + " Your Order Is Been processed and Shipped To Following Address" +
+                   Environment.NewLine + Order.AddressLine1 + " " + Order.Locality + " " + Order.State + " " + Order.Postcode +
+                   Environment.NewLine + " Your OrderID : " + Order.TIABOrderID + ", Ordered Device " + Order.SKU +
+                   Environment.NewLine + "Date :" + date +
+                   Environment.NewLine +
+                   Environment.NewLine + "Thank You.";
+
+                this.TestPrint();
+                return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = VerserOrderID });
+            }
+            return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = VerserOrderID, ResultMessage = "Order Greeting Label failed to Beacuse No Order Exist" });
+        }
+
         [HttpPost]
         public ActionResult ExportDispatchToExcel()
         {

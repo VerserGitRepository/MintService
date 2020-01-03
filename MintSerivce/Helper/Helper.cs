@@ -797,5 +797,38 @@ namespace MintSerivce.Helper
             }
             return ordermodel;
         }
+        public static List<SIMOrderModel> SIMOrdersList()
+        {
+            List<SIMOrderModel> ordermodel = new List<SIMOrderModel>();
+            string response = string.Empty;
+            string OnOrderlist = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["SIMOrderList"];
+            string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var resp = client.GetAsync(OnOrderlist);
+                    resp.Wait(TimeSpan.FromSeconds(10));
+
+                    if (resp.IsCompleted)
+                    {
+                        if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            Console.WriteLine("Authorization failed. Token expired or invalid.");
+                        }
+                        else
+                        {
+                            response = resp.Result.Content.ReadAsStringAsync().Result;
+                            ordermodel = JsonConvert.DeserializeObject<List<SIMOrderModel>>(response);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return ordermodel;
+        }
     }
 }
