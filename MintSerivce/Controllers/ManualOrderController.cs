@@ -48,6 +48,10 @@ namespace MintSerivce.Controllers
                 ModelState.Clear();
                 return RedirectToAction("index", "ManualOrder");
             }
+            //if (TempData["TabOrder"] == null)
+            //{
+                TempData["TabOrder"] = "MORDER";
+            //}
             return RedirectToAction("index", "ManualOrder");
         }
         [HttpPost]
@@ -67,15 +71,18 @@ namespace MintSerivce.Controllers
                     }
               
                     ModelState.Clear();
+                    TempData["TabOrder"] = "RORDER";
                     return RedirectToAction("index", "ManualOrder");
                 }
                 else
                 {
                     TempData["ManualOrder"] = "Verser Order Is Mandatory";
+                    TempData["TabOrder"] = "RORDER";
                     return RedirectToAction("index", "ManualOrder");
                 }
                
             }
+            TempData["TabOrder"] = "MORDER";
             return RedirectToAction("index", "ManualOrder");
         }
         [HttpPost]
@@ -88,16 +95,19 @@ namespace MintSerivce.Controllers
                 if (returnModel != null && returnModel.First().ErrorMessage != null)
                 {
                     TempData["ManualOrder"] = $"{manualorder.VerserOrderID} Order Successfully Cancelled !";
+                    TempData["TabOrder"] = "CORDER";
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     TempData["OrderError"] = "Error has occurred while processing the request.";
+                    TempData["TabOrder"] = "CORDER";
                     return RedirectToAction("Index");
                 }
             }
             catch (Exception)
             {
+                TempData["TabOrder"] = "CORDER";
                 return RedirectToAction("index", "ManualOrder");
             } 
         }
@@ -111,16 +121,19 @@ namespace MintSerivce.Controllers
                 if (returnModel != null && returnModel.First().ErrorMessage != null)
                 {
                     TempData["ManualOrder"] = $"{manualorder.VerserOrderID} Order Status Successfully Updated To On Hold";
+                    TempData["TabOrder"] = "OHORDER"; 
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     TempData["OrderError"] = "Error has occurred while processing the request.";
+                    TempData["TabOrder"] = "OHORDER";
                     return RedirectToAction("Index");
                 }
             }
             catch (Exception)
             {
+                TempData["TabOrder"] = "OHORDER";
                 return RedirectToAction("index", "ManualOrder");
             }
         }
@@ -133,17 +146,20 @@ namespace MintSerivce.Controllers
                 var returnModel = Helper.Helper.UpdateOnOrder(model);
                 if (returnModel != null && returnModel.First().ErrorMessage != null)
                 {
-                    TempData["ManualOrder"]   = $"{manualorder.VerserOrderID} Order Status Successfully Updated To On Order"; 
+                    TempData["ManualOrder"]   = $"{manualorder.VerserOrderID} Order Status Successfully Updated To On Order";
+                    TempData["TabOrder"] = "ONORDER";
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     TempData["OrderError"] = "Error has occurred while processing the request.";
+                    TempData["TabOrder"] = "ONORDER";
                     return RedirectToAction("Index");
                 }
             }
             catch (Exception)
             {
+                TempData["TabOrder"] = "ONORDER";
                 return RedirectToAction("index", "ManualOrder");
             }
         }
@@ -157,16 +173,19 @@ namespace MintSerivce.Controllers
                 if (returnModel != null && returnModel.IsActivated == true)
                 {
                     TempData["ManualOrder"] = $"{manualorder.VerserOrderID} {returnModel.Message}";
+                    TempData["TabOrder"] = "SIMACTIVATE";
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     TempData["OrderError"] = "Error has occurred while processing the request.";
+                    TempData["TabOrder"] = "SIMACTIVATE";
                     return RedirectToAction("Index");
                 }
             }
             catch (Exception)
             {
+                TempData["TabOrder"] = "SIMACTIVATE";
                 return RedirectToAction("index", "ManualOrder");
             }
         }
@@ -180,16 +199,19 @@ namespace MintSerivce.Controllers
                 if (returnModel != null )
                 {
                     TempData["ManualOrder"] = $"{manualorder.VerserOrderID} {returnModel}";
+                    TempData["TabOrder"] = "ROONLY";
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     TempData["OrderError"] = "Error has occurred while processing the request.";
+                    TempData["TabOrder"] = "ROONLY";
                     return RedirectToAction("Index");
                 }
             }
             catch (Exception)
             {
+                TempData["TabOrder"] = "ROONLY";
                 return RedirectToAction("index", "ManualOrder");
             }
         }

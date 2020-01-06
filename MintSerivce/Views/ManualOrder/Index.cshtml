@@ -16,10 +16,11 @@
     <div class="tab-content" style="border-width:thin;border-style:solid;border-color:gray;width:100%;padding-top:5px;">
         <div class="form-group" style="padding-left:20px;color:orange;width:auto;align-items:center;text-align:center;">
             @*@if (Model.ResultMessage != null)
-                {
-                    <p><h5> @Model.ResultMessage</h5></p>
-                }*@
+            {
+                <p><h5> @Model.ResultMessage</h5></p>
+            }*@
         </div>
+        <input class="hidden" type="text" id="hdnTabOrder" value="@TempData["TabOrder"]" />
         <div id="MORDER" class="tab-pane fade in active" role="tabpanel" style="text-align:left;padding-left:20px;">
 
             @using (Html.BeginForm("Index", "ManualOrder", FormMethod.Post))
@@ -34,7 +35,7 @@
                         @if (TempData["OrderError"] != null)
                         {
                             <h6 style="color:red;text-align:center">@TempData["OrderError"].ToString()</h6>
-                        }                                              
+                        }
                     </div>
                     <div class="col-sm-6" style="padding-top:20px;">
                         <label>TIABOrderID:</label>
@@ -103,91 +104,91 @@
         </div>
 
         <div id="RORDER" class="tab-pane fade" role="tabpanel">
-           
+
             @using (Html.BeginForm("ReturnedOrder", "ManualOrder", FormMethod.Post))
             {
 
-            <div class="container" style="padding-top:20px;color:gray">
-                <div>
-                    @if (TempData["ManualOrder"] != null)
-                    {
-                        <h6 style="color:green;text-align:center">@TempData["ManualOrder"].ToString()</h6>
-                    }
-                    @if (TempData["OrderError"] != null)
-                    {
-                        <h6 style="color:red;text-align:center">@TempData["OrderError"].ToString()</h6>
-                    }
-                </div>
-                <div class="col-sm-6" style="padding-top:20px;">
-                    <label>TIABOrderID:</label>
-                    @Html.EditorFor(model => model.TIABOrderID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
-                    @Html.ValidationMessageFor(model => model.TIABOrderID, null, new { @class = "text-danger" })
-                </div>
-                <div class="col-sm-6" style="padding-top:20px;">
-                    <label>VerserOrderID:</label>
-                    @Html.EditorFor(model => model.VerserOrderID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
-                    @Html.ValidationMessageFor(model => model.VerserOrderID, null, new { @class = "text-danger" })
-                </div>
-                <div class="col-sm-6">
-                    <label>FirstName:</label>
-                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "text-danger" })
-                </div>
-                <div class="col-sm-6">
-                    <label>Surname:</label>
-                    @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Surname, null, new { @class = "text-danger" })
-                </div>
-                <div class="col-sm-6">
-                    <label>Salutation:</label>
-                    @Html.EditorFor(model => model.Salutation, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Salutation, null, new { @class = "text-danger" })
-                </div>
-                <div class="col-sm-6">
-                    <label>AddressLine1:</label>
-                    @Html.EditorFor(model => model.AddressLine1, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.AddressLine1, null, new { @class = "text-danger" })
-                </div>
-                <div class="col-sm-6">
-                    <label>Suburb:</label>
-                    @Html.EditorFor(model => model.Locality, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Locality, null, new { @class = "text-danger" })
-                </div>
-                <div class="col-sm-6">
-                    <label>State:</label>
-                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.State, null, new { @class = "text-danger" })
-                </div>
-                <div class="col-sm-6">
-                    <label>Postcode:</label>
-                    @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Postcode, null, new { @class = "text-danger" })
-                </div>
-                <div class="col-sm-6">
-                    <label>SKU:</label>
-                    @Html.EditorFor(model => model.SKU, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.SKU, null, new { @class = "text-danger" })
-                </div>
-                <div class="col-sm-6">
-                    <label>ContactNumber:</label>
-                    @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
-                </div>
-                <div class="col-sm-6">
-                    <label>OrderType:</label>
-                    @Html.EditorFor(model => model.OrderType, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
-                </div>
-                @*<div class="col-sm-6">
-                    <label>Replacement ?&nbsp;&nbsp;</label>
-                    @Html.CheckBoxFor(model => model.IsReplacement, new { style = "transform: scale(2.0);-webkit-transform: scale(2.0);" } )
+                <div class="container" style="padding-top:20px;color:gray">
+                    <div>
+                        @if (TempData["ManualOrder"] != null)
+                        {
+                            <h6 style="color:green;text-align:center">@TempData["ManualOrder"].ToString()</h6>
+                        }
+                        @if (TempData["OrderError"] != null)
+                        {
+                            <h6 style="color:red;text-align:center">@TempData["OrderError"].ToString()</h6>
+                        }
+                    </div>
+                    <div class="col-sm-6" style="padding-top:20px;">
+                        <label>TIABOrderID:</label>
+                        @Html.EditorFor(model => model.TIABOrderID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
+                        @Html.ValidationMessageFor(model => model.TIABOrderID, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6" style="padding-top:20px;">
+                        <label>VerserOrderID:</label>
+                        @Html.EditorFor(model => model.VerserOrderID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
+                        @Html.ValidationMessageFor(model => model.VerserOrderID, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6">
+                        <label>FirstName:</label>
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Surname:</label>
+                        @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Surname, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Salutation:</label>
+                        @Html.EditorFor(model => model.Salutation, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Salutation, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6">
+                        <label>AddressLine1:</label>
+                        @Html.EditorFor(model => model.AddressLine1, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AddressLine1, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Suburb:</label>
+                        @Html.EditorFor(model => model.Locality, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Locality, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6">
+                        <label>State:</label>
+                        @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.State, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Postcode:</label>
+                        @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Postcode, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6">
+                        <label>SKU:</label>
+                        @Html.EditorFor(model => model.SKU, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SKU, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6">
+                        <label>ContactNumber:</label>
+                        @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6">
+                        <label>OrderType:</label>
+                        @Html.EditorFor(model => model.OrderType, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
+                    </div>
+                    @*<div class="col-sm-6">
+                        <label>Replacement ?&nbsp;&nbsp;</label>
+                        @Html.CheckBoxFor(model => model.IsReplacement, new { style = "transform: scale(2.0);-webkit-transform: scale(2.0);" } )
 
-                </div>*@
-                <div class="col-sm-6">
-                    <button type="submit" class="btn btn-primary">Complete Return Order</button>
+                    </div>*@
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-primary">Complete Return Order</button>
+                    </div>
+                    <br />
                 </div>
-                <br />
-            </div>
             }
         </div>
         <div id="CORDER" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
@@ -196,7 +197,7 @@
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
-                      
+
                         @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })<br /><br />
                         <div class="col-md-10">
                         </div>
@@ -310,6 +311,26 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script>
+
+    $(document).ready(function () {
+        if ($("#hdnTabOrder").val() == "MORDER")
+            $('a[href="#MORDER"]').click();
+        else if ($("#hdnTabOrder").val() == "RORDER")
+            $('a[href="#RORDER"]').click();
+        else if ($("#hdnTabOrder").val() == "OHORDER")
+            $('a[href="#OHORDER"]').click();
+        else if ($("#hdnTabOrder").val() == "ONORDER")
+            $('a[href="#ONORDER"]').click();
+        else if ($("#hdnTabOrder").val() == "CORDER")
+            $('a[href="#CORDER"]').click();
+        else if ($("#hdnTabOrder").val() == "SIMACTIVATE")
+            $('a[href="#SIMACTIVATE"]').click();
+        else if ($("#hdnTabOrder").val() == "ROONLY")
+            $('a[href="#ROONLY"]').click();
+        else
+            $('a[href="#MORDER"]').click();
+    });
+
     $('#ddlOrderID').multiselect({
         includeSelectAllOption: false,
         maxHeight: 280,

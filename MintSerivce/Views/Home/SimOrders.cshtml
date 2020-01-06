@@ -4,9 +4,9 @@
 }
 @using System.Linq;
 @model IEnumerable<MintSerivce.Models.SIMOrderModel>
-<div class="row" style="margin-left:-130px;margin-right:200px">
-    <div style="padding-top:15px;width:131%;">
-        @using (Html.BeginForm("ExportDispatchToExcel", "Home", FormMethod.Post))
+<div class="row" style="margin-left:-70px;margin-right:100px">
+    <div style="padding-top:15px;width:100%;">
+        @using (Html.BeginForm("ExportSimToExcel", "Home", FormMethod.Post))
         {
             <div align="right">
                 <button type="submit" value="ExportToExcel" class="btn btn-default btn-sm" name="submitButton">
@@ -17,20 +17,18 @@
     </div>
 </div>
 @*<div class="container" style="margin-left:2px;padding-top:30px">*@
-<div class="row" style="margin-left:-140px;width:130%">
+<div class="row" style="margin-left:-140px;width:100%">
     @*class="pull-left"*@
 
     <div class="col-md-12" @*style="width:100%;margin-left:-140px;"*@>
 
-        <table class="table table-bordered" table-responsive table-hover" id="mainTable" style="width:80%;">
+        <table class="table table-bordered" table-responsive table-hover" id="mainTable" style="width:100%;">
             <thead style="background-color:#959ca1;color:white">
                 <tr>
                     <th>Order</th>
                     <th>Job</th>
                     <th>TIABOrder</th>
-                 
-                 
-                    <th>Customer</th>
+                 <th>Customer</th>
                     <th>SurName</th>
                     <th>Address</th>
                     <th>Suburb</th>

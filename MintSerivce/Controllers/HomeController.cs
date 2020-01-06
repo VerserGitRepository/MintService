@@ -155,7 +155,11 @@ namespace MintSerivce.Controllers
         {
             if (selectedOrder.SIM == null)
             {
-                return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage = "SIM Is Required!" });
+                return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage = "SIM Is Required!", OrderType = "SimOnly" });
+            }
+            else if (selectedOrder.ConsignmentNumber == null)
+            {
+                return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage = "Consignment Number Is Required!", OrderType= "SimOnly" });
             }
             selectedOrder.UserName = Session["User"].ToString();
             string result = ProcessSimOrderService(selectedOrder).Result;
@@ -449,6 +453,34 @@ namespace MintSerivce.Controllers
             }
             return RedirectToAction("StockAvailable", "Home");
         }
+        [HttpPost]
+        public ActionResult ExportSimToExcel()
+        {
+            List<SIMOrderModel> SimOrdersList = new List<SIMOrderModel>();
+            if (System.Web.HttpContext.Current.Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                SimOrdersList = Helper.Helper.SIMOrdersList();
+                GridView gv = new GridView();
+                gv.DataSource = Helper.Helper.SIMOrdersList();
+                gv.DataBind();
+                Response.ClearContent();
+                Response.Buffer = true;
+                Response.AddHeader("content-disposition", "attachment; filename=SIMOrdersList.xls");
+                Response.ContentType = "application/ms-excel";
+                Response.Charset = "";
+                StringWriter sw = new StringWriter();
+                HtmlTextWriter htw = new System.Web.UI.HtmlTextWriter(sw);
+                gv.RenderControl(htw);
+                Response.Output.Write(sw.ToString());
+                Response.Flush();
+                Response.End();
+            }
+            return RedirectToAction("StockAvailable", "Home");
+        }
         public ActionResult ExportStockToExcel()
         {
             List<SKUStock> SKUStockModel = new List<SKUStock>();
@@ -482,6 +514,33 @@ namespace MintSerivce.Controllers
             OrderDispatchViewModel model = Helper.Helper.GetOrderDetails(orderId);
 
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ExportOrdersToExcel()
+        {
+            
+            List<OrderViewModel> orderModel = new List<OrderViewModel>();
+            if (System.Web.HttpContext.Current.Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                GridView gv = new GridView();
+                gv.DataSource = GetOrderList();
+                gv.DataBind();
+                Response.ClearContent();
+                Response.Buffer = true;
+                Response.AddHeader("content-disposition", "attachment; filename=OrdersList.xls");
+                Response.ContentType = "application/ms-excel";
+                Response.Charset = "";
+                StringWriter sw = new StringWriter();
+                HtmlTextWriter htw = new System.Web.UI.HtmlTextWriter(sw);
+                gv.RenderControl(htw);
+                Response.Output.Write(sw.ToString());
+                Response.Flush();
+                Response.End();
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

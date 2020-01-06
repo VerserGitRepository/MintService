@@ -56,17 +56,19 @@
             @using (Html.BeginForm("OrderSummary", "ManageOrders", FormMethod.Post))
             {
                 <button type="submit" class="btn btn-primary">PRINT TODAY ORDERS SUMMARY</button>
+
                 if (TempData["OrderFilePath"] != null)
-                {                   
+                {
                     <br />
-                     <img style="width:45px" src="~/Images/PDF.png"/> <a href="javascript: w=window.open('@TempData["OrderFilePath"].ToString()');" >Print Shipment Order Summary</a> 
+                    <img style="width:45px" src="~/Images/PDF.png" /> <a href="javascript: w=window.open('@TempData["OrderFilePath"].ToString()');">Print Shipment Order Summary</a>
                 }
             }
             <br />
-            <span id="staticText">https://customers.verser.com.au/MintStarTrackOrderSummaryFiles/OrderSummary-</span>
-            <input type="text" id="datevalueEnter" name="dateValueEnter" placeholder="Enter Date in ddmmyyyy format" /> <span id="trailer">.pdf</span>
-
-            <p><a id="downloadfile" class="btn-primary btn-lg"  href="downloadfile" target="_blank">Download File</a></p>
+            @*<span id="staticText">https://customers.verser.com.au/MintStarTrackOrderSummaryFiles/OrderSummary-</span>*@
+            <input type="date" value="" placeholder="Enter Date in ddmmyyyy format" id="datevalueEnter" />
+            @*<input type="text" id="datevalueEnter" name="dateValueEnter" placeholder="Enter Date in ddmmyyyy format" /> <span id="trailer">.pdf</span>*@
+            <br /> <br /> <br />
+            <p><a id="downloadfile" class="btn-primary btn-lg" href="downloadfile" target="_blank">Download File</a></p>
         </div>
 
         <div id="MANAGESKU" class="tab-pane fade">
@@ -126,8 +128,11 @@
         }
         var today = dd + + mm + + yyyy;      
 
-        $("#downloadfile").click(function () {
-            var text1 = $("#staticText").text() + $("#datevalueEnter").val() + $("#trailer").text();         
+            $("#downloadfile").click(function () {
+                let result = '';
+                let parts = $("#datevalueEnter").val().split('-');
+                result = parts[2]+''+parts[1]+''+parts[0];
+                var text1 = 'https://customers.verser.com.au/MintStarTrackOrderSummaryFiles/OrderSummary-' + result + '.pdf';         
             document.getElementById("downloadfile").href = text1;         
        
         });
