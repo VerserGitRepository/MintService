@@ -33,7 +33,8 @@
                     <th>Address</th>
                     <th>Suburb</th>
                     <th>State</th>
-                    <th>Status</th>              
+                    <th>Status</th>
+                    <th>SIM</th>
                     <th>Consignment</th>
                     <th>ShippedDate</th>
                   
@@ -52,7 +53,8 @@
                         <td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>
                         <td>@Html.DisplayFor(modelItem => item.Locality)</td>
                         <td>@Html.DisplayFor(modelItem => item.State)</td>
-                        <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>           
+                        <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>      
+                        <td>@Html.DisplayFor(modelItem => item.SIM)</td>     
                         <td>@Html.DisplayFor(modelItem => item.ConsignmentNumber)</td>
                         <td>@item.DateShipped.Value.ToShortDateString() </td>                    
 
