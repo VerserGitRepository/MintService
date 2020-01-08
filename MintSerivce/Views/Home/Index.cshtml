@@ -7,7 +7,7 @@
         <img src="~/Content/Images/Loader.gif" alt="loading" />
     </div>*@
 
-<div class="row">
+<div class="row" style="padding-top:5px; width:120%">
         <div style="padding-top:15px;width:100%;">
             @using (Html.BeginForm("ExportOrdersToExcel", "Home", FormMethod.Post))
             {
@@ -18,8 +18,8 @@
                 </div>
             }
         </div>
-    <Div style="padding-top:5px">
-        <div class="col-md-10 col-sm-offset-0">
+    @*<Div style="padding-top:5px">*@
+        <div class="col-md-12">
 
             <table class="table table-bordered" table-responsive table-hover" id="mainTable">
                 <thead style="background-color:#959ca1;color:white">
@@ -93,7 +93,7 @@
                 </tbody>
             </table>
         </div>
-    </Div>
+   
 </div>
 
 @section Scripts {
