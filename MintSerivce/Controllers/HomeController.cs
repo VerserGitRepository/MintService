@@ -13,6 +13,8 @@ using System.Drawing;
 using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web;
+using BarcodeLib.Barcode;
 
 namespace MintSerivce.Controllers
 {
@@ -27,7 +29,7 @@ namespace MintSerivce.Controllers
             }
             var orderslist = GetOrderList();
 
-            
+
 
             return View(orderslist);
         }
@@ -153,23 +155,30 @@ namespace MintSerivce.Controllers
         }
         public ActionResult ProcessSimOrder(SelectedOrderModel selectedOrder)
         {
-            if (selectedOrder.SIM == null)
-            {
-                return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage = "SIM Is Required!", OrderType = "SimOnly" });
-            }
-            else if (selectedOrder.ConsignmentNumber == null)
-            {
-                return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage = "Consignment Number Is Required!", OrderType= "SimOnly" });
-            }
-            selectedOrder.UserName = Session["User"].ToString();
-            string result = ProcessSimOrderService(selectedOrder).Result;
-            if (!string.IsNullOrEmpty(result))
-            {
-                result = result.Replace('"', ' ').Trim();
-                selectedOrder.ResultMessage = result;
-            }
+            PrintOrderLabel(selectedOrder.VerserOrderID);
+
+            //if (selectedOrder.SIM == null)
+            //{
+            //    return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage = "SIM Is Required!", OrderType = "SimOnly" });
+            //}
+            //else if (selectedOrder.ConsignmentNumber == null)
+            //{
+            //    return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage = "Consignment Number Is Required!", OrderType = "SimOnly" });
+            //}
+            //selectedOrder.UserName = Session["User"].ToString();
+
+            //selectedOrder.ResultMessage = "Test Print";
+            //string result = ProcessSimOrderService(selectedOrder).Result;
+            //if (!string.IsNullOrEmpty(result))
+            //{
+            //    result = result.Replace('"', ' ').Trim();
+            //    selectedOrder.ResultMessage = result;
+            //    PrintOrdergreetings(selectedOrder.VerserOrderID);
+            //}
+
             return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage });
         }
+
         public ActionResult GetOrderShipmentLabel(string VerserOrderID)
         {
             var URL = OrderShipmentLabel(VerserOrderID).Result;
@@ -180,7 +189,7 @@ namespace MintSerivce.Controllers
             }
             return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = VerserOrderID, ResultMessage = "Order Shipment Label Doesn't Exist For This Order", URL = "" });
         }
-        
+
         public ActionResult Assets(string SKU)
         {
             SKUStock AssetDetails = new SKUStock();
@@ -193,7 +202,7 @@ namespace MintSerivce.Controllers
                 AssetDetails.Capacity = skustock.Capacity;
                 AssetDetails.SKU = skustock.SKU;
             }
-            return PartialView("Assets",AssetDetails);
+            return PartialView("Assets", AssetDetails);
         }
         public static List<OrderViewModel> GetOrderList()
         {
@@ -386,9 +395,16 @@ namespace MintSerivce.Controllers
             return returnmessage;
         }
 
-        public void TestPrint()
+        public void LabelPrinter()
         {
             var x = new PrintDocument();
+            x.PrintPage += (sender, args) =>
+            {
+                Point p = new Point(205, 5);
+                args.Graphics.TranslateTransform(210, 10);
+                args.Graphics.RotateTransform(90.0f);
+                args.Graphics.ResetTransform();
+            };
             x.PrintPage += new PrintPageEventHandler(PrintPage);
             x.Print();
         }
@@ -399,32 +415,55 @@ namespace MintSerivce.Controllers
             {
                 PrintContent = TempData["PrintData"].ToString();
             }
-            var printFont = new Font("Courier New", 12);
+            var printFont = new Font("Courier New", 4);
             var leftMargin = e.MarginBounds.Left;
             var topMargin = e.MarginBounds.Top;
             e.Graphics.DrawString(PrintContent, printFont, Brushes.Black, leftMargin, topMargin);
         }
-        public ActionResult PrintOrdergreetings(string VerserOrderID)
+        public ActionResult PrintOrderLabel(string VerserOrderID)
         {
-            var Order = GetOrdergreeting(VerserOrderID).Result;
+            var Order = GetOrdergreeting(VerserOrderID).Result;         
             if (Order != null)
             {
                 var date = Convert.ToDateTime(Order.OrderDate).ToString("dd/MM/yyyy");
-                TempData["PrintData"] = "Hello " + Order.FirstName + "," +
-                   Environment.NewLine +
-                   Environment.NewLine + " Your Order Is Been processed and Shipped To Following Address" +
-                   Environment.NewLine + Order.AddressLine1 + " " + Order.Locality + " " + Order.State + " " + Order.Postcode +
-                   Environment.NewLine + " Your OrderID : " + Order.TIABOrderID + ", Ordered Device " + Order.SKU +
-                   Environment.NewLine + "Date :" + date +
-                   Environment.NewLine +
-                   Environment.NewLine + "Thank You.";
-
-                this.TestPrint();
+                TempData["PrintData"] = $"Name: {Order.FirstName}  {Environment.NewLine}Address: {Order.AddressLine1} {Environment.NewLine}Suburb: {Order.Locality} {Environment.NewLine}State: {Order.State}{Environment.NewLine}Postcode: { Order.Postcode}  {Environment.NewLine}TIABOrderID: {Order.TIABOrderID}  {Environment.NewLine}VerserOrderID: {Order.VerserOrderID}";                
+                 this.LabelPrinter();      
                 return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = VerserOrderID });
             }
-            return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = VerserOrderID, ResultMessage = "Order Greeting Label failed to Beacuse No Order Exist" });
-        }
 
+            //PrintDocument pd = new PrintDocument();
+            //pd.PrintPage += (sender, args) =>
+            //{
+            //    BarcodeLib.Barcode.Linear AddressLabel = new BarcodeLib.Barcode.Linear();
+            //    AddressLabel.Data = Data;
+            //    AddressLabel.Type = BarcodeLib.Barcode.BarcodeType.CODE128B;
+            //    AddressLabel.BarHeight = 50;
+            //    AddressLabel.BarWidth = 1;
+            //    AddressLabel.N = 2;
+            //    AddressLabel.AddCheckSum = true;
+            //    AddressLabel.UOM = UnitOfMeasure.PIXEL;
+            //    AddressLabel.ImageFormat = System.Drawing.Imaging.ImageFormat.Png;
+            //    AddressLabel.ImageWidth = 20;
+            //    AddressLabel.Rotate = RotateOrientation.BottomFacingLeft;
+            //    AddressLabel.TextFont = (new Font("Arial", 9, FontStyle.Regular));
+            //    byte[] SSNbarcodeInBytes = AddressLabel.drawBarcodeAsBytes();
+            //    System.Drawing.Bitmap Addressbitmap;
+            //    using (System.IO.MemoryStream SSNms = new System.IO.MemoryStream(SSNbarcodeInBytes))
+            //    {
+            //        Addressbitmap = new System.Drawing.Bitmap(SSNms);
+            //    }
+            //    Point SSNp = new Point(120, 380);
+            //    args.Graphics.DrawImage(Addressbitmap, SSNp);
+            //    args.Graphics.TranslateTransform(210, 10);
+            //    args.Graphics.RotateTransform(90.0f);
+            //    args.Graphics.ResetTransform();
+            //    args.Graphics.Dispose();
+
+            //};
+            //pd.Print();
+            //pd.Dispose();           
+          return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = VerserOrderID, ResultMessage = "Order Greeting Label failed to Beacuse No Order Exist" });
+        }
         [HttpPost]
         public ActionResult ExportDispatchToExcel()
         {
@@ -517,7 +556,7 @@ namespace MintSerivce.Controllers
         }
         public ActionResult ExportOrdersToExcel()
         {
-            
+
             List<OrderViewModel> orderModel = new List<OrderViewModel>();
             if (System.Web.HttpContext.Current.Session["User"] == null)
             {
