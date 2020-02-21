@@ -14,6 +14,7 @@ using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web;
+using DYMO.Label;
 using BarcodeLib.Barcode;
 
 namespace MintSerivce.Controllers
@@ -397,28 +398,36 @@ namespace MintSerivce.Controllers
 
         public void LabelPrinter()
         {
-            var x = new PrintDocument();
-            x.PrintPage += (sender, args) =>
-            {
-                Point p = new Point(205, 5);
-                args.Graphics.TranslateTransform(210, 10);
-                args.Graphics.RotateTransform(90.0f);
-                args.Graphics.ResetTransform();
-            };
-            x.PrintPage += new PrintPageEventHandler(PrintPage);
-            x.Print();
+            //var x = new PrintDocument();
+            //x.PrintPage += (sender, args) =>
+            //{
+            //    Point p = new Point(205, 5);
+            //    args.Graphics.TranslateTransform(210, 10);
+            //    args.Graphics.RotateTransform(90.0f);
+            //    args.Graphics.ResetTransform();
+            //};
+            //x.PrintPage += new PrintPageEventHandler(PrintPage);
+            //x.Print();
+            
         }
-        private void PrintPage(Object sender, PrintPageEventArgs e)
+        private void PrintLabel(string data)
         {
-            var PrintContent = "";
-            if (TempData["PrintData"] != null)
+            string labelPath = ConfigurationManager.AppSettings["LabelPath"];
+            string printerName = ConfigurationManager.AppSettings["PrinterName"];
+            if (labelPath == null || labelPath == string.Empty)
             {
-                PrintContent = TempData["PrintData"].ToString();
+                labelPath = Server.MapPath("\\") + "\\Images\\DymoLabel\\SKUAddressLabel.label";
             }
-            var printFont = new Font("Courier New", 4);
-            var leftMargin = e.MarginBounds.Left;
-            var topMargin = e.MarginBounds.Top;
-            e.Graphics.DrawString(PrintContent, printFont, Brushes.Black, leftMargin, topMargin);
+            var PrintContent = "";
+            if (data != null)
+            {
+                  PrintContent = data;
+
+                var label = DYMO.Label.Framework.Label.Open(labelPath);
+                label.SetObjectText("data", PrintContent);               
+                label.Print(printerName);
+            }
+           
         }
         public ActionResult PrintOrderLabel(string VerserOrderID)
         {
@@ -427,10 +436,15 @@ namespace MintSerivce.Controllers
             if (Order != null)
             {
                 var date = Convert.ToDateTime(Order.OrderDate).ToString("dd/MM/yyyy");
-               // TempData["PrintData"]
-                    Data = $"Name: {Order.FirstName}  {Environment.NewLine}Address: {Order.AddressLine1} {Environment.NewLine}Suburb: {Order.Locality} {Environment.NewLine}State: {Order.State}{Environment.NewLine}Postcode: { Order.Postcode}  {Environment.NewLine}TIABOrderID: {Order.TIABOrderID}  {Environment.NewLine}VerserOrderID: {Order.VerserOrderID}";
-                //   this.LabelPrinter();      
-                TempData["PrintData"] = Data;
+                Data = $"Name: {Order.FirstName}  {Environment.NewLine}Address: {Order.AddressLine1} {Environment.NewLine}Suburb: {Order.Locality} {Environment.NewLine}State: {Order.State}{Environment.NewLine}Postcode: { Order.Postcode}  {Environment.NewLine}TIABOrderID: {Order.TIABOrderID}  {Environment.NewLine}VerserOrderID: {Order.VerserOrderID}";
+                try
+                {
+                    PrintLabel(Data);
+                }
+                catch (Exception ex)
+                {
+
+                }
                 return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = VerserOrderID });
             }
 
