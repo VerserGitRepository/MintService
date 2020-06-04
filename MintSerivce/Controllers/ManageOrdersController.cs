@@ -34,8 +34,6 @@ namespace MintSerivce.Controllers
                     {
                         mymodel.OrdersListItemModel.Add(new SelectListItem { Text = item.Value });
                     }
-
-
                     return View(mymodel);
                 }
             }

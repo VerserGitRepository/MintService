@@ -156,26 +156,26 @@ namespace MintSerivce.Controllers
         }
         public ActionResult ProcessSimOrder(SelectedOrderModel selectedOrder)
         {
-            PrintOrderLabel(selectedOrder.VerserOrderID);
+           // PrintOrderLabel(selectedOrder.VerserOrderID); Commented for label Testing
 
-            //if (selectedOrder.SIM == null)
-            //{
-            //    return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage = "SIM Is Required!", OrderType = "SimOnly" });
-            //}
-            //else if (selectedOrder.ConsignmentNumber == null)
-            //{
-            //    return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage = "Consignment Number Is Required!", OrderType = "SimOnly" });
-            //}
-            //selectedOrder.UserName = Session["User"].ToString();
+            if (selectedOrder.SIM == null)
+            {
+                return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage = "SIM Is Required!", OrderType = "SimOnly" });
+            }
+            else if (selectedOrder.ConsignmentNumber == null)
+            {
+                return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage = "Consignment Number Is Required!", OrderType = "SimOnly" });
+            }
+            selectedOrder.UserName = Session["User"].ToString();
 
-            //selectedOrder.ResultMessage = "Test Print";
-            //string result = ProcessSimOrderService(selectedOrder).Result;
-            //if (!string.IsNullOrEmpty(result))
-            //{
-            //    result = result.Replace('"', ' ').Trim();
-            //    selectedOrder.ResultMessage = result;
-            //    PrintOrdergreetings(selectedOrder.VerserOrderID);
-            //}
+            selectedOrder.ResultMessage = "Test Print";
+            string result = ProcessSimOrderService(selectedOrder).Result;
+            if (!string.IsNullOrEmpty(result))
+            {
+                result = result.Replace('"', ' ').Trim();
+                selectedOrder.ResultMessage = result;
+                PrintOrderLabel(selectedOrder.VerserOrderID);
+            }
 
             return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage });
         }
@@ -437,15 +437,15 @@ namespace MintSerivce.Controllers
             {
                 var date = Convert.ToDateTime(Order.OrderDate).ToString("dd/MM/yyyy");
                 Data = $"Name: {Order.FirstName}  {Environment.NewLine}Address: {Order.AddressLine1} {Environment.NewLine}Suburb: {Order.Locality} {Environment.NewLine}State: {Order.State}{Environment.NewLine}Postcode: { Order.Postcode}  {Environment.NewLine}TIABOrderID: {Order.TIABOrderID}  {Environment.NewLine}VerserOrderID: {Order.VerserOrderID}";
-                try
-                {
-                    PrintLabel(Data);
-                }
-                catch (Exception ex)
-                {
+                //try
+                //{
+                //    PrintLabel(Data);
+                //}
+                //catch (Exception ex)
+                //{
 
-                }
-                return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = VerserOrderID });
+                //}
+                //return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = VerserOrderID });
             }
 
             PrintDocument pd = new PrintDocument();
