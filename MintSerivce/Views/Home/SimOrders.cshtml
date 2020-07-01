@@ -37,7 +37,7 @@
                     <th>SIM</th>
                     <th>Consignment</th>
                     <th>ShippedDate</th>
-                  
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -57,7 +57,11 @@
                         <td>@Html.DisplayFor(modelItem => item.SIM)</td>     
                         <td>@Html.DisplayFor(modelItem => item.ConsignmentNumber)</td>
                         <td>@item.DateShipped.Value.ToShortDateString() </td>                    
-
+                        <td>
+                            <a href="@Url.Action("PrintOrderLabel", "Home", new { VerserOrderID = item.VerserOrderID })">
+                                <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="PRINT">
+                            </a>
+                        </td>
                     </tr>
                 }
             </tbody>

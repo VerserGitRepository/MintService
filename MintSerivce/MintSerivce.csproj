@@ -219,6 +219,7 @@
     <Compile Include="Membership\AuthorisationManager.cs" />
     <Compile Include="Membership\User.cs" />
     <Compile Include="MintServiceAutoMapper.cs" />
+    <Compile Include="Models\CancelledOrdersViewModel.cs" />
     <Compile Include="Models\CancelOrderModel.cs" />
     <Compile Include="Models\DispatchedOrderDto.cs" />
     <Compile Include="Models\ListItemModel.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="Models\PhoneOnlyModel.cs" />
     <Compile Include="Models\RequiredIfAttribute.cs" />
     <Compile Include="Models\ReturnDto.cs" />
+    <Compile Include="Models\ReturnValidationMessageDTO.cs" />
     <Compile Include="Models\SelectedOrderModel.cs" />
     <Compile Include="Models\ShipLabelDTO.cs" />
     <Compile Include="Models\SimActivateResponseDto.cs" />

@@ -60,13 +60,11 @@
                         @Html.HiddenFor(Model => Model.VerserOrderID, new { id = "_VerserOrderID" })
                     </div>
                     <div class="form-group" style="padding-left:20px;">
-                        <button type="submit" class="btn btn-primary" id="PhoneOnly" onclick="return ShowProgressPhoneOnly(this);" >COMPLETE ORDER</button>
-                         @*onclick="return ShowProgressPhoneOnly(this);"*@
+                        <button type="submit" class="btn btn-primary" id="PhoneOnly" onclick="return ShowProgressPhoneOnly(this);" >COMPLETE ORDER</button>                   
                     </div>
                     }
             </div>        
             <div id="SIMORDER" class="tab-pane fade" role="tabpanel">
-
                 @using (Html.BeginForm("ProcessSimOrder", "Home", FormMethod.Post))
                 {
                 <div class="form-group" style="padding-left:20px;padding-top:15px">
@@ -99,27 +97,15 @@
                     @if (Model.ShipLabelURL != null)
                     {
                     <div style="padding-left:30px;padding-bottom:15px;"> 
-                                              
-                        @*var opts = 'width=700,height=500,toolbar=0,menubar=0,location=1,status=1,scrollbars=1,resizable=1,left=0,top=0';
-                        var newWindow = window.open(yourUrl,'name',opts);
-                        newWindow.print();*@
-                        <a href="javascript: w=window.open('@Model.ShipLabelURL');" class="btn-success btn-md btn-circle">Print Shipment Label</a>                      
+                      <a href="javascript: w=window.open('@Model.ShipLabelURL');" class="btn-success btn-md btn-circle">Print Shipment Label</a>                      
                     </div>
                     }
-                </div>
-                @*<div class="form-group" style="padding-left:20px;">
-                    @using (Html.BeginForm("PrintOrdergreetings", "Home", FormMethod.Post))
-                    {
-                    @Html.HiddenFor(Model => Model.VerserOrderID)
-                    <button type="submit" class="btn btn-primary">PRINT ORDER GREETINGS</button>
-                    }
-                </div>*@
+                </div>           
 
             </div>
         </div>
     </div>
 </body>
-
 
 <style>
      .loading {

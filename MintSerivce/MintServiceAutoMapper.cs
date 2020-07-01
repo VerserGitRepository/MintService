@@ -13,6 +13,7 @@ namespace MintSerivce
         {
             CreateMap<OrderViewModel, OrderDto>();
             CreateMap<OrderDispatchViewModel, DispatchedOrderDto>();
+            CreateMap<CancelledOrdersViewModel, OrderDispatchViewModel>();
         }
     }
 }

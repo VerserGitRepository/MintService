@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -17,7 +18,6 @@ namespace MintSerivce.Controllers
 {
     public class CancelledOrdersController : Controller
     {
-        // GET: ReturnedOrders
         public ActionResult CancelledOrders()
         {
             if (Session["User"] == null)
@@ -65,6 +65,36 @@ namespace MintSerivce.Controllers
                 throw;
             }
             return ordermodel;
-        }        
+        }
+
+
+        [HttpPost]
+        public ActionResult ExportCancelledOrders()
+        {
+            var cancelledOrdersList = new List<OrderDispatchViewModel>();
+            if (System.Web.HttpContext.Current.Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                cancelledOrdersList = CancelledOrderList();
+                GridView gv = new GridView();
+                gv.DataSource = cancelledOrdersList;
+                gv.DataBind();
+                Response.ClearContent();
+                Response.Buffer = true;
+                Response.AddHeader("content-disposition", "attachment; filename=CancelledOrders.xls");
+                Response.ContentType = "application/ms-excel";
+                Response.Charset = "";
+                StringWriter sw = new StringWriter();
+                HtmlTextWriter htw = new System.Web.UI.HtmlTextWriter(sw);
+                gv.RenderControl(htw);
+                Response.Output.Write(sw.ToString());
+                Response.Flush();
+                Response.End();
+            }
+            return RedirectToAction("StockAvailable", "Home");
+        }
     }
 }

@@ -7,7 +7,7 @@
 @model IEnumerable<MintSerivce.Models.OrderDispatchViewModel>
 <div class="row" style="margin-left:0px;margin-right:0px">
     <div style="padding-top:15px;width:79%;">
-        @using (Html.BeginForm("ExportDispatchToExcel", "Home", FormMethod.Post))
+        @using (Html.BeginForm("ExportCancelledOrders", "CancelledOrders", FormMethod.Post))
         {
             <div align="right">
                 <button type="submit" value="ExportToExcel" class="btn btn-default btn-sm" name="submitButton">
