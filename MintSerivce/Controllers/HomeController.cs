@@ -393,25 +393,31 @@ namespace MintSerivce.Controllers
             return returnmessage;
         }
 
-        private void PrintLabel(string data)
-        {
-            string labelPath = ConfigurationManager.AppSettings["LabelPath"];
-            string printerName = ConfigurationManager.AppSettings["PrinterName"];
-            if (labelPath == null || labelPath == string.Empty)
-            {
-                labelPath = Server.MapPath("\\") + "\\Images\\DymoLabel\\SKUAddressLabel.label";
-            }
-            var PrintContent = "";
-            if (data != null)
-            {
-                PrintContent = data;
+        //private void PrintLabel(string data)
+        //{
+        //    string labelPath = ConfigurationManager.AppSettings["LabelPath"];
+        //    string printerName = ConfigurationManager.AppSettings["PrinterName"];
+        //    if (labelPath == null || labelPath == string.Empty)
+        //    {
+        //        labelPath = Server.MapPath("\\") + "\\Images\\DymoLabel\\SKUAddressLabel.label";
+        //    }
+        //    var PrintContent = "";
+        //    if (data != null)
+        //    {
+        //        PrintContent = data;
 
-                var label = DYMO.Label.Framework.Label.Open(labelPath);
-                label.SetObjectText("data", PrintContent);
-                label.Print(printerName);
-            }
+        //        var label = DYMO.Label.Framework.Label.Open(labelPath);
+        //        label.SetObjectText("data", PrintContent);
+        //        label.Print(printerName);
+        //    }
 
-        }
+        //}
+
+        //[HttpPost]
+        //public void SIMLabelReprint(string VerserOrderID)
+        //{
+        //    PrintOrderLabel(VerserOrderID);
+        //}
         public ActionResult PrintOrderLabel(string VerserOrderID)
         {
             var Order = GetOrdergreeting(VerserOrderID).Result;
@@ -430,6 +436,8 @@ namespace MintSerivce.Controllers
                     args.Graphics.DrawString(Data, new Font("Arial", 11, FontStyle.Bold), Brushes.Black, 0, 0);
                     args.Graphics.ResetTransform();
                 };
+
+                
                 pd.Print();
                 pd.Dispose();
                 Message = "Order Label Printed!";
@@ -438,6 +446,7 @@ namespace MintSerivce.Controllers
             {
                 Message = "Order Greeting Label failed to Beacuse No Order Exist";
             }
+
             return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = VerserOrderID, ResultMessage = Message });
         }
         [HttpPost]

@@ -58,9 +58,8 @@
                         <td>@Html.DisplayFor(modelItem => item.ConsignmentNumber)</td>
                         <td>@item.DateShipped.Value.ToShortDateString() </td>                    
                         <td>
-                            <a href="@Url.Action("PrintOrderLabel", "Home", new { VerserOrderID = item.VerserOrderID })">
-                                <input type="button" class="btn btn-info btn-sm" style="font-size:small;font-weight:500" value="PRINT">
-                            </a>
+                            <input type="button" class="btn btn-info btn-sm" onclick="RePrintSIMLabel('@item.VerserOrderID');" style="font-size:small;font-weight:500" value="PRINT">
+
                         </td>
                     </tr>
                 }
@@ -87,32 +86,18 @@
                 $(document).ready(function () {
                     $('#mainTable').DataTable();
                     $('.dataTables_filter').addClass('pull-right');
-                });
-                 function ShowSKU(SKUId) {
-        var sliderURL = '@Url.Action("Assets", "Home")'
-        $.ajax({
-            type: "GET",
-            url: sliderURL,
-            data: { "SKU": SKUId },
-            success: function (data) {
+                });                 
 
-
-
-        $.confirm({
-            boxWidth: '470px',
-            useBootstrap: false,
-            title: '',
-            content: data,
-            closeIcon: true,
-            backgroundDismiss: true,
-            buttons: {
-                yes: { isHidden: true }
-            }
-        });
-
+        function RePrintSIMLabel(VerserOrderID) {
+            var sliderURL = '@Url.Action("PrintOrderLabel", "Home")'
+            $.ajax({
+                type: "GET",
+                url: sliderURL,
+                data: { "VerserOrderID": VerserOrderID },
+                success: function (data) {
+                }
+            });
         }
-        });
-    }
     </script>
 }
 
