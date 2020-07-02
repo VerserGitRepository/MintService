@@ -15,7 +15,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web;
 using DYMO.Label;
-using BarcodeLib.Barcode;
+using BarcodeLib;
+using System.Threading;
 
 namespace MintSerivce.Controllers
 {
@@ -423,12 +424,28 @@ namespace MintSerivce.Controllers
             var Order = GetOrdergreeting(VerserOrderID).Result;
             string Data = string.Empty;
             string Message = string.Empty;
+            string directory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string PrintFileName = Path.Combine(directory, DateTime.Now.Ticks + ".pdf");
             if (Order != null)
             {
               //  var date = Convert.ToDateTime(Order.OrderDate).ToString("dd/MM/yyyy");
                 Data = $"{Order.FirstName} {Order.Surname}  {Environment.NewLine}{Order.AddressLine1} {Environment.NewLine}{Order.Locality}  {Order.State} { Order.Postcode} {Environment.NewLine}VerserOrder: {Order.VerserOrderID} {Environment.NewLine}NUOrder: {Order.TIABOrderID}";
 
-                PrintDocument pd = new PrintDocument();
+                PrintDocument pd = new PrintDocument()
+                {
+                    PrinterSettings = new PrinterSettings()
+                    {
+                        // set the printer to 'Microsoft Print to PDF'
+                        PrinterName = "Microsoft Print to PDF",
+
+                        // tell the object this document will print to file
+                        PrintToFile = true,
+
+                        // set the filename to whatever you like (full path)
+                        PrintFileName = PrintFileName
+                    }
+
+                };
                 pd.PrintPage += (sender, args) =>
                 {
                     args.Graphics.TranslateTransform(210, 10);
@@ -436,11 +453,15 @@ namespace MintSerivce.Controllers
                     args.Graphics.DrawString(Data, new Font("Arial", 11, FontStyle.Bold), Brushes.Black, 0, 0);
                     args.Graphics.ResetTransform();
                 };
-
-                
                 pd.Print();
-                pd.Dispose();
-                Message = "Order Label Printed!";
+                Thread.Sleep(5000);
+                System.IO.FileStream fs = new System.IO.FileStream(PrintFileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+                System.IO.BinaryReader binaryReader = new System.IO.BinaryReader(fs);
+
+                long byteLength = new System.IO.FileInfo(PrintFileName).Length;
+                byte[] RetutnPDFFileContent = binaryReader.ReadBytes((Int32)byteLength);
+
+                return Json(RetutnPDFFileContent, JsonRequestBehavior.AllowGet);
             }
             else
             {

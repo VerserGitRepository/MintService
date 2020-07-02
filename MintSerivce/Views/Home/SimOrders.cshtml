@@ -95,6 +95,17 @@
                 url: sliderURL,
                 data: { "VerserOrderID": VerserOrderID },
                 success: function (data) {
+                    var bytes = new Uint8Array(data); // pass your byte response to this constructor
+                    var blob = new Blob([bytes], { type: "application/pdf" });// change resultByte to bytes
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = "myFileName.pdf";
+                    var objFra = document.createElement('iframe'); 
+                    objFra.style.visibility = "hidden";  
+                    objFra.src = link;
+                    document.body.appendChild(objFra);
+                    objFra.contentWindow.focus();
+                    objFra.contentWindow.print();  
                 }
             });
         }
