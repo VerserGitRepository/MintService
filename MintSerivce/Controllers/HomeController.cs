@@ -96,7 +96,7 @@ namespace MintSerivce.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
-            PhoneOnlyModel selectedorder = new PhoneOnlyModel();
+            var selectedorder = new PhoneOnlyModel();
             selectedorder.VerserOrderID = VerserOrderID;
             selectedorder.ResultMessage = ResultMessage;
             selectedorder.UserName = Session["User"].ToString();
@@ -110,7 +110,7 @@ namespace MintSerivce.Controllers
         [HttpPost]
         public ActionResult PhoneOnlyOrder(SelectedOrderModel selectedOrder)
         {
-            if (!ModelState.IsValid)
+            if (selectedOrder.SSN == null)
             {
                 return View("ProcessOrder", selectedOrder);
             }
@@ -129,7 +129,7 @@ namespace MintSerivce.Controllers
         }
         public ActionResult AddMobileToOrder(SelectedOrderModel selectedOrderDetails)
         {
-            if (!ModelState.IsValid)
+            if (selectedOrderDetails.SIM ==null && selectedOrderDetails.SSN ==null )
             {
                 return View("ProcessOrder", selectedOrderDetails);
             }
