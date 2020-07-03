@@ -97,7 +97,7 @@ namespace MintSerivce.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
-            PhoneOnlyModel selectedorder = new PhoneOnlyModel();
+            var selectedorder = new PhoneOnlyModel();
             selectedorder.VerserOrderID = VerserOrderID;
             selectedorder.ResultMessage = ResultMessage;
             selectedorder.UserName = Session["User"].ToString();
@@ -111,8 +111,7 @@ namespace MintSerivce.Controllers
         [HttpPost]
         public ActionResult PhoneOnlyOrder(SelectedOrderModel selectedOrder)
         {
-            ModelState.Remove("ConsignmentNumber");
-            if (!ModelState.IsValid)
+            if (selectedOrder.SSN == null)
             {
                 return View("ProcessOrder", selectedOrder);
             }
@@ -131,8 +130,7 @@ namespace MintSerivce.Controllers
         }
         public ActionResult AddMobileToOrder(SelectedOrderModel selectedOrderDetails)
         {
-            ModelState.Remove("ConsignmentNumber");
-            if (!ModelState.IsValid)
+            if (selectedOrderDetails.SIM ==null && selectedOrderDetails.SSN ==null )
             {
                 return View("ProcessOrder", selectedOrderDetails);
             }
@@ -415,55 +413,60 @@ namespace MintSerivce.Controllers
         //    }
 
         //}
-
-        //[HttpPost]
-        //public void SIMLabelReprint(string VerserOrderID)
-        //{
-        //    PrintOrderLabel(VerserOrderID);
-        //}
         public ActionResult PrintOrderLabel(string VerserOrderID)
         {
+            var FolderPath = Server.MapPath("~/SIMLabelPrint/");            
+            string[] files = Directory.GetFiles(FolderPath);
+            foreach (string file in files)
+            {
+                if (file !=null)
+                {
+                    System.IO.File.Delete(file);
+                }                             
+            }
+
             var Order = GetOrdergreeting(VerserOrderID).Result;
             string Data = string.Empty;
             string Message = string.Empty;
-            string directory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string PrintFileName = Path.Combine(directory, DateTime.Now.Ticks + ".pdf");
+            string directory = FolderPath; 
+            string PrintFileName = Path.Combine(directory, VerserOrderID+".pdf");
             if (Order != null)
             {
-              //  var date = Convert.ToDateTime(Order.OrderDate).ToString("dd/MM/yyyy");
+   
                 Data = $"{Order.FirstName} {Order.Surname}  {Environment.NewLine}{Order.AddressLine1} {Environment.NewLine}{Order.Locality}  {Order.State} { Order.Postcode} {Environment.NewLine}VerserOrder: {Order.VerserOrderID} {Environment.NewLine}NUOrder: {Order.TIABOrderID}";
 
                 PrintDocument pd = new PrintDocument()
                 {
                     PrinterSettings = new PrinterSettings()
-                    {
-                        // set the printer to 'Microsoft Print to PDF'
-                        PrinterName = "Microsoft Print to PDF",
-
-                        // tell the object this document will print to file
+                    {                        
+                      PrinterName = "Acrobat Reader DC",        
+                                    
                         PrintToFile = true,
-
-                        // set the filename to whatever you like (full path)
                         PrintFileName = PrintFileName
                     }
 
                 };
                 pd.PrintPage += (sender, args) =>
                 {
-                    args.Graphics.TranslateTransform(210, 10);
+                    args.Graphics.TranslateTransform(210, 30 );
                     args.Graphics.RotateTransform(90.0f);
-                    args.Graphics.DrawString(Data, new Font("Arial", 11, FontStyle.Bold), Brushes.Black, 0, 0);
+                    args.Graphics.DrawString(Data, new Font("Arial", 12, FontStyle.Bold), Brushes.Black, 0,0);
                     args.Graphics.ResetTransform();
                 };
                 pd.Print();
-                Thread.Sleep(5000);
+
+
+               Thread.Sleep(1000);
                 System.IO.FileStream fs = new System.IO.FileStream(PrintFileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
                 System.IO.BinaryReader binaryReader = new System.IO.BinaryReader(fs);
 
                 long byteLength = new System.IO.FileInfo(PrintFileName).Length;
                 byte[] RetutnPDFFileContent = binaryReader.ReadBytes((Int32)byteLength);
-
+                pd.Dispose();
+                fs.Dispose();
+                binaryReader.Dispose();
                 return Json(RetutnPDFFileContent, JsonRequestBehavior.AllowGet);
+                
             }
             else
             {
