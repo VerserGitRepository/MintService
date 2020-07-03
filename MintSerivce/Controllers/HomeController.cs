@@ -111,6 +111,7 @@ namespace MintSerivce.Controllers
         [HttpPost]
         public ActionResult PhoneOnlyOrder(SelectedOrderModel selectedOrder)
         {
+            ModelState.Remove("ConsignmentNumber");
             if (!ModelState.IsValid)
             {
                 return View("ProcessOrder", selectedOrder);
@@ -130,6 +131,7 @@ namespace MintSerivce.Controllers
         }
         public ActionResult AddMobileToOrder(SelectedOrderModel selectedOrderDetails)
         {
+            ModelState.Remove("ConsignmentNumber");
             if (!ModelState.IsValid)
             {
                 return View("ProcessOrder", selectedOrderDetails);
