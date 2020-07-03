@@ -228,7 +228,9 @@
     <Compile Include="Models\OrderDto.cs" />
     <Compile Include="Models\OrderReplacementReturnDto.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
+    <Compile Include="Models\PDFFileReturnModel.cs" />
     <Compile Include="Models\PhoneOnlyModel.cs" />
+    <Compile Include="Models\SIMOnlyViewModel.cs" />
     <Compile Include="Models\RequiredIfAttribute.cs" />
     <Compile Include="Models\ReturnDto.cs" />
     <Compile Include="Models\ReturnValidationMessageDTO.cs" />
@@ -246,6 +248,7 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceAgents\PDFileBuilderService.cs" />
     <Compile Include="ValidationHelper\UpdateSKUBufferValidator.cs" />
   </ItemGroup>
   <ItemGroup>
