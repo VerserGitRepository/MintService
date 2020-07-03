@@ -568,6 +568,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
+    <Folder Include="SIMLabelPrint\" />
     <Folder Include="Views\PhoneOnly\" />
   </ItemGroup>
   <ItemGroup>
