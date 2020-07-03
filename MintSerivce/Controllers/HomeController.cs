@@ -17,6 +17,7 @@ using System.Web;
 using DYMO.Label;
 using BarcodeLib;
 using System.Threading;
+using MintSerivce.ServiceAgents;
 
 namespace MintSerivce.Controllers
 {
@@ -112,6 +113,7 @@ namespace MintSerivce.Controllers
         public ActionResult PhoneOnlyOrder(SelectedOrderModel selectedOrder)
         {
             ModelState.Remove("ConsignmentNumber");
+            ModelState.Remove("SIM");
             if (!ModelState.IsValid)
             {
                 return View("ProcessOrder", selectedOrder);
@@ -417,65 +419,14 @@ namespace MintSerivce.Controllers
         //}
         public ActionResult PrintOrderLabel(string VerserOrderID)
         {
-            var FolderPath = Server.MapPath("~/SIMLabelPrint/");            
-            string[] files = Directory.GetFiles(FolderPath);
-            foreach (string file in files)
+            string SIMLOrderLabelURL = ConfigurationManager.AppSettings["SIMLOrderLabelURL"];
+            var PrintData= PDFileBuilderService.CustomerAddressLabelRequest(VerserOrderID).Result;
+            if (PrintData != null && PrintData.IsSuccess)
             {
-                if (file !=null)
-                {
-                    System.IO.File.Delete(file);
-                }                             
+                TempData["LabelURL"] = SIMLOrderLabelURL + VerserOrderID + ".pdf";
             }
-
-            var Order = GetOrdergreeting(VerserOrderID).Result;
-            string Data = string.Empty;
-            string Message = string.Empty;
-            string directory = FolderPath; 
-            string PrintFileName = Path.Combine(directory, VerserOrderID+".pdf");
-            if (Order != null)
-            {
-   
-                Data = $"{Order.FirstName} {Order.Surname}  {Environment.NewLine}{Order.AddressLine1} {Environment.NewLine}{Order.Locality}  {Order.State} { Order.Postcode} {Environment.NewLine}VerserOrder: {Order.VerserOrderID} {Environment.NewLine}NUOrder: {Order.TIABOrderID}";
-
-                PrintDocument pd = new PrintDocument()
-                {
-                    PrinterSettings = new PrinterSettings()
-                    {                        
-                      PrinterName = "Acrobat Reader DC",        
-                                    
-                        PrintToFile = true,
-                        PrintFileName = PrintFileName
-                    }
-
-                };
-                pd.PrintPage += (sender, args) =>
-                {
-                    args.Graphics.TranslateTransform(210, 30 );
-                    args.Graphics.RotateTransform(90.0f);
-                    args.Graphics.DrawString(Data, new Font("Arial", 12, FontStyle.Bold), Brushes.Black, 0,0);
-                    args.Graphics.ResetTransform();
-                };
-                pd.Print();
-
-
-               Thread.Sleep(1000);
-                System.IO.FileStream fs = new System.IO.FileStream(PrintFileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
-                System.IO.BinaryReader binaryReader = new System.IO.BinaryReader(fs);
-
-                long byteLength = new System.IO.FileInfo(PrintFileName).Length;
-                byte[] RetutnPDFFileContent = binaryReader.ReadBytes((Int32)byteLength);
-                pd.Dispose();
-                fs.Dispose();
-                binaryReader.Dispose();
-                return Json(RetutnPDFFileContent, JsonRequestBehavior.AllowGet);
-                
-            }
-            else
-            {
-                Message = "Order Greeting Label failed to Beacuse No Order Exist";
-            }
-
-            return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = VerserOrderID, ResultMessage = Message });
+            return Json(PrintData.FileContent, JsonRequestBehavior.AllowGet);
+           
         }
         [HttpPost]
         public ActionResult ExportDispatchToExcel()
