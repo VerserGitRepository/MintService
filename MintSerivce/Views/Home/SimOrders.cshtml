@@ -58,8 +58,7 @@
                         <td>@Html.DisplayFor(modelItem => item.ConsignmentNumber)</td>
                         <td>@item.DateShipped.Value.ToShortDateString() </td>                    
                         <td>
-                            <input type="button" class="btn btn-info btn-sm" onclick="RePrintSIMLabel('@item.VerserOrderID');" style="font-size:small;font-weight:500" value="PRINT">
-
+                            <input type="button" class="btn btn-info btn-sm" onclick="RePrintSIMLabel('@item.VerserOrderID');" style="font-size:small;font-weight:500" value="PRINT">                            
                         </td>
                     </tr>
                 }
@@ -67,7 +66,7 @@
         </table>
     </div>
 </div>
-@*</div>*@
+
 <style>
     .row {
         margin-left: -130px;
@@ -79,9 +78,9 @@
     <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
     <script src="~/Scripts/datatables.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-
     <script src="~/Scripts/confirm.js"></script>
     <link href="~/Content/confirm.css" rel="stylesheet" />
+
     <script type="text/javascript">
                 $(document).ready(function () {
                     $('#mainTable').DataTable();
