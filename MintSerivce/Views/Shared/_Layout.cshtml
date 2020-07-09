@@ -20,32 +20,32 @@
                 <div style="text-align:left">
                     <img src="~/fonts/verserLogo.png" />
                 </div>
-               
+
                 @*@Html.ActionLink("VERSER MINT SERVICE ORDERS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand"  } )*@
             </div>
             <div class="navbar-collapse collapse">
 
-                 @if(Session["User"] != null)
-                 {
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("ORDERS", "Index", "Home")</li>
-                    <li>@Html.ActionLink("RE-ORDER", "Index", "ManualOrder")</li>
-                    <li>@Html.ActionLink("STOCK", "StockAvailable", "Home")</li>
-                    <li>@Html.ActionLink("DISPATCHES", "dispatchedorders", "Home")</li>
-                    <li>@Html.ActionLink("SIMORDERS", "SimOrders", "Home")</li>
-                    <li>@Html.ActionLink("CANCELLED", "CancelledOrders", "CancelledOrders")</li>
-                    <li>@Html.ActionLink("RETURNED", "ReturnedOrders", "ReturnedOrders")</li>
-                    <li>@Html.ActionLink("MANAGE", "index", "ManageOrders")</li>
-                    <li style="text-align:right">@Html.ActionLink("LOGOUT", "Logout", "login")</li>
+                @if (Session["User"] != null)
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("ORDERS", "Index", "Home")</li>
+                        <li>@Html.ActionLink("RE-ORDER", "Index", "ManualOrder")</li>
+                        <li>@Html.ActionLink("STOCK", "StockAvailable", "Home")</li>
+                        <li>@Html.ActionLink("DISPATCHES", "dispatchedorders", "Home")</li>
+                        <li>@Html.ActionLink("SIMORDERS", "SimOrders", "Home")</li>
+                        <li>@Html.ActionLink("CANCELLED", "CancelledOrders", "CancelledOrders")</li>
+                        <li>@Html.ActionLink("RETURNED", "ReturnedOrders", "ReturnedOrders")</li>
+                        <li>@Html.ActionLink("MANAGE", "index", "ManageOrders")</li>
+                        <li style="text-align:right">@Html.ActionLink("LOGOUT", "Logout", "login")</li>
 
-                    @*<li><a href="https://customers.verser.com.au/JMSGatewayAPI/OnlyVerserInternalUsersRegisterFormToMAuthtokens.html", new { target="_blank" }>REGISTER NEW USER</a> </li>*@
+                        @*<li><a href="https://customers.verser.com.au/JMSGatewayAPI/OnlyVerserInternalUsersRegisterFormToMAuthtokens.html", new { target="_blank" }>REGISTER NEW USER</a> </li>*@
 
-                </ul>
-                 }
+                    </ul>
+                }
 
                 @*<button type="button" class="btn btn-default btn-sm "  style="text-align:right">
-                    <span class="glyphicon glyphicon-log-out"></span> Log out
-                </button>*@
+                        <span class="glyphicon glyphicon-log-out"></span> Log out
+                    </button>*@
             </div>
         </div>
     </div>
@@ -58,6 +58,8 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/CustomRequiredIf.js")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

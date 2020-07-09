@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Web.Mvc;
 
 namespace MintSerivce.Models
 {
@@ -28,6 +29,14 @@ namespace MintSerivce.Models
                 return new ValidationResult(ErrorMessage);
             }
             return ValidationResult.Success;
+        }
+        public System.Collections.Generic.IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
+        {
+            var rule = new ModelClientValidationRule();
+            rule.ErrorMessage = FormatErrorMessage(metadata.GetDisplayName());
+            rule.ValidationParameters.Add("string", ErrorMessage);
+            rule.ValidationType = "required";
+            yield return rule;
         }
     }
 }
