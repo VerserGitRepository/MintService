@@ -90,7 +90,7 @@ namespace MintSerivce.Controllers
         {
             try
             {
-                CancelOrderModel model = new CancelOrderModel { ErrorMessage = string.Empty, OrderStatus =string.Empty, TIABOrderID = string.Empty, VerserOrderID = manualorder.VerserOrderID };
+                CancelOrderModel model = new CancelOrderModel { ErrorMessage = string.Empty, OrderStatus =string.Empty, TIABOrderID = manualorder.TIABOrderID, VerserOrderID = manualorder.VerserOrderID };
                 var returnModel = Helper.Helper.CancelOrder(model);
                 if (returnModel != null && returnModel.First().ErrorMessage != null)
                 {
