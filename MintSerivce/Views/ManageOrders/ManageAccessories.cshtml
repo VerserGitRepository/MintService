@@ -6,17 +6,21 @@
     ViewBag.Title = "Returned Orders";
 }
 @Html.AntiForgeryToken()
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
 <div class="form-horizontal" style="margin-left:20px;margin-top:5px;">
+
 
     <table class="table table-bordered table-responsive table-hover" align="center" id="mainTable" style="width:50%;">
         <thead style="background-color:#959ca1;color:white">
             <tr>
                 <th>ACCESSORIES TYPE</th>
                 <th>AVAILABLE STOCK  COUNT</th>
-              
+
             </tr>
         </thead>
         <tbody>
@@ -24,9 +28,9 @@
             {
                 <tr>
                     <td>
-                        <a href="javascript:ShowOrderDetails('@item.Id','@item.AccessoryType')">@item.AccessoryType</a>
+                        <a href="javascript:ShowOrderDetails('@item.Id')">@item.AccessoryType</a>
                     </td>
-                    <td>@Html.DisplayFor(modelItem => item.AvailableStockCount)</td>                   
+                    <td>@Html.DisplayFor(modelItem => item.AvailableStockCount)</td>
                 </tr>
             }
         </tbody>
@@ -57,45 +61,42 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="submit" class="close" id="modelclosebtn" onclick="closeModelbutton()" >&times;</button>
+                <button type="submit" class="close" id="modelclosebtn" data-backdrop="false" onclick="closeModelbutton()" >&times;</button>
                 <h4 class="modal-title">Update Accessories Count</h4>
             </div>
             <div id='myModalContent'>
-                <label id="lblId" />
-                <label id="lblAccessoryType" />
-                <input type="text" id="txtcount"  />               
+                <input type="text" id="txtcount" class="text-info"><label id="lblId" />                
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-default" data-dismiss="modal">Save Changes</button>
+                <button type="submit" class="btn btn-default" data-dismiss="modal" onclick="UpdateAccessoriesCounts()" >Save Changes</button>
             </div>
         </div>
     </div>
 </div>
-
 <script>
     $(document).ready(function () {
         $('#mainTable').DataTable();
         $('.dataTables_filter').addClass('pull-right');
     });
 
-  
-
-    function ShowOrderDetails(Id, AccessoryType) {
-        $('#lblAccessoryType').val(AccessoryType)
-        $('#lblId').val(Id)
-        var options = { "backdrop": "static", keyboard: true };
+    function ShowOrderDetails(Id) {
+     
+        $('#lblId').text(Id);
         $('#AccessoriesModal').show();
-        $('#myModalContent').modal(options);
-        $('#myModalContent').modal('show');
     }
 
-    function closeModelbutton() {
-       
-        //$('#AccessoriesModal').hide();
-        $('#myModalContent').modal('hide');
-        $("#myModalContent").on('hide.bs.modal', function () {
-            $('.modal-backdrop').remove()
-        });
+    function closeModelbutton()
+    {
+        var options = { "backdrop": "true", keyboard: true };
+        $('#AccessoriesModal').hide();
+        $('.modal-backdrop').remove();
+    }
+
+    function UpdateAccessoriesCounts()
+    {
+        var Id = $('#lblId').text();
+        var accessoriesCount = $('#txtcount').val();
+        alert(Id, accessoriesCount);
     }
 
 </script>
