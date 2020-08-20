@@ -1,1 +1,102 @@
-﻿<p>ManageAccessories</p>
+﻿
+@using System.Linq;
+@using MintSerivce.Models
+@model ViewModel
+@{
+    ViewBag.Title = "Returned Orders";
+}
+@Html.AntiForgeryToken()
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
+<div class="form-horizontal" style="margin-left:20px;margin-top:5px;">
+
+    <table class="table table-bordered table-responsive table-hover" align="center" id="mainTable" style="width:50%;">
+        <thead style="background-color:#959ca1;color:white">
+            <tr>
+                <th>ACCESSORIES TYPE</th>
+                <th>AVAILABLE STOCK  COUNT</th>
+              
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.AccessoriesStock)
+            {
+                <tr>
+                    <td>
+                        <a href="javascript:ShowOrderDetails('@item.Id','@item.AccessoryType')">@item.AccessoryType</a>
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.AvailableStockCount)</td>                   
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@*<div>
+    @using (Html.BeginForm("RemoveSKU", "ManageOrders", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("SKU", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownListFor(model => Model.ListItemModel, Model.ListItemModel, "Select SKU", new { @class = "control-label col-md-2", @id = "ddlRemoveSKUID", @multiple = "multiple" })<br>
+            <div class="col-md-10">
+            </div>
+        </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Remove" class="btn btn-default" />
+                </div>
+            </div>
+    }
+</div>*@
+
+<div id='AccessoriesModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="submit" class="close" id="modelclosebtn" onclick="closeModelbutton()" >&times;</button>
+                <h4 class="modal-title">Update Accessories Count</h4>
+            </div>
+            <div id='myModalContent'>
+                <label id="lblId" />
+                <label id="lblAccessoryType" />
+                <input type="text" id="txtcount"  />               
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-default" data-dismiss="modal">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#mainTable').DataTable();
+        $('.dataTables_filter').addClass('pull-right');
+    });
+
+  
+
+    function ShowOrderDetails(Id, AccessoryType) {
+        $('#lblAccessoryType').val(AccessoryType)
+        $('#lblId').val(Id)
+        var options = { "backdrop": "static", keyboard: true };
+        $('#AccessoriesModal').show();
+        $('#myModalContent').modal(options);
+        $('#myModalContent').modal('show');
+    }
+
+    function closeModelbutton() {
+       
+        //$('#AccessoriesModal').hide();
+        $('#myModalContent').modal('hide');
+        $("#myModalContent").on('hide.bs.modal', function () {
+            $('.modal-backdrop').remove()
+        });
+    }
+
+</script>
+ 

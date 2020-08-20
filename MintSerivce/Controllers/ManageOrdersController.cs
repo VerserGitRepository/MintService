@@ -8,13 +8,14 @@ using FluentValidation.Results;
 using MintSerivce.Helper;
 using MintSerivce.Models;
 using MintSerivce.ValidationHelper;
+using System.Threading.Tasks;
 
 namespace MintSerivce.Controllers
 {
     public class ManageOrdersController : Controller
     {
         // GET: ReturnedOrders
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             if (Session["User"] != null)
             {
@@ -24,7 +25,9 @@ namespace MintSerivce.Controllers
                     ViewModel mymodel = new ViewModel();
                     List<ListItemModel> ordersList = Helper.Helper.OrdersList();
                     List<ListItemModel> skuList = Helper.Helper.SKUList();
+                    mymodel.AccessoriesStock =await AccessoriesStockService.AvailableAccessoriesStock();
                     mymodel.ListItemModel = new List<SelectListItem>();
+                    
                     foreach (ListItemModel item in skuList)
                     {
                         mymodel.ListItemModel.Add(new SelectListItem { Text = item.Value });
@@ -79,6 +82,10 @@ namespace MintSerivce.Controllers
             return View();
         }
         public ActionResult RemoveSKU()
+        {
+            return View();
+        }
+        public ActionResult ManageAccessories()
         {
             return View();
         }
@@ -145,6 +152,12 @@ namespace MintSerivce.Controllers
             }
 
             return View("Index",theModel);
+        }
+        [HttpPost]
+        public ActionResult ManageAccessories(int AccessoryId,int count)
+        {
+            var result = AccessoriesStockService.UpdateAccessoriesCount(AccessoryId, count).Result;
+            return View("Index", "ManageOrders");
         }
     }
 }
