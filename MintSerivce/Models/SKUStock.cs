@@ -7,6 +7,10 @@ namespace MintSerivce.Models
 {
     public class SKUStock
     {
+        public SKUStock()
+        {
+            Files = new List<FilesModel>();
+        }
         public string SKU { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
@@ -14,5 +18,6 @@ namespace MintSerivce.Models
         public string Colour { get; set; }
         public int? Count { get; set; }
         public string SKUBuffer { get; set; }
+        public List<FilesModel>  Files { get; set; }
     }
 }

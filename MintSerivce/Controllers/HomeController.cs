@@ -55,7 +55,7 @@ namespace MintSerivce.Controllers
         }
         public ActionResult StockAvailable()
         {
-            if (Session["User"] == null)
+            if (Session["User"] == null || Session["BearerToken"] == null)
             {
                 return RedirectToAction("Login", "Login");
             }
@@ -551,7 +551,12 @@ namespace MintSerivce.Controllers
         [ChildActionOnly]
         public ActionResult Reports()
         {
-           var files= GetDirectoryFiles(Filepath);
+            if (Session["User"] == null || Session["BearerToken"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+            var files= GetDirectoryFiles(Filepath);
             return PartialView(files);
         }
         public List<FilesModel> GetDirectoryFiles(string dir)
@@ -565,7 +570,7 @@ namespace MintSerivce.Controllers
                 {
                     FileName = info.Name,
                     FileDate = info.LastWriteTime,
-                    FileSize = Convert.ToInt32(info.Length),
+                    FileSize = sizes(Convert.ToInt32(info.Length)),
                     FileType = info.Extension,
                     FileFullPath = info.DirectoryName
                 };
@@ -573,19 +578,16 @@ namespace MintSerivce.Controllers
             }
             return files;
         }
+
+        public int sizes(int size)
+        {
+            var sizes = (size /= 1024);
+            return sizes;
+        }
         public FileResult DownloadFile(string path, string fileName)
         {
-            var filepath = System.IO.Path.Combine(path, fileName);
-            //byte[] filedata = System.IO.File.ReadAllBytes(filepath);
-            //string contentType = MimeMapping.GetMimeMapping(filepath);
-
-            //var cd = new System.Net.Mime.ContentDisposition
-            //{
-            //    FileName = filepath,
-            //    Inline = true,
-            //};
-            //Response.AppendHeader("Content-Disposition", cd.ToString());
-            //return File(filedata, contentType, MimeMapping.GetMimeMapping(filepath));
+          
+            var filepath = System.IO.Path.Combine(path, fileName);        
 
             return File(filepath, MimeMapping.GetMimeMapping(filepath), fileName);
         }
