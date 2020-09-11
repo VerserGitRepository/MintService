@@ -35,6 +35,7 @@
                         <th>Postcode</th>
                         <th>Status</th>
                         <th>OrderType</th>
+                        <th>OrderDate</th>
                         <th>ProcessOrders</th>
                     </tr>
                 </thead>
@@ -56,6 +57,7 @@
                             <td>@Html.DisplayFor(modelItem => item.Postcode)</td>
                             <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
                             <td>@Html.DisplayFor(modelItem => item.OrderType)</td>
+                            <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
                             <td>
                                 @if (item.OrderStatus != "On Hold")
                                 {
