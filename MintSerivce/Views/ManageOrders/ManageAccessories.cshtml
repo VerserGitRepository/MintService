@@ -5,16 +5,8 @@
 @{
     ViewBag.Title = "Returned Orders";
 }
-@Html.AntiForgeryToken()
-
-
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
 <div class="form-horizontal" style="margin-left:20px;margin-top:5px;">
-
-
     <table class="table table-bordered table-responsive table-hover" align="center" id="mainTable" style="width:50%;">
         <thead style="background-color:#959ca1;color:white">
             <tr>
@@ -28,7 +20,7 @@
             {
                 <tr>
                     <td>
-                        <a href="javascript:ShowOrderDetails('@item.Id')">@item.AccessoryType</a>
+                        <a href="javascript:ShowOrderDetails('@item.Id','@item.AccessoryType')">@item.AccessoryType</a>
                     </td>
                     <td>@Html.DisplayFor(modelItem => item.AvailableStockCount)</td>
                 </tr>
@@ -36,36 +28,22 @@
         </tbody>
     </table>
 </div>
-
-
-@*<div>
-    @using (Html.BeginForm("RemoveSKU", "ManageOrders", FormMethod.Post))
-    {
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.Label("SKU", htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.DropDownListFor(model => Model.ListItemModel, Model.ListItemModel, "Select SKU", new { @class = "control-label col-md-2", @id = "ddlRemoveSKUID", @multiple = "multiple" })<br>
-            <div class="col-md-10">
-            </div>
-        </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Remove" class="btn btn-default" />
-                </div>
-            </div>
-    }
-</div>*@
-
 <div id='AccessoriesModal' class='modal'>
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" >
                 <button type="submit" class="close" id="modelclosebtn" data-backdrop="false" onclick="closeModelbutton()" >&times;</button>
                 <h4 class="modal-title">Update Accessories Count</h4>
-            </div>
-            <div id='myModalContent'>
-                <input type="text" id="txtcount" class="text-info"><label id="lblId" />                
+               
+            </div>            
+            <div id='myModalContent' style="padding-left:30px;" >
+                Add <label id="lbleaddAccessory"></label> Count: <br />
+                 <input type="text" id="txtAddcount" class="text-info" placeholder="Enter Accessory Count"><br />
+               Remove <label id="lbleremoveAccessory"></label> Count: <br />
+                 <input type="text" id="txtRemovecount" class="text-info" placeholder="Remove Accessory Count">
+                 <br />
+                <label id="lblerrormsg" style="color:red;font-weight:600;">                 
+                </label>  ID:<label id="lblId" />  
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-default" data-dismiss="modal" onclick="UpdateAccessoriesCounts()" >Save Changes</button>
@@ -79,15 +57,19 @@
         $('.dataTables_filter').addClass('pull-right');
     });
 
-    function ShowOrderDetails(Id) {
+    function ShowOrderDetails(Id, AccessoryType) {
      
         $('#lblId').text(Id);
+        $('#lbleaddAccessory').text(AccessoryType);
+        $('#lbleremoveAccessory').text(AccessoryType);
+        $('#lblerrormsg').text('');
+        $('#txtAddcount').val(0);
+        $('#txtRemovecount').val(0);
         $('#AccessoriesModal').show();
     }
 
     function closeModelbutton()
-    {
-        var options = { "backdrop": "true", keyboard: true };
+    {      
         $('#AccessoriesModal').hide();
         $('.modal-backdrop').remove();
     }
@@ -95,8 +77,24 @@
     function UpdateAccessoriesCounts()
     {
         var Id = $('#lblId').text();
-        var accessoriesCount = $('#txtcount').val();
-        alert(Id, accessoriesCount);
+        var AddAccessoriesCount = $('#txtAddcount').val();
+        var RemoveAccessoriesCount = $('#txtRemovecount').val();
+        if (AddAccessoriesCount <= 0 && RemoveAccessoriesCount <= 0)
+        {   
+            $('#lblerrormsg').text("Please Enter Accessory Stock Value!");
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "./ManageAccessories",            
+            data: { "AccessoryId": Id, "AddAccessoriesCount": AddAccessoriesCount, "RemoveAccessoriesCount": RemoveAccessoriesCount, },
+            datatype: "json"            
+        });
+        
+        location.reload();
+        $('#AccessoriesModal').hide();
+        $('.modal-backdrop').remove();
     }
 
 </script>

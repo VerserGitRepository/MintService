@@ -212,6 +212,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\AccessoriesStockService.cs" />
     <Compile Include="Helper\CreateNewSKU.cs" />
     <Compile Include="Helper\Helper.cs" />
     <Compile Include="Helper\RetireSKU.cs" />
@@ -219,9 +220,11 @@
     <Compile Include="Membership\AuthorisationManager.cs" />
     <Compile Include="Membership\User.cs" />
     <Compile Include="MintServiceAutoMapper.cs" />
+    <Compile Include="Models\AccessoriesStockCountDto.cs" />
     <Compile Include="Models\CancelledOrdersViewModel.cs" />
     <Compile Include="Models\CancelOrderModel.cs" />
     <Compile Include="Models\DispatchedOrderDto.cs" />
+    <Compile Include="Models\FilesModel.cs" />
     <Compile Include="Models\ListItemModel.cs" />
     <Compile Include="Models\ManualOrderModel.cs" />
     <Compile Include="Models\OrderDispatchViewModel.cs" />
@@ -443,6 +446,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\confirm.js" />
     <Content Include="Scripts\copy_csv_xls_pdf.swf" />
+    <Content Include="Scripts\CustomRequiredIf.js" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -567,6 +571,7 @@
     <Content Include="Views\ReturnedOrders\ReturnedOrders.cshtml" />
     <Content Include="Views\CancelledOrders\CancelledOrders.cshtml" />
     <Content Include="Views\Home\SimOrders.cshtml" />
+    <Content Include="Views\Home\Reports.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,37 @@
+﻿@using System.Linq;
+@model IEnumerable<MintSerivce.Models.FilesModel>
+@{
+    ViewBag.Title = "Reports";
+}
+
+<table class="table pull-left" id="FilesTable">
+        <thead style="background-color: #428bca; color:white">
+            <tr>
+                <th>
+                    FileName
+                </th>
+                <th>
+                    FileSize
+                </th>
+                <th>
+                    FileType
+                </th>
+                <th>
+                    FileDate
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var _file in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(_file.FileName, "DownloadFile", "Home", new { path = _file.FileFullPath, fileName = _file.FileName }, htmlAttributes: null)</td>
+                    <td>@_file.FileSize</td>
+                    <td>@_file.FileType</td>
+                    <td>@_file.FileDate</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>

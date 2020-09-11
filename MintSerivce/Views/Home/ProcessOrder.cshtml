@@ -3,7 +3,7 @@
     ViewBag.Title = "ProcessOrder";
  }
 
-
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <div class="loading" align="center" style="padding-top:20px;" >
    Order Completing, Please Wait...<br />
     <br />
@@ -137,11 +137,7 @@
     }*/
 
 </style>
-
-
-    @Scripts.Render("~/bundles/jqueryval")
 <script type="text/javascript">
-
     $(document).ready(function () {
         if($("#hdnOrderType").val() == "PhoneSim")
             $('a[href="#ADDPHONETOORDER"]').click();
@@ -221,7 +217,6 @@
     //        $('#nav-tabs-wrapper a[href="default"]').tab('show'); // show default
     //    }
     //}    
-
     function ShowProgressPhoneOnly(ctl) {
 
 
@@ -269,5 +264,4 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
-
 

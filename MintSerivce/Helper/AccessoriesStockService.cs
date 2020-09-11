@@ -29,7 +29,7 @@ namespace MintSerivce.Helper
         }
 
 
-        public static async Task<ReturnValidationMessageDTO> UpdateAccessoriesCount(int AccessoryId, int Count)
+        public static async Task<ReturnValidationMessageDTO> UpdateAccessoriesCount(int AccessoryId, int AddAccessoriesCount, int RemoveAccessoriesCount)
         {
             var Returnresponse = new ReturnValidationMessageDTO();
             string BaseUri = System.Configuration.ConfigurationManager.AppSettings["baseUri"] + System.Configuration.ConfigurationManager.AppSettings["rootSite"];
@@ -37,7 +37,7 @@ namespace MintSerivce.Helper
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format("inventorycontrol/MintServiceOrder/UpdateAccessoriesCount/{0}/{1}",AccessoryId,Count)).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format("inventorycontrol/MintServiceOrder/UpdateAccessoriesCount/{0}/{1}/{2}",AccessoryId, AddAccessoriesCount, RemoveAccessoriesCount)).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     Returnresponse = await response.Content.ReadAsAsync<ReturnValidationMessageDTO>();

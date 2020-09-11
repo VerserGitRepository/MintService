@@ -122,7 +122,7 @@ namespace MintSerivce.Controllers
             _UpdateOrderAddressData.VerserOrderID = theModel.VerserOrderID;
             _UpdateOrderAddressData.State = theModel.State;
             ValidationResult result = _Validator.Validate(theModel);
-  if (!result.IsValid)
+             if (!result.IsValid)
             {
                 foreach (ValidationFailure failure in result.Errors)
                 {
@@ -154,9 +154,9 @@ namespace MintSerivce.Controllers
             return View("Index",theModel);
         }
         [HttpPost]
-        public ActionResult ManageAccessories(int AccessoryId,int count)
+        public ActionResult ManageAccessories(int AccessoryId,int AddAccessoriesCount, int RemoveAccessoriesCount)
         {
-            var result = AccessoriesStockService.UpdateAccessoriesCount(AccessoryId, count).Result;
+            var result = AccessoriesStockService.UpdateAccessoriesCount(AccessoryId, AddAccessoriesCount, RemoveAccessoriesCount).Result;
             return View("Index", "ManageOrders");
         }
     }

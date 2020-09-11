@@ -23,6 +23,8 @@ namespace MintSerivce.Controllers
 {
     public class HomeController : Controller
     {
+        public static readonly string Filepath = ConfigurationManager.AppSettings["Filepath"];
+
         Helper.Helper APIHelper = new Helper.Helper();
         public ActionResult Index()
         {
@@ -544,6 +546,48 @@ namespace MintSerivce.Controllers
                 Response.End();
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        [ChildActionOnly]
+        public ActionResult Reports()
+        {
+           var files= GetDirectoryFiles(Filepath);
+            return PartialView(files);
+        }
+        public List<FilesModel> GetDirectoryFiles(string dir)
+        {
+            var d = new DirectoryInfo(dir);
+            var files = new List<FilesModel>();
+
+            foreach (FileInfo info in d.GetFiles())
+            {
+                var fileModel = new FilesModel
+                {
+                    FileName = info.Name,
+                    FileDate = info.LastWriteTime,
+                    FileSize = Convert.ToInt32(info.Length),
+                    FileType = info.Extension,
+                    FileFullPath = info.DirectoryName
+                };
+                files.Add(fileModel);
+            }
+            return files;
+        }
+        public FileResult DownloadFile(string path, string fileName)
+        {
+            var filepath = System.IO.Path.Combine(path, fileName);
+            //byte[] filedata = System.IO.File.ReadAllBytes(filepath);
+            //string contentType = MimeMapping.GetMimeMapping(filepath);
+
+            //var cd = new System.Net.Mime.ContentDisposition
+            //{
+            //    FileName = filepath,
+            //    Inline = true,
+            //};
+            //Response.AppendHeader("Content-Disposition", cd.ToString());
+            //return File(filedata, contentType, MimeMapping.GetMimeMapping(filepath));
+
+            return File(filepath, MimeMapping.GetMimeMapping(filepath), fileName);
         }
     }
 }

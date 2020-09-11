@@ -14,7 +14,7 @@ namespace MintSerivce.Controllers
             if (Session["User"] != null)
             {
                 string username = Session["User"].ToString();
-                if (username == "VerserMintAdmin@verser.com.au")
+                if (username != null) //"VerserMintAdmin@verser.com.au")
                 {
                     ManualOrderModel model = new ManualOrderModel();
                     List<ListItemModel> ordersList =  Helper.Helper.CancelOrdersList();
