@@ -8,17 +8,17 @@
         <li class="active"><a data-toggle="tab" href="#MORDER">MANUAL ORDER</a></li>
         <li><a data-toggle="tab" href="#RORDER">RETURN & REPLACE</a></li>
         <li><a data-toggle="tab" href="#OHORDER">UPDATE ON HOLD</a></li>
-        <li><a data-toggle="tab" href="#ONORDER">UPDATE  ON ORDER</a></li>     
+        <li><a data-toggle="tab" href="#ONORDER">UPDATE  ON ORDER</a></li>
         <li><a data-toggle="tab" href="#CORDER">CANCEL ORDER</a></li>
-        <li><a data-toggle="tab" href="#SIMACTIVATE">SIM REACTIVATE</a></li> 
-        <li><a data-toggle="tab" href="#ROONLY">RETURN ORDER</a></li>        
+        <li><a data-toggle="tab" href="#SIMACTIVATE">SIM REACTIVATE</a></li>
+        <li><a data-toggle="tab" href="#ROONLY">RETURN ORDER</a></li>
     </ul>
     <div class="tab-content" style="border-width:thin;border-style:solid;border-color:gray;width:100%;padding-top:5px;">
         <div class="form-group" style="padding-left:20px;color:orange;width:auto;align-items:center;text-align:center;">
             @*@if (Model.ResultMessage != null)
-            {
-                <p><h5> @Model.ResultMessage</h5></p>
-            }*@
+                {
+                    <p><h5> @Model.ResultMessage</h5></p>
+                }*@
         </div>
         <input class="hidden" type="text" id="hdnTabOrder" value="@TempData["TabOrder"]" />
         <div id="MORDER" class="tab-pane fade in active" role="tabpanel" style="text-align:left;padding-left:20px;">
@@ -104,6 +104,7 @@
         </div>
 
         <div id="RORDER" class="tab-pane fade" role="tabpanel">
+            <input type="checkbox" checked data-toggle="toggle" data-on="Show Return Order" data-off="Hide Return Order" data-onstyle="success" data-offstyle="danger" id="showhideReturnOrder" onchange="HideShowModal();">
 
             @using (Html.BeginForm("ReturnedOrder", "ManualOrder", FormMethod.Post))
             {
@@ -180,10 +181,10 @@
                         @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
                     </div>
                     @*<div class="col-sm-6">
-                        <label>Replacement ?&nbsp;&nbsp;</label>
-                        @Html.CheckBoxFor(model => model.IsReplacement, new { style = "transform: scale(2.0);-webkit-transform: scale(2.0);" } )
+                            <label>Replacement ?&nbsp;&nbsp;</label>
+                            @Html.CheckBoxFor(model => model.IsReplacement, new { style = "transform: scale(2.0);-webkit-transform: scale(2.0);" } )
 
-                    </div>*@
+                        </div>*@
                     <div class="col-sm-6">
                         <button type="submit" class="btn btn-primary">Complete Return Order</button>
                     </div>
@@ -305,6 +306,9 @@
 <link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
 
 @section scripts
     {
@@ -380,4 +384,26 @@
     });
     $('#ddlReturnOrderID').removeAttr('multiple')
     $('#ddlReturnOrderID').multiselect('rebuild');
+    function HideShowModal() {
+
+        $.ajax({
+            type: "GET",
+            url: "./ShowModal",
+            success: function (data) {
+                $.confirm({
+                    boxWidth: '800px',
+                    useBootstrap: false,
+                    title: '',
+                    content: data,
+                    closeIcon: true,
+
+                    buttons: {
+                        yes: { isHidden: true }
+                    },
+                });
+
+            }
+        });
+
+    }
 </script>

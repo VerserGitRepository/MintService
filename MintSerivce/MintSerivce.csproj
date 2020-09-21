@@ -572,6 +572,7 @@
     <Content Include="Views\CancelledOrders\CancelledOrders.cshtml" />
     <Content Include="Views\Home\SimOrders.cshtml" />
     <Content Include="Views\Home\Reports.cshtml" />
+    <Content Include="Views\ManualOrder\ReturnModalView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

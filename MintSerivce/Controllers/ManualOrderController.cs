@@ -215,5 +215,18 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("index", "ManualOrder");
             }
         }
+        [HttpGet]
+        public ActionResult ShowModal()
+        {
+            try
+            {
+                return PartialView("ReturnModalView",new ManualOrderModel());
+            }
+            catch (Exception)
+            {
+                TempData["TabOrder"] = "SIMACTIVATE";
+                return RedirectToAction("index", "ManualOrder");
+            }
+        }
     }   
 }
