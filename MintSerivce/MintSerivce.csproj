@@ -233,6 +233,7 @@
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\PDFFileReturnModel.cs" />
     <Compile Include="Models\PhoneOnlyModel.cs" />
+    <Compile Include="Models\ReturnReplacementViewModel.cs" />
     <Compile Include="Models\SIMOnlyViewModel.cs" />
     <Compile Include="Models\RequiredIfAttribute.cs" />
     <Compile Include="Models\ReturnDto.cs" />
