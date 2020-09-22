@@ -15,7 +15,6 @@ namespace MintSerivce.Models
             ReturnReplacementModel = new ReturnReplacementViewModel();
         }
         public string VerserOrderID { get; set; }
-
         [Required(ErrorMessage = "TIAB Order Is Mandatory")]
         public string TIABOrderID { get; set; }
         [Required(ErrorMessage = "FirstName Is Mandatory")]
@@ -55,9 +54,7 @@ namespace MintSerivce.Models
         //public string JMS_JobNo { get; set; }
         //public int? JMS_JOBID { get; set; }
         public List<SelectListItem> OrdersListItemModel { get; set; }
-
         public List<SelectListItem> DispatchedOrderListItems { get; set; }
-
         public ReturnReplacementViewModel ReturnReplacementModel { get; set; }       
 
     }

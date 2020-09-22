@@ -62,11 +62,10 @@ namespace MintSerivce.Controllers
         [HttpPost]
         public ActionResult ReturnedOrder(ManualOrderModel manualOrder)
         {
-            if (ModelState.IsValid)
-            {
-                if (manualOrder.VerserOrderID !=null)
+           
+                if (manualOrder.ReturnReplacementModel != null)
                 {
-                  var returnmessage = Helper.Helper.CreateReturnOrder(manualOrder);
+                 var returnmessage = Helper.Helper.CreateReturnOrder(manualOrder);
                     if (returnmessage != null && returnmessage.ErrorMessage !=null && returnmessage.OrderStatus == "ERROR")
                     {
                         TempData["OrderError"] = $"{returnmessage.VerserOrderID} {returnmessage.ErrorMessage}";
@@ -86,9 +85,10 @@ namespace MintSerivce.Controllers
                     return RedirectToAction("index", "ManualOrder");
                 }
                
-            }
-            TempData["TabOrder"] = "MORDER";
-            return RedirectToAction("index", "ManualOrder");
+            
+            //TempData["TabOrder"] = "MORDER";
+
+            //return RedirectToAction("index", "ManualOrder");
         }
         [HttpPost]
         public ActionResult CancelOrder(ManualOrderModel manualorder)

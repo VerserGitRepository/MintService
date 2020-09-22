@@ -9,6 +9,11 @@ namespace MintSerivce.Models
 {
     public class ReturnReplacementViewModel
     {
+        public ReturnReplacementViewModel()
+        {
+        }
+        [Required(ErrorMessage = "VerserOrderID Order Is Mandatory")]
+        public string VerserOrderID { get; set; }
         public string CustomerID { get; set; }
         [Required(ErrorMessage = "Day Is Mandatory")]
         [DataType(DataType.Date)]
@@ -22,17 +27,25 @@ namespace MintSerivce.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DateOfExpectedReturn { get; set; } //Date of return organised +7 days
-        public string ReturnType { get; set; } //DropdownList
-        public string CoolingOffPeriod { get; set; } //Yes, No
+        public string ReturnType { get; set; } 
+        public string CoolingOffPeriod { get; set; } 
         public string TrackingNumberToCustomer { get; set; }
         public string TrackingNumberFromCustomerToVerser { get; set; }
         public int? NumberofdaysReturnedReceive   { get; set; } //-	Number of days taken to receive returned device  ( The date it was received by Verser minus the date of returned organise)
         public string IsReplaced { get; set; }
-        public string SMSReminder { get; set; } //Yes/No
+        public string SMSReminder { get; set; } 
         public string CustomerServiceComments { get; set; }
-        //public SelectListItem CoolingOffPeriodlist { get; set; }
-        //public SelectListItem ReturnTypes { get; set; }
-        //public SelectListItem IsReplacedlist { get; set; }
-        //public SelectListItem SMSReminderList { get; set; }
+        public bool IsReplacementRequired { get; set; }
+        public bool ReplacementTONewAddress { get; set; }        
+        public string FirstName { get; set; }       
+        public string Surname { get; set; }      
+        public string Salutation { get; set; }      
+        public string State { get; set; }      
+        public string AddressLine1 { get; set; }      
+        public string Locality { get; set; }      
+        public string Postcode { get; set; }     
+        public string SKU { get; set; }      
+        public string ContactNumber { get; set; }    
+        public string OrderType { get; set; }
     }
 }

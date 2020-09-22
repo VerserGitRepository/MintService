@@ -1,15 +1,14 @@
 ﻿
 @model MintSerivce.Models.ManualOrderModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Replace To New Addess";
 }
-<div id="RORDERModal">
-  
+<div id="RORDERModal">  
 
     @using (Html.BeginForm("ReturnedOrder", "ManualOrder", FormMethod.Post))
     {
 
-        <div class="container" style="padding-top:20px;color:gray">
+        <div class="container" style="padding-top:10px;color:gray">
             <div>
                 @if (TempData["ManualOrder"] != null)
                 {
@@ -19,8 +18,7 @@
                 {
                     <h6 style="color:red;text-align:center">@TempData["OrderError"].ToString()</h6>
                 }
-            </div>
-            
+            </div>            
             <div class="col-sm-6">
                 <label>FirstName:</label>
                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
@@ -48,7 +46,17 @@
             </div>
             <div class="col-sm-6">
                 <label>State:</label>
-                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.State, new List<SelectListItem>
+                 {
+                             new SelectListItem{ Text="NSW", Value = "NSW" },
+                             new SelectListItem{ Text="QLD", Value = "QLD" },
+                             new SelectListItem{ Text="SA", Value = "SA" },
+                             new SelectListItem{ Text="TAS", Value = "TAS" },
+                             new SelectListItem{ Text="VIC", Value = "VIC" },
+                             new SelectListItem{ Text="WA", Value = "WA" },
+                             new SelectListItem{ Text="ACT", Value = "ACT" },
+                             new SelectListItem{ Text="NT", Value = "NT" }
+                 }, "States", new { @class = "form-control", style = "Height:40px" })
                 @Html.ValidationMessageFor(model => model.State, null, new { @class = "text-danger" })
             </div>
             <div class="col-sm-6">
@@ -68,18 +76,19 @@
             </div>
             <div class="col-sm-6">
                 <label>OrderType:</label>
-                @Html.EditorFor(model => model.OrderType, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
-            </div>
-            @*<div class="col-sm-6">
-                    <label>Replacement ?&nbsp;&nbsp;</label>
-                    @Html.CheckBoxFor(model => model.IsReplacement, new { style = "transform: scale(2.0);-webkit-transform: scale(2.0);" } )
+                @Html.DropDownListFor(model => model.OrderType, new List<SelectListItem>
+              {
+                          new SelectListItem{ Text="PhoneSim", Value = "PhoneSim" },
+                          new SelectListItem{ Text="PhoneOnly", Value = "PhoneOnly" },
+                          new SelectListItem{ Text="SimOnly", Value = "SimOnly" }
+              }, "OrderType", new { @class = "form-control", style = "Height:40px" })
+              @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
 
-                </div>*@
-            <div class="col-sm-6">
-                <button type="submit" class="btn btn-primary">Complete Return Order</button>
+            </div>         
+            <div class="col-sm-6" style="padding-top:20px;">
+                <button type="submit" class="btn btn-success">ADD ADDRESS</button>
             </div>
-            <br />
+            
         </div>
     }
 </div>
