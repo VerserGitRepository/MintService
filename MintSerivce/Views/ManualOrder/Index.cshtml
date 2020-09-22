@@ -156,7 +156,7 @@
                 new SelectListItem{Text="Warranty",Value="Warranty"},
                 new SelectListItem{Text="Shopify Return",Value="Shopify Return"},
                 new SelectListItem{Text="Shopify Swap",Value="Shopify Swap"},
-                new SelectListItem{Text="Shopify Warranty",Value="Shopify Warranty"} 
+                new SelectListItem{Text="Shopify Warranty",Value="Shopify Warranty"}
                  }, new { @class = "form-control", style = "Height:35px" })
             </div>
 
@@ -166,44 +166,58 @@
             @Html.ValidationMessageFor(model => model.AddressLine1, null, new { @class = "text-danger" })
         </div>*@
             <div class="col-sm-6">
-                <label>Suburb:</label>
-                @Html.EditorFor(model => model.Locality, new { htmlAttributes = new { @class = "form-control" } })
+                <label>Cooling off Period:</label>
+                @Html.DropDownList("Return Type", new List<SelectListItem>
+                 {
+                new SelectListItem{Text="Return",Value="Yes"},
+                new SelectListItem{Text="Swap",Value="No"}
+
+             }, new { @class = "form-control", style = "Height:35px" })
                 @Html.ValidationMessageFor(model => model.Locality, null, new { @class = "text-danger" })
             </div>
             <div class="col-sm-6">
-                <label>State:</label>
-                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                <label>Tracking To Customer:</label>
+                @Html.EditorFor(model => model.ReturnReplacementModel.TrackingNumberToCustomer, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.State, null, new { @class = "text-danger" })
             </div>
             <div class="col-sm-6">
-                <label>Postcode:</label>
-                @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "form-control" } })
+                <label>Tracking  From Customer To Verser:</label>
+                @Html.EditorFor(model => model.ReturnReplacementModel.TrackingNumberFromCustomerToVerser, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Postcode, null, new { @class = "text-danger" })
             </div>
             <div class="col-sm-6">
-                <label>SKU:</label>
-                @Html.EditorFor(model => model.SKU, new { htmlAttributes = new { @class = "form-control" } })
+                <label>Number Of Days Returned Receive:</label>
+                @Html.EditorFor(model => model.ReturnReplacementModel.NumberofdaysReturnedReceive, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SKU, null, new { @class = "text-danger" })
             </div>
             <div class="col-sm-6">
-                <label>ContactNumber:</label>
-                @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
+                <label>Replacement Sent:</label>
+                @Html.DropDownList("Return Type", new List<SelectListItem>
+             {
+            new SelectListItem{Text="Return",Value="Yes"},
+            new SelectListItem{Text="Swap",Value="No"}
+
+             }, new { @class = "form-control", style = "Height:35px" })
                 @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
             </div>
             <div class="col-sm-6">
-                <label>OrderType:</label>
-                @Html.EditorFor(model => model.OrderType, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
+                <label>SMS Reminder sent to customer:</label>
+                @Html.DropDownList("Return Type", new List<SelectListItem>
+              {
+             new SelectListItem{Text="Return",Value="Yes"},
+             new SelectListItem{Text="Swap",Value="No"},
+              new SelectListItem{Text="Multiple Contacts",Value="Multiple Contacts"}
+              }, new { @class = "form-control", style = "Height:35px" })
             </div>
-            @*<div class="col-sm-6">
-            <label>Replacement ?&nbsp;&nbsp;</label>
-            @Html.CheckBoxFor(model => model.IsReplacement, new { style = "transform: scale(2.0);-webkit-transform: scale(2.0);" } )
-
-        </div>*@
+            <div class="col-sm-6">
+                <label>Customer Service Comments:</label>
+                @Html.EditorFor(model => model.ReturnReplacementModel.CustomerServiceComments, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SKU, null, new { @class = "text-danger" })
+            </div>
             <div class="col-sm-6">
                 <button type="submit" class="btn btn-primary">Complete Return Order</button>
             </div>
-            <br />
+
         </div>
             }
         </div>
