@@ -21,7 +21,12 @@ namespace MintSerivce.Controllers
                     List<ListItemModel> DispatchedOrdersList = Helper.Helper.DispatchedOrderNumbers();
 
                     model.OrdersListItemModel = new List<SelectListItem>();
-                    model.DispatchedOrderListItems = new List<SelectListItem>(); 
+                    model.DispatchedOrderListItems = new List<SelectListItem>();
+
+                    //model.ReturnReplacementModel.CoolingOffPeriodlist = new SelectList(Helper.DropDownHelper.CoolingoffPeriods());
+                    //model.ReturnReplacementModel.ReturnTypes = new SelectList(Helper.DropDownHelper.ReturnTypes());
+                    //model.ReturnReplacementModel.SMSReminder = new SelectList(Helper.DropDownHelper.SMSReminder());
+                    //model.ReturnReplacementModel.CoolingOffPeriodlist = new SelectList(Helper.DropDownHelper.CoolingoffPeriods());
 
                     foreach (ListItemModel item in ordersList)
                     {

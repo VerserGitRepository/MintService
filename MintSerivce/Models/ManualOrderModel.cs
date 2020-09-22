@@ -9,7 +9,11 @@ namespace MintSerivce.Models
 {
     public class ManualOrderModel
     {
-      //  public int ID { get; set; }
+        //  public int ID { get; set; }
+        public ManualOrderModel()
+        {
+            ReturnReplacementModel = new ReturnReplacementViewModel();
+        }
         public string VerserOrderID { get; set; }
 
         [Required(ErrorMessage = "TIAB Order Is Mandatory")]
@@ -53,6 +57,8 @@ namespace MintSerivce.Models
         public List<SelectListItem> OrdersListItemModel { get; set; }
 
         public List<SelectListItem> DispatchedOrderListItems { get; set; }
+
+        public ReturnReplacementViewModel ReturnReplacementModel { get; set; }       
 
     }
 }
