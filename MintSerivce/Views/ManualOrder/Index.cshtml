@@ -169,8 +169,8 @@
                 <label>Cooling off Period:</label>
                 @Html.DropDownList("Return Type", new List<SelectListItem>
                  {
-                new SelectListItem{Text="Return",Value="Yes"},
-                new SelectListItem{Text="Swap",Value="No"}
+                new SelectListItem{Text="Yes",Value="Yes"},
+                new SelectListItem{Text="No",Value="No"}
 
              }, new { @class = "form-control", style = "Height:35px" })
                 @Html.ValidationMessageFor(model => model.Locality, null, new { @class = "text-danger" })
@@ -194,8 +194,8 @@
                 <label>Replacement Sent:</label>
                 @Html.DropDownList("Return Type", new List<SelectListItem>
              {
-            new SelectListItem{Text="Return",Value="Yes"},
-            new SelectListItem{Text="Swap",Value="No"}
+            new SelectListItem{Text="Yes",Value="Yes"},
+            new SelectListItem{Text="No",Value="No"}
 
              }, new { @class = "form-control", style = "Height:35px" })
                 @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
@@ -204,8 +204,8 @@
                 <label>SMS Reminder sent to customer:</label>
                 @Html.DropDownList("Return Type", new List<SelectListItem>
               {
-             new SelectListItem{Text="Return",Value="Yes"},
-             new SelectListItem{Text="Swap",Value="No"},
+             new SelectListItem{Text="Yes",Value="Yes"},
+             new SelectListItem{Text="No",Value="No"},
               new SelectListItem{Text="Multiple Contacts",Value="Multiple Contacts"}
               }, new { @class = "form-control", style = "Height:35px" })
             </div>
