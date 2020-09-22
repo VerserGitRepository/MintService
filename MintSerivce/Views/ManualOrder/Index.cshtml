@@ -109,20 +109,25 @@
 
         <div id="RORDER" class="tab-pane fade" role="tabpanel">
 
-
             @using (Html.BeginForm("ReturnedOrder", "ManualOrder", FormMethod.Post))
             {
 
-                <div class="container" style="padding-top:20px;color:gray">
-                    <div>
-                        @if (TempData["ManualOrder"] != null)
-                        {
-                            <h6 style="color:green;text-align:center">@TempData["ManualOrder"].ToString()</h6>
-                        }
-                        @if (TempData["OrderError"] != null)
-                        {
-                            <h6 style="color:red;text-align:center">@TempData["OrderError"].ToString()</h6>
-                        }
+            <div class="container" style="padding-top:20px;color:gray">
+                <div>
+                    @if (TempData["ManualOrder"] != null)
+                    {
+                        <h6 style="color:green;text-align:center">@TempData["ManualOrder"].ToString()</h6>
+                    }
+                    @if (TempData["OrderError"] != null)
+                    {
+                        <h6 style="color:red;text-align:center">@TempData["OrderError"].ToString()</h6>
+                    }
+                </div>
+                <div class="row" style="padding-top:10px">
+                    <div class="col-sm-6" style="padding-top:20px;">
+                        <label>Customer ID:</label>
+                        @Html.EditorFor(model => model.ReturnReplacementModel.CustomerID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
+                        @Html.ValidationMessageFor(model => model.ReturnReplacementModel.CustomerID, null, new { @class = "text-danger" })
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
@@ -137,17 +142,12 @@
                             @Html.ValidationMessageFor(model => model.ReturnReplacementModel.VerserOrderID, null, new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="row" style="padding-top:10px">
-                        <div class="col-sm-6">
-                            <label>Date OF Purchase:</label>
-                            @Html.EditorFor(model => model.ReturnReplacementModel.DateOfPurchase, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DateOfPurchase" } })
-                            @Html.ValidationMessageFor(model => model.ReturnReplacementModel.DateOfPurchase, null, new { @class = "text-danger" })
-                        </div>
-                        <div class="col-sm-6">
-                            <label>Date of Returned Organised</label>
-                            @Html.EditorFor(model => model.ReturnReplacementModel.DateOfReturnOrganised, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DateOfReturnOrganised" } })
-                            @Html.ValidationMessageFor(model => model.ReturnReplacementModel.DateOfReturnOrganised, null, new { @class = "text-danger" })
-                        </div>
+                </div>
+                <div class="row" style="padding-top:10px">
+                    <div class="col-sm-6">
+                        <label>Date OF Purchase:</label>
+                        @Html.EditorFor(model => model.ReturnReplacementModel.DateOfPurchase, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DateOfPurchase" } })
+                        @Html.ValidationMessageFor(model => model.ReturnReplacementModel.DateOfPurchase, null, new { @class = "text-danger" })
                     </div>
                     <div class="row" style="padding-top:10px">
                         <div class="col-sm-6">
@@ -246,8 +246,8 @@
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+                }
+            </div>
         <div id="CORDER" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
             <div class="form-horizontal">
                 @using (Html.BeginForm("CancelOrder", "ManualOrder", FormMethod.Post))
