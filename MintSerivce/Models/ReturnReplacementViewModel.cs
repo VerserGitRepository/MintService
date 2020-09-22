@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,8 +10,17 @@ namespace MintSerivce.Models
     public class ReturnReplacementViewModel
     {
         public string CustomerID { get; set; }
+        [Required(ErrorMessage = "Day Is Mandatory")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DateOfPurchase { get; set; }
+        [Required(ErrorMessage = "Day Is Mandatory")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DateOfReturnOrganised { get; set; }
+        [Required(ErrorMessage = "Day Is Mandatory")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DateOfExpectedReturn { get; set; } //Date of return organised +7 days
         public string ReturnType { get; set; } //DropdownList
         public string CoolingOffPeriod { get; set; } //Yes, No

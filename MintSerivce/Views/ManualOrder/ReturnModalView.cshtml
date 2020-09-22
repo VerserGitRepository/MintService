@@ -20,16 +20,7 @@
                     <h6 style="color:red;text-align:center">@TempData["OrderError"].ToString()</h6>
                 }
             </div>
-            <div class="col-sm-6" style="padding-top:20px;">
-                <label>TIABOrderID:</label>
-                @Html.EditorFor(model => model.TIABOrderID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
-                @Html.ValidationMessageFor(model => model.TIABOrderID, null, new { @class = "text-danger" })
-            </div>
-            <div class="col-sm-6" style="padding-top:20px;">
-                <label>VerserOrderID:</label>
-                @Html.EditorFor(model => model.VerserOrderID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
-                @Html.ValidationMessageFor(model => model.VerserOrderID, null, new { @class = "text-danger" })
-            </div>
+            
             <div class="col-sm-6">
                 <label>FirstName:</label>
                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
