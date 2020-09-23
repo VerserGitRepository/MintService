@@ -341,7 +341,6 @@ namespace MintSerivce.Helper
             }
             return response;
         }
-
         public static OrderReplacementReturnDto CreateReturnOrder(ManualOrderModel NewManualOrder)
         {
             var ordermodel = new List<OrderReplacementReturnDto>();
@@ -379,7 +378,6 @@ namespace MintSerivce.Helper
             }
             return ordermodel.FirstOrDefault();
         }
-
         public static string UpdateSKUBufferValue(string SKU, string SKUBuffer)
         {           
             string response = string.Empty;
@@ -519,9 +517,7 @@ namespace MintSerivce.Helper
                 
             }
             return response;
-        }
-
-        
+        }       
 
         public static List<ListItemModel> CancelOrdersList()
         {

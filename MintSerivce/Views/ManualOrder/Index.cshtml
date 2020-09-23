@@ -219,32 +219,91 @@
                     </div>
                     <div class="col-sm-6">
                         <label>Replacement To New Address:</label>
-                        @Html.CheckBoxFor(model => model.ReturnReplacementModel.ReplacementTONewAddress, new { htmlAttributes = new { @class = "form-control" }, onchange = "HideShowModal(this);" })
-                        @Html.ValidationMessageFor(model => model.ReturnReplacementModel.ReplacementTONewAddress, null, new { @class = "text-danger" })
-
-                        @*<input type="checkbox" checked data-toggle="toggle" data-on="Show Return Order" data-off="Hide Return Order" data-onstyle="success" data-offstyle="danger" id="showhideReturnOrder" >*@
+                        @Html.CheckBoxFor(model => model.ReturnReplacementModel.ReplacementTONewAddress, new { htmlAttributes = new { @class = "form-control" } }) @*onchange = "HideShowModal(this);"*@
+                        @Html.ValidationMessageFor(model => model.ReturnReplacementModel.ReplacementTONewAddress, null, new { @class = "text-danger" })                      
                     </div>
                 </div>
-                <div class="row" style="padding-top:10px">
+                <div class="row" style="padding-top:10px;color:lightsalmon">
                     <div class="col-sm-6">
-                        <label>SKU:</label>
-                        @Html.DropDownListFor(model => model.OrderType, new List<SelectListItem>
-                      {
-                                  new SelectListItem{ Text="PhoneSim", Value = "PhoneSim" },
-                                  new SelectListItem{ Text="PhoneOnly", Value = "PhoneOnly" },
-                                  new SelectListItem{ Text="SimOnly", Value = "SimOnly" }
-                      }, "OrderType", new { @class = "form-control", style = "Height:40px", @id = "ddlSKUType", @disabled = "disabled" })
-                        @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
+                        <label>SKU: Replacement To New SKU ?</label>
+                        @Html.CheckBoxFor(model => model.ReturnReplacementModel.ReplacementToNewSKU, new { htmlAttributes = new { @class = "form-control" }, onchange = "ShowddlSKUType(this);" })
+
+                        @Html.DropDownListFor(model => model.ReturnReplacementModel.SKU, Model.SKUList, "Select SKU", new { @class = "form-control", style = "Height:40px", @id = "ddlSKUType", @disabled = "disabled" })
+
+                        @Html.ValidationMessageFor(model => model.SKU, null, new { @class = "text-danger" })
                     </div>
                     <div class="col-sm-6">
-                        <label>OrderType:</label>
+                        <label>OrderType: Replacement To New OrderType ?</label>
+                        @Html.CheckBoxFor(model => model.ReturnReplacementModel.ReplacementTONewOrderType, new { htmlAttributes = new { @class = "form-control" }, onchange = "ShowddlOrderType(this);" })
                         @Html.DropDownListFor(model => model.OrderType, new List<SelectListItem>
                       {
                                   new SelectListItem{ Text="PhoneSim", Value = "PhoneSim" },
                                   new SelectListItem{ Text="PhoneOnly", Value = "PhoneOnly" },
                                   new SelectListItem{ Text="SimOnly", Value = "SimOnly" }
-                      }, "OrderType", new { @class = "form-control", style = "Height:40px",@id="ddlOrderType", @disabled = "disabled" })
+                      }, "Select OrderType", new { @class = "form-control", style = "Height:40px", @id = "ddlOrderType", @disabled = "disabled" })
+
                         @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div id="OrderNewAddressId" disabled="true" onload="OrderNewAddressDisable();">
+                    <div class="row" style="padding-top:10px">
+                        <div class="col-sm-6">
+                            <label>FirstName:</label>
+                            @Html.EditorFor(model => model.ReturnReplacementModel.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Surname:</label>
+                            @Html.EditorFor(model => model.ReturnReplacementModel.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Surname, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top:10px">
+                        <div class="col-sm-6">
+                            <label>Salutation:</label>
+                            @Html.EditorFor(model => model.ReturnReplacementModel.Salutation, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Salutation, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="col-sm-6">
+                            <label>AddressLine1:</label>
+                            @Html.EditorFor(model => model.ReturnReplacementModel.AddressLine1, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.AddressLine1, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top:10px">
+                        <div class="col-sm-6">
+                            <label>Suburb:</label>
+                            @Html.EditorFor(model => model.ReturnReplacementModel.Locality, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Locality, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="col-sm-6">
+                            <label>State:</label>
+                            @Html.DropDownListFor(model => model.ReturnReplacementModel.State, new List<SelectListItem>
+                             {
+                                         new SelectListItem{ Text="NSW", Value = "NSW" },
+                                         new SelectListItem{ Text="QLD", Value = "QLD" },
+                                         new SelectListItem{ Text="SA", Value = "SA" },
+                                         new SelectListItem{ Text="TAS", Value = "TAS" },
+                                         new SelectListItem{ Text="VIC", Value = "VIC" },
+                                         new SelectListItem{ Text="WA", Value = "WA" },
+                                         new SelectListItem{ Text="ACT", Value = "ACT" },
+                                         new SelectListItem{ Text="NT", Value = "NT" }
+                             }, "States", new { @class = "form-control", style = "Height:40px" })
+                            @Html.ValidationMessageFor(model => model.State, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top:10px">
+                        <div class="col-sm-6">
+                            <label>Postcode:</label>
+                            @Html.EditorFor(model => model.ReturnReplacementModel.Postcode, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Postcode, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="col-sm-6">
+                            <label>ContactNumber:</label>
+                            @Html.EditorFor(model => model.ReturnReplacementModel.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
                 <div class="row" style="padding-top:10px;">
@@ -266,7 +325,7 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
 
-                        @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })<br /><br />
+                        @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })
                         <div class="col-md-10">
                         </div>
                     </div>
@@ -360,136 +419,145 @@
                     }
                 </div>
             </div>*@
-       
+
     </div>
-    </div>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
-    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">*@
-    <link href="~/Content/bootstrap-3.1.4.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="~/Scripts/bootstrap-multiselect.js"></script>
-    <link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+</div>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
+@*<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">*@
+<link href="~/Content/bootstrap-3.1.4.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
 
-    @section scripts
+@section scripts
     {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-    <script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
 
-        $(document).ready(function () {
-            if ($("#hdnTabOrder").val() == "MORDER")
-                $('a[href="#MORDER"]').click();
-            else if ($("#hdnTabOrder").val() == "RORDER")
-                $('a[href="#RORDER"]').click();
-            else if ($("#hdnTabOrder").val() == "OHORDER")
-                $('a[href="#OHORDER"]').click();
-            else if ($("#hdnTabOrder").val() == "ONORDER")
-                $('a[href="#ONORDER"]').click();
-            else if ($("#hdnTabOrder").val() == "CORDER")
-                $('a[href="#CORDER"]').click();
-            else if ($("#hdnTabOrder").val() == "SIMACTIVATE")
-                $('a[href="#SIMACTIVATE"]').click();
-            else if ($("#hdnTabOrder").val() == "ROONLY")
-                $('a[href="#ROONLY"]').click();
-            else
-                $('a[href="#MORDER"]').click();
-        });
+    $(document).ready(function () {
+        if ($("#hdnTabOrder").val() == "MORDER")
+            $('a[href="#MORDER"]').click();
+        else if ($("#hdnTabOrder").val() == "RORDER")
+            $('a[href="#RORDER"]').click();
+        else if ($("#hdnTabOrder").val() == "OHORDER")
+            $('a[href="#OHORDER"]').click();
+        else if ($("#hdnTabOrder").val() == "ONORDER")
+            $('a[href="#ONORDER"]').click();
+        else if ($("#hdnTabOrder").val() == "CORDER")
+            $('a[href="#CORDER"]').click();
+        else if ($("#hdnTabOrder").val() == "SIMACTIVATE")
+            $('a[href="#SIMACTIVATE"]').click();
+        else if ($("#hdnTabOrder").val() == "ROONLY")
+            $('a[href="#ROONLY"]').click();
+        else
+            $('a[href="#MORDER"]').click();
+    });
 
-        $('#ddlOrderID').multiselect({
-            includeSelectAllOption: false,
-            maxHeight: 280,
-            buttonWidth: '370px',
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering: true
-        });
-        $('#ddlOrderID').removeAttr('multiple')
-        $('#ddlOrderID').multiselect('rebuild');
+    $('#ddlOrderID').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 280,
+        buttonWidth: '370px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true
+    });
+    $('#ddlOrderID').removeAttr('multiple')
+    $('#ddlOrderID').multiselect('rebuild');
 
-        $('#ddlohOrderID').multiselect({
-            includeSelectAllOption: false,
-            maxHeight: 280,
-            buttonWidth: '370px',
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering: true
-        });
-        $('#ddlohOrderID').removeAttr('multiple')
-        $('#ddlohOrderID').multiselect('rebuild');
+    $('#ddlohOrderID').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 280,
+        buttonWidth: '370px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true
+    });
+    $('#ddlohOrderID').removeAttr('multiple')
+    $('#ddlohOrderID').multiselect('rebuild');
 
-        $('#ddlONOrderID').multiselect({
-            includeSelectAllOption: false,
-            maxHeight: 280,
-            buttonWidth: '370px',
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering: true
-        });
-        $('#ddlONOrderID').removeAttr('multiple')
-        $('#ddlONOrderID').multiselect('rebuild');
+    $('#ddlONOrderID').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 280,
+        buttonWidth: '370px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true
+    });
+    $('#ddlONOrderID').removeAttr('multiple')
+    $('#ddlONOrderID').multiselect('rebuild');
 
-        $('#ddlSIMActivateOrderID').multiselect({
-            includeSelectAllOption: false,
-            maxHeight: 280,
-            buttonWidth: '370px',
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering: true
-        });
-        $('#ddlSIMActivateOrderID').removeAttr('multiple')
-        $('#ddlSIMActivateOrderID').multiselect('rebuild');
+    $('#ddlSIMActivateOrderID').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 280,
+        buttonWidth: '370px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true
+    });
+    $('#ddlSIMActivateOrderID').removeAttr('multiple')
+    $('#ddlSIMActivateOrderID').multiselect('rebuild');
 
-        $('#ddlReturnOrderID').multiselect({
-            includeSelectAllOption: false,
-            maxHeight: 280,
-            buttonWidth: '370px',
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering: true
-        });
-        $('#ddlReturnOrderID').removeAttr('multiple')
-        $('#ddlReturnOrderID').multiselect('rebuild');
-        function HideShowModal(control) {
-            var firstConfirm = null;
-            if (($(control)[0]).checked) {
+    $('#ddlReturnOrderID').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 280,
+        buttonWidth: '370px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true
+    });
+    $('#ddlReturnOrderID').removeAttr('multiple')
+    $('#ddlReturnOrderID').multiselect('rebuild');
+    function HideShowModal(control) {
+        var firstConfirm = null;
+        if (($(control)[0]).checked) {
 
-                firstconfirm = $.confirm({
-                    boxWidth: '800px',
-                    useBootstrap: false,
-                    title: '',
-                    content: ` <input type="checkbox" id="showhideReturnOrder" onchange="HideShowModal(this);">
-                                Return for Different Address<br/>
-                                <input type="checkbox" id="NewSku" onchange="HideShowModal(this);">
-                                New SKU Needed<br/>`,
-                    closeIcon: true,
+            //firstconfirm = $.confirm({
+            //    boxWidth: '800px',
+            //    useBootstrap: false,
+            //    title: '',
+            //    content: ` <input type="checkbox" id="showhideReturnOrder" onchange="HideShowModal(this);">
+            //                Return for Different Address<br/>
+            //                <input type="checkbox" id="NewSku" onchange="HideShowModal(this);">
+            //                New SKU Needed<br/>`,
+            //    closeIcon: true,
 
-                    buttons: {
-                        yes: { isHidden: true }
-                    },
-                   
-                });
-                firstconfirm = null
-                alert(firstconfirm);
+            //    buttons: {
+            //        yes: { isHidden: true }
+            //    },
 
-                $.ajax({
-                    type: "GET",
-                    url: "./ShowModal",
-                    success: function (data) {
-                        $.confirm({
-                            boxWidth: '800px',
-                            useBootstrap: false,
-                            title: '',
-                            content: data,
-                            closeIcon: true,
+            //});
+            //  firstconfirm = null
+            // alert(firstconfirm);
 
-                            buttons: {
-                                yes: { isHidden: true }
-                            },
-                        });
+            $.ajax({
+                type: "GET",
+                url: "./ShowModal",
+                success: function (data) {
+                    $.confirm({
+                        boxWidth: '800px',
+                        useBootstrap: false,
+                        title: '',
+                        content: data,
+                        closeIcon: true,
 
-                    }
-                });
-            }
+                        buttons: {
+                            yes: { isHidden: true }
+                        },
+                    });
 
+                }
+            });
         }
-    </script>
+
+    }
+
+    function ShowddlOrderType() {
+        $('#ddlOrderType').removeAttr('disabled');
+
+    }
+    function ShowddlSKUType() {
+        $('#ddlSKUType').removeAttr('disabled');
+    }
+
+</script>
