@@ -36,12 +36,17 @@ namespace MintSerivce.Models
         public string SMSReminder { get; set; } 
         public string CustomerServiceComments { get; set; }
         public bool IsReplacementRequired { get; set; }
-        public bool ReplacementTONewAddress { get; set; }        
+        public bool ReplacementTONewAddress { get; set; }
+        public bool ReplacementToNewSKU { get; set; }
+        public bool ReplacementTONewOrderType { get; set; }
         public string FirstName { get; set; }       
         public string Surname { get; set; }      
         public string Salutation { get; set; }      
         public string State { get; set; }      
-        public string AddressLine1 { get; set; }      
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string AddressLine3 { get; set; }
+        public string TIABOrderID { get; set; }        
         public string Locality { get; set; }      
         public string Postcode { get; set; }     
         public string SKU { get; set; }      
