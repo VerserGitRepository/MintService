@@ -55,7 +55,8 @@ namespace MintSerivce.Models
         //public int? JMS_JOBID { get; set; }
         public List<SelectListItem> OrdersListItemModel { get; set; }
         public List<SelectListItem> DispatchedOrderListItems { get; set; }
-        public ReturnReplacementViewModel ReturnReplacementModel { get; set; }       
+        public ReturnReplacementViewModel ReturnReplacementModel { get; set; }
+        public SelectList SKUList { get; set; }       
 
     }
 }

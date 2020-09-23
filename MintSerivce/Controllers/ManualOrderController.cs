@@ -22,7 +22,8 @@ namespace MintSerivce.Controllers
 
                     model.OrdersListItemModel = new List<SelectListItem>();
                     model.DispatchedOrderListItems = new List<SelectListItem>();
-
+                    model.SKUList = new SelectList(Helper.Helper.SKUList(), "Value", "Value");             
+                    
                     //model.ReturnReplacementModel.CoolingOffPeriodlist = new SelectList(Helper.DropDownHelper.CoolingoffPeriods());
                     //model.ReturnReplacementModel.ReturnTypes = new SelectList(Helper.DropDownHelper.ReturnTypes());
                     //model.ReturnReplacementModel.SMSReminder = new SelectList(Helper.DropDownHelper.SMSReminder());
@@ -49,6 +50,7 @@ namespace MintSerivce.Controllers
             if (ModelState.IsValid)
             {
               string returnmessage=Helper.Helper.CreateOrder(manualOrder);
+
                 TempData["ManualOrder"] = returnmessage.ToString();
                 ModelState.Clear();
                 return RedirectToAction("index", "ManualOrder");
@@ -65,7 +67,7 @@ namespace MintSerivce.Controllers
            
                 if (manualOrder.ReturnReplacementModel != null)
                 {
-                 var returnmessage = Helper.Helper.CreateReturnOrder(manualOrder);
+                 var returnmessage = Helper.Helper.CreateReturnOrder(manualOrder.ReturnReplacementModel);
                     if (returnmessage != null && returnmessage.ErrorMessage !=null && returnmessage.OrderStatus == "ERROR")
                     {
                         TempData["OrderError"] = $"{returnmessage.VerserOrderID} {returnmessage.ErrorMessage}";

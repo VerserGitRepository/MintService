@@ -66,5 +66,7 @@ namespace MintSerivce.Helper
             };
             return _CoolingoffPeriods;
         }
+
+
     }
 }
