@@ -453,43 +453,53 @@
             var firstConfirm = null;
             if (($(control)[0]).checked) {
 
-                firstconfirm = $.confirm({
-                    boxWidth: '800px',
-                    useBootstrap: false,
-                    title: '',
-                    content: ` <input type="checkbox" id="showhideReturnOrder" onchange="HideShowModal(this);">
+
+                $.confirm({
+                    content: ` <input type="checkbox" id="NewOrder" onchange="EnableDDLOrder();">
                                 Return for Different Address<br/>
-                                <input type="checkbox" id="NewSku" onchange="HideShowModal(this);">
+                                <input type="checkbox" id="NewSku" onchange="EnableDDLSKU();">
                                 New SKU Needed<br/>`,
                     closeIcon: true,
-
                     buttons: {
                         yes: { isHidden: true }
                     },
-                   
-                });
-                firstconfirm = null
-                alert(firstconfirm);
+                    onClose: function () {
+                      
+                            $.ajax({
+                                type: "GET",
+                                url: "./ShowModal",
+                                success: function (data) {
+                                    $.confirm({
+                                        boxWidth: '800px',
+                                        useBootstrap: false,
+                                        title: '',
+                                        content: data,
+                                        closeIcon: true,
 
-                $.ajax({
-                    type: "GET",
-                    url: "./ShowModal",
-                    success: function (data) {
-                        $.confirm({
-                            boxWidth: '800px',
-                            useBootstrap: false,
-                            title: '',
-                            content: data,
-                            closeIcon: true,
-
-                            buttons: {
-                                yes: { isHidden: true }
-                            },
-                        });
+                                        buttons: {
+                                            yes: { isHidden: true }
+                                        },
+                                    });
 
                     }
                 });
+                       
+                    },
+                    cancel: function () {
+                        // nothing to do
+                    }
+                })
+
             }
 
         }
+        function EnableDDLOrder() {
+
+            $("#ddlOrderType").prop("disabled", false);  
+        }
+        function EnableDDLSKU() {
+
+            $("#ddlSKUType").prop("disabled", false);
+        }
     </script>
+
