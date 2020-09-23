@@ -341,11 +341,11 @@ namespace MintSerivce.Helper
             }
             return response;
         }
-        public static OrderReplacementReturnDto CreateReturnOrder(ManualOrderModel NewManualOrder)
+        public static OrderReplacementReturnDto CreateReturnOrder(ReturnReplacementViewModel ReturnReplacementModel)
         {
             var ordermodel = new List<OrderReplacementReturnDto>();
-             var _NewManualOrder = new List<ManualOrderModel>();
-            _NewManualOrder.Add(NewManualOrder);
+             var _NewManualOrder = new List<ReturnReplacementViewModel>();
+            _NewManualOrder.Add(ReturnReplacementModel);
             var response = string.Empty;
 
             string CreateOrderURi = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["CreateReturnOrder"];

@@ -145,6 +145,11 @@
                         @Html.EditorFor(model => model.ReturnReplacementModel.DateOfPurchase, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DateOfPurchase" } })
                         @Html.ValidationMessageFor(model => model.ReturnReplacementModel.DateOfPurchase, null, new { @class = "text-danger" })
                     </div>
+                    <div class="col-sm-3">
+                        <label>Date OF Return Organised:</label>
+                        @Html.EditorFor(model => model.ReturnReplacementModel.DateOfReturnOrganised, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DateOfPurchase" } })
+                        @Html.ValidationMessageFor(model => model.ReturnReplacementModel.DateOfPurchase, null, new { @class = "text-danger" })
+                    </div>
                     <div class="col-sm-4">
                         <label>Return Type:</label>
                         @Html.DropDownListFor(model => model.ReturnReplacementModel.ReturnType, new List<SelectListItem>
@@ -235,7 +240,7 @@
                     <div class="col-sm-6">
                         <label>OrderType: Replacement To New OrderType ?</label>
                         @Html.CheckBoxFor(model => model.ReturnReplacementModel.ReplacementTONewOrderType, new { htmlAttributes = new { @class = "form-control" }, onchange = "ShowddlOrderType(this);" })
-                        @Html.DropDownListFor(model => model.OrderType, new List<SelectListItem>
+                        @Html.DropDownListFor(model => model.ReturnReplacementModel.OrderType, new List<SelectListItem>
                       {
                                   new SelectListItem{ Text="PhoneSim", Value = "PhoneSim" },
                                   new SelectListItem{ Text="PhoneOnly", Value = "PhoneOnly" },
