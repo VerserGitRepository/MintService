@@ -135,21 +135,24 @@
                         </div>
                     </div>
                     <div class="row" style="padding-top:0px">
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label>Date Expected return:</label>
                             @Html.EditorFor(model => model.ReturnReplacementModel.DateOfExpectedReturn, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DateOfExpectedReturn" } })
                             @Html.ValidationMessageFor(model => model.ReturnReplacementModel.DateOfExpectedReturn, null, new { @class = "text-danger" })
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label>Date OF Purchase:</label>
                             @Html.EditorFor(model => model.ReturnReplacementModel.DateOfPurchase, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DateOfPurchase" } })
                             @Html.ValidationMessageFor(model => model.ReturnReplacementModel.DateOfPurchase, null, new { @class = "text-danger" })
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label>Date OF Return Organised:</label>
                             @Html.EditorFor(model => model.ReturnReplacementModel.DateOfReturnOrganised, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DateOfPurchase" } })
                             @Html.ValidationMessageFor(model => model.ReturnReplacementModel.DateOfPurchase, null, new { @class = "text-danger" })
                         </div>
+                    
+                    </div>
+                    <div class="row" style="padding-top:10px">
                         <div class="col-sm-4">
                             <label>Return Type:</label>
                             @Html.DropDownListFor(model => model.ReturnReplacementModel.ReturnType, new List<SelectListItem>
@@ -162,9 +165,7 @@
                             new SelectListItem{Text="Shopify Warranty",Value="Shopify Warranty"}
                              }, "Return Type", new { @class = "form-control", style = "Height:40px" })
                         </div>
-                    </div>
-                    <div class="row" style="padding-top:10px">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label>Cooling off Period:</label>
                             @Html.DropDownListFor(model => model.ReturnReplacementModel.CoolingOffPeriod, new List<SelectListItem>
                             {
@@ -174,6 +175,13 @@
                         }, "Cooling off Period", new { @class = "form-control", style = "Height:40px" })
                             @Html.ValidationMessageFor(model => model.ReturnReplacementModel.CoolingOffPeriod, null, new { @class = "text-danger" })
                         </div>
+                        <div class="col-sm-4">
+                            <label>Number Of Days Returned Receive:</label>
+                            @Html.DropDownListFor(m => m.ReturnReplacementModel.NumberofdaysReturnedReceive, Enumerable.Range(1, 90).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ReturnReplacementModel.NumberofdaysReturnedReceive, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top:10px">
                         <div class="col-sm-6">
                             <label>Tracking To Customer:</label>
                             @Html.EditorFor(model => model.ReturnReplacementModel.TrackingNumberToCustomer, new
@@ -182,18 +190,12 @@
                        })
                             @Html.ValidationMessageFor(model => model.ReturnReplacementModel.TrackingNumberToCustomer, null, new { @class = "text-danger" })
                         </div>
-                    </div>
-                    <div class="row" style="padding-top:10px">
                         <div class="col-sm-6">
                             <label>Tracking From Customer To Verser:</label>
                             @Html.EditorFor(model => model.ReturnReplacementModel.TrackingNumberFromCustomerToVerser, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Postcode, null, new { @class = "text-danger" })
                         </div>
-                        <div class="col-sm-6">
-                            <label>Number Of Days Returned Receive:</label>
-                            @Html.DropDownListFor(m => m.ReturnReplacementModel.NumberofdaysReturnedReceive, Enumerable.Range(1, 90).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.ReturnReplacementModel.NumberofdaysReturnedReceive, null, new { @class = "text-danger" })
-                        </div>
+                     
                     </div>
                     <div class="row" style="padding-top:10px">
                         <div class="col-sm-6">
@@ -323,6 +325,8 @@
                 </div>
             }
         </div>
+
+
         <div id="CORDER" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
             <div class="form-horizontal">
                 @using (Html.BeginForm("CancelOrder", "ManualOrder", FormMethod.Post))
