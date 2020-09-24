@@ -199,7 +199,7 @@
                         </div>
 
                         <div class="col-sm-3">
-                            <label>Replacement Sent:</label>
+                            <label style="padding-bottom:10px;" >Replacement Sent:</label>
                             @Html.DropDownListFor(model => model.ReturnReplacementModel.IsReplaced, new List<SelectListItem>
                           {
                          new SelectListItem{Text="Yes",Value="Yes"},
@@ -213,7 +213,7 @@
                             @Html.CheckBoxFor(model => model.ReturnReplacementModel.IsReplacementRequired, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3" style="padding-top:0px;color:lightsalmon">
                                 <label>Replacement To New Address:</label>
                                 @Html.CheckBoxFor(model => model.ReturnReplacementModel.ReplacementTONewAddress, new { htmlAttributes = new { @class = "form-control" }, @onchange = "HideShowModal(this);" })
                                 @Html.ValidationMessageFor(model => model.ReturnReplacementModel.ReplacementTONewAddress, null, new { @class = "text-danger" })
