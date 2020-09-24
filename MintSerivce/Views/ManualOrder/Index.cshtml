@@ -182,7 +182,7 @@
                         </div>
                     </div>
                     <div class="row" style="padding-top:10px">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label>Tracking To Customer:</label>
                             @Html.EditorFor(model => model.ReturnReplacementModel.TrackingNumberToCustomer, new
                        {
@@ -190,15 +190,12 @@
                        })
                             @Html.ValidationMessageFor(model => model.ReturnReplacementModel.TrackingNumberToCustomer, null, new { @class = "text-danger" })
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label>Tracking From Customer To Verser:</label>
                             @Html.EditorFor(model => model.ReturnReplacementModel.TrackingNumberFromCustomerToVerser, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Postcode, null, new { @class = "text-danger" })
                         </div>
-                     
-                    </div>
-                    <div class="row" style="padding-top:10px">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label>Replacement Sent:</label>
                             @Html.DropDownListFor(model => model.ReturnReplacementModel.IsReplaced, new List<SelectListItem>
                           {
@@ -208,7 +205,10 @@
                           }, "Replacement Sent", new { @class = "form-control", style = "Height:40px" })
                             @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
                         </div>
-                        <div class="col-sm-6">
+                    </div>
+            
+                    <div class="row" style="padding-top:10px;color:lightsalmon">
+                        <div class="col-sm-4">
                             <label>SMS Reminder sent to customer:</label>
                             @Html.DropDownListFor(model => model.ReturnReplacementModel.SMSReminder, new List<SelectListItem>
                           {
@@ -217,14 +217,12 @@
                           new SelectListItem{Text="Multiple Contacts",Value="Multiple Contacts"}
                           }, "SMS Reminder", new { @class = "form-control", style = "Height:40px" })
                         </div>
-                    </div>
-                    <div class="row" style="padding-top:10px;color:lightsalmon">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label>Replacement Required:</label>
                             @Html.CheckBoxFor(model => model.ReturnReplacementModel.IsReplacementRequired, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label>Replacement To New Address:</label>
                             @Html.CheckBoxFor(model => model.ReturnReplacementModel.ReplacementTONewAddress, new { htmlAttributes = new { @class = "form-control" }, @onchange = "HideShowModal(this);" })
                             @Html.ValidationMessageFor(model => model.ReturnReplacementModel.ReplacementTONewAddress, null, new { @class = "text-danger" })
@@ -255,36 +253,36 @@
 
                     <div id="OrderNewAddressId">
                         <div class="row" style="padding-top:10px">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
+                                <label>Salutation:</label>
+                                @Html.EditorFor(model => model.ReturnReplacementModel.Salutation, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Salutation, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-4">
+
                                 <label>FirstName:</label>
                                 @Html.EditorFor(model => model.ReturnReplacementModel.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "text-danger" })
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label>Surname:</label>
                                 @Html.EditorFor(model => model.ReturnReplacementModel.Surname, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Surname, null, new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="row" style="padding-top:10px">
-                            <div class="col-sm-6">
-                                <label>Salutation:</label>
-                                @Html.EditorFor(model => model.ReturnReplacementModel.Salutation, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Salutation, null, new { @class = "text-danger" })
-                            </div>
-                            <div class="col-sm-6">
+
+                            <div class="col-sm-4">
                                 <label>AddressLine1:</label>
                                 @Html.EditorFor(model => model.ReturnReplacementModel.AddressLine1, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.AddressLine1, null, new { @class = "text-danger" })
                             </div>
-                        </div>
-                        <div class="row" style="padding-top:10px">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label>Suburb:</label>
                                 @Html.EditorFor(model => model.ReturnReplacementModel.Locality, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Locality, null, new { @class = "text-danger" })
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label>State:</label>
                                 @Html.DropDownListFor(model => model.ReturnReplacementModel.State, new List<SelectListItem>
                                  {
@@ -300,24 +298,27 @@
                                 @Html.ValidationMessageFor(model => model.State, null, new { @class = "text-danger" })
                             </div>
                         </div>
+                    
                         <div class="row" style="padding-top:10px">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label>Postcode:</label>
                                 @Html.EditorFor(model => model.ReturnReplacementModel.Postcode, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Postcode, null, new { @class = "text-danger" })
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label>ContactNumber:</label>
                                 @Html.EditorFor(model => model.ReturnReplacementModel.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
                             </div>
+                            <div class="col-sm-4">
+                                <label>CustomerServiceComments:</label>
+                                @Html.EditorFor(model => model.ReturnReplacementModel.CustomerServiceComments, new { htmlAttributes = new { @class = "form-control", placeholder = "CustomerService Comments Here .." } })
+                                @Html.ValidationMessageFor(model => model.ReturnReplacementModel.CustomerServiceComments, null, new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
                     <div class="row" style="padding-top:10px;">
-                        <div class="col-sm-6">
-                            @Html.EditorFor(model => model.ReturnReplacementModel.CustomerServiceComments, new { htmlAttributes = new { @class = "form-control", placeholder = "CustomerService Comments Here .." } })
-                            @Html.ValidationMessageFor(model => model.ReturnReplacementModel.CustomerServiceComments, null, new { @class = "text-danger" })
-                        </div>
+                     
                         <div class="col-sm-6" style="padding-top:10px">
                             <button type="submit" class="btn btn-success">SUBMIT RETURN</button>
                         </div>
