@@ -517,11 +517,11 @@
     function HideShowModal(control) {
         var firstConfirm = null;
         if (($(control)[0]).checked) {
-            $("#OrderNewAddressId").show();
+            $("#OrderNewAddressId").show(1000);
 
         }
         else {
-            $("#OrderNewAddressId").hide();
+            $("#OrderNewAddressId").hide(1000);
         }
     }
 
