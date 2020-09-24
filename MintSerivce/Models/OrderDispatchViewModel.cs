@@ -32,6 +32,22 @@ namespace MintSerivce.Models
         public string OrderDispatchno { get; set; }
         public string OrderShipmentStatus { get; set; }
         public string OrderShipmentURL { get; set; }
+        public string CustomerID { get; set; }
+        public DateTime? DateOfPurchase { get; set; }
+        public DateTime? DateOfReturnOrganised { get; set; }
+        public DateTime? DateOfExpectedReturn { get; set; } //Date of return organised +7 days     
+        public string ReturnType { get; set; }
+        public string CoolingOffPeriod { get; set; }
+        public string TrackingNumberToCustomer { get; set; }
+        public string TrackingNumberFromCustomerToVerser { get; set; }
+        public int? NumberofdaysReturnedReceive { get; set; } //-	Number of days taken to receive returned device  ( The date it was received by Verser minus the date of returned organise)
+        public string IsReplaced { get; set; }
+        public string SMSReminder { get; set; }
+        public string CustomerServiceComments { get; set; }
+        public bool IsReplacementRequired { get; set; }
+        public bool ReplacementTONewAddress { get; set; }
+        public bool ReplacementToNewSKU { get; set; }
+        public bool ReplacementTONewOrderType { get; set; }
         public Nullable<DateTime> OrderShippedDate { get; set; }
 
     }
