@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using MintSerivce.Models;
 using MintSerivce.Helper;
+using Newtonsoft.Json;
+
 namespace MintSerivce.Controllers
 {
     public class ManualOrderController : Controller
@@ -41,6 +43,9 @@ namespace MintSerivce.Controllers
                     return View(model);
                 }
             }
+
+        
+
             return RedirectToAction("Index", "Home");
             
         }
@@ -64,8 +69,10 @@ namespace MintSerivce.Controllers
         [HttpPost]
         public ActionResult ReturnedOrder(ManualOrderModel manualOrder)
         {
-           
-                if (manualOrder.ReturnReplacementModel != null)
+
+            string json = JsonConvert.SerializeObject(manualOrder.ReturnReplacementModel);
+
+            if (manualOrder.ReturnReplacementModel != null)
                 {
                  var returnmessage = Helper.Helper.CreateReturnOrder(manualOrder.ReturnReplacementModel);
                     if (returnmessage != null && returnmessage.ErrorMessage !=null && returnmessage.OrderStatus == "ERROR")
