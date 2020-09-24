@@ -1,8 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace MintSerivce
 {
@@ -10,7 +6,7 @@ namespace MintSerivce
     {
         public static void Configure()
         {
-            Mapper.Initialize(cfg => cfg.AddProfile<MintServiceAutoMapper>());            
+            Mapper.Initialize(cfg => cfg.AddProfile<MintServiceAutoMapper>());
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MintSerivce.Models
 {
@@ -12,7 +8,7 @@ namespace MintSerivce.Models
         [MinLength(5, ErrorMessage = "ConsignmentNumber Must Be Minimum 5 Digits Length")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Consignment Number is mandatory.")]
         [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "ConsignmentNumber Must Be Alpha Numeric - Special character Not Allowed")]
-        public string ConsignmentNumber { get; set; } 
+        public string ConsignmentNumber { get; set; }
 
         [RequiredIf("PhoneAndSim", true, "SIM Is Mandatory To Add Phone!")]
         [MaxLength(13, ErrorMessage = "SIM Can Be Maximum 13 Digits Length")]

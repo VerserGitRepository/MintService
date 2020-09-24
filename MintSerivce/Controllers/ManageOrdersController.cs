@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
 using MintSerivce.Helper;
 using MintSerivce.Models;
 using MintSerivce.ValidationHelper;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace MintSerivce.Controllers
 {
@@ -25,9 +22,9 @@ namespace MintSerivce.Controllers
                     ViewModel mymodel = new ViewModel();
                     List<ListItemModel> ordersList = Helper.Helper.OrdersList();
                     List<ListItemModel> skuList = Helper.Helper.SKUList();
-                    mymodel.AccessoriesStock =await AccessoriesStockService.AvailableAccessoriesStock();
+                    mymodel.AccessoriesStock = await AccessoriesStockService.AvailableAccessoriesStock();
                     mymodel.ListItemModel = new List<SelectListItem>();
-                    
+
                     foreach (ListItemModel item in skuList)
                     {
                         mymodel.ListItemModel.Add(new SelectListItem { Text = item.Value });
@@ -54,15 +51,15 @@ namespace MintSerivce.Controllers
         }
         public ActionResult UpdateSKUBuffer(string ListItemModel, string SKUBuffer)
         {
-            var _buffermodel = new UpdateSKUBufferModel();          
-         
+            var _buffermodel = new UpdateSKUBufferModel();
+
             if (!string.IsNullOrEmpty(ListItemModel) && !string.IsNullOrEmpty(SKUBuffer))
             {
                 _buffermodel.BufferCount = SKUBuffer;
                 _buffermodel.SKU = ListItemModel;
                 var _validate = new UpdateSKUBufferValidator();
                 var returnvalidation = _validate.Validate(_buffermodel);
-                if (returnvalidation.IsValid ==true)
+                if (returnvalidation.IsValid == true)
                 {
                     TempData["ValidationErrors"] = Helper.Helper.UpdateSKUBufferValue(ListItemModel, SKUBuffer);
                 }
@@ -92,20 +89,22 @@ namespace MintSerivce.Controllers
         [HttpPost]
         public ActionResult CreateSKU(string SKU, string Make, string Model, string Capacity, string Colour)
         {
-            SKUModel skus = new SKUModel() {
-            SKU=SKU,
-            Make=Make,
-            Model=Model,
-            Capacity=Capacity,
-            Colour=Colour};
-            var result= CreateNewSKU.AddNewSKU(skus);
+            SKUModel skus = new SKUModel()
+            {
+                SKU = SKU,
+                Make = Make,
+                Model = Model,
+                Capacity = Capacity,
+                Colour = Colour
+            };
+            var result = CreateNewSKU.AddNewSKU(skus);
             return View("Index", "ManageOrders");
         }
         [HttpPost]
         public ActionResult RemoveSKU(SKUModel skumodel)
         {
-            var result = RetireSKU.RetireExistingSKU(skumodel).Result;       
-                 
+            var result = RetireSKU.RetireExistingSKU(skumodel).Result;
+
             return View("Index", "ManageOrders");
         }
         [HttpPost]
@@ -115,14 +114,14 @@ namespace MintSerivce.Controllers
 
 
             var _UpdateOrderAddressData = new UpdateOrderAddressDto();
-    
-            _UpdateOrderAddressData.AddressLine1 = theModel.AddressLine1;            
+
+            _UpdateOrderAddressData.AddressLine1 = theModel.AddressLine1;
             _UpdateOrderAddressData.Locality = theModel.Locality;
-            _UpdateOrderAddressData.Postcode = theModel.Postcode;           
+            _UpdateOrderAddressData.Postcode = theModel.Postcode;
             _UpdateOrderAddressData.VerserOrderID = theModel.VerserOrderID;
             _UpdateOrderAddressData.State = theModel.State;
             ValidationResult result = _Validator.Validate(theModel);
-             if (!result.IsValid)
+            if (!result.IsValid)
             {
                 foreach (ValidationFailure failure in result.Errors)
                 {
@@ -151,10 +150,10 @@ namespace MintSerivce.Controllers
                 theModel.OrdersListItemModel.Add(new SelectListItem { Text = item.Value });
             }
 
-            return View("Index",theModel);
+            return View("Index", theModel);
         }
         [HttpPost]
-        public ActionResult ManageAccessories(int AccessoryId,int AddAccessoriesCount, int RemoveAccessoriesCount)
+        public ActionResult ManageAccessories(int AccessoryId, int AddAccessoriesCount, int RemoveAccessoriesCount)
         {
             var result = AccessoriesStockService.UpdateAccessoriesCount(AccessoryId, AddAccessoriesCount, RemoveAccessoriesCount).Result;
             return View("Index", "ManageOrders");

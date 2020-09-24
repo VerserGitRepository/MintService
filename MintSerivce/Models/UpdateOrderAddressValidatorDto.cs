@@ -14,10 +14,10 @@ namespace MintSerivce.Models
 
             RuleFor(c => c.AddressLine1).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty").NotNull().WithMessage("{PropertyName} is Null").Length(1, 42)
 
-                .WithMessage("{PropertyName} Length Should Be Between 1 to 40 Character");             
+                .WithMessage("{PropertyName} Length Should Be Between 1 to 40 Character");
 
             RuleFor(d => d.Locality).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty").Length(1, 40)
-               .WithMessage("{PropertyName} is Invalid").Must(BeAValidChar).WithMessage("{PropertyName} is Invalid Character")        
+               .WithMessage("{PropertyName} is Invalid").Must(BeAValidChar).WithMessage("{PropertyName} is Invalid Character")
              .WithMessage("{PropertyName} Length Should Be Between 1 to 40 Character");
 
             RuleFor(d => d.State).Cascade(CascadeMode.StopOnFirstFailure).NotEmpty().WithMessage("{PropertyName} is Empty").NotNull().WithMessage("{PropertyName} is Null").Length(2, 3)

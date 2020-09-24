@@ -1,7 +1,7 @@
-﻿using System;
+﻿using MintSerivce.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using MintSerivce.Models;
 using MintSerivce.Helper;
@@ -19,13 +19,13 @@ namespace MintSerivce.Controllers
                 if (username != null) //"VerserMintAdmin@verser.com.au")
                 {
                     ManualOrderModel model = new ManualOrderModel();
-                    List<ListItemModel> ordersList =  Helper.Helper.CancelOrdersList();
+                    List<ListItemModel> ordersList = Helper.Helper.CancelOrdersList();
                     List<ListItemModel> DispatchedOrdersList = Helper.Helper.DispatchedOrderNumbers();
 
                     model.OrdersListItemModel = new List<SelectListItem>();
                     model.DispatchedOrderListItems = new List<SelectListItem>();
-                    model.SKUList = new SelectList(Helper.Helper.SKUList(), "Value", "Value");             
-                    
+                    model.SKUList = new SelectList(Helper.Helper.SKUList(), "Value", "Value");
+
                     //model.ReturnReplacementModel.CoolingOffPeriodlist = new SelectList(Helper.DropDownHelper.CoolingoffPeriods());
                     //model.ReturnReplacementModel.ReturnTypes = new SelectList(Helper.DropDownHelper.ReturnTypes());
                     //model.ReturnReplacementModel.SMSReminder = new SelectList(Helper.DropDownHelper.SMSReminder());
@@ -47,14 +47,14 @@ namespace MintSerivce.Controllers
         
 
             return RedirectToAction("Index", "Home");
-            
+
         }
         [HttpPost]
         public ActionResult Index(ManualOrderModel manualOrder)
         {
             if (ModelState.IsValid)
             {
-              string returnmessage=Helper.Helper.CreateOrder(manualOrder);
+                string returnmessage = Helper.Helper.CreateOrder(manualOrder);
 
                 TempData["ManualOrder"] = returnmessage.ToString();
                 ModelState.Clear();
@@ -62,7 +62,7 @@ namespace MintSerivce.Controllers
             }
             //if (TempData["TabOrder"] == null)
             //{
-                TempData["TabOrder"] = "MORDER";
+            TempData["TabOrder"] = "MORDER";
             //}
             return RedirectToAction("index", "ManualOrder");
         }
@@ -104,7 +104,7 @@ namespace MintSerivce.Controllers
         {
             try
             {
-                CancelOrderModel model = new CancelOrderModel { ErrorMessage = string.Empty, OrderStatus =string.Empty, TIABOrderID = manualorder.TIABOrderID, VerserOrderID = manualorder.VerserOrderID };
+                CancelOrderModel model = new CancelOrderModel { ErrorMessage = string.Empty, OrderStatus = string.Empty, TIABOrderID = manualorder.TIABOrderID, VerserOrderID = manualorder.VerserOrderID };
                 var returnModel = Helper.Helper.CancelOrder(model);
                 if (returnModel != null && returnModel.First().ErrorMessage != null)
                 {
@@ -123,7 +123,7 @@ namespace MintSerivce.Controllers
             {
                 TempData["TabOrder"] = "CORDER";
                 return RedirectToAction("index", "ManualOrder");
-            } 
+            }
         }
         [HttpPost]
         public ActionResult OrderPutOnHold(ManualOrderModel manualorder)
@@ -135,7 +135,7 @@ namespace MintSerivce.Controllers
                 if (returnModel != null && returnModel.First().ErrorMessage != null)
                 {
                     TempData["ManualOrder"] = $"{manualorder.VerserOrderID} Order Status Successfully Updated To On Hold";
-                    TempData["TabOrder"] = "OHORDER"; 
+                    TempData["TabOrder"] = "OHORDER";
                     return RedirectToAction("Index");
                 }
                 else
@@ -160,7 +160,7 @@ namespace MintSerivce.Controllers
                 var returnModel = Helper.Helper.UpdateOnOrder(model);
                 if (returnModel != null && returnModel.First().ErrorMessage != null)
                 {
-                    TempData["ManualOrder"]   = $"{manualorder.VerserOrderID} Order Status Successfully Updated To On Order";
+                    TempData["ManualOrder"] = $"{manualorder.VerserOrderID} Order Status Successfully Updated To On Order";
                     TempData["TabOrder"] = "ONORDER";
                     return RedirectToAction("Index");
                 }
@@ -182,7 +182,7 @@ namespace MintSerivce.Controllers
         {
             try
             {
-                var SimActivateReuestModel = new SimActivationModel { IsActivation = true,  VerserOrderID = manualorder.VerserOrderID };
+                var SimActivateReuestModel = new SimActivationModel { IsActivation = true, VerserOrderID = manualorder.VerserOrderID };
                 var returnModel = Helper.Helper.SimReActivateHelper(SimActivateReuestModel);
                 if (returnModel != null && returnModel.IsActivated == true)
                 {
@@ -210,7 +210,7 @@ namespace MintSerivce.Controllers
             {
                 var SimActivateReuestModel = new SimActivationModel { IsActivation = true, VerserOrderID = manualorder.VerserOrderID };
                 var returnModel = Helper.Helper.ReturnOnlyOrderHelper(SimActivateReuestModel);
-                if (returnModel != null )
+                if (returnModel != null)
                 {
                     TempData["ManualOrder"] = $"{manualorder.VerserOrderID} {returnModel}";
                     TempData["TabOrder"] = "ROONLY";
@@ -234,7 +234,7 @@ namespace MintSerivce.Controllers
         {
             try
             {
-                return PartialView("ReturnModalView",new ManualOrderModel());
+                return PartialView("ReturnModalView", new ManualOrderModel());
             }
             catch (Exception)
             {
@@ -242,5 +242,5 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("index", "ManualOrder");
             }
         }
-    }   
+    }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MintSerivce.Models
 {
@@ -15,7 +11,7 @@ namespace MintSerivce.Models
         [MaxLength(10, ErrorMessage = "SSN Can Be Maximum 10 Digits Length")]
         [MinLength(7, ErrorMessage = "SSN Must Be Minimum 7 Digits Length")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "SSN Must Be Numeric")]
-        public string SSN { get; set; }    
+        public string SSN { get; set; }
         public string ResultMessage { get; set; }
         public string ShipLabelURL { get; set; }
     }

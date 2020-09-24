@@ -1,8 +1,5 @@
-﻿using System;
+﻿using MintSerivce.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using MintSerivce.Models;
 
 namespace MintSerivce.Helper
 {
@@ -33,7 +30,7 @@ namespace MintSerivce.Helper
                 new ListItemModel{Id=3,Value="Warranty"},
                 new ListItemModel{Id=4,Value="Shopify Return"},
                 new ListItemModel{Id=5,Value="Shopify Swap"},
-                new ListItemModel{Id=6,Value="Shopify Warranty"} 
+                new ListItemModel{Id=6,Value="Shopify Warranty"}
             };
             return _ReturnTypes;
         }
@@ -43,7 +40,7 @@ namespace MintSerivce.Helper
             var _CoolingoffPeriods = new List<ListItemModel>
             {
                 new ListItemModel{Id=1,Value="Yes"},
-                new ListItemModel{Id=2,Value="No"}               
+                new ListItemModel{Id=2,Value="No"}
             };
             return _CoolingoffPeriods;
         }

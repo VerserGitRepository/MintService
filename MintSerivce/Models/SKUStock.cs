@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace MintSerivce.Models
 {
@@ -18,6 +15,6 @@ namespace MintSerivce.Models
         public string Colour { get; set; }
         public int? Count { get; set; }
         public string SKUBuffer { get; set; }
-        public List<FilesModel>  Files { get; set; }
+        public List<FilesModel> Files { get; set; }
     }
 }
