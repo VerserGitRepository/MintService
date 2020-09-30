@@ -11,15 +11,16 @@
         <li><a data-toggle="tab" href="#ONORDER">UPDATE  ON ORDER</a></li>
         <li><a data-toggle="tab" href="#CORDER">CANCEL ORDER</a></li>
         <li><a data-toggle="tab" href="#SIMACTIVATE">SIM REACTIVATE</a></li>
-        <li><a data-toggle="tab" href="#ROONLY">RETURN ORDER</a></li>
+        <li><a data-toggle="tab" href="#SHOPIFYORDS">SHOPIFY ORDER</a></li>
     </ul>
-    <div class="tab-content" style="border-width:thin;border-style:solid;border-color:gray;width:100%;padding-top:5px;">
-        <div class="form-group" style="padding-left:20px;color:orange;width:auto;align-items:center;text-align:center;">
-            @*@if (Model.ResultMessage != null)
+    <div class="tab-content" style="border-width:thin;border-style:solid;border-color:gray;width:110%;padding-top:5px;">
+       
+         @*<div class="form-group" style="padding-left:20px;color:orange;width:auto;align-items:center;text-align:center;">
+            @if (Model.ResultMessage != null)
                 {
                     <p><h5> @Model.ResultMessage</h5></p>
-                }*@
-        </div>
+                }
+        </div>*@
         <input class="hidden" type="text" id="hdnTabOrder" value="@TempData["TabOrder"]" />
         <div id="MORDER" class="tab-pane fade in active" role="tabpanel" style="text-align:left;padding-left:20px;">
 
@@ -275,24 +276,53 @@
             </div>
         </div>
 
-        <div id="ROONLY" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
+        <div id="SHOPIFYORDS" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
             <div class="form-horizontal">
-                @using (Html.BeginForm("OrderReturn", "ManualOrder", FormMethod.Post))
-                {
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
+                <table class="table table-bordered" table-responsive table-hover" style="font-size:smaller" id="SHOPIFYORDERSTable">
+                    <thead style="background-color:#959ca1;color:white">
+                        <tr>
+                            <th>Order</th>
+                            <th>Job</th>
+                            <th>TIABOrder</th>
+                            <th>SKU</th>
+                            <th>Customer</th>
+                            <th>Address</th>
+                            <th>Suburb</th>
+                            <th>State</th>
+                            <th>Postcode</th>
+                            <th>Status</th>
+                            <th>OrderType</th>
+                            <th>Date</th>
+                            <th>Source</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                        @Html.DropDownListFor(model => Model.VerserOrderID, Model.DispatchedOrderListItems, "Select Verser Order", new { @class = "form-control", @id = "ddlReturnOrderID", @multiple = "multiple" })<br /><br />
-                        <div class="col-md-10">
-                        </div>
-                    </div>
+                        @foreach (var item in Model.OrdersList)
+                        {
+                            <tr>
 
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="UPDATE" class="btn btn-default" />
-                        </div>
-                    </div>
-                }
+                                <td>@Html.DisplayFor(modelItem => item.VerserOrderID)</td>
+                                <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
+                                <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
+                                <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>
+                                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Locality)</td>
+                                <td>@Html.DisplayFor(modelItem => item.State)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Postcode)</td>
+                                <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
+                                <td>@Html.DisplayFor(modelItem => item.OrderType)</td>
+                                <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                                <td>@Html.DisplayFor(modelItem => item.OrderSource)</td>
+                                <td>
+                                    <input type="button" class="btn btn-success btn-sm"  value="APPROVE" onclick="ApproveOnOrder(@item.VerserOrderID);">                                   
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -316,7 +346,11 @@
 }
 <script>
 
+    
     $(document).ready(function () {
+        $('#SHOPIFYORDERSTable').DataTable();
+        $('.dataTables_filter').addClass('pull-right');
+
         if ($("#hdnTabOrder").val() == "MORDER")
             $('a[href="#MORDER"]').click();
         else if ($("#hdnTabOrder").val() == "RORDER")
@@ -406,4 +440,30 @@
         });
 
     }
+
+    function ApproveOnOrder(VerserOrderID) {
+
+        alert("APPROVED",VerserOrderID);
+
+        //$.ajax({
+        //    type: "GET",
+        //    url: "./ShowModal",
+        //    success: function (data) {
+        //        $.confirm({
+        //            boxWidth: '800px',
+        //            useBootstrap: false,
+        //            title: '',
+        //            content: data,
+        //            closeIcon: true,
+
+        //            buttons: {
+        //                yes: { isHidden: true }
+        //            },
+        //        });
+
+        //    }
+        //});
+
+    }
+
 </script>

@@ -24,6 +24,7 @@ namespace MintSerivce.Models
         public string OrderType { get; set; }
         public Nullable<DateTime> OrderDate { get; set; }
         public string OrderStatus { get; set; }
+        public string OrderSource { get; set; }
     }
 }
 

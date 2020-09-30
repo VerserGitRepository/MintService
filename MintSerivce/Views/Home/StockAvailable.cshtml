@@ -30,6 +30,8 @@
                         <th>Capacity</th>
                         <th>Available</th>
                         <th>Buffer</th>
+                        <th>On Hold</th>
+                        <th>On Order</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +46,8 @@
                             <td>@Html.DisplayFor(modelItem => item.Capacity)</td>
                             <td>@Html.DisplayFor(modelItem => item.Count)</td>
                             <td>@Html.DisplayFor(modelItem => item.SKUBuffer)</td>
+                            <td>@Html.DisplayFor(modelItem => item.OnHold)</td>
+                            <td>@Html.DisplayFor(modelItem => item.OnOrder)</td>
                         </tr>
                     }
                 </tbody>

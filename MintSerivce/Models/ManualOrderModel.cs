@@ -9,9 +9,12 @@ namespace MintSerivce.Models
 {
     public class ManualOrderModel
     {
+        public ManualOrderModel()
+        {
+            OrdersList = new List<OrderViewModel>(); 
+        }
       //  public int ID { get; set; }
         public string VerserOrderID { get; set; }
-
         [Required(ErrorMessage = "TIAB Order Is Mandatory")]
         public string TIABOrderID { get; set; }
         [Required(ErrorMessage = "FirstName Is Mandatory")]
@@ -41,6 +44,7 @@ namespace MintSerivce.Models
         [Required(ErrorMessage = "OrderType Is Mandatory")]
         public string OrderType { get; set; }
         public bool IsReplacement { get; set; }
+
         //public Nullable<DateTime> OrderDate { get; set; }
         //public string OrderStatus { get; set; }
         //public string Ordershipment_Id { get; set; }
@@ -51,8 +55,8 @@ namespace MintSerivce.Models
         //public string JMS_JobNo { get; set; }
         //public int? JMS_JOBID { get; set; }
         public List<SelectListItem> OrdersListItemModel { get; set; }
-
         public List<SelectListItem> DispatchedOrderListItems { get; set; }
+        public List<OrderViewModel> OrdersList { get; set; }
 
     }
 }

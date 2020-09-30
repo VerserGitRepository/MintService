@@ -18,6 +18,8 @@ namespace MintSerivce.Models
         public string Colour { get; set; }
         public int? Count { get; set; }
         public string SKUBuffer { get; set; }
+        public string OnHold { get; set; }
+        public string OnOrder { get; set; }
         public List<FilesModel>  Files { get; set; }
     }
 }

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MintSerivce.Models;
-using MintSerivce.Helper;
+using MintSerivce.ServiceAgents;
+
 namespace MintSerivce.Controllers
 {
     public class ManualOrderController : Controller
@@ -19,6 +20,8 @@ namespace MintSerivce.Controllers
                     ManualOrderModel model = new ManualOrderModel();
                     List<ListItemModel> ordersList =  Helper.Helper.CancelOrdersList();
                     List<ListItemModel> DispatchedOrdersList = Helper.Helper.DispatchedOrderNumbers();
+
+                    model.OrdersList = OrderService.ShopifyOnHoldOrders().ToList();
 
                     model.OrdersListItemModel = new List<SelectListItem>();
                     model.DispatchedOrderListItems = new List<SelectListItem>(); 
@@ -228,5 +231,7 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("index", "ManualOrder");
             }
         }
+
+       
     }   
 }
