@@ -18,13 +18,12 @@
     </div>
 </div>
 
-     @*<div class="container" style="margin-left:2px;padding-top:30px">*@
+
 <div class="row" style="margin-left:-280px;">
-    @*class="pull-left"*@
 
-    <div class="col-md-12" @*style="width:100%;margin-left:-140px;"*@>
 
-        <table class="table table-bordered" table-responsive table-hover" id="mainTable" style="font-size:9px">
+    <div class="col-md-12">
+        <table class="table table-bordered" table-responsive table-hover" id="mainTable" style="font-size:10px">
             <thead style="background-color:#959ca1;color:white">
                 <tr>
                     <th>ORDER</th>
@@ -41,8 +40,7 @@
                     <th>STATUS</th>
                     <th>DISPATCH</th>
                     <th>CONSIGNMENT</th>
-                    <th>SHIPPED</th>
-                    <th>CUSTOMER</th>
+                    <th>SHIPPED</th>                   
                     <th>DateOfPurchase</th>
                     <th>DateOfReturnOrganised</th>
                     <th>DateOfExpectedReturn</th>
@@ -53,11 +51,7 @@
                     <th>NumberofdaysReturnedReceive</th>
                     <th>IsReplaced</th>
                     <th>SMSReminder</th>
-                    <th>CustomerServiceComments</th>
-                    <th>IsReplacementRequired</th>
-                    <th>ReplacementTONewAddress</th>
-                    <th>ReplacementToNewSKU</th>
-                    <th>ReplacementTONewOrderType</th>
+                    <th>CustomerServiceComments</th>                 
 
                 </tr>
             </thead>
@@ -83,8 +77,7 @@
                     <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
                     <td>@Html.DisplayFor(modelItem => item.OrderDispatchno)</td>
                     <td>@Html.DisplayFor(modelItem => item.Ordershipment_Consignment_Id)</td>
-                    <td>@item.OrderShippedDate.Value.ToShortDateString()</td>
-                    <td>@Html.DisplayFor(modelItem => item.CustomerID)</td>
+                    <td>@item.OrderShippedDate.Value.ToShortDateString()</td>                 
                     <td>@Html.DisplayFor(modelItem => item.DateOfPurchase)</td>
                     <td>@Html.DisplayFor(modelItem => item.DateOfReturnOrganised)</td>
                     <td>@Html.DisplayFor(modelItem => item.DateOfExpectedReturn)</td>
@@ -92,13 +85,10 @@
                     <td>@Html.DisplayFor(modelItem => item.CoolingOffPeriod)</td>
                     <td>@Html.DisplayFor(modelItem => item.TrackingNumberToCustomer)</td>
                     <td>@Html.DisplayFor(modelItem => item.TrackingNumberFromCustomerToVerser)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NumberofdaysReturnedReceive)</td>
                     <td>@Html.DisplayFor(modelItem => item.IsReplaced)</td>
                     <td>@Html.DisplayFor(modelItem => item.SMSReminder)</td>
                     <td>@Html.DisplayFor(modelItem => item.CustomerServiceComments)</td>
-                    <td>@Html.DisplayFor(modelItem => item.IsReplacementRequired)</td>
-                    <td>@Html.DisplayFor(modelItem => item.ReplacementTONewAddress)</td>
-                    <td>@Html.DisplayFor(modelItem => item.ReplacementToNewSKU)</td>
-                    <td>@Html.DisplayFor(modelItem => item.ReplacementTONewOrderType)</td>
                 </tr>
                 }
             </tbody>

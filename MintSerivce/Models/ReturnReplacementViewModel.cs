@@ -29,7 +29,7 @@ namespace MintSerivce.Models
         public string CoolingOffPeriod { get; set; }
         public string TrackingNumberToCustomer { get; set; }
         public string TrackingNumberFromCustomerToVerser { get; set; }
-        public int? NumberofdaysReturnedReceive { get; set; } //-	Number of days taken to receive returned device  ( The date it was received by Verser minus the date of returned organise)
+        public string NumberofdaysReturnedReceive { get; set; } //-	Number of days taken to receive returned device  ( The date it was received by Verser minus the date of returned organise)
         public string IsReplaced { get; set; }
         [Required(ErrorMessage = "SMSReminder Is Mandatory")]
         public string SMSReminder { get; set; }
@@ -49,7 +49,7 @@ namespace MintSerivce.Models
         public string Locality { get; set; }
         public string Postcode { get; set; }
         public string SKU { get; set; }
-        public string ContactNumber { get; set; }
+        public int? ContactNumber { get; set; }
         public string OrderType { get; set; }
     }
 }
