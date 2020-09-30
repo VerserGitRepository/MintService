@@ -51,6 +51,8 @@ namespace MintSerivce.Models
         //public Nullable<DateTime> OrderShippedDate { get; set; }
         //public string JMS_JobNo { get; set; }
         //public int? JMS_JOBID { get; set; }
+        public ReturnReplacementViewModel ReturnReplacementModel { get; set; }
+        public SelectList SKUList { get; set; }
         public List<SelectListItem> OrdersListItemModel { get; set; }
         public List<SelectListItem> DispatchedOrderListItems { get; set; }
         public List<OrderViewModel> OrdersList { get; set; }
