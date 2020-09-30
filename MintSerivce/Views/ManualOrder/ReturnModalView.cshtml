@@ -1,35 +1,25 @@
 ﻿
 @model MintSerivce.Models.ManualOrderModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Replace To New Addess";
 }
-<div id="RORDERModal">
-  
+<div id="RORDERModal">  
 
     @using (Html.BeginForm("ReturnedOrder", "ManualOrder", FormMethod.Post))
     {
 
-        <div class="container" style="padding-top:20px;color:gray">
-            <div>
-                @if (TempData["ManualOrder"] != null)
-                {
-                    <h6 style="color:green;text-align:center">@TempData["ManualOrder"].ToString()</h6>
-                }
-                @if (TempData["OrderError"] != null)
-                {
-                    <h6 style="color:red;text-align:center">@TempData["OrderError"].ToString()</h6>
-                }
-            </div>
-            <div class="col-sm-6" style="padding-top:20px;">
-                <label>TIABOrderID:</label>
-                @Html.EditorFor(model => model.TIABOrderID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
-                @Html.ValidationMessageFor(model => model.TIABOrderID, null, new { @class = "text-danger" })
-            </div>
-            <div class="col-sm-6" style="padding-top:20px;">
-                <label>VerserOrderID:</label>
-                @Html.EditorFor(model => model.VerserOrderID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
-                @Html.ValidationMessageFor(model => model.VerserOrderID, null, new { @class = "text-danger" })
-            </div>
+    <div class="container" style="padding-top:10px;color:gray">
+        <div>
+            @if (TempData["ManualOrder"] != null)
+            {
+                <h6 style="color:green;text-align:center">@TempData["ManualOrder"].ToString()</h6>
+            }
+            @if (TempData["OrderError"] != null)
+            {
+                <h6 style="color:red;text-align:center">@TempData["OrderError"].ToString()</h6>
+            }
+        </div>
+        <div class="row" style="padding-top:10px">
             <div class="col-sm-6">
                 <label>FirstName:</label>
                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
@@ -40,6 +30,8 @@
                 @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Surname, null, new { @class = "text-danger" })
             </div>
+        </div>
+        <div class="row" style="padding-top:10px">
             <div class="col-sm-6">
                 <label>Salutation:</label>
                 @Html.EditorFor(model => model.Salutation, new { htmlAttributes = new { @class = "form-control" } })
@@ -50,6 +42,8 @@
                 @Html.EditorFor(model => model.AddressLine1, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AddressLine1, null, new { @class = "text-danger" })
             </div>
+        </div>
+        <div class="row" style="padding-top:10px">
             <div class="col-sm-6">
                 <label>Suburb:</label>
                 @Html.EditorFor(model => model.Locality, new { htmlAttributes = new { @class = "form-control" } })
@@ -57,38 +51,38 @@
             </div>
             <div class="col-sm-6">
                 <label>State:</label>
-                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.State, new List<SelectListItem>
+                 {
+                             new SelectListItem{ Text="NSW", Value = "NSW" },
+                             new SelectListItem{ Text="QLD", Value = "QLD" },
+                             new SelectListItem{ Text="SA", Value = "SA" },
+                             new SelectListItem{ Text="TAS", Value = "TAS" },
+                             new SelectListItem{ Text="VIC", Value = "VIC" },
+                             new SelectListItem{ Text="WA", Value = "WA" },
+                             new SelectListItem{ Text="ACT", Value = "ACT" },
+                             new SelectListItem{ Text="NT", Value = "NT" }
+                 }, "States", new { @class = "form-control", style = "Height:40px" })
                 @Html.ValidationMessageFor(model => model.State, null, new { @class = "text-danger" })
             </div>
+        </div>
+        <div class="row" style="padding-top:10px">
             <div class="col-sm-6">
                 <label>Postcode:</label>
                 @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Postcode, null, new { @class = "text-danger" })
             </div>
             <div class="col-sm-6">
-                <label>SKU:</label>
-                @Html.EditorFor(model => model.SKU, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SKU, null, new { @class = "text-danger" })
-            </div>
-            <div class="col-sm-6">
                 <label>ContactNumber:</label>
                 @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
             </div>
-            <div class="col-sm-6">
-                <label>OrderType:</label>
-                @Html.EditorFor(model => model.OrderType, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
-            </div>
-            @*<div class="col-sm-6">
-                    <label>Replacement ?&nbsp;&nbsp;</label>
-                    @Html.CheckBoxFor(model => model.IsReplacement, new { style = "transform: scale(2.0);-webkit-transform: scale(2.0);" } )
-
-                </div>*@
-            <div class="col-sm-6">
-                <button type="submit" class="btn btn-primary">Complete Return Order</button>
-            </div>
-            <br />
         </div>
-    }
-</div>
+        <div class="row" style="padding-top:10px">
+            <div class="col-sm-6" style="padding-top:20px;">
+                <button type="submit" class="btn btn-success">ADD ADDRESS</button>
+            </div>
+            </div>
+
+        </div>
+        }
+    </div>

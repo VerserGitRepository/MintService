@@ -1,6 +1,5 @@
 ﻿using MintSerivce.Models;
 using Newtonsoft.Json;
-using NLog.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +7,6 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Web;
-using System.Configuration;
 namespace MintSerivce.Helper
 {
     public class Helper
@@ -324,8 +321,9 @@ namespace MintSerivce.Helper
                         {
                             response = resp.Result.Content.ReadAsStringAsync().Result;
                             ordermodel = JsonConvert.DeserializeObject<List<OrderViewModel>>(response);
-                            if(ordermodel.First().VerserOrderID != null) { 
-                            response = ordermodel.First().VerserOrderID + " Order is been created and ready to Process. Go To Orders for Processing";
+                            if (ordermodel.First().VerserOrderID != null)
+                            {
+                                response = ordermodel.First().VerserOrderID + " Order is been created and ready to Process. Go To Orders for Processing";
                             }
                             else
                             {
@@ -341,12 +339,11 @@ namespace MintSerivce.Helper
             }
             return response;
         }
-
-        public static OrderReplacementReturnDto CreateReturnOrder(ManualOrderModel NewManualOrder)
+        public static OrderReplacementReturnDto CreateReturnOrder(ReturnReplacementViewModel ReturnReplacementModel)
         {
             var ordermodel = new List<OrderReplacementReturnDto>();
-             var _NewManualOrder = new List<ManualOrderModel>();
-            _NewManualOrder.Add(NewManualOrder);
+            var _NewManualOrder = new List<ReturnReplacementViewModel>();
+            _NewManualOrder.Add(ReturnReplacementModel);
             var response = string.Empty;
 
             string CreateOrderURi = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["CreateReturnOrder"];
@@ -368,7 +365,7 @@ namespace MintSerivce.Helper
                         {
                             response = resp.Result.Content.ReadAsStringAsync().Result;
                             ordermodel = JsonConvert.DeserializeObject<List<OrderReplacementReturnDto>>(response);
-                            
+
                         }
                     }
                 }
@@ -379,11 +376,10 @@ namespace MintSerivce.Helper
             }
             return ordermodel.FirstOrDefault();
         }
-
         public static string UpdateSKUBufferValue(string SKU, string SKUBuffer)
-        {           
+        {
             string response = string.Empty;
-            string OnOrderlist = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["ListItems"]+SKU+"/"+SKUBuffer+"/UpdateSKUBuffer";
+            string OnOrderlist = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["ListItems"] + SKU + "/" + SKUBuffer + "/UpdateSKUBuffer";
             string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
             try
             {
@@ -415,7 +411,7 @@ namespace MintSerivce.Helper
         }
         public static List<ListItemModel> SKUList()
         {
-            var response =  new List<ListItemModel>();
+            var response = new List<ListItemModel>();
             string OnOrderlist = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["SKUsList"];
             string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
             try
@@ -434,13 +430,13 @@ namespace MintSerivce.Helper
                         }
                         else
                         {
-                           // response = resp.Result.Content.ReadAsStringAsync().Result;
+                            // response = resp.Result.Content.ReadAsStringAsync().Result;
 
                             response = JsonConvert.DeserializeObject<List<ListItemModel>>(resp.Result.Content.ReadAsStringAsync().Result);
                         }
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -490,7 +486,7 @@ namespace MintSerivce.Helper
         public static List<ListItemModel> OrdersList()
         {
             var response = new List<ListItemModel>();
-            
+
             string OnOrderlist = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["Orderslist"];
             string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
             try
@@ -516,12 +512,10 @@ namespace MintSerivce.Helper
             }
             catch (Exception ex)
             {
-                
+
             }
             return response;
         }
-
-        
 
         public static List<ListItemModel> CancelOrdersList()
         {
@@ -624,7 +618,7 @@ namespace MintSerivce.Helper
             }
             return theList;
         }
-        
+
         public static List<CancelOrderModel> OrderOnHold(CancelOrderModel order)
         {
             var response = string.Empty;
@@ -700,7 +694,7 @@ namespace MintSerivce.Helper
         {
             var response = string.Empty;
             var returnresponse = new SimActivateResponseDto();
-            
+
             string simactivationURi = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["SimReActivate"];
             string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
             try
@@ -732,7 +726,7 @@ namespace MintSerivce.Helper
         }
         public static string ReturnOnlyOrderHelper(SimActivationModel order)
         {
-            var response = string.Empty;         
+            var response = string.Empty;
             string simactivationURi = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + System.Configuration.ConfigurationManager.AppSettings["OrderReturn"];
             string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
             try
@@ -787,7 +781,7 @@ namespace MintSerivce.Helper
                         else
                         {
                             response = resp.Result.Content.ReadAsStringAsync().Result;
-                            ordermodel = JsonConvert.DeserializeObject <OrderDispatchViewModel>(response);
+                            ordermodel = JsonConvert.DeserializeObject<OrderDispatchViewModel>(response);
                         }
                     }
                 }

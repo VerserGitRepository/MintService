@@ -1,11 +1,11 @@
-﻿using System;
+﻿using MintSerivce.Helper;
+using MintSerivce.Models;
+using System;
+using System.Configuration;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using MintSerivce.Models;
-using System.Configuration;
-using MintSerivce.Helper;
-using System.Linq;
 
 namespace MintSerivce.Controllers
 {
@@ -19,12 +19,12 @@ namespace MintSerivce.Controllers
 
         public ActionResult Login()
         {
-            
+
             Session.Clear();
             Session.Abandon();
-            if(Request.Cookies["ASP.NET_SessionId"] != null)
+            if (Request.Cookies["ASP.NET_SessionId"] != null)
             {
-                Response.Cookies["ASP.NET_SessionId"].Value = string.Empty ;
+                Response.Cookies["ASP.NET_SessionId"].Value = string.Empty;
                 Response.Cookies["ASP.NET_SessionId"].Expires = DateTime.Now.AddMonths(-20);
             }
             if (Request.Cookies["AuthToken"] != null)
@@ -66,8 +66,8 @@ namespace MintSerivce.Controllers
                 {
                     login.IsAccountLocked = true;
                     login.AccessFailedCount = 1;
-                   var lockReturn =  LockAccount(login).Result;
-                    TempData["ErrorMessage"]  = lockReturn.ErrorMessage;                    
+                    var lockReturn = LockAccount(login).Result;
+                    TempData["ErrorMessage"] = lockReturn.ErrorMessage;
                     return RedirectToAction("Login", "Login");
                 }
                 var LoginResult = Login(login).Result;
@@ -76,19 +76,19 @@ namespace MintSerivce.Controllers
                     Session["User"] = LoginResult.UserName;
                     return RedirectToAction("Index", "Home");
                 }
-                TempData["ErrorMessage"]= LoginResult.ErrorMessage;               
+                TempData["ErrorMessage"] = LoginResult.ErrorMessage;
             }
             return RedirectToAction("Login", "Login");
         }
         public ActionResult Logout()
-        { 
+        {
             Session.Clear();
             Session.RemoveAll();
             Session.Abandon();
 
-            if(Request.Cookies["ASP.NET_SessionId"] != null)
+            if (Request.Cookies["ASP.NET_SessionId"] != null)
             {
-                Response.Cookies["ASP.NET_SessionId"].Value = string.Empty ;
+                Response.Cookies["ASP.NET_SessionId"].Value = string.Empty;
                 Response.Cookies["ASP.NET_SessionId"].Expires = DateTime.Now.AddMonths(-20);
             }
             if (Request.Cookies["AuthToken"] != null)
@@ -99,7 +99,7 @@ namespace MintSerivce.Controllers
             Session["User"] = null;
             Session["ErrorMessage"] = null;
             return RedirectToAction("Login", "Login");
-        }        
+        }
         public async static Task<UserModel> Login(UserModel login)
         {
             UserModel returnmessage = new UserModel();

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
@@ -40,7 +37,7 @@ namespace MintSerivce.Models
         [MaxLength(10, ErrorMessage = "ContactNumber Can Be Maximum 10 Digits Length")]
         [MinLength(8, ErrorMessage = "ContactNumber Must Be Minimum 8 Digits Length")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "ContactNumber Must Be Numeric")]
-        public string ContactNumber { get; set; }      
+        public string ContactNumber { get; set; }
         [Required(ErrorMessage = "OrderType Is Mandatory")]
         public string OrderType { get; set; }
         public bool IsReplacement { get; set; }
@@ -57,6 +54,5 @@ namespace MintSerivce.Models
         public List<SelectListItem> OrdersListItemModel { get; set; }
         public List<SelectListItem> DispatchedOrderListItems { get; set; }
         public List<OrderViewModel> OrdersList { get; set; }
-
     }
 }

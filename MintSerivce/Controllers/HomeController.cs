@@ -1,23 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿using MintSerivce.Models;
+//using BarcodeLib;
+using MintSerivce.ServiceAgents;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
-using MintSerivce.Models;
-using System.Drawing.Printing;
-using System.Drawing;
-using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web;
-using DYMO.Label;
-using BarcodeLib;
-using System.Threading;
-using MintSerivce.ServiceAgents;
 
 namespace MintSerivce.Controllers
 {
@@ -168,11 +164,11 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage = "Consignment Number Is Required!", OrderType = "SimOnly" });
             }
             selectedOrder.UserName = Session["User"].ToString();
-          
+
             var result = ProcessSimOrderService(selectedOrder).Result;
-          
+
             if (result != null)
-            {                
+            {
                 selectedOrder.ResultMessage = result.ResultMessage;
                 if (result.IsValidateState)
                 {
@@ -342,7 +338,7 @@ namespace MintSerivce.Controllers
                 {
                     var result = await response.Content.ReadAsStringAsync();
                     returnmessage = JsonConvert.DeserializeObject<ReturnValidationMessageDTO>(result);
-                    
+
                 }
             }
             return returnmessage;
@@ -422,13 +418,13 @@ namespace MintSerivce.Controllers
         public ActionResult PrintOrderLabel(string VerserOrderID)
         {
             string SIMLOrderLabelURL = ConfigurationManager.AppSettings["SIMLOrderLabelURL"];
-            var PrintData= PDFileBuilderService.CustomerAddressLabelRequest(VerserOrderID).Result;
+            var PrintData = PDFileBuilderService.CustomerAddressLabelRequest(VerserOrderID).Result;
             if (PrintData != null && PrintData.IsSuccess)
             {
                 TempData["LabelURL"] = SIMLOrderLabelURL + VerserOrderID + ".pdf";
             }
             return Json(PrintData.FileContent, JsonRequestBehavior.AllowGet);
-           
+
         }
         [HttpPost]
         public ActionResult ExportDispatchToExcel()
@@ -556,7 +552,7 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("Login", "Login");
             }
 
-            var files= GetDirectoryFiles(Filepath);
+            var files = GetDirectoryFiles(Filepath);
             return PartialView(files);
         }
         public List<FilesModel> GetDirectoryFiles(string dir)
@@ -586,8 +582,8 @@ namespace MintSerivce.Controllers
         }
         public FileResult DownloadFile(string path, string fileName)
         {
-          
-            var filepath = System.IO.Path.Combine(path, fileName);        
+
+            var filepath = System.IO.Path.Combine(path, fileName);
 
             return File(filepath, MimeMapping.GetMimeMapping(filepath), fileName);
         }

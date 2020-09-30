@@ -214,6 +214,7 @@
     </Compile>
     <Compile Include="Helper\AccessoriesStockService.cs" />
     <Compile Include="Helper\CreateNewSKU.cs" />
+    <Compile Include="Helper\DropDownHelper.cs" />
     <Compile Include="Helper\Helper.cs" />
     <Compile Include="Helper\RetireSKU.cs" />
     <Compile Include="Helper\TokenInitiator.cs" />
@@ -425,6 +426,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\PDF.png" />
+    <Content Include="Images\VerserLogo.png" />
     <Content Include="Scripts\bootstrap-multiselect.css" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\bootstrap.js" />

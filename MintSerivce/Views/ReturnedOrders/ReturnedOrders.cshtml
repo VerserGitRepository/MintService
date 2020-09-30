@@ -19,15 +19,15 @@
 </div>
 
      @*<div class="container" style="margin-left:2px;padding-top:30px">*@
-<div class="row" style="margin-left:-140px;width:152%">
+<div class="row" style="margin-left:-280px;">
     @*class="pull-left"*@
 
     <div class="col-md-12" @*style="width:100%;margin-left:-140px;"*@>
 
-        <table class="table table-bordered" table-responsive table-hover" id="mainTable" style="width:50%;">
+        <table class="table table-bordered" table-responsive table-hover" id="mainTable" style="font-size:9px">
             <thead style="background-color:#959ca1;color:white">
                 <tr>
-                    <th>ORDER</th>                   
+                    <th>ORDER</th>
                     <th>TIAB-ORD</th>
                     <th>RP-ORDER</th>
                     <th>SKU</th>
@@ -35,13 +35,30 @@
                     <th>RP-SSN</th>
                     <th>RN-IMEI</th>
                     <th>RP-IMEI</th>
-                    <th>CUSTOMER</th>                   
+                    <th>CUSTOMER</th>
                     <th>ADDRESS</th>
                     <th>SUBURB</th>
                     <th>STATUS</th>
                     <th>DISPATCH</th>
                     <th>CONSIGNMENT</th>
-                    <th>SHIPPED</th>                
+                    <th>SHIPPED</th>
+                    <th>CUSTOMER</th>
+                    <th>DateOfPurchase</th>
+                    <th>DateOfReturnOrganised</th>
+                    <th>DateOfExpectedReturn</th>
+                    <th>ReturnType</th>
+                    <th>CoolingOffPeriod</th>
+                    <th>TrackingNumberToCustomer</th>
+                    <th>TrackingNumberFromCustomerToVerser</th>
+                    <th>NumberofdaysReturnedReceive</th>
+                    <th>IsReplaced</th>
+                    <th>SMSReminder</th>
+                    <th>CustomerServiceComments</th>
+                    <th>IsReplacementRequired</th>
+                    <th>ReplacementTONewAddress</th>
+                    <th>ReplacementToNewSKU</th>
+                    <th>ReplacementTONewOrderType</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -49,25 +66,40 @@
                 {
                 <tr>
                     <td>
-                    <a href="javascript:ShowOrderDetails('@item.VerserOrderID')">@item.VerserOrderID</a>
-                    </td>               
+                        <a href="javascript:ShowOrderDetails('@item.VerserOrderID')">@item.VerserOrderID</a>
+                    </td>
                     <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
                     <td>
                         <a href="javascript:ShowOrderDetails('@item.VerserReturnOrderID')">@item.VerserReturnOrderID</a>
-                    </td>                    
-                    <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>                
+                    </td>
+                    <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>
                     <td>@Html.DisplayFor(modelItem => item.ReturnSSN)</td>
                     <td>@Html.DisplayFor(modelItem => item.ReplacementSSN)</td>
                     <td>@Html.DisplayFor(modelItem => item.ReturnedIMEI)</td>
                     <td>@Html.DisplayFor(modelItem => item.ReplacementIMEI)</td>
-                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>                   
+                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
                     <td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>
                     <td>@Html.DisplayFor(modelItem => item.Locality)</td>
                     <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
                     <td>@Html.DisplayFor(modelItem => item.OrderDispatchno)</td>
                     <td>@Html.DisplayFor(modelItem => item.Ordershipment_Consignment_Id)</td>
-                    <td>@item.OrderShippedDate.Value.ToShortDateString()</td>               
-                 </tr>
+                    <td>@item.OrderShippedDate.Value.ToShortDateString()</td>
+                    <td>@Html.DisplayFor(modelItem => item.CustomerID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DateOfPurchase)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DateOfReturnOrganised)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DateOfExpectedReturn)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ReturnType)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CoolingOffPeriod)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TrackingNumberToCustomer)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TrackingNumberFromCustomerToVerser)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IsReplaced)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SMSReminder)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CustomerServiceComments)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IsReplacementRequired)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ReplacementTONewAddress)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ReplacementToNewSKU)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ReplacementTONewOrderType)</td>
+                </tr>
                 }
             </tbody>
         </table>
