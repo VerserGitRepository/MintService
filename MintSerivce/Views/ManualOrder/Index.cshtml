@@ -1,13 +1,24 @@
 ﻿@model MintSerivce.Models.ManualOrderModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ReOrders";
 }
 <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-<div class="container" style="width:100%; padding-top:20px">
+<link href="~/Content/bootstrap-3.1.4.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<link href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.semanticui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
 
+<div class="container" style="width:100%; padding-top:20px">
     <ul class="nav nav-tabs" style="padding-top:15px;" id="myTab">
         <li class="active"><a data-toggle="tab" href="#MORDER">MANUAL ORDER</a></li>
         <li><a data-toggle="tab" href="#RORDER">RETURN & REPLACE</a></li>
@@ -18,13 +29,13 @@
         <li><a data-toggle="tab" href="#SHOPIFYORDS">SHOPIFY ORDER</a></li>
     </ul>
     <div class="tab-content" style="border-width:thin;border-style:solid;border-color:gray;width:110%;padding-top:5px;">
-       
-         @*<div class="form-group" style="padding-left:20px;color:orange;width:auto;align-items:center;text-align:center;">
-            @if (Model.ResultMessage != null)
-                {
-                    <p><h5> @Model.ResultMessage</h5></p>
-                }
-        </div>*@
+
+        @*<div class="form-group" style="padding-left:20px;color:orange;width:auto;align-items:center;text-align:center;">
+                @if (Model.ResultMessage != null)
+                    {
+                        <p><h5> @Model.ResultMessage</h5></p>
+                    }
+            </div>*@
         <input class="hidden" type="text" id="hdnTabOrder" value="@TempData["TabOrder"]" />
         <div id="MORDER" class="tab-pane fade in active" role="tabpanel" style="text-align:left;padding-left:20px;">
 
@@ -112,149 +123,149 @@
 
             @using (Html.BeginForm("ReturnedOrder", "ManualOrder", FormMethod.Post))
             {
-            <div class="container" style="padding-top:10px;color:gray">
-                <div>
-                    @if (TempData["ManualOrder"] != null)
-                    {
-                        <h6 style="color:green;text-align:center">@TempData["ManualOrder"].ToString()</h6>
-                    }
-                    @if (TempData["OrderError"] != null)
-                    {
-                        <h6 style="color:red;text-align:center">@TempData["OrderError"].ToString()</h6>
-                    }
-                </div>
-                <div class="well">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <label>CustomerID:</label>
-                            @Html.EditorFor(model => model.ReturnReplacementModel.CustomerID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
-                            @Html.ValidationMessageFor(model => model.ReturnReplacementModel.CustomerID, null, new { @class = "text-danger" })
-                        </div>
-                        <div class="col-sm-3">
-                            <label>Customer Tracking To Verser:</label>
-                            @Html.EditorFor(model => model.ReturnReplacementModel.TrackingNumberFromCustomerToVerser, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Postcode, null, new { @class = "text-danger" })
-                        </div>
+                <div class="container" style="padding-top:10px;color:gray">
+                    <div>
+                        @if (TempData["ManualOrder"] != null)
+                        {
+                            <h6 style="color:green;text-align:center">@TempData["ManualOrder"].ToString()</h6>
+                        }
+                        @if (TempData["OrderError"] != null)
+                        {
+                            <h6 style="color:red;text-align:center">@TempData["OrderError"].ToString()</h6>
+                        }
+                    </div>
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label>CustomerID:</label>
+                                @Html.EditorFor(model => model.ReturnReplacementModel.CustomerID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus" } })
+                                @Html.ValidationMessageFor(model => model.ReturnReplacementModel.CustomerID, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-3">
+                                <label>Customer Tracking To Verser:</label>
+                                @Html.EditorFor(model => model.ReturnReplacementModel.TrackingNumberFromCustomerToVerser, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Postcode, null, new { @class = "text-danger" })
+                            </div>
 
-                        <div class="col-sm-3">
-                            <label>VerserOrderID:</label>
-                            @Html.DropDownListFor(model => Model.ReturnReplacementModel.VerserOrderID, Model.DispatchedOrderListItems, "Select Verser Order", new { @class = "form-control", @id = "ddlReturnOrderID", @multiple = "multiple", style = "width:150px;" })
-                            @Html.ValidationMessageFor(model => model.ReturnReplacementModel.VerserOrderID, null, new { @class = "text-danger" })
+                            <div class="col-sm-3">
+                                <label>VerserOrderID:</label>
+                                @Html.DropDownListFor(model => Model.ReturnReplacementModel.VerserOrderID, Model.DispatchedOrderListItems, "Select Verser Order", new { @class = "form-control", @id = "ddlReturnOrderID", @multiple = "multiple", style = "width:150px;" })
+                                @Html.ValidationMessageFor(model => model.ReturnReplacementModel.VerserOrderID, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:0px">
+                            <div class="col-sm-4">
+                                <label>Date Expected return:</label>
+                                @Html.EditorFor(model => model.ReturnReplacementModel.DateOfExpectedReturn, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DateOfExpectedReturn" } })
+                                @Html.ValidationMessageFor(model => model.ReturnReplacementModel.DateOfExpectedReturn, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Date OF Purchase:</label>
+                                @Html.EditorFor(model => model.ReturnReplacementModel.DateOfPurchase, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DateOfPurchase" } })
+                                @Html.ValidationMessageFor(model => model.ReturnReplacementModel.DateOfPurchase, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Date OF Return Organised:</label>
+                                @Html.EditorFor(model => model.ReturnReplacementModel.DateOfReturnOrganised, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DateOfPurchase" } })
+                                @Html.ValidationMessageFor(model => model.ReturnReplacementModel.DateOfPurchase, null, new { @class = "text-danger" })
+                            </div>
+
                         </div>
                     </div>
-                    <div class="row" style="padding-top:0px">
-                        <div class="col-sm-4">
-                            <label>Date Expected return:</label>
-                            @Html.EditorFor(model => model.ReturnReplacementModel.DateOfExpectedReturn, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DateOfExpectedReturn" } })
-                            @Html.ValidationMessageFor(model => model.ReturnReplacementModel.DateOfExpectedReturn, null, new { @class = "text-danger" })
-                        </div>
-                        <div class="col-sm-4">
-                            <label>Date OF Purchase:</label>
-                            @Html.EditorFor(model => model.ReturnReplacementModel.DateOfPurchase, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DateOfPurchase" } })
-                            @Html.ValidationMessageFor(model => model.ReturnReplacementModel.DateOfPurchase, null, new { @class = "text-danger" })
-                        </div>
-                        <div class="col-sm-4">
-                            <label>Date OF Return Organised:</label>
-                            @Html.EditorFor(model => model.ReturnReplacementModel.DateOfReturnOrganised, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DateOfPurchase" } })
-                            @Html.ValidationMessageFor(model => model.ReturnReplacementModel.DateOfPurchase, null, new { @class = "text-danger" })
-                        </div>
+                    <div class="well">
+                        <div class="row" style="padding-top:10px">
+                            <div class="col-sm-4">
+                                <label>Return Type:</label>
+                                @Html.DropDownListFor(model => model.ReturnReplacementModel.ReturnType, new List<SelectListItem>
+                                 {
+                                new SelectListItem{Text="Return",Value="Return"},
+                                new SelectListItem{Text="Swap",Value="Swap"},
+                                new SelectListItem{Text="Warranty",Value="Warranty"},
+                                new SelectListItem{Text="Shopify Return",Value="Shopify Return"},
+                                new SelectListItem{Text="Shopify Swap",Value="Shopify Swap"},
+                                new SelectListItem{Text="Shopify Warranty",Value="Shopify Warranty"}
+                                 }, "Return Type", new { @class = "form-control", style = "Height:40px" })
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Cooling off Period:</label>
+                                @Html.DropDownListFor(model => model.ReturnReplacementModel.CoolingOffPeriod, new List<SelectListItem>
+                                {
+                               new SelectListItem{Text="Yes",Value="Yes"},
+                               new SelectListItem{Text="No",Value="No"}
 
-                    </div>
-                </div>
-                <div class="well">
-                    <div class="row" style="padding-top:10px">
-                        <div class="col-sm-4">
-                            <label>Return Type:</label>
-                            @Html.DropDownListFor(model => model.ReturnReplacementModel.ReturnType, new List<SelectListItem>
-                             {
-                            new SelectListItem{Text="Return",Value="Return"},
-                            new SelectListItem{Text="Swap",Value="Swap"},
-                            new SelectListItem{Text="Warranty",Value="Warranty"},
-                            new SelectListItem{Text="Shopify Return",Value="Shopify Return"},
-                            new SelectListItem{Text="Shopify Swap",Value="Shopify Swap"},
-                            new SelectListItem{Text="Shopify Warranty",Value="Shopify Warranty"}
-                             }, "Return Type", new { @class = "form-control", style = "Height:40px" })
+                            }, "Cooling off Period", new { @class = "form-control", style = "Height:40px" })
+                                @Html.ValidationMessageFor(model => model.ReturnReplacementModel.CoolingOffPeriod, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Number Of Days Returned Receive:</label>
+                                @Html.DropDownListFor(m => m.ReturnReplacementModel.NumberofdaysReturnedReceive, Enumerable.Range(1, 90).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ReturnReplacementModel.NumberofdaysReturnedReceive, null, new { @class = "text-danger" })
+                            </div>
                         </div>
-                        <div class="col-sm-4">
-                            <label>Cooling off Period:</label>
-                            @Html.DropDownListFor(model => model.ReturnReplacementModel.CoolingOffPeriod, new List<SelectListItem>
-                            {
-                           new SelectListItem{Text="Yes",Value="Yes"},
-                           new SelectListItem{Text="No",Value="No"}
+                        <div class="row" style="padding-top:10px">
 
-                        }, "Cooling off Period", new { @class = "form-control", style = "Height:40px" })
-                            @Html.ValidationMessageFor(model => model.ReturnReplacementModel.CoolingOffPeriod, null, new { @class = "text-danger" })
-                        </div>
-                        <div class="col-sm-4">
-                            <label>Number Of Days Returned Receive:</label>
-                            @Html.DropDownListFor(m => m.ReturnReplacementModel.NumberofdaysReturnedReceive, Enumerable.Range(1, 90).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.ReturnReplacementModel.NumberofdaysReturnedReceive, null, new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="row" style="padding-top:10px">
+                            <div class="col-sm-3">
+                                <label>Verser Tracking To Customer:</label>
+                                @Html.EditorFor(model => model.ReturnReplacementModel.TrackingNumberToCustomer, new
+                                 {
+                                    htmlAttributes = new { @class = "form-control" }
+                                 })
+                                @Html.ValidationMessageFor(model => model.ReturnReplacementModel.TrackingNumberToCustomer, null, new { @class = "text-danger" })
+                            </div>
 
-                        <div class="col-sm-3">
-                            <label>Verser Tracking To Customer:</label>
-                            @Html.EditorFor(model => model.ReturnReplacementModel.TrackingNumberToCustomer, new
-                             {
-                                htmlAttributes = new { @class = "form-control" }
-                             })
-                            @Html.ValidationMessageFor(model => model.ReturnReplacementModel.TrackingNumberToCustomer, null, new { @class = "text-danger" })
-                        </div>
+                            <div class="col-sm-3">
+                                <label style="padding-bottom:10px;">Replacement Sent:</label>
+                                @Html.DropDownListFor(model => model.ReturnReplacementModel.IsReplaced, new List<SelectListItem>
+                              {
+                             new SelectListItem{Text="Yes",Value="Yes"},
+                             new SelectListItem{Text="No",Value="No"}
 
-                        <div class="col-sm-3">
-                            <label style="padding-bottom:10px;">Replacement Sent:</label>
-                            @Html.DropDownListFor(model => model.ReturnReplacementModel.IsReplaced, new List<SelectListItem>
-                          {
-                         new SelectListItem{Text="Yes",Value="Yes"},
-                         new SelectListItem{Text="No",Value="No"}
+                              }, "Replacement Sent", new { @class = "form-control", style = "Height:40px" })
+                                @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-3" style="padding-top:0px;color:lightsalmon">
+                                <label>Replacement Required:</label>
+                                @Html.CheckBoxFor(model => model.ReturnReplacementModel.IsReplacementRequired, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-3" style="padding-top:0px;color:lightsalmon">
+                                <label>New Address?</label>
+                                @Html.CheckBoxFor(model => model.ReturnReplacementModel.ReplacementTONewAddress, new { htmlAttributes = new { @class = "form-control" }, @onchange = "HideShowModal(this);" })
+                                @Html.ValidationMessageFor(model => model.ReturnReplacementModel.ReplacementTONewAddress, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:10px;color:lightsalmon">
+                            <div class="col-sm-3">
+                                <label>SMS Reminder</label>
+                                @Html.DropDownListFor(model => model.ReturnReplacementModel.SMSReminder, new List<SelectListItem>
+                              {
+                             new SelectListItem{Text="Yes",Value="Yes"},
+                             new SelectListItem{Text="No",Value="No"},
+                              new SelectListItem{Text="Multiple Contacts",Value="Multiple Contacts"}
+                              }, "SMS Reminder", new { @class = "form-control", style = "Height:40px" })
+                            </div>
+                            <div class="col-sm-4">
+                                <label>New SKU?</label>
+                                @Html.CheckBoxFor(model => model.ReturnReplacementModel.ReplacementToNewSKU, new { htmlAttributes = new { @class = "form-control" }, onchange = "ShowddlSKUType(this);" })
 
-                          }, "Replacement Sent", new { @class = "form-control", style = "Height:40px" })
-                            @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
-                        </div>
-                        <div class="col-sm-3" style="padding-top:0px;color:lightsalmon">
-                            <label>Replacement Required:</label>
-                            @Html.CheckBoxFor(model => model.ReturnReplacementModel.IsReplacementRequired, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
-                        </div>
-                        <div class="col-sm-3" style="padding-top:0px;color:lightsalmon">
-                            <label>New Address?</label>
-                            @Html.CheckBoxFor(model => model.ReturnReplacementModel.ReplacementTONewAddress, new { htmlAttributes = new { @class = "form-control" }, @onchange = "HideShowModal(this);" })
-                            @Html.ValidationMessageFor(model => model.ReturnReplacementModel.ReplacementTONewAddress, null, new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="row" style="padding-top:10px;color:lightsalmon">
-                        <div class="col-sm-3">
-                            <label>SMS Reminder</label>
-                            @Html.DropDownListFor(model => model.ReturnReplacementModel.SMSReminder, new List<SelectListItem>
-                          {
-                         new SelectListItem{Text="Yes",Value="Yes"},
-                         new SelectListItem{Text="No",Value="No"},
-                          new SelectListItem{Text="Multiple Contacts",Value="Multiple Contacts"}
-                          }, "SMS Reminder", new { @class = "form-control", style = "Height:40px" })
-                        </div>
-                        <div class="col-sm-4">
-                            <label>New SKU?</label>
-                            @Html.CheckBoxFor(model => model.ReturnReplacementModel.ReplacementToNewSKU, new { htmlAttributes = new { @class = "form-control" }, onchange = "ShowddlSKUType(this);" })
+                                @Html.DropDownListFor(model => model.ReturnReplacementModel.SKU, Model.SKUList, "Select SKU", new { @class = "form-control", style = "Height:40px", @id = "ddlSKUType", @disabled = "disabled" })
 
-                            @Html.DropDownListFor(model => model.ReturnReplacementModel.SKU, Model.SKUList, "Select SKU", new { @class = "form-control", style = "Height:40px", @id = "ddlSKUType", @disabled = "disabled" })
+                                @Html.ValidationMessageFor(model => model.SKU, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-5">
+                                <label>New OrderType?</label>
+                                @Html.CheckBoxFor(model => model.ReturnReplacementModel.ReplacementTONewOrderType, new { htmlAttributes = new { @class = "form-control" }, onchange = "ShowddlOrderType(this);" })
+                                @Html.DropDownListFor(model => model.ReturnReplacementModel.OrderType, new List<SelectListItem>
+                              {
+                                          new SelectListItem{ Text="PhoneSim", Value = "PhoneSim" },
+                                          new SelectListItem{ Text="PhoneOnly", Value = "PhoneOnly" },
+                                          new SelectListItem{ Text="SimOnly", Value = "SimOnly" }
+                              }, "Select OrderType", new { @class = "form-control", style = "Height:40px", @id = "ddlOrderType", @disabled = "disabled" })
 
-                            @Html.ValidationMessageFor(model => model.SKU, null, new { @class = "text-danger" })
-                        </div>
-                        <div class="col-sm-5">
-                            <label>New OrderType?</label>
-                            @Html.CheckBoxFor(model => model.ReturnReplacementModel.ReplacementTONewOrderType, new { htmlAttributes = new { @class = "form-control" }, onchange = "ShowddlOrderType(this);" })
-                            @Html.DropDownListFor(model => model.ReturnReplacementModel.OrderType, new List<SelectListItem>
-                          {
-                                      new SelectListItem{ Text="PhoneSim", Value = "PhoneSim" },
-                                      new SelectListItem{ Text="PhoneOnly", Value = "PhoneOnly" },
-                                      new SelectListItem{ Text="SimOnly", Value = "SimOnly" }
-                          }, "Select OrderType", new { @class = "form-control", style = "Height:40px", @id = "ddlOrderType", @disabled = "disabled" })
-
-                            @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
-                </div>
                     <div id="OrderNewAddressId" class="well">
                         <div class="row" style="padding-top:10px">
                             <div class="col-sm-2">
@@ -325,8 +336,8 @@
                         </div>
                     </div>
                 </div>
-                }
-            </div>
+            }
+        </div>
 
         <div id="CORDER" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
             <div class="form-horizontal">
@@ -409,10 +420,10 @@
             </div>
         </div>
 
-        <div id="SHOPIFYORDS" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
+        <div id="SHOPIFYORDS" class="tab-pane fade" role="tabpanel" style="padding-left:0px;">
             <div class="form-horizontal">
-                <table class="table table-bordered" table-responsive table-hover" style="font-size:smaller" id="SHOPIFYORDERSTable">
-                    <thead style="background-color:#959ca1;color:white">
+                <table class="table table-bordered" table-responsive table-hover" style="font-size:x-small;font-weight:600;" id="SHOPIFYORDERSTable">
+                    <thead style="background-color:#959ca1;color:white;font-weight:700">
                         <tr>
                             <th>Order</th>
                             <th>Job</th>
@@ -435,7 +446,6 @@
                         @foreach (var item in Model.OrdersList)
                         {
                             <tr>
-
                                 <td>@Html.DisplayFor(modelItem => item.VerserOrderID)</td>
                                 <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
                                 <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
@@ -450,7 +460,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
                                 <td>@Html.DisplayFor(modelItem => item.OrderSource)</td>
                                 <td>
-                                    <input type="button" class="btn btn-success btn-sm"  value="APPROVE" onclick="ApproveOnOrder(@item.VerserOrderID);">                                   
+                                    <input type="button" class="btn btn-success btn-sm" value="APPROVE" onclick="ApproveOnOrder(@item.VerserOrderID);">
                                 </td>
                             </tr>
                         }
@@ -461,29 +471,14 @@
 
     </div>
 </div>
-
-<link href="~/Content/bootstrap-3.1.4.css" rel="stylesheet" />
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="~/Scripts/bootstrap-multiselect.js"></script>
-<link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
-
-
-<style>
-
-    /*<button type="button" class="multiselect dropdown-toggle btn btn-default" style="width: 100%; overflow: hidden; text-overflow: ellipsis;">*/
-</style>
-
 @section scripts
     {
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script>
-
-    
     $(document).ready(function () {
         $('#SHOPIFYORDERSTable').DataTable();
-        $('.dataTables_filter').addClass('pull-right');
+        //$('.dataTables_filter').addClass('pull-right');
 
         if ($("#hdnTabOrder").val() == "MORDER")
             $('a[href="#MORDER"]').click();
@@ -574,7 +569,7 @@
 
     function ApproveOnOrder(VerserOrderID) {
 
-        alert("APPROVED",VerserOrderID);
+        alert("APPROVED", VerserOrderID);
 
         //$.ajax({
         //    type: "GET",
