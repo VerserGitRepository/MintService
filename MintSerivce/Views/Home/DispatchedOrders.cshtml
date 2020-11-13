@@ -4,7 +4,7 @@
 }
 @using System.Linq;
 @model IEnumerable<MintSerivce.Models.OrderDispatchViewModel>
-<div class="row" style="margin-left:-130px;margin-right:200px">
+<div class="row" >
     <div style="padding-top:15px;width:131%;">
         @using (Html.BeginForm("ExportDispatchToExcel", "Home", FormMethod.Post))
         {
@@ -17,7 +17,7 @@
     </div>
 </div>
 @*<div class="container" style="margin-left:2px;padding-top:30px">*@
-<div class="row" style="margin-left:-140px;width:135%">
+<div class="row pull-left" style="margin-left:-180px;width:135%">
     @*class="pull-left"*@
 
     <div class="col-md-12" @*style="width:100%;margin-left:-140px;"*@>
