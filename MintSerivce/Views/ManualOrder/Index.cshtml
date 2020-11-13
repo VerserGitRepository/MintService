@@ -1,10 +1,11 @@
 ﻿@model MintSerivce.Models.ManualOrderModel
 @{
-    ViewBag.Title = "ReOrders";
+    ViewBag.Title = "Index";
 }
 
 
 <div class="container" style="width:100%; padding-top:20px">
+
     <ul class="nav nav-tabs" style="padding-top:15px;" id="myTab">
         <li class="active"><a data-toggle="tab" href="#MORDER">MANUAL ORDER</a></li>
         <li><a data-toggle="tab" href="#RORDER">RETURN & REPLACE</a></li>
@@ -406,10 +407,10 @@
             </div>
         </div>
 
-        <div id="SHOPIFYORDS" class="tab-pane fade" role="tabpanel" style="padding-left:0px;">
+        <div id="SHOPIFYORDS" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
             <div class="form-horizontal">
-                <table class="table table-bordered" table-responsive table-hover" style="font-size:x-small;font-weight:600;" id="SHOPIFYORDERSTable">
-                    <thead style="background-color:#959ca1;color:white;font-weight:700">
+                <table class="table table-bordered" table-responsive table-hover" style="font-size:smaller" id="SHOPIFYORDERSTable">
+                    <thead style="background-color:#959ca1;color:white">
                         <tr>
                             <th>Order</th>
                             <th>Job</th>
@@ -432,11 +433,12 @@
                         @foreach (var item in Model.OrdersList)
                         {
                             <tr>
+
                                 <td>@Html.DisplayFor(modelItem => item.VerserOrderID)</td>
                                 <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
                                 <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
                                 <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>
-                                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.FirstName) &nbsp; @Html.DisplayFor(modelItem => item.Surname) </td>
                                 <td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Locality)</td>
                                 <td>@Html.DisplayFor(modelItem => item.State)</td>
@@ -446,7 +448,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
                                 <td>@Html.DisplayFor(modelItem => item.OrderSource)</td>
                                 <td>
-                                    <input type="button" class="btn btn-success btn-sm" value="APPROVE" onclick="ApproveOnOrder(@item.VerserOrderID);">
+                                    <input type="button" class="btn btn-success btn-sm" value="APPROVE" onclick="ApproveOnOrder('@item.VerserOrderID');">
                                 </td>
                             </tr>
                         }
@@ -457,6 +459,19 @@
 
     </div>
 </div>
+
+<link href="~/Content/bootstrap-3.1.4.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
+
+
+<style>
+
+    /*<button type="button" class="multiselect dropdown-toggle btn btn-default" style="width: 100%; overflow: hidden; text-overflow: ellipsis;">*/
+</style>
+
 @section scripts
     {
     @Scripts.Render("~/bundles/jqueryval")
@@ -568,28 +583,21 @@
 
         function ApproveOnOrder(VerserOrderID) {
 
-            alert("APPROVED", VerserOrderID);
-
-            //$.ajax({
-            //    type: "GET",
-            //    url: "./ShowModal",
-            //    success: function (data) {
-            //        $.confirm({
-            //            boxWidth: '800px',
-            //            useBootstrap: false,
-            //            title: '',
-            //            content: data,
-            //            closeIcon: true,
-
-            //            buttons: {
-            //                yes: { isHidden: true }
-            //            },
-            //        });
-
-            //    }
-            //});
-
-        }
+        $.ajax({
+            type: "GET",
+            data: { "VerserOrderID": VerserOrderID },
+            url: "./ApproveOnOrder",
+            success: function (response) {
+                $.alert({
+                    title: 'ORDER APPROVED !',
+                    content: '',
+                    confirm: function () {
+                    }
+                });
+            }
+        });
+    }
+</script>
 
     </script>
 }
