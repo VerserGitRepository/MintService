@@ -16,81 +16,80 @@
         }
     </div>
 </div>
-@*<div class="container" style="margin-left:2px;padding-top:30px">*@
-<div class="row pull-left" style="margin-left:-180px;width:135%">
-    @*class="pull-left"*@
+<div class="container" style="padding-top:1px; width:100%;margin-left:-350px">
+    <div class="row">
+        @*class="pull-left"*@
 
-    <div class="col-md-12" @*style="width:100%;margin-left:-140px;"*@>
+        <div class="col-md-12" @*style="width:100%;margin-left:-140px;"*@>
 
-        <table class="table table-bordered" table-responsive table-hover" id="mainTable" style="width:80%;">
-            <thead style="background-color:#959ca1;color:white">
-                <tr>
-                    <th>Order</th>
-                    <th>Job</th>
-                    <th>TIABOrder</th>
-                    <th>ShopifyOrder</th>
-                    <th>SKU</th>
-                    <th>SSN</th>
-                    <th>Customer</th>
-                    <th>SurName</th>
-                    <th>Address</th>
-                    <th>Suburb</th>
-                    <th>Status</th>
-                    <th>Source</th>
-                    <th>DispatchNo</th>
-                    <th>Consignment</th>
-                    <th>ShippedDate</th>
-                    <th>Label</th>
-                    @*<th>Greeting</th>*@
-                </tr>
-            </thead>
-            <tbody>
+            <table class="table table-bordered" table-responsive table-hover" id="mainTable">
+                <thead style="background-color:#959ca1;color:white">
+                    <tr>
+                        <th>Order</th>
+                        <th>Job</th>
+                        <th>TIABOrder</th>
+                        <th>ShopifyOrder</th>
+                        <th>SKU</th>
+                        <th>SSN</th>
+                        <th>Customer</th>
+                        <th>SurName</th>
+                        <th>Address</th>
+                        <th>Suburb</th>
+                        <th>Status</th>
+                        <th>Source</th>
+                        <th>DispatchNo</th>
+                        <th>Consignment</th>
+                        <th>ShippedDate</th>
+                        <th>Label</th>
+                        @*<th>Greeting</th>*@
+                    </tr>
+                </thead>
+                <tbody>
 
-                @foreach (var item in Model)
-                {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.VerserOrderID)</td>
-                    <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
-                    <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Shopify_OrderNumber)</td>
-                    <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>
-                    <td>@Html.DisplayFor(modelItem => item.SSN)</td>
-                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Surname)</td>
-                    <td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Locality)</td>
-                    <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
-                    <td>@Html.DisplayFor(modelItem => item.OderSource)</td>
-                    <td>@Html.DisplayFor(modelItem => item.OrderDispatchno)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Ordershipment_Consignment_Id)</td>
-                    <td>@item.OrderShippedDate.Value.ToShortDateString()</td>
-                    <td>
-                        <a href="@item.OrderShipmentURL" target="_blank" class="btn-primary btn-sm">Print</a>
-                    </td>
-                    @*<td><input type="submit" value="Print" class="btn-primary btn-sm" /></td>*@
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.VerserOrderID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Shopify_OrderNumber)</td>
+                            <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>
+                            <td>@Html.DisplayFor(modelItem => item.SSN)</td>
+                            <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Surname)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Locality)</td>
+                            <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
+                            <td>@Html.DisplayFor(modelItem => item.OderSource)</td>
+                            <td>@Html.DisplayFor(modelItem => item.OrderDispatchno)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Ordershipment_Consignment_Id)</td>
+                            <td>@item.OrderShippedDate.Value.ToShortDateString()</td>
+                            <td>
+                                <a href="@item.OrderShipmentURL" target="_blank" class="btn-primary btn-sm">Print</a>
+                            </td>
+                            @*<td><input type="submit" value="Print" class="btn-primary btn-sm" /></td>*@
 
-                </tr>
-                }
-            </tbody>
-        </table>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-@*</div>*@
-<style>
-    .row {
-        margin-left: -130px;
-        margin-right: 175px;
-    }
-</style>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
-    <script src="~/Scripts/datatables.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    </div>
+    <style>
+        .row {
+            width: 122%;
+        }
+    </style>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
+        <script src="~/Scripts/datatables.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
-    <script src="~/Scripts/confirm.js"></script>
-    <link href="~/Content/confirm.css" rel="stylesheet" />
-    <script type="text/javascript">
+        <script src="~/Scripts/confirm.js"></script>
+        <link href="~/Content/confirm.css" rel="stylesheet" />
+        <script type="text/javascript">
                 $(document).ready(function () {
                     $('#mainTable').DataTable();
                     $('.dataTables_filter').addClass('pull-right');
@@ -120,8 +119,8 @@
         }
         });
     }
-    </script>
-}
+        </script>
+    }
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
