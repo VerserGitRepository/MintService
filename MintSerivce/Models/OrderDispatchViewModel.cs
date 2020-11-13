@@ -10,6 +10,8 @@ namespace MintSerivce.Models
         public string VerserReturnOrderID { get; set; }
         public string SSN { get; set; }
         public int ReturnSSN { get; set; }
+        public string OderSource { get; set; }
+        public string Shopify_OrderNumber { get; set; }        
         public int ReplacementSSN { get; set; }
         public string ReturnedIMEI { get; set; }
         public string ReplacementIMEI { get; set; }
@@ -41,7 +43,7 @@ namespace MintSerivce.Models
         public string TrackingNumberToCustomer { get; set; }
         public string TrackingNumberFromCustomerToVerser { get; set; }
         public int? NumberofdaysReturnedReceive { get; set; } //-	Number of days taken to receive returned device  ( The date it was received by Verser minus the date of returned organise)
-        public string IsReplaced { get; set; }
+        public string IsReplaced { get; set; }          
         public string SMSReminder { get; set; }
         public string CustomerServiceComments { get; set; }
         public bool IsReplacementRequired { get; set; }

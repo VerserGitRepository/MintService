@@ -28,6 +28,7 @@
                     <th>Order</th>
                     <th>Job</th>
                     <th>TIABOrder</th>
+                    <th>ShopifyOrder</th>
                     <th>SKU</th>
                     <th>SSN</th>
                     <th>Customer</th>
@@ -35,6 +36,7 @@
                     <th>Address</th>
                     <th>Suburb</th>
                     <th>Status</th>
+                    <th>Source</th>
                     <th>DispatchNo</th>
                     <th>Consignment</th>
                     <th>ShippedDate</th>
@@ -46,26 +48,28 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.VerserOrderID)</td>
-                        <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
-                        <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
-                        <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>
-                        <td>@Html.DisplayFor(modelItem => item.SSN)</td>
-                        <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Surname)</td>
-                        <td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Locality)</td>
-                        <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
-                        <td>@Html.DisplayFor(modelItem => item.OrderDispatchno)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Ordershipment_Consignment_Id)</td>
-                        <td>@item.OrderShippedDate.Value.ToShortDateString()</td>
-                        <td>
-                            <a href="@item.OrderShipmentURL" target="_blank" class="btn-primary btn-sm">Print</a>
-                        </td>
-                        @*<td><input type="submit" value="Print" class="btn-primary btn-sm" /></td>*@
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.VerserOrderID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Shopify_OrderNumber)</td>
+                    <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>
+                    <td>@Html.DisplayFor(modelItem => item.SSN)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Surname)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Locality)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OderSource)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderDispatchno)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Ordershipment_Consignment_Id)</td>
+                    <td>@item.OrderShippedDate.Value.ToShortDateString()</td>
+                    <td>
+                        <a href="@item.OrderShipmentURL" target="_blank" class="btn-primary btn-sm">Print</a>
+                    </td>
+                    @*<td><input type="submit" value="Print" class="btn-primary btn-sm" /></td>*@
 
-                    </tr>
+                </tr>
                 }
             </tbody>
         </table>
