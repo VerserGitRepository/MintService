@@ -354,7 +354,7 @@ namespace MintSerivce.Helper
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                     var resp = client.PostAsJsonAsync(CreateOrderURi, _NewManualOrder);
-                    resp.Wait(TimeSpan.FromSeconds(200));
+                    resp.Wait(TimeSpan.FromSeconds(10));
                     if (resp.IsCompleted)
                     {
                         if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)

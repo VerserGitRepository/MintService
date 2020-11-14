@@ -1,10 +1,10 @@
 ﻿@model MintSerivce.Models.ManualOrderModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Re-Order";
 }
 
 
-<div class="container" style="width:100%; padding-top:20px">
+<div class="container" style="width:120%; padding-left:-1000px;padding-top:20px">
 
     <ul class="nav nav-tabs" style="padding-top:15px;" id="myTab">
         <li class="active"><a data-toggle="tab" href="#MORDER">MANUAL ORDER</a></li>
@@ -15,7 +15,7 @@
         <li><a data-toggle="tab" href="#SIMACTIVATE">SIM REACTIVATE</a></li>
         <li><a data-toggle="tab" href="#SHOPIFYORDS">SHOPIFY ORDER</a></li>
     </ul>
-    <div class="tab-content" style="border-width:thin;border-style:solid;border-color:gray;width:110%;padding-top:5px;">
+    <div class="tab-content" style="border-width:thin;border-style:solid;border-color:gray;width:120%;padding-top:5px;">
 
         @*<div class="form-group" style="padding-left:20px;color:orange;width:auto;align-items:center;text-align:center;">
                 @if (Model.ResultMessage != null)
@@ -409,20 +409,19 @@
 
         <div id="SHOPIFYORDS" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
             <div class="form-horizontal">
-                <table class="table table-bordered" table-responsive table-hover" style="font-size:smaller" id="SHOPIFYORDERSTable">
+                <table class="table table-bordered" table-responsive table-hover" style="font-size:smaller;font-weight:600" id="SHOPIFYORDERSTable">
                     <thead style="background-color:#959ca1;color:white">
                         <tr>
-                            <th>Order</th>
-                            <th>Job</th>
+                            <th>Order</th>                          
                             <th>TIABOrder</th>
+                            <th>Shopify</th>                            
                             <th>SKU</th>
                             <th>Customer</th>
                             <th>Address</th>
                             <th>Suburb</th>
                             <th>State</th>
-                            <th>Postcode</th>
-                            <th>Status</th>
-                            <th>OrderType</th>
+                            <th>Post</th>
+                            <th>Status</th>                           
                             <th>Date</th>
                             <th>Source</th>
                             <th></th>
@@ -432,25 +431,24 @@
 
                         @foreach (var item in Model.OrdersList)
                         {
-                            <tr>
-
-                                <td>@Html.DisplayFor(modelItem => item.VerserOrderID)</td>
-                                <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
-                                <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
-                                <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>
-                                <td>@Html.DisplayFor(modelItem => item.FirstName) &nbsp; @Html.DisplayFor(modelItem => item.Surname) </td>
-                                <td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Locality)</td>
-                                <td>@Html.DisplayFor(modelItem => item.State)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Postcode)</td>
-                                <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
-                                <td>@Html.DisplayFor(modelItem => item.OrderType)</td>
-                                <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
-                                <td>@Html.DisplayFor(modelItem => item.OrderSource)</td>
-                                <td>
-                                    <input type="button" class="btn btn-success btn-sm" value="APPROVE" onclick="ApproveOnOrder('@item.VerserOrderID');">
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.VerserOrderID)</td>
+                          
+                            <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Shopify_OrderNumber)</td>
+                            <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>
+                            <td>@Html.DisplayFor(modelItem => item.FirstName) &nbsp; @Html.DisplayFor(modelItem => item.Surname) </td>
+                            <td>@Html.DisplayFor(modelItem => item.AddressLine1)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Locality)</td>
+                            <td>@Html.DisplayFor(modelItem => item.State)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Postcode)</td>
+                            <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>                          
+                            <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.OrderSource)</td>
+                            <td>
+                                <input type="button" class="btn btn-success btn-sm" value="APPROVE" onclick="ApproveOnOrder('@item.VerserOrderID');">
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

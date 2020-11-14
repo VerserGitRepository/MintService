@@ -174,6 +174,33 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("index", "ManualOrder");
             }
         }
+
+        public ActionResult ApproveOnOrder(string VerserOrderID)
+        {
+            try
+            {
+                CancelOrderModel model = new CancelOrderModel { ErrorMessage = string.Empty, OrderStatus = string.Empty, TIABOrderID = string.Empty, VerserOrderID = VerserOrderID };
+                var returnModel = Helper.Helper.UpdateOnOrder(model);
+                if (returnModel != null && returnModel.First().ErrorMessage != null)
+                {
+                    TempData["ManualOrder"] = $"{VerserOrderID} Order Status Successfully Approved";
+                    TempData["TabOrder"] = "ONORDER";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["OrderError"] = "Error has occurred while processing the request.";
+                    TempData["TabOrder"] = "ONORDER";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
+            {
+                TempData["TabOrder"] = "ONORDER";
+                return RedirectToAction("index", "ManualOrder");
+            }
+        }
+
         [HttpPost]
         public ActionResult ReactivateOrderSIM(ManualOrderModel manualorder)
         {

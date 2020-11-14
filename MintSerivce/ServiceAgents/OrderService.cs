@@ -25,7 +25,7 @@ namespace MintSerivce.ServiceAgents
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                     var resp = client.GetAsync(APIEndPointUri);
-                    resp.Wait(TimeSpan.FromSeconds(10));
+                    resp.Wait(TimeSpan.FromSeconds(200));
 
                     if (resp.IsCompleted)
                     {

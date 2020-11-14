@@ -250,7 +250,7 @@ namespace MintSerivce.Controllers
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                     var resp = client.GetAsync(OnOrderlist);
 
-                    resp.Wait(TimeSpan.FromSeconds(10));
+                    resp.Wait(TimeSpan.FromSeconds(100));
 
                     if (resp.IsCompleted)
                     {
@@ -287,7 +287,7 @@ namespace MintSerivce.Controllers
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                     var resp = client.GetAsync(OnOrderlist);
 
-                    resp.Wait(TimeSpan.FromSeconds(10));
+                    resp.Wait(TimeSpan.FromSeconds(100));
 
                     if (resp.IsCompleted)
                     {
