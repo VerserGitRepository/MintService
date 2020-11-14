@@ -5,7 +5,7 @@
 @using System.Linq;
 @model IEnumerable<MintSerivce.Models.OrderDispatchViewModel>
 <div class="row" >
-    <div style="padding-top:15px;width:131%;">
+    <div style="padding-top:15px;width:120%;">
         @using (Html.BeginForm("ExportDispatchToExcel", "Home", FormMethod.Post))
         {
             <div align="right">
@@ -16,12 +16,8 @@
         }
     </div>
 </div>
-@*<div class="container" style="margin-left:2px;padding-top:30px">*@
-<div class="row pull-left" style="margin-left:-180px;width:135%">
-    @*class="pull-left"*@
-
-    <div class="col-md-12" @*style="width:100%;margin-left:-140px;"*@>
-
+<div class="row pull-left" style="margin-left:-230px;width:125%;font-size:smaller">
+    <div class="col-md-12">
         <table class="table table-bordered" table-responsive table-hover" id="mainTable" style="width:80%;">
             <thead style="background-color:#959ca1;color:white">
                 <tr>
@@ -40,12 +36,10 @@
                     <th>DispatchNo</th>
                     <th>Consignment</th>
                     <th>ShippedDate</th>
-                    <th>Label</th>
-                    @*<th>Greeting</th>*@
+                    <th>Label</th>               
                 </tr>
             </thead>
             <tbody>
-
                 @foreach (var item in Model)
                 {
                 <tr>
@@ -67,15 +61,13 @@
                     <td>
                         <a href="@item.OrderShipmentURL" target="_blank" class="btn-primary btn-sm">Print</a>
                     </td>
-                    @*<td><input type="submit" value="Print" class="btn-primary btn-sm" /></td>*@
-
-                </tr>
+                            </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
-@*</div>*@
+
 <style>
     .row {
         margin-left: -130px;
@@ -122,6 +114,5 @@
     }
     </script>
 }
-
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
