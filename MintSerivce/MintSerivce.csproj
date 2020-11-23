@@ -425,7 +425,9 @@
     <Content Include="fonts\verserLogo.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\FailIcon.PNG" />
     <Content Include="Images\PDF.png" />
+    <Content Include="Images\SuccessIcon.PNG" />
     <Content Include="Images\VerserLogo.png" />
     <Content Include="Scripts\bootstrap-multiselect.css" />
     <Content Include="Scripts\bootstrap-multiselect.js" />

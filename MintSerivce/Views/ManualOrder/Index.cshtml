@@ -434,7 +434,6 @@
                         {
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.VerserOrderID)</td>
-
                             <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
                             <td>@Html.DisplayFor(modelItem => item.Shopify_OrderNumber)</td>
                             <td><a href="javascript:ShowSKU('@item.SKU')">@item.SKU</a></td>
@@ -445,14 +444,14 @@
                             <td>@Html.DisplayFor(modelItem => item.Postcode)</td>
                             <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
                             <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
-                            <td>
+                            <td width="40px">
                                 @if (Convert.ToBoolean(item.AddressValidation))
                                 {
-                                    <img src="~/Images/SuccessIcon.PNG" style="width:10%;height:10%"/>
+                                    <img src="~/Images/SuccessIcon.PNG" style="width:30px;height:30px"/>
                                 }
                                 else
                                 {
-                                    <img src="~/Images/failIcon.PNG" style="width:10%;height:10%"  />
+                                    <img src="~/Images/failIcon.PNG" style="width:30px;height:30px"/>
                                 }
                             </td>
                             <td>@Html.DisplayFor(modelItem => item.OrderSource)</td>
