@@ -174,7 +174,6 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("index", "ManualOrder");
             }
         }
-
         public ActionResult ApproveOnOrder(string VerserOrderID)
         {
             try
@@ -200,7 +199,6 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("index", "ManualOrder");
             }
         }
-
         [HttpPost]
         public ActionResult ReactivateOrderSIM(ManualOrderModel manualorder)
         {
@@ -227,7 +225,6 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("index", "ManualOrder");
             }
         }
-
         public ActionResult OrderReturn(ManualOrderModel manualorder)
         {
             try

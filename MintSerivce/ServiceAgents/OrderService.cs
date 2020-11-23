@@ -15,7 +15,7 @@ namespace MintSerivce.ServiceAgents
         public static string APIEndPointUri = ConfigurationManager.AppSettings["rooturi"] + ConfigurationManager.AppSettings["ShopifyOrdersList"];
         public static List<OrderViewModel> ShopifyOnHoldOrders()
         {
-            List<OrderViewModel> ordermodel = new List<OrderViewModel>();
+            var ordermodel = new List<OrderViewModel>();
             string response = string.Empty;
          
             string token = HttpContext.Current.Session["BearerToken"].ToString();
