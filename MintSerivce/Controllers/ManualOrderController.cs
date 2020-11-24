@@ -274,7 +274,7 @@ namespace MintSerivce.Controllers
             catch (Exception)
             {
                 TempData["TabOrder"] = "ONORDER";
-                return RedirectToAction("index", "ManualOrder");
+                return RedirectToAction("UpdateAddress", "ManualOrder");
             }
         }
     }   
