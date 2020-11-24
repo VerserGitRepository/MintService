@@ -5,8 +5,9 @@
 @{
     ViewBag.Title = "Returned Orders";
 }
+
 <div id="RETURNORDER" class="tab-pane fade in active" role="tabpanel" style="text-align:left;padding-left:20px;width:1000px; ">
-    @using (Html.BeginForm("UpdateOrderAddress", "ManageOrders", FormMethod.Post))
+    @using (Ajax.BeginForm("UpdateOrderAddress", "ManualOrder", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }))
     {
         @Html.AntiForgeryToken()
 
@@ -33,6 +34,30 @@
         @Html.EditorFor(model => model.Postcode, "", new { style = "width:150px" })
         @Html.ValidationMessageFor(model => Model.Postcode, "", new { @class = "text-danger" })
         <br /><br />
-        <input type="submit" class="btn btn-primary" id="update" style="padding-left:20px" value="Update Address"> @*onclick="return ShowProgress();" onclick="DisplayProgressMessage(this,'Processing Order...')"*@<br /><br />
+        <input type="submit" class="btnUpdate" id="update" style="padding-left:20px" value="Update Address"><br /><br />
     }
 </div>
+<script>
+    function OnSuccess(data) {
+        debugger;
+        // $("#btnCreateSalesForceOppn").attr('disabled', true);
+
+
+        //var str = data.split('-')[0];
+        //var strId = data.split('-')[1];
+        //var sfId = data.split('-')[2];
+        //str = str.replace("Salesforce Opportunity has been successfully created with Opportunity Number :", "");
+        //strId = strId.replace("Id:", "");
+        //sfId = sfId.replace("salesForceUniqueId:", "");
+        //$("#txtSalesForceOpportunity").text('Opportunity:' + str);
+        //$("#hdnQuoteId").val(strId);
+        //$("#hdnSalesForceId").val(sfId);
+        //$("#btnSubmit").val("ADD SERVICE");
+        alert(data);
+        $(".jconfirm").hide();
+       
+    }
+    function OnFailure() {
+        alert('Error has occurred in the request.');
+    }
+</script>

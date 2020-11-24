@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.Mvc;
 using MintSerivce.ServiceAgents;
 using Newtonsoft.Json;
+using FluentValidation.Results;
 
 namespace MintSerivce.Controllers
 {
@@ -276,6 +277,40 @@ namespace MintSerivce.Controllers
                 TempData["TabOrder"] = "ONORDER";
                 return RedirectToAction("index", "ManualOrder");
             }
+        }
+        [HttpPost]
+        public ActionResult UpdateOrderAddress(ViewModel theModel)
+        {
+            var _Validator = new UpdateOrderAddressValidatorDto();
+
+            var ReturnFileName = "";
+            var _UpdateOrderAddressData = new UpdateOrderAddressDto();
+
+            _UpdateOrderAddressData.AddressLine1 = theModel.AddressLine1;
+            _UpdateOrderAddressData.Locality = theModel.Locality;
+            _UpdateOrderAddressData.Postcode = theModel.Postcode;
+            _UpdateOrderAddressData.VerserOrderID = theModel.VerserOrderID;
+            _UpdateOrderAddressData.State = theModel.State;
+            ValidationResult result = _Validator.Validate(theModel);
+            if (!result.IsValid)
+            {
+                foreach (ValidationFailure failure in result.Errors)
+                {
+                    ModelState.AddModelError(failure.PropertyName, failure.ErrorMessage);
+                }
+            }
+            else
+            {
+                ReturnFileName =  Helper.Helper.UpdateOrderAddress(_UpdateOrderAddressData);
+                if (ReturnFileName != null)
+                {
+                    ReturnFileName = ReturnFileName.Trim('"');
+                    TempData["ValidationErrors"] = ReturnFileName;
+                }
+            }
+
+
+            return Json(ReturnFileName, JsonRequestBehavior.AllowGet);
         }
     }   
 }

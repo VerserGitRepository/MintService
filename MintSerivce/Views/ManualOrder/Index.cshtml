@@ -613,6 +613,11 @@
         }
 
         function OpenUpdateAddress(rowid) {
+            var str = "";
+            str = str + "<script src='/Scripts/jquery.validate.js'><\/script>";
+            str = str + "<script src='/Scripts/jquery.validate.min.js'><\/script>";
+            str = str + "<script src='/Scripts/jquery.validate.unobtrusive.js'><\/script>";
+            str = str + "<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.js'><\/script>";
             var obj = null;
             var row = $(rowid).closest("tr");
             var verserOrderId = row.find("td:first").text();
@@ -635,16 +640,35 @@
                 success: function (response) {
                     //$("#spinner").hide();
                     //obj.close();
-                    $.alert({
+                    obj = $.alert({
                         title: 'UPDATE ADDRESS FOR ORDER - ' + verserOrderId,
                         closeIcon: true,
-                        content: response,
+                        content: str+response,
                         boxWidth: '880px',
                         useBootstrap: false,
                         buttons: {
                             yes: { isHidden: true }
                         }
+
+                        //onOpen: function () {
+                        //    //alert('after the modal is opened/rendered');
+                        //    // find the input element and attach events to it.
+                        //    // NOTE: `this.$content` is the jquery object for content.
+                        //    this.$content.find('input.btnUpdate').click(function () {
+                        //        alert('I\'ve powers!');
+                        //       // obj.close();
+                        //    });
+                        //},
+                        //onClose: function () {
+                        //    alert('before the modal is closed');
+                        //},
+                        //onAction: function (action) {
+                        //    // action is either 'confirm', 'cancel' or 'close'
+                        //    alert(action + ' was clicked');
+                        //}
                     });
+
+                   // window.opener.document.getElementById('update').click()
                 }
             });
         }
