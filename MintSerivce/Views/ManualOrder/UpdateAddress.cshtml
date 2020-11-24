@@ -1,0 +1,38 @@
+﻿
+@using System.Linq;
+@using MintSerivce.Models
+@model ViewModel
+@{
+    ViewBag.Title = "Returned Orders";
+}
+<div id="RETURNORDER" class="tab-pane fade in active" role="tabpanel" style="text-align:left;padding-left:20px;width:1000px; ">
+    @using (Html.BeginForm("UpdateOrderAddress", "ManageOrders", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+
+        @*<label class="control-label">Order Id</label><br>*@
+        @Html.HiddenFor(model => model.VerserOrderID)<br />
+
+
+        <label class="control-label">Address Line 1&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        @Html.EditorFor(model => model.AddressLine1, "", new { style = "width:150px" })
+        @Html.ValidationMessageFor(model => Model.AddressLine1, "", new { @class = "text-danger" })
+        <br /><br />
+
+        <label class="control-label">Locality&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        @Html.EditorFor(model => model.Locality, "", new { style = "width:150px" })
+        @Html.ValidationMessageFor(model => Model.Locality, "", new { @class = "text-danger" })
+        <br /><br />
+        <label class="control-label">State&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+
+        @Html.EditorFor(model => model.State, "", new { style = "width:150px" })
+        @Html.ValidationMessageFor(model => Model.State, "", new { @class = "text-danger" })
+        <br /><br />
+        <label class="control-label">Postal Code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        @Html.EditorFor(model => model.Postcode, "", new { style = "width:150px" })
+        @Html.ValidationMessageFor(model => Model.Postcode, "", new { @class = "text-danger" })
+        <br /><br />
+        <input type="submit" class="btn btn-primary" id="update" style="padding-left:20px" value="Update Address"> @*onclick="return ShowProgress();" onclick="DisplayProgressMessage(this,'Processing Order...')"*@<br /><br />
+    }
+</div>

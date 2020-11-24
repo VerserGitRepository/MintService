@@ -425,6 +425,7 @@
     <Content Include="fonts\verserLogo.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\FailIcon.PNG" />
     <Content Include="Images\PDF.png" />
     <Content Include="Images\SuccessIcon.PNG" />
@@ -579,6 +580,7 @@
     <Content Include="Views\Home\SimOrders.cshtml" />
     <Content Include="Views\Home\Reports.cshtml" />
     <Content Include="Views\ManualOrder\ReturnModalView.cshtml" />
+    <Content Include="Views\ManualOrder\UpdateAddress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

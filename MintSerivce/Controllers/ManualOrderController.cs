@@ -262,6 +262,20 @@ namespace MintSerivce.Controllers
                 TempData["TabOrder"] = "SIMACTIVATE";
                 return RedirectToAction("index", "ManualOrder");
             }
-        }       
+        }
+        [HttpGet]
+        public ActionResult UpdateAddress(string VerserOrderID)
+        {
+            try
+            {
+
+                return PartialView("UpdateAddress", new ViewModel { VerserOrderID = VerserOrderID});
+            }
+            catch (Exception)
+            {
+                TempData["TabOrder"] = "ONORDER";
+                return RedirectToAction("index", "ManualOrder");
+            }
+        }
     }   
 }
