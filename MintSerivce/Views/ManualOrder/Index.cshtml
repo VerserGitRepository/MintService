@@ -619,6 +619,7 @@
             str = str + "<script src='/Scripts/jquery.validate.unobtrusive.js'><\/script>";
             str = str + "<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.js'><\/script>";
             var obj = null;
+            var objSpinner = null;
             var row = $(rowid).closest("tr");
             var verserOrderId = row.find("td:first").text();
 
@@ -627,15 +628,15 @@
                 data: { "VerserOrderID": verserOrderId },
                 url: "./UpdateAddress",
                 beforeSend: function () {
-                    //obj = $.alert({
-                    //    boxWidth: '50px',
-                    //    useBootstrap: false,
-                    //    title: '',
-                    //    content: $("#spinner").html(),
-                    //    buttons: {
-                    //        yes: { isHidden: true }
-                    //    }
-                    //})
+                    objSpinner = $.alert({
+                        boxWidth: '50px',
+                        useBootstrap: false,
+                        title: '',
+                        content: $("#spinner").html(),
+                        buttons: {
+                            yes: { isHidden: true }
+                        }
+                    })
                 },
                 success: function (response) {
                     //$("#spinner").hide();
@@ -648,17 +649,17 @@
                         useBootstrap: false,
                         buttons: {
                             yes: { isHidden: true }
-                        }
+                        },
 
-                        //onOpen: function () {
-                        //    //alert('after the modal is opened/rendered');
-                        //    // find the input element and attach events to it.
-                        //    // NOTE: `this.$content` is the jquery object for content.
-                        //    this.$content.find('input.btnUpdate').click(function () {
-                        //        alert('I\'ve powers!');
-                        //       // obj.close();
-                        //    });
-                        //},
+                        onOpen: function () {
+                           
+                            //this.$content.find('input.btnUpdate').click(function () {
+                            //    alert('I\'ve powers!');
+                            //   // obj.close();
+                            //});
+                            $("#spinner").hide();
+                            objSpinner.close();
+                        }
                         //onClose: function () {
                         //    alert('before the modal is closed');
                         //},
