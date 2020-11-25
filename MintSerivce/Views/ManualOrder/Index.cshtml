@@ -449,11 +449,11 @@
                                 <td width="40px" style="align-content:center;justify-content:center">
                                     @if (Convert.ToBoolean(item.AddressValidation))
                                     {
-                                        <img src="~/Images/SuccessIcon.PNG" style="width:30px;height:30px;justify-content:center" onclick="OpenUpdateAddress(this);" />
+                                        <img src="~/Images/SuccessIcon.PNG" id="successIcon" style="width:30px;height:30px;justify-content:center" onclick="OpenUpdateAddress(this);" />
                                     }
                                     else
                                     {
-                                        <img src="~/Images/failIcon.PNG" style="width:30px;height:30px;justify-content:center" onclick="OpenUpdateAddress(this);" />
+                                        <img src="~/Images/failIcon.PNG" id="failIcon" style="width:30px;height:30px;justify-content:center" onclick="OpenUpdateAddress(this);" />
                                     }
                                 </td>
                                 <td>@Html.DisplayFor(modelItem => item.OrderSource)</td>
@@ -611,7 +611,7 @@
                 }
             });
         }
-
+        var Globalrow;
         function OpenUpdateAddress(rowid) {
             var str = "";
             str = str + "<script src='/Scripts/jquery.validate.js'><\/script>";
@@ -621,6 +621,7 @@
             var obj = null;
             var objSpinner = null;
             var row = $(rowid).closest("tr");
+            Globalrow = row;
             var verserOrderId = row.find("td:first").text();
 
             $.ajax({
@@ -662,7 +663,7 @@
                         }
                         //onClose: function () {
                         //    alert('before the modal is closed');
-                        //},
+                        //}
                         //onAction: function (action) {
                         //    // action is either 'confirm', 'cancel' or 'close'
                         //    alert(action + ' was clicked');
@@ -672,6 +673,17 @@
                    // window.opener.document.getElementById('update').click()
                 }
             });
+        }
+        function OnSuccess(data) {
+            var img = "/Images/SuccessIcon.PNG";
+            $(Globalrow).find($("#failIcon")).attr("src", img);
+            alert(data);
+            $(".jconfirm").hide();
+
+        }
+        function OnFailure() {                
+            alert('Error has occurred in the request.');
+            $(".jconfirm").hide();
         }
     </script>
 
