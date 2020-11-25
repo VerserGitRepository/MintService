@@ -446,14 +446,14 @@
                                 <td>@Html.DisplayFor(modelItem => item.Postcode)</td>
                                 <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
                                 <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
-                                <td width="40px" style="align-content:center;justify-content:center">
+                                <td width="40px" style="align-content:center;justify-content:center" title="Click On Icon To Update Address !">
                                     @if (Convert.ToBoolean(item.AddressValidation))
                                     {
-                                        <img src="~/Images/SuccessIcon.PNG" style="width:30px;height:30px;justify-content:center" onclick="OpenUpdateAddress(this);" />
+                                        <img src="~/Images/SuccessIcon.PNG" style="width:30px;height:30px;justify-content:center" onclick="OpenUpdateAddress(this);" title="Click On Icon To Update Address !" />
                                     }
                                     else
                                     {
-                                        <img src="~/Images/failIcon.PNG" style="width:30px;height:30px;justify-content:center" onclick="OpenUpdateAddress(this);" />
+                                        <img src="~/Images/failIcon.PNG" style="width:30px;height:30px;justify-content:center" onclick="OpenUpdateAddress(this);" title="Click On Icon To Update Address !" />
                                     }
                                 </td>
                                 <td>@Html.DisplayFor(modelItem => item.OrderSource)</td>
