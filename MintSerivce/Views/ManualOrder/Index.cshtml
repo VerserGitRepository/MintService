@@ -641,11 +641,11 @@
                 success: function (response) {
                     //$("#spinner").hide();
                     //obj.close();
-                    obj = $.alert({
-                        title: 'UPDATE ADDRESS FOR ORDER - ' + verserOrderId,
+                    $.alert({
+                        title: 'UPDATE ORDER ADDRESS-' + verserOrderId,
                         closeIcon: true,
-                        content: str+response,
-                        boxWidth: '880px',
+                        content: response,
+                        boxWidth: '500px',
                         useBootstrap: false,
                         buttons: {
                             yes: { isHidden: true }
