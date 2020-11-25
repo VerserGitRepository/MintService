@@ -596,12 +596,25 @@
         }
 
         function ApproveOnOrder(VerserOrderID) {
-
+            var objSpinner = null;
             $.ajax({
                 type: "GET",
                 data: { "VerserOrderID": VerserOrderID },
                 url: "./ApproveOnOrder",
+                beforeSend: function () {
+                    objSpinner = $.alert({
+                        boxWidth: '50px',
+                        useBootstrap: false,
+                        title: '',
+                        content: $("#spinner").html(),
+                        buttons: {
+                            yes: { isHidden: true }
+                        }
+                    })
+                },
                 success: function (response) {
+                    $("#spinner").hide();
+                    objSpinner.close();
                     $.alert({
                         title: 'ORDER APPROVED !',
                         content: '',
