@@ -12,13 +12,12 @@ namespace MintSerivce.Models
         [MinLength(7, ErrorMessage = "SSN Must Be Minimum 7 Digits Length")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "SSN Must Be Numeric")]
         public string SSN { get; set; }
-
         [RequiredIf("PhoneAndSim", true, "SIM Is Mandatory To Add Phone!")]
         [MaxLength(13, ErrorMessage = "SIM Can Be Maximum 13 Digits Length")]
         [MinLength(9, ErrorMessage = "SIM Must Be Minimum 9 Digits Length")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "SIM Must Be Numeric")]
         public string SIM { get; set; }
-        [MaxLength(18, ErrorMessage = "ConsignmentNumber Can Be Maximum 18 Digits Length")]
+        [MaxLength(60, ErrorMessage = "ConsignmentNumber Can Be Maximum 60 Digits Length")]
         [MinLength(5, ErrorMessage = "ConsignmentNumber Must Be Minimum 5 Digits Length")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Consignment Number is mandatory.")]
         [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "ConsignmentNumber Must Be Alpha Numeric - Special character Not Allowed")]

@@ -161,12 +161,13 @@ namespace MintSerivce.Controllers
             }
             else if (selectedOrder.ConsignmentNumber == null)
             {
+
                 return RedirectToAction("ProcessOrder", "Home", new { VerserOrderID = selectedOrder.VerserOrderID, ResultMessage = selectedOrder.ResultMessage = "Consignment Number Is Required!", OrderType = "SimOnly" });
             }
             selectedOrder.UserName = Session["User"].ToString();
-
+            string Strconcatinate = selectedOrder.ConsignmentNumber.Substring(0, selectedOrder.ConsignmentNumber.Length - 16);                    
+            selectedOrder.ConsignmentNumber = Strconcatinate.Remove(0, 18);
             var result = ProcessSimOrderService(selectedOrder).Result;
-
             if (result != null)
             {
                 selectedOrder.ResultMessage = result.ResultMessage;

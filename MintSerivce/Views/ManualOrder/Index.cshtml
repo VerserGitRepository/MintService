@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <div class="container" style="width:120%; padding-left:-1000px;padding-top:20px">
-
     <ul class="nav nav-tabs" style="padding-top:15px;" id="myTab">
         <li class="active"><a data-toggle="tab" href="#MORDER">MANUAL ORDER</a></li>
         <li><a data-toggle="tab" href="#RORDER">RETURN & REPLACE</a></li>
@@ -469,7 +468,6 @@
 
     </div>
 </div>
-
 <div id="spinner" style="display:none;">
     <img src="~/Images/ajax-loader.gif" />
 </div>
@@ -690,7 +688,17 @@
         function OnSuccess(data) {
             var img = "/Images/SuccessIcon.PNG";
             $(Globalrow).find($("#failIcon")).attr("src", img);
-            alert(data);
+
+            $.alert({
+                title: 'UPDATE ORDER ADDRESS SUCCESSFUL',
+                closeIcon: true,
+                content: data,
+                boxWidth: '450px',
+                useBootstrap: false,
+                buttons: {
+                    yes: { isHidden: false }
+                }
+            });         
             $(".jconfirm").hide();
 
         }
