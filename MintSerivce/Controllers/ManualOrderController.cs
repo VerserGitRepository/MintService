@@ -175,6 +175,7 @@ namespace MintSerivce.Controllers
                 return RedirectToAction("index", "ManualOrder");
             }
         }
+
         public ActionResult ApproveOnOrder(string VerserOrderID)
         {
             try
@@ -308,8 +309,6 @@ namespace MintSerivce.Controllers
                     TempData["ValidationErrors"] = ReturnFileName;
                 }
             }
-
-
             return Json(ReturnFileName, JsonRequestBehavior.AllowGet);
         }
     }   

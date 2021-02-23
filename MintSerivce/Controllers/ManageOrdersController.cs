@@ -11,7 +11,7 @@ namespace MintSerivce.Controllers
 {
     public class ManageOrdersController : Controller
     {
-        // GET: ReturnedOrders
+      
         public async Task<ActionResult> Index()
         {
             if (Session["User"] != null)
@@ -76,29 +76,74 @@ namespace MintSerivce.Controllers
         }
         public ActionResult CreateSKU()
         {
-            return View();
+            var _skunew = new ViewModel();          
+            return View(_skunew);
+        }
+        public ActionResult UpdateSKU()
+        {
+            var _skunew = new ViewModel();
+            return View(_skunew);
         }
         public ActionResult RemoveSKU()
         {
             return View();
         }
-        public ActionResult ManageAccessories()
+        public ActionResult ChangeOrderSKU()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult CreateSKU(string SKU, string Make, string Model, string Capacity, string Colour)
+        public ActionResult ChangeOrderSKU(ViewModel theModel)
         {
-            SKUModel skus = new SKUModel()
+            if (theModel != null)
             {
-                SKU = SKU,
-                Make = Make,
-                Model = Model,
-                Capacity = Capacity,
-                Colour = Colour
-            };
-            var result = CreateNewSKU.AddNewSKU(skus);
-            return View("Index", "ManageOrders");
+                var _requestModel = new SimActivationModel { 
+                    VerserOrderID= theModel.VerserOrderID,
+                    SKU= theModel.SKU,                    
+                };  
+             var _a=   Helper.Helper.ChangeVerserOrderSKU(_requestModel);
+            }
+            return RedirectToAction("Index", "ManageOrders");
+        }
+        public ActionResult ManageAccessories()
+        {
+            return View();
+        }
+       [HttpPost]
+        public ActionResult CreateSKU(ViewModel _SKURequest)
+        {
+            bool result = false;
+            if (ModelState.IsValid)
+            {
+                result = Helper.Helper.CreateNewSKU(_SKURequest.SKUViewModel);
+            }
+            if (result == true)
+            {
+                TempData["ValidationErrors"] = $"New {_SKURequest.SKUViewModel.SKU} New SKU Created Successfully !";
+            }
+            else
+            {
+                TempData["ValidationErrors"] ="Unable To Create New SKU Please validate your inputs ";
+            }
+            return RedirectToAction("Index", "ManageOrders");
+        }
+        [HttpPost]
+        public ActionResult UpdateSKU(ViewModel _SKURequest)
+        {
+            bool result = false;
+            if (ModelState.IsValid)
+            {
+                result = Helper.Helper.UpdateSKU(_SKURequest.SKUViewModel);
+            }
+            if (result == true)
+            {
+                TempData["ValidationErrors"] = $"New {_SKURequest.SKUViewModel.SKU} SKU Updated Successfully !";
+            }
+            else
+            {
+                TempData["ValidationErrors"] = "Unable To Update SKU Please validate your Enteries ";
+            }
+            return RedirectToAction("Index", "ManageOrders");
         }
         [HttpPost]
         public ActionResult RemoveSKU(SKUModel skumodel)

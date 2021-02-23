@@ -6,12 +6,14 @@
 }
 <div class="container" style="width:1200px; padding-top:20px">
     <ul class="nav nav-tabs" style="padding-top:15px;" id="myTab">
-        <li class="active"><a data-toggle="tab" href="#RETURNORDER">UPDATE ORDERS ADDRESS</a></li>
-        <li><a data-toggle="tab" href="#MANAGESKU">UPDATE SKU BUFFER</a></li>
+        <li class="active"><a data-toggle="tab" href="#RETURNORDER">UPDATE ADDRESS</a></li>
+        <li><a data-toggle="tab" href="#MANAGESKU">UPDATE BUFFER</a></li>
         <li><a data-toggle="tab" href="#CreateSKU">CREATE NEW SKU</a></li>
-        <li><a data-toggle="tab" href="#RemoveSKU">REMOVE EXISTING SKU</a></li>
+        <li><a data-toggle="tab" href="#UpdateSKU">UPDATE SKU</a></li>
+        <li><a data-toggle="tab" href="#RemoveSKU">REMOVE SKU</a></li>
         <li><a data-toggle="tab" href="#MANAGEDISPATCHORDER">MANAGE DISPATCH</a></li>
-        <li><a data-toggle="tab" href="#MANAGEACCESSORIES">MANAGE ACCESSORIES</a></li>  
+        <li><a data-toggle="tab" href="#MANAGEACCESSORIES">ACCESSORIES</a></li>
+        <li><a data-toggle="tab" href="#CHANGEORDERSKU">CHANGE SKU</a></li>
     </ul>
     <div class="tab-content" style="border-width:thin;border-style:solid;border-color:gray;width:1200px;padding-top:10px;">
         <div class="form-group" style="padding-left:10px;color:orange;width:auto;align-items:center;text-align:center;vertical-align:top">
@@ -24,38 +26,31 @@
             @using (Html.BeginForm("UpdateOrderAddress", "ManageOrders", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
-
-
-                @*<label class="control-label">Order Id</label><br>*@
                 @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })<br /><br />
-      
-
                 <label class="control-label">Address Line 1&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 @Html.EditorFor(model => model.AddressLine1, "", new { style = "width:150px" })
                 @Html.ValidationMessageFor(model => Model.AddressLine1, "", new { @class = "text-danger" })
                 <br /><br />
-
                 <label class="control-label">Locality&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 @Html.EditorFor(model => model.Locality, "", new { style = "width:150px" })
                 @Html.ValidationMessageFor(model => Model.Locality, "", new { @class = "text-danger" })
                 <br /><br />
                 <label class="control-label">State&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-
-                    @Html.EditorFor(model => model.State, "", new { style = "width:150px" })
-                    @Html.ValidationMessageFor(model => Model.State, "", new { @class = "text-danger" })
-                    <br /><br />
+                @Html.EditorFor(model => model.State, "", new { style = "width:150px" })
+                @Html.ValidationMessageFor(model => Model.State, "", new { @class = "text-danger" })
+                <br /><br />
                 <label class="control-label">Postal Code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 @Html.EditorFor(model => model.Postcode, "", new { style = "width:150px" })
                 @Html.ValidationMessageFor(model => Model.Postcode, "", new { @class = "text-danger" })
                 <br /><br />
-                <input type="submit" class="btn btn-primary" id="update" style="padding-left:20px" value="Update Address"> @*onclick="return ShowProgress();" onclick="DisplayProgressMessage(this,'Processing Order...')"*@<br /><br />
+                <input type="submit" class="btn btn-primary" id="update" style="padding-left:20px" value="Update Address"> @*onclick="return ShowProgress();" onclick="DisplayProgressMessage(this,'Processing Order...')"*@
+                <br /><br />
             }
         </div>
         <div id="MANAGEDISPATCHORDER" class="tab-pane fade">
             @using (Html.BeginForm("OrderSummary", "ManageOrders", FormMethod.Post))
             {
                 <button type="submit" class="btn btn-primary">PRINT TODAY ORDERS SUMMARY</button>
-
                 if (TempData["OrderFilePath"] != null)
                 {
                     <br />
@@ -63,13 +58,10 @@
                 }
             }
             <br />
-            @*<span id="staticText">https://customers.verser.com.au/MintStarTrackOrderSummaryFiles/OrderSummary-</span>*@
             <input type="date" value="" placeholder="Enter Date in ddmmyyyy format" id="datevalueEnter" />
-            @*<input type="text" id="datevalueEnter" name="dateValueEnter" placeholder="Enter Date in ddmmyyyy format" /> <span id="trailer">.pdf</span>*@
             <br /> <br /> <br />
             <p><a id="downloadfile" class="btn-primary btn-lg" href="downloadfile" target="_blank">Download File</a></p>
         </div>
-
         <div id="MANAGESKU" class="tab-pane fade">
             @using (Html.BeginForm("UpdateSKUBuffer", "ManageOrders", FormMethod.Post))
             {
@@ -83,18 +75,24 @@
                     <button type="submit" class="btn btn-primary">UPDATE SKU</button>
                 </div>
             }
-        </div>   
-        <div id="MANAGEACCESSORIES" class="tab-pane fade">     
+        </div>
+        <div id="MANAGEACCESSORIES" class="tab-pane fade">
             @Html.Partial("ManageAccessories")
-        </div> 
+        </div>
         <div id="CreateSKU" class="tab-pane fade">
             @Html.Partial("CreateSKU")
-        </div> 
+        </div>
+        <div id="UpdateSKU" class="tab-pane fade">
+            @Html.Partial("UpdateSKU")
+        </div>
         <div id="RemoveSKU" class="tab-pane fade">
             @Html.Partial("RemoveSKU")
-        </div> 
         </div>
-    </div>        
+        <div id="CHANGEORDERSKU" class="tab-pane fade">
+            @Html.Partial("ChangeOrderSKU")
+        </div>
+    </div>
+</div>
 
 <link href="~/Content/bootstrap-3.1.4.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -105,16 +103,16 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
 @*<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">*@
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-         
-            <script src="~/Scripts/datatables.min.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/datatables.min.js"></script>
 }
-            <script type="text/javascript">
-        $(document).ready(function () {
-            $('#mainTable').DataTable();
-            $('.dataTables_filter').addClass('pull-right');
- var today = new Date();
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#mainTable').DataTable();
+        $('.dataTables_filter').addClass('pull-right');
+        var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth() + 1; //January is 0!
 
@@ -125,15 +123,15 @@
         if (mm < 10) {
             mm = '0' + mm;
         }
-        var today = dd + + mm + + yyyy;      
+        var today = dd + + mm + + yyyy;
 
-            $("#downloadfile").click(function () {
-                let result = '';
-                let parts = $("#datevalueEnter").val().split('-');
-                result = parts[2]+''+parts[1]+''+parts[0];
-                var text1 = 'https://customers.verser.com.au/MintStarTrackOrderSummaryFiles/OrderSummary-' + result + '.pdf';         
-            document.getElementById("downloadfile").href = text1;         
-       
+        $("#downloadfile").click(function () {
+            let result = '';
+            let parts = $("#datevalueEnter").val().split('-');
+            result = parts[2] + '' + parts[1] + '' + parts[0];
+            var text1 = 'https://customers.verser.com.au/MintStarTrackOrderSummaryFiles/OrderSummary-' + result + '.pdf';
+            document.getElementById("downloadfile").href = text1;
+
         });
 
     });
@@ -159,5 +157,5 @@
     });
     $('#ddlOrderID').removeAttr('multiple')
     $('#ddlOrderID').multiselect('rebuild');
-    
+
 </script>

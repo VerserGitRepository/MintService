@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace MintSerivce.Models
@@ -8,6 +9,7 @@ namespace MintSerivce.Models
         public ViewModel()
         {
             AccessoriesStock = new List<AccessoriesStockCountDto>();
+            SKUViewModel = new SKUModel();
         }
         public List<SelectListItem> ListItemModel { get; set; }
         public List<SelectListItem> OrdersListItemModel { get; set; }
@@ -18,6 +20,6 @@ namespace MintSerivce.Models
         public string Locality { get; set; }
         public string Postcode { get; set; }
         public List<AccessoriesStockCountDto> AccessoriesStock { get; set; }
-
+        public SKUModel SKUViewModel { get; set; }        
     }
 }

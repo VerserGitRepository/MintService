@@ -667,7 +667,7 @@ namespace MintSerivce.Helper
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                     var resp = client.PostAsJsonAsync(CancelOrderURi, theList);
-                    //resp.Wait(TimeSpan.FromSeconds(10));
+                    resp.Wait(TimeSpan.FromSeconds(10));
                     if (resp.IsCompleted)
                     {
                         if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
@@ -724,6 +724,42 @@ namespace MintSerivce.Helper
             }
             return returnresponse;
         }
+
+        public static SimActivateResponseDto ChangeVerserOrderSKU(SimActivationModel order)
+        {
+            var response = string.Empty;
+            var returnresponse = new SimActivateResponseDto();
+
+            string simactivationURi = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + "Order/ChangeOrderSKU";
+            string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var resp = client.PostAsJsonAsync(simactivationURi, order);
+                    resp.Wait(TimeSpan.FromSeconds(10));
+                    if (resp.IsCompleted)
+                    {
+                        if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            Console.WriteLine("Authorization failed. Token expired or invalid.");
+                        }
+                        else
+                        {
+                            response = resp.Result.Content.ReadAsStringAsync().Result;
+                            returnresponse = JsonConvert.DeserializeObject<SimActivateResponseDto>(response);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response = ex.Message;
+            }
+            return returnresponse;
+        }
+
         public static string ReturnOnlyOrderHelper(SimActivationModel order)
         {
             var response = string.Empty;
@@ -756,6 +792,8 @@ namespace MintSerivce.Helper
             }
             return response;
         }
+
+
 
         public static OrderDispatchViewModel GetOrderDetails(string orderId)
         {
@@ -791,6 +829,8 @@ namespace MintSerivce.Helper
             }
             return ordermodel;
         }
+
+
         public static List<SIMOrderModel> SIMOrdersList()
         {
             List<SIMOrderModel> ordermodel = new List<SIMOrderModel>();
@@ -823,6 +863,73 @@ namespace MintSerivce.Helper
             {
             }
             return ordermodel;
+        }
+
+
+        public static bool CreateNewSKU(SKUModel order)
+        {
+            bool returnresponse = false;
+            string simactivationURi = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + "Order/CreateNewSKU";
+            string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var resp = client.PostAsJsonAsync(simactivationURi, order);
+                    resp.Wait(TimeSpan.FromSeconds(10));
+                    if (resp.IsCompleted)
+                    {
+                        if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            Console.WriteLine("Authorization failed. Token expired or invalid.");
+                        }
+                        else
+                        {
+                            var response = resp.Result.Content.ReadAsStringAsync().Result;
+                            returnresponse = JsonConvert.DeserializeObject<bool>(response);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+              //  response = ex.Message;
+            }
+            return returnresponse;
+        }
+
+        public static bool UpdateSKU(SKUModel order)
+        {
+            bool returnresponse = false;
+            string simactivationURi = System.Configuration.ConfigurationManager.AppSettings["rooturi"] + "Order/UpdateSKU";
+            string token = System.Web.HttpContext.Current.Session["BearerToken"].ToString();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var resp = client.PostAsJsonAsync(simactivationURi, order);
+                    resp.Wait(TimeSpan.FromSeconds(10));
+                    if (resp.IsCompleted)
+                    {
+                        if (resp.Result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            Console.WriteLine("Authorization failed. Token expired or invalid.");
+                        }
+                        else
+                        {
+                            var response = resp.Result.Content.ReadAsStringAsync().Result;
+                            returnresponse = JsonConvert.DeserializeObject<bool>(response);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //  response = ex.Message;
+            }
+            return returnresponse;
         }
     }
 }
