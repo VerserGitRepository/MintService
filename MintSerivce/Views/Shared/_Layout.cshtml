@@ -14,7 +14,7 @@
 
         <div class="navbar-header pull-left">
             <div id="LogoImage" style="float: left; padding-right: 20px">
-                <img src="~/Images/verser.jpg" style="height:48px; width:150px; margin:0 15px;" />
+                <img src="~/Images/verser.jpg" style="height:48px; width:140px; margin:0 15px;" />
             </div>
             @*@Html.ActionLink("VERSER MINT SERVICE ORDERS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand"  } )*@
         </div>
@@ -24,14 +24,11 @@
                 @if (Session["User"] != null)
                 {
                     <li>@Html.ActionLink("OPEN ORDERS", "Index", "Home")</li>
-                    @*<li>@Html.ActionLink("RE-ORDER", "Index", "ManualOrder")</li>*@
                     <li>@Html.ActionLink("STOCKS", "StockAvailable", "Home")</li>
                     <li>@Html.ActionLink("DISPATCHED ORDERS", "dispatchedorders", "Home")</li>
                     <li>@Html.ActionLink("SIM ORDERS", "SimOrders", "Home")</li>
                     <li>@Html.ActionLink("CANCELLED ORDERS", "CancelledOrders", "CancelledOrders")</li>
                     <li>@Html.ActionLink("RETURNED ORDERS", "ReturnedOrders", "ReturnedOrders")</li>
-                    @*<li>@Html.ActionLink("MANAGE", "index", "ManageOrders")</li>*@
-                    @*<li style="text-align:right">@Html.ActionLink("LOGOUT", "Logout", "login")</li>*@
 
                     @*<li><a href="https://customers.verser.com.au/JMSGatewayAPI/OnlyVerserInternalUsersRegisterFormToMAuthtokens.html", new { target="_blank" }>REGISTER NEW USER</a> </li>*@
                 }
@@ -45,9 +42,9 @@
                             @Session["User"].ToString()
                         </a>
                         <ul class="dropdown-menu" style="font-size:large;font-weight:800">
-                            <li>@Html.ActionLink("RE-ORDERS", "Index", "ManualOrder")</li>
-                            <li>@Html.ActionLink("MANAGE ORDERS", "index", "ManageOrders")</li>
-                            <li>@Html.ActionLink("LOGOUT", "Logout", "login")</li>
+                            <li>@Html.ActionLink("RE-ORDERS", "Index", "ManualOrder", new { style = "padding:12px 20px" })</li>
+                            <li>@Html.ActionLink("MANAGE ORDERS", "index", "ManageOrders", new { style = "padding:12px 20px" })</li>
+                            <li>@Html.ActionLink("LOGOUT", "Logout", "login", new { style = "padding:12px 20px" })</li>
                         </ul>
                     </li>
                 }
