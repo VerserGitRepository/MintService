@@ -3,58 +3,69 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>@ViewBag.Title -NUmobile Orders</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <div style="text-align:left">
-                    <img src="~/fonts/verserLogo.png" />
-                </div>
+    <div class="navbar navbar-fixed-top" style="background-color:black; padding:0 10px;">
 
-                @*@Html.ActionLink("VERSER MINT SERVICE ORDERS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand"  } )*@
+        <div class="navbar-header pull-left">
+            <div id="LogoImage" style="float: left; padding-right: 20px">
+                <img src="~/Images/verser.jpg" style="height:48px; width:150px; margin:0 15px;" />
             </div>
-            <div class="navbar-collapse collapse">
+            @*@Html.ActionLink("VERSER MINT SERVICE ORDERS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand"  } )*@
+        </div>
 
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
                 @if (Session["User"] != null)
                 {
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("ORDERS", "Index", "Home")</li>
-                        <li>@Html.ActionLink("RE-ORDER", "Index", "ManualOrder")</li>
-                        <li>@Html.ActionLink("STOCK", "StockAvailable", "Home")</li>
-                        <li>@Html.ActionLink("DISPATCHES", "dispatchedorders", "Home")</li>
-                        <li>@Html.ActionLink("SIMORDERS", "SimOrders", "Home")</li>
-                        <li>@Html.ActionLink("CANCELLED", "CancelledOrders", "CancelledOrders")</li>
-                        <li>@Html.ActionLink("RETURNED", "ReturnedOrders", "ReturnedOrders")</li>
-                        <li>@Html.ActionLink("MANAGE", "index", "ManageOrders")</li>
-                        <li style="text-align:right">@Html.ActionLink("LOGOUT", "Logout", "login")</li>
+                    <li>@Html.ActionLink("ORDERS", "Index", "Home")</li>
+                    @*<li>@Html.ActionLink("RE-ORDER", "Index", "ManualOrder")</li>*@
+                    <li>@Html.ActionLink("STOCK", "StockAvailable", "Home")</li>
+                    <li>@Html.ActionLink("DISPATCHES", "dispatchedorders", "Home")</li>
+                    <li>@Html.ActionLink("SIMORDERS", "SimOrders", "Home")</li>
+                    <li>@Html.ActionLink("CANCELLED", "CancelledOrders", "CancelledOrders")</li>
+                    <li>@Html.ActionLink("RETURNED", "ReturnedOrders", "ReturnedOrders")</li>
+                    @*<li>@Html.ActionLink("MANAGE", "index", "ManageOrders")</li>*@
+                    @*<li style="text-align:right">@Html.ActionLink("LOGOUT", "Logout", "login")</li>*@
 
-                        @*<li><a href="https://customers.verser.com.au/JMSGatewayAPI/OnlyVerserInternalUsersRegisterFormToMAuthtokens.html", new { target="_blank" }>REGISTER NEW USER</a> </li>*@
-
-                    </ul>
+                    @*<li><a href="https://customers.verser.com.au/JMSGatewayAPI/OnlyVerserInternalUsersRegisterFormToMAuthtokens.html", new { target="_blank" }>REGISTER NEW USER</a> </li>*@
                 }
+            </ul>
 
-                @*<button type="button" class="btn btn-default btn-sm "  style="text-align:right">
-                        <span class="glyphicon glyphicon-log-out"></span> Log out
-                    </button>*@
-            </div>
+            <ul class="nav navbar-nav" style="float:right; margin-right:30px">
+                @if (Session["User"] != null)
+                {
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            @Session["User"].ToString()
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("RE-ORDER", "Index", "ManualOrder")</li>
+                            <li>@Html.ActionLink("MANAGE", "index", "ManageOrders")</li>
+                            <li>@Html.ActionLink("LOGOUT", "Logout", "login")</li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+
+            @*<button type="button" class="btn btn-default btn-sm "  style="text-align:right">
+                    <span class="glyphicon glyphicon-log-out"></span> Log out
+                </button>*@
         </div>
+
     </div>
-    <div class="container body-content">
+
+    <div class="container-fluid">
         @RenderBody()
-        <hr />
-        <footer>
+
+        @*<footer>
             <p>&copy; @DateTime.Now.Year -VERSER TECHNOLOY LIFECYCLES  <a href="mailto:Support@verser.com.au?Subject=VerserMintServiceOrders%20Request" style="font-size:small"> Contact Support</a></p>
-        </footer>
+        </footer>*@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
@@ -64,3 +75,25 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+<style>
+    .navbar-nav > li > a {
+        color: white;
+        font-family: sans-serif;
+        font-weight: 600;
+    }
+
+        .navbar-nav > li > a:hover {
+            background-color: darkorange !important;
+            color: black;
+        }
+
+    a {
+        color: gray;
+    }
+
+    .navbar-fixed-top {
+        overflow:visible;
+    }
+</style>
+

@@ -4,39 +4,39 @@
     ViewBag.Title = "Reports";
 }
 
-<div style="border:solid;border-width:1px;border-color:gray">
-    <table class="table pull-left" id="FilesTable">
-        <thead style="background-color: #428bca; color:white">
+
+<table class="table table-bordered pull-left" id="FilesTable">
+    <thead style="background-color: darkorange; color:white">
+        <tr>
+            <th>
+                FileName
+            </th>
+            <th>
+                FileSize
+            </th>
+            <th>
+                FileType
+            </th>
+            <th>
+                FileDate
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var _file in Model)
+        {
             <tr>
-                <th>
-                    FileName
-                </th>
-                <th>
-                    FileSize
-                </th>
-                <th>
-                    FileType
-                </th>
-                <th>
-                    FileDate
-                </th>
+                <td>@Html.ActionLink(_file.FileName, "DownloadFile", "Home", new { path = _file.FileFullPath, fileName = _file.FileName }, htmlAttributes: null)</td>
+                <td>@_file.FileSize KB</td>
+                <td>@_file.FileType</td>
+                <td>@_file.FileDate</td>
             </tr>
-        </thead>
-        <tbody>
+        }
 
-            @foreach (var _file in Model)
-            {
-                <tr>
-                    <td>@Html.ActionLink(_file.FileName, "DownloadFile", "Home", new { path = _file.FileFullPath, fileName = _file.FileName }, htmlAttributes: null)</td>
-                    <td>@_file.FileSize KB</td>
-                    <td>@_file.FileType</td>
-                    <td>@_file.FileDate</td>
-                </tr>
-            }
+    </tbody>
+</table>
 
-        </tbody>
-    </table>
-</div>
 
 <link href="~/Content/bootstrap-3.1.4.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>

@@ -6,30 +6,29 @@
 <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-<div class="container" style="width:120%; padding-left:-1000px;padding-top:20px">
-    <ul class="nav nav-tabs" style="padding-top:15px;" id="myTab">
-        <li class="active"><a data-toggle="tab" href="#MORDER">MANUAL ORDER</a></li>
-        <li><a data-toggle="tab" href="#RORDER">RETURN & REPLACE</a></li>
-        <li><a data-toggle="tab" href="#OHORDER">UPDATE ON HOLD</a></li>
-        <li><a data-toggle="tab" href="#ONORDER">UPDATE  ON ORDER</a></li>
-        <li><a data-toggle="tab" href="#CORDER">CANCEL ORDER</a></li>
-        <li><a data-toggle="tab" href="#SIMACTIVATE">SIM REACTIVATE</a></li>
-        <li><a data-toggle="tab" href="#SHOPIFYORDS">SHOPIFY ORDER</a></li>
-    </ul>
-    <div class="tab-content" style="border-width:thin;border-style:solid;border-color:gray;width:120%;padding-top:5px;">
 
-        @*<div class="form-group" style="padding-left:20px;color:orange;width:auto;align-items:center;text-align:center;">
-                @if (Model.ResultMessage != null)
-                    {
-                        <p><h5> @Model.ResultMessage</h5></p>
-                    }
-            </div>*@
+
+
+<ul class="nav nav-tabs" style="padding-top:15px;" id="myTab">
+    <li class="active"><a data-toggle="tab" href="#MORDER">MANUAL ORDER</a></li>
+    <li><a data-toggle="tab" href="#RORDER">RETURN & REPLACE</a></li>
+    <li><a data-toggle="tab" href="#OHORDER">UPDATE ON HOLD</a></li>
+    <li><a data-toggle="tab" href="#ONORDER">UPDATE  ON ORDER</a></li>
+    <li><a data-toggle="tab" href="#CORDER">CANCEL ORDER</a></li>
+    <li><a data-toggle="tab" href="#SIMACTIVATE">SIM REACTIVATE</a></li>
+    <li><a data-toggle="tab" href="#SHOPIFYORDS">SHOPIFY ORDER</a></li>
+</ul>
+
+<div class="col-md-12">
+    <div class="tab-content">
+
         <input class="hidden" type="text" id="hdnTabOrder" value="@TempData["TabOrder"]" />
+
         <div id="MORDER" class="tab-pane fade in active" role="tabpanel" style="text-align:left;padding-left:20px;">
 
             @using (Html.BeginForm("Index", "ManualOrder", FormMethod.Post))
             {
-                <div class="container" style="padding-top:20px;color:gray">
+                <div class="col-md-6 well" style="padding-top:20px;color:gray">
 
                     <div>
                         @if (TempData["ManualOrder"] != null)
@@ -111,7 +110,7 @@
 
             @using (Html.BeginForm("ReturnedOrder", "ManualOrder", FormMethod.Post))
             {
-                <div class="container" style="padding-top:10px;color:gray">
+                <div class="col-md-6" style="padding-top:10px;color:gray">
                     <div>
                         @if (TempData["ManualOrder"] != null)
                         {
@@ -165,21 +164,21 @@
                             <div class="col-sm-4">
                                 <label>Return Type:</label>
                                 @Html.DropDownListFor(model => model.ReturnReplacementModel.ReturnType, new List<SelectListItem>
-                                 {
+                                    {
                                 new SelectListItem{Text="Return",Value="Return"},
                                 new SelectListItem{Text="Swap",Value="Swap"},
                                 new SelectListItem{Text="Warranty",Value="Warranty"},
                                 new SelectListItem{Text="Shopify Return",Value="Shopify Return"},
                                 new SelectListItem{Text="Shopify Swap",Value="Shopify Swap"},
                                 new SelectListItem{Text="Shopify Warranty",Value="Shopify Warranty"}
-                                 }, "Return Type", new { @class = "form-control", style = "Height:40px" })
+                                    }, "Return Type", new { @class = "form-control", style = "Height:40px" })
                             </div>
                             <div class="col-sm-4">
                                 <label>Cooling off Period:</label>
                                 @Html.DropDownListFor(model => model.ReturnReplacementModel.CoolingOffPeriod, new List<SelectListItem>
                                 {
-                               new SelectListItem{Text="Yes",Value="Yes"},
-                               new SelectListItem{Text="No",Value="No"}
+                                new SelectListItem{Text="Yes",Value="Yes"},
+                                new SelectListItem{Text="No",Value="No"}
 
                             }, "Cooling off Period", new { @class = "form-control", style = "Height:40px" })
                                 @Html.ValidationMessageFor(model => model.ReturnReplacementModel.CoolingOffPeriod, null, new { @class = "text-danger" })
@@ -195,20 +194,20 @@
                             <div class="col-sm-3">
                                 <label>Verser Tracking To Customer:</label>
                                 @Html.EditorFor(model => model.ReturnReplacementModel.TrackingNumberToCustomer, new
-                                 {
+                                    {
                                     htmlAttributes = new { @class = "form-control" }
-                                 })
+                                    })
                                 @Html.ValidationMessageFor(model => model.ReturnReplacementModel.TrackingNumberToCustomer, null, new { @class = "text-danger" })
                             </div>
 
                             <div class="col-sm-3">
                                 <label style="padding-bottom:10px;">Replacement Sent:</label>
                                 @Html.DropDownListFor(model => model.ReturnReplacementModel.IsReplaced, new List<SelectListItem>
-                              {
-                             new SelectListItem{Text="Yes",Value="Yes"},
-                             new SelectListItem{Text="No",Value="No"}
+                                {
+                                new SelectListItem{Text="Yes",Value="Yes"},
+                                new SelectListItem{Text="No",Value="No"}
 
-                              }, "Replacement Sent", new { @class = "form-control", style = "Height:40px" })
+                                }, "Replacement Sent", new { @class = "form-control", style = "Height:40px" })
                                 @Html.ValidationMessageFor(model => model.ContactNumber, null, new { @class = "text-danger" })
                             </div>
                             <div class="col-sm-3" style="padding-top:0px;color:lightsalmon">
@@ -226,11 +225,11 @@
                             <div class="col-sm-3">
                                 <label>SMS Reminder</label>
                                 @Html.DropDownListFor(model => model.ReturnReplacementModel.SMSReminder, new List<SelectListItem>
-                              {
-                             new SelectListItem{Text="Yes",Value="Yes"},
-                             new SelectListItem{Text="No",Value="No"},
-                              new SelectListItem{Text="Multiple Contacts",Value="Multiple Contacts"}
-                              }, "SMS Reminder", new { @class = "form-control", style = "Height:40px" })
+                                {
+                                new SelectListItem{Text="Yes",Value="Yes"},
+                                new SelectListItem{Text="No",Value="No"},
+                                new SelectListItem{Text="Multiple Contacts",Value="Multiple Contacts"}
+                                }, "SMS Reminder", new { @class = "form-control", style = "Height:40px" })
                             </div>
                             <div class="col-sm-4">
                                 <label>New SKU?</label>
@@ -244,11 +243,11 @@
                                 <label>New OrderType?</label>
                                 @Html.CheckBoxFor(model => model.ReturnReplacementModel.ReplacementTONewOrderType, new { htmlAttributes = new { @class = "form-control" }, onchange = "ShowddlOrderType(this);" })
                                 @Html.DropDownListFor(model => model.ReturnReplacementModel.OrderType, new List<SelectListItem>
-                              {
-                                          new SelectListItem{ Text="PhoneSim", Value = "PhoneSim" },
-                                          new SelectListItem{ Text="PhoneOnly", Value = "PhoneOnly" },
-                                          new SelectListItem{ Text="SimOnly", Value = "SimOnly" }
-                              }, "Select OrderType", new { @class = "form-control", style = "Height:40px", @id = "ddlOrderType", @disabled = "disabled" })
+                                {
+                                            new SelectListItem{ Text="PhoneSim", Value = "PhoneSim" },
+                                            new SelectListItem{ Text="PhoneOnly", Value = "PhoneOnly" },
+                                            new SelectListItem{ Text="SimOnly", Value = "SimOnly" }
+                                }, "Select OrderType", new { @class = "form-control", style = "Height:40px", @id = "ddlOrderType", @disabled = "disabled" })
 
                                 @Html.ValidationMessageFor(model => model.OrderType, null, new { @class = "text-danger" })
                             </div>
@@ -290,19 +289,19 @@
                                 @Html.EditorFor(model => model.ReturnReplacementModel.Locality, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Locality, null, new { @class = "text-danger" })
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-2" style="padding-top:12px">
                                 <label>State:</label>
                                 @Html.DropDownListFor(model => model.ReturnReplacementModel.State, new List<SelectListItem>
-                                 {
-                                             new SelectListItem{ Text="NSW", Value = "NSW" },
-                                             new SelectListItem{ Text="QLD", Value = "QLD" },
-                                             new SelectListItem{ Text="SA", Value = "SA" },
-                                             new SelectListItem{ Text="TAS", Value = "TAS" },
-                                             new SelectListItem{ Text="VIC", Value = "VIC" },
-                                             new SelectListItem{ Text="WA", Value = "WA" },
-                                             new SelectListItem{ Text="ACT", Value = "ACT" },
-                                             new SelectListItem{ Text="NT", Value = "NT" }
-                                 }, "State", new { @class = "form-control", style = "Height:40px" })
+                                    {
+                                                new SelectListItem{ Text="NSW", Value = "NSW" },
+                                                new SelectListItem{ Text="QLD", Value = "QLD" },
+                                                new SelectListItem{ Text="SA", Value = "SA" },
+                                                new SelectListItem{ Text="TAS", Value = "TAS" },
+                                                new SelectListItem{ Text="VIC", Value = "VIC" },
+                                                new SelectListItem{ Text="WA", Value = "WA" },
+                                                new SelectListItem{ Text="ACT", Value = "ACT" },
+                                                new SelectListItem{ Text="NT", Value = "NT" }
+                                    }, "State", new { @class = "form-control", style = "Height:40px" })
                                 @Html.ValidationMessageFor(model => model.State, null, new { @class = "text-danger" })
                             </div>
                             <div class="col-sm-2">
@@ -327,8 +326,8 @@
             }
         </div>
 
-        <div id="CORDER" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
-            <div class="form-horizontal">
+        <div id="CORDER" class="tab-pane fade" role="tabpanel">
+            <div class="form-horizontal well">
                 @using (Html.BeginForm("CancelOrder", "ManualOrder", FormMethod.Post))
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -347,8 +346,9 @@
                 }
             </div>
         </div>
-        <div id="OHORDER" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
-            <div class="form-horizontal">
+
+        <div id="OHORDER" class="tab-pane fade" role="tabpanel">
+            <div class="form-horizontal well">
                 @using (Html.BeginForm("OrderPutOnHold", "ManualOrder", FormMethod.Post))
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -367,8 +367,9 @@
                 }
             </div>
         </div>
-        <div id="ONORDER" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
-            <div class="form-horizontal">
+
+        <div id="ONORDER" class="tab-pane fade" role="tabpanel">
+            <div class="form-horizontal well">
                 @using (Html.BeginForm("UpdateToOnOrder", "ManualOrder", FormMethod.Post))
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -387,8 +388,9 @@
                 }
             </div>
         </div>
-        <div id="SIMACTIVATE" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
-            <div class="form-horizontal">
+
+        <div id="SIMACTIVATE" class="tab-pane fade" role="tabpanel">
+            <div class="form-horizontal well">
                 @using (Html.BeginForm("ReactivateOrderSIM", "ManualOrder", FormMethod.Post))
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -468,9 +470,12 @@
 
     </div>
 </div>
+
+
 <div id="spinner" style="display:none;">
     <img src="~/Images/ajax-loader.gif" />
 </div>
+
 
 <link href="~/Content/bootstrap-3.1.4.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
