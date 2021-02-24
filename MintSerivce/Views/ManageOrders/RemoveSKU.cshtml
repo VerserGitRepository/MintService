@@ -13,15 +13,16 @@
         {
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.Label("SKU", htmlAttributes: new { @class = "control-label col-md-2" })
-        @Html.DropDownListFor(model => Model.ListItemModel, Model.ListItemModel, "Select SKU", new { @class = "control-label col-md-2", @id = "ddlRemoveSKUID", @multiple = "multiple" })<br>
-        <div class="col-md-10">
+                <div class="col-md-6">
+                    @Html.Label("SKU", htmlAttributes: new { @class = "control-label col-md-1" })
+                    @Html.DropDownListFor(model => Model.ListItemModel, Model.ListItemModel, "Select SKU", new { @class = "control-label col-md-3", @id = "ddlRemoveSKUID", @multiple = "multiple" })<br>
+
                 </div>
             </div>
             
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Remove" class="btn btn-default" />
+                <div class="col-md-offset-1 col-md-1">
+                    <input type="submit" value="Remove" class="btn btn-primary" />
                 </div>
             </div>
         }

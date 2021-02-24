@@ -42,9 +42,9 @@
                             @Session["User"].ToString()
                         </a>
                         <ul class="dropdown-menu" style="font-size:large;font-weight:800">
-                            <li>@Html.ActionLink("RE-ORDERS", "Index", "ManualOrder", new { style = "padding:12px 20px" })</li>
-                            <li>@Html.ActionLink("MANAGE ORDERS", "index", "ManageOrders", new { style = "padding:12px 20px" })</li>
-                            <li>@Html.ActionLink("LOGOUT", "Logout", "login", new { style = "padding:12px 20px" })</li>
+                            <li>@Html.ActionLink("RE-ORDERS", "Index", "ManualOrder", null, new { style = "padding:12px 20px" })</li>
+                            <li>@Html.ActionLink("MANAGE ORDERS", "index", "ManageOrders",null, new { style = "padding:12px 20px" })</li>
+                            <li>@Html.ActionLink("LOGOUT", "Logout", "login", null, new { style = "padding:12px 20px" })</li>
                         </ul>
                     </li>
                 }

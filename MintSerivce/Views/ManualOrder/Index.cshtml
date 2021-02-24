@@ -332,15 +332,13 @@
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
-
-                        @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })
                         <div class="col-md-10">
+                            @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })<br /><br />
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Cancel Order" class="btn btn-default" />
+                        <div class="col-md-10">
+                            <input type="submit" value="CANCEL" class="btn btn-default" style="margin:0" />
                         </div>
                     </div>
                 }
@@ -353,15 +351,13 @@
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
-
-                        @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlohOrderID", @multiple = "multiple" })<br /><br />
                         <div class="col-md-10">
+                            @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlohOrderID", @multiple = "multiple" })<br /><br />
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="UPDATE" class="btn btn-default" />
+                        <div class="col-md-10">
+                            <input type="submit" value="UPDATE" class="btn btn-default" style="margin:0" />
                         </div>
                     </div>
                 }
@@ -374,15 +370,13 @@
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
-
-                        @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlONOrderID", @multiple = "multiple" })<br /><br />
                         <div class="col-md-10">
+                        @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlONOrderID", @multiple = "multiple" })<br /><br />
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="UPDATE" class="btn btn-default" />
+                        <div class="col-md-10">
+                            <input type="submit" value="UPDATE" class="btn btn-default" style="margin:0" />
                         </div>
                     </div>
                 }
@@ -395,24 +389,23 @@
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
-
-                        @Html.DropDownListFor(model => Model.VerserOrderID, Model.DispatchedOrderListItems, "Select Verser Order", new { @class = "form-control", @id = "ddlSIMActivateOrderID", @multiple = "multiple" })<br /><br />
                         <div class="col-md-10">
+                        @Html.DropDownListFor(model => Model.VerserOrderID, Model.DispatchedOrderListItems, "Select Verser Order", new { @class = "form-control", @id = "ddlSIMActivateOrderID", @multiple = "multiple" })<br /><br />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="UPDATE" class="btn btn-default" />
+                        <div class="col-md-10">
+                            <input type="submit" value="UPDATE" class="btn btn-default" style="margin:0" />
                         </div>
                     </div>
                 }
             </div>
         </div>
 
-        <div id="SHOPIFYORDS" class="tab-pane fade" role="tabpanel" style="padding-left:20px;">
+        <div id="SHOPIFYORDS" class="tab-pane fade" role="tabpanel">
             <div class="form-horizontal">
-                <table class="table table-bordered table-hover" table-responsive table-hover" style="font-size:smaller;font-weight:600" id="SHOPIFYORDERSTable">
+                <table class="table table-bordered table-hover" table-responsive table-hover" id="SHOPIFYORDERSTable">
                     <thead style="background-color:darkorange;color:white">
                         <tr>
                             <th>Order</th>
@@ -447,7 +440,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.Postcode)</td>
                                 <td>@Html.DisplayFor(modelItem => item.OrderStatus)</td>
                                 <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
-                                <td width="40px" style="align-content:center;justify-content:center" title="Click On Icon To Update Address !">
+                                <td style="align-content:center;justify-content:center" title="Click On Icon To Update Address !">
                                     @if (Convert.ToBoolean(item.AddressValidation))
                                     {
                                         <img src="~/Images/SuccessIcon.PNG" id="successIcon" style="width:30px;height:30px;justify-content:center" onclick="OpenUpdateAddress(this);" title="Click On Icon To Update Address !" />
@@ -509,7 +502,7 @@
     <script>
         $(document).ready(function () {
             $('#SHOPIFYORDERSTable').DataTable();
-            //$('.dataTables_filter').addClass('pull-right');
+            $('.dataTables_filter').addClass('pull-right');
 
             if ($("#hdnTabOrder").val() == "MORDER")
                 $('a[href="#MORDER"]').click();
