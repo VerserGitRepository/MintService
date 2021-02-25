@@ -18,10 +18,12 @@
             <div style="padding-top:5px">
                 @using (Html.BeginForm("ExportStockToExcel", "Home", FormMethod.Post))
                 {
-                    <div align="right">
-                        <button type="submit" value="ExportToExcel" class="btn btn-default btn-sm" name="submitButton">
-                            <span class="glyphicon glyphicon-export">Export</span>
-                        </button>
+                    <div class="row" align="right">
+                        <div class="col-md-12">
+                            <button type="submit" value="ExportToExcel" class="btn btn-primary" name="submitButton">
+                                <span class="glyphicon glyphicon-export">Export</span>
+                            </button>
+                        </div>
                     </div>
                 }
             </div>

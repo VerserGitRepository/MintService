@@ -8,10 +8,12 @@
 
 @using (Html.BeginForm("ExportDispatchToExcel", "Home", FormMethod.Post))
 {
-    <div align="right">
-        <button type="submit" value="ExportToExcel" class="btn btn-default btn-sm" name="submitButton">
-            <span class="glyphicon glyphicon-export">Export</span>
-        </button>
+    <div class="row" align="right">
+        <div class="col-md-12">
+            <button type="submit" value="ExportToExcel" class="btn btn-primary btn-sm" name="submitButton" style="margin-top:15px">
+                <span class="glyphicon glyphicon-export">Export</span>
+            </button>
+        </div>
     </div>
 }
 
@@ -59,7 +61,7 @@
                     <td>@Html.DisplayFor(modelItem => item.Ordershipment_Consignment_Id)</td>
                     <td>@item.OrderShippedDate.Value.ToShortDateString()</td>
                     <td>
-                        <a href="@item.OrderShipmentURL" target="_blank" class="btn-primary btn-sm">Print</a>
+                        <a href="@item.OrderShipmentURL" target="_blank" class="btn-info btn-sm">Print</a>
                     </td>
                 </tr>
             }

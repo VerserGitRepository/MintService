@@ -10,10 +10,12 @@
 
 @using (Html.BeginForm("ExportOrdersToExcel", "Home", FormMethod.Post))
 {
-    <div align="right">
-        <button type="submit" value="ExportToExcel" class="btn btn-default btn-sm" name="submitButton">
-            <span class="glyphicon glyphicon-export">Export</span>
-        </button>
+    <div class="row" align="right">
+        <div class="col-md-12">
+            <button type="submit" value="ExportToExcel" class="btn btn-primary btn-sm" name="submitButton" style="margin-top:15px">
+                <span class="glyphicon glyphicon-export">Export</span>
+            </button>
+        </div>
     </div>
 }
 
@@ -139,7 +141,7 @@
 }
 <style>
 
-    .body-content {
+/*    .body-content {
         padding-left: 0px;
         padding-right: 0px;
         max-width: 100%;
@@ -190,7 +192,7 @@
         position: fixed;
         background-color: White;
         z-index: 999;
-    }
+    }*/
 </style>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">

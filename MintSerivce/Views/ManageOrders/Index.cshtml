@@ -60,7 +60,7 @@
         <div class="well">
             @using (Html.BeginForm("OrderSummary", "ManageOrders", FormMethod.Post))
             {
-                <button type="submit" class="btn btn-primary">PRINT TODAY ORDERS SUMMARY</button>
+                <button type="submit" class="btn btn-primary" style="margin:0">PRINT TODAY ORDERS SUMMARY</button>
                 if (TempData["OrderFilePath"] != null)
                 {
                     <br />
