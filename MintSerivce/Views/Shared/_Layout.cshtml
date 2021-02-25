@@ -11,7 +11,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-fixed-top" style="background-color:black; padding:0 10px;">
+    <nav class="navbar navbar-fixed-top" style="background-color:black; padding:0 10px; height:50px">
 
         <div id="LogoImage" style="float: left; padding-right: 20px">
             <img src="~/Images/verser.jpg" style="height:48px; width:140px; margin:0 15px;" />
@@ -19,19 +19,21 @@
             @*@Html.ActionLink("VERSER MINT SERVICE ORDERS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand"  } )*@
 
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                @if (Session["User"] != null)
-                {
-                    <li>@Html.ActionLink("OPEN ORD", "Index", "Home")</li>
-                    <li>@Html.ActionLink("STOCKS", "StockAvailable", "Home")</li>
-                    <li>@Html.ActionLink("DISPATCHED ORD", "dispatchedorders", "Home")</li>
-                    <li>@Html.ActionLink("SIM ORD", "SimOrders", "Home")</li>
-                    <li>@Html.ActionLink("CANCELLED ORD", "CancelledOrders", "CancelledOrders")</li>
-                    <li>@Html.ActionLink("RETURNED ORD", "ReturnedOrders", "ReturnedOrders")</li>
+            <div class="col-md-8" style="white-space: nowrap">
+                <ul class="nav navbar-nav">
+                    @if (Session["User"] != null)
+                    {
+                        <li>@Html.ActionLink("OPEN ORD", "Index", "Home")</li>
+                        <li>@Html.ActionLink("STOCKS", "StockAvailable", "Home")</li>
+                        <li>@Html.ActionLink("DISPATCHED ORD", "dispatchedorders", "Home")</li>
+                        <li>@Html.ActionLink("SIM ORD", "SimOrders", "Home")</li>
+                        <li>@Html.ActionLink("CANCELLED ORD", "CancelledOrders", "CancelledOrders")</li>
+                        <li>@Html.ActionLink("RETURNED ORD", "ReturnedOrders", "ReturnedOrders")</li>
 
-                    @*<li><a href="https://customers.verser.com.au/JMSGatewayAPI/OnlyVerserInternalUsersRegisterFormToMAuthtokens.html", new { target="_blank" }>REGISTER NEW USER</a> </li>*@
-                }
-            </ul>
+                        @*<li><a href="https://customers.verser.com.au/JMSGatewayAPI/OnlyVerserInternalUsersRegisterFormToMAuthtokens.html", new { target="_blank" }>REGISTER NEW USER</a> </li>*@
+                    }
+                </ul>
+            </div>
 
             <ul class="nav navbar-nav" style="float:right; margin-right:10px">
                 @if (Session["User"] != null)
