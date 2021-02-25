@@ -56,7 +56,7 @@
                         <td>@Html.DisplayFor(modelItem => item.ConsignmentNumber)</td>
                         <td>@item.DateShipped.Value.ToShortDateString() </td>
                         <td>
-                            <input type="button" class="btn btn-info btn-sm" onclick="RePrintSIMLabel('@item.VerserOrderID');" style="font-size:small;font-weight:500" value="PRINT">
+                            <input type="button" class="btn btn-success btn-sm" onclick="RePrintSIMLabel('@item.VerserOrderID');" style="font-size:small;font-weight:500" value="PRINT">
                         </td>
                     </tr>
                 }

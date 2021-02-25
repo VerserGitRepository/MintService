@@ -1,10 +1,8 @@
 ﻿@using System.Linq;
 @model IEnumerable<MintSerivce.Models.OrderDispatchViewModel>
-
 @{
     ViewBag.Title = "DispatchedOrders";
 }
-
 
 @using (Html.BeginForm("ExportDispatchToExcel", "Home", FormMethod.Post))
 {
@@ -16,8 +14,6 @@
         </div>
     </div>
 }
-
-
 
 <div class="col-md-12">
     <table class="table table-bordered table-hover" table-responsive table-hover" id="mainTable">
@@ -61,7 +57,7 @@
                     <td>@Html.DisplayFor(modelItem => item.Ordershipment_Consignment_Id)</td>
                     <td>@item.OrderShippedDate.Value.ToShortDateString()</td>
                     <td>
-                        <a href="@item.OrderShipmentURL" target="_blank" class="btn-info btn-sm">Print</a>
+                        <a href="@item.OrderShipmentURL" target="_blank" class="btn btn-success btn-sm">Print</a>
                     </td>
                 </tr>
             }
@@ -69,14 +65,11 @@
     </table>
 </div>
 
-
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
     <script src="~/Scripts/datatables.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-
     <script src="~/Scripts/confirm.js"></script>
     <link href="~/Content/confirm.css" rel="stylesheet" />
     <script type="text/javascript">

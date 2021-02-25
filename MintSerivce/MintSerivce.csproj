@@ -429,6 +429,7 @@
     <Content Include="Images\FailIcon.PNG" />
     <Content Include="Images\PDF.png" />
     <Content Include="Images\SuccessIcon.PNG" />
+    <Content Include="Images\Verser.jpg" />
     <Content Include="Images\VerserLogo.png" />
     <Content Include="Scripts\bootstrap-multiselect.css" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
@@ -587,6 +588,8 @@
     <Content Include="Views\Home\Reports.cshtml" />
     <Content Include="Views\ManualOrder\ReturnModalView.cshtml" />
     <Content Include="Views\ManualOrder\UpdateAddress.cshtml" />
+    <Content Include="Views\ManageOrders\ChangeOrderSKU.cshtml" />
+    <Content Include="Views\ManageOrders\UpdateSKU.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -622,7 +625,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52484</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52488/</IISUrl>
+          <IISUrl>http://localhost:53500/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
