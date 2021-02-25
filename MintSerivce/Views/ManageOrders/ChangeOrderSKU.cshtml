@@ -12,16 +12,16 @@
     {
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.Label("Verser Order", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Verser Order", htmlAttributes: new { @class = "control-label col-md-1" })
             @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlChangeOrderID", @multiple = "multiple" })<br /><br />
            
-                   @Html.Label("SKU", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("SKU", htmlAttributes: new { @class = "control-label col-md-1" })
             @Html.DropDownListFor(model => Model.SKU, Model.ListItemModel, "Select SKU", new { @class = "control-label col-md-2", @id = "ddlChangeOrdSKUID", @multiple = "multiple" })<br>
          
         </div>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Update Order SKU" class="btn btn-default" />
+            <div class="col-md-offset-1 col-md-2">
+                <input type="submit" value="Update Order SKU" class="btn btn-primary" />
             </div>
         </div>
     }
