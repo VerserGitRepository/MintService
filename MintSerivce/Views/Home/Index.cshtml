@@ -20,7 +20,7 @@
 
 
 <div class="col-md-12">
-    <table class="table table-bordered display nowrap" table-responsive table-hover" id="mainTable" style="width:100%">
+    <table class="table table-bordered" table-responsive table-hover" id="mainTable">
         <thead style="background-color:darkorange;color:white; ">
             <tr>
                 <th>Order</th>
@@ -92,7 +92,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#mainTable').DataTable({
-                "scrollX": true
+                "scrollX": true,
             });
 
             $('.dataTables_filter').addClass('pull-right');
@@ -144,10 +144,6 @@
     div.dataTables_wrapper {
         width: 100%;
         margin: 0;
-    }
-
-    div.dataTables_filter {
-        display: inline-block;
     }
 
     /*    .body-content {

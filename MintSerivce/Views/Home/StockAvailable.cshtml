@@ -10,71 +10,71 @@
 </ul>
 
 
-<div class="col-md-12">
 
-    <div class="tab-content">
 
-        <div id="SKUSTOCK" class="tab-pane fade in active" role="tabpanel">
-            <div style="padding-top:5px">
-                @using (Html.BeginForm("ExportStockToExcel", "Home", FormMethod.Post))
-                {
-                    <div class="row" align="right">
-                        <div class="col-md-12">
-                            <button type="submit" value="ExportToExcel" class="btn btn-primary" name="submitButton">
-                                <span class="glyphicon glyphicon-export">Export</span>
-                            </button>
-                        </div>
-                    </div>
-                }
-            </div>
-            <div class="row">
+<div class="tab-content">
+
+    <div id="SKUSTOCK" class="tab-pane fade in active" role="tabpanel">
+
+        @using (Html.BeginForm("ExportStockToExcel", "Home", FormMethod.Post))
+        {
+            <div class="row" align="right">
                 <div class="col-md-12">
+                    <button type="submit" value="ExportToExcel" class="btn btn-primary" name="submitButton">
+                        <span class="glyphicon glyphicon-export">Export</span>
+                    </button>
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-12">
                 <table class="table table-bordered table-hover" table-responsive table-hover" id="mainTable">
-                <thead style="background-color:#959ca1;color:white">
-                    <tr style="background-color:darkorange">
-                        <th>SKU</th>
-                        <th>Make</th>
-                        <th>Model</th>
-                        <th>Colour</th>
-                        <th>Capacity</th>
-                        <th>Available</th>
-                        <th>Buffer</th>
-                        <th>On Hold</th>
-                        <th>On Order</th>
-                        <th>ShopifyStockCount</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.SKU)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Make)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Model)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Colour)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Capacity)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Count)</td>
-                            <td>@Html.DisplayFor(modelItem => item.SKUBuffer)</td>
-                            <td>@Html.DisplayFor(modelItem => item.OnHold)</td>
-                            <td>@Html.DisplayFor(modelItem => item.OnOrder)</td>
-                            <td width="5%">@Html.DisplayFor(modelItem => item.ShopifyStockCount)</td>
+                    <thead style="background-color:#959ca1;color:white">
+                        <tr style="background-color:darkorange">
+                            <th>SKU</th>
+                            <th>Make</th>
+                            <th>Model</th>
+                            <th>Colour</th>
+                            <th>Capacity</th>
+                            <th>Available</th>
+                            <th>Buffer</th>
+                            <th>On Hold</th>
+                            <th>On Order</th>
+                            <th>ShopifyStockCount</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-            </div>
-            </div>
-        </div>
+                    </thead>
+                    <tbody>
 
-        <div id="REPORTS" class="tab-pane fade" role="tabpanel">
-
-            @{
-                Html.RenderAction("Reports", "Home");
-            }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.SKU)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Make)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Model)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Colour)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Capacity)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Count)</td>
+                                <td>@Html.DisplayFor(modelItem => item.SKUBuffer)</td>
+                                <td>@Html.DisplayFor(modelItem => item.OnHold)</td>
+                                <td>@Html.DisplayFor(modelItem => item.OnOrder)</td>
+                                <td width="5%">@Html.DisplayFor(modelItem => item.ShopifyStockCount)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
+    <div id="REPORTS" class="tab-pane fade" role="tabpanel">
+
+        @{
+            Html.RenderAction("Reports", "Home");
+        }
+    </div>
 </div>
+
 
 
 
@@ -85,7 +85,7 @@
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
-@*<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">*@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -94,13 +94,14 @@
 }
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#mainTable').DataTable();
+        $('#mainTable').DataTable({
+            "scrollX": true
+        });
         $('.dataTables_filter').addClass('pull-right');
     });
 </script>
 
 <style>
-
 </style>
 
 

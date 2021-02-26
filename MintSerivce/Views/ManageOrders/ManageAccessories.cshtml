@@ -1,12 +1,11 @@
-﻿
-@using System.Linq;
+﻿@using System.Linq;
 @using MintSerivce.Models
 @model ViewModel
 @{
     ViewBag.Title = "Returned Orders";
 }
 
-<div class="col-md-12" style="margin-top:5px;">
+<div class="col-md-12">
     <table class="table table-bordered table-responsive table-hover" align="center" id="mainTable">
         <thead style="background-color:darkorange;color:white">
             <tr>
@@ -51,6 +50,7 @@
         </div>
     </div>
 </div>
+
 <script>
     $(document).ready(function () {
         $('#mainTable').DataTable();
