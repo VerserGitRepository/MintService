@@ -5,8 +5,20 @@
     ViewBag.Title = "Returned Orders";
 }
 
+<div class="row pull-right">
+    <div class="col-md-1">
+        <div class="col-md-1" style="margin-bottom:5px">
+            <button type="submit" class="btn btn-primary btn-md" id="addProduct" data-toggle="tooltip" data-placement="left" onclick="">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+
 <div class="col-md-12">
-    <table class="table table-bordered table-responsive table-hover" align="center" id="mainTable">
+
+    <table class="table table-bordered table-responsive table-hover display nowrap" align="center" id="mainTable">
         <thead style="background-color:darkorange;color:white">
             <tr>
                 <th>ACCESSORIES TYPE</th>
@@ -26,39 +38,55 @@
             }
         </tbody>
     </table>
+
 </div>
+
 <div id='AccessoriesModal' class='modal'>
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" >
-                <button type="submit" class="close" id="modelclosebtn" data-backdrop="false" onclick="closeModelbutton()" >&times;</button>
+            <div class="modal-header">
+                <button type="submit" class="close" id="modelclosebtn" data-backdrop="false" onclick="closeModelbutton()">&times;</button>
                 <h4 class="modal-title">Update Accessories Count</h4>
-               
-            </div>            
-            <div id='myModalContent' style="padding-left:30px;" >
+
+            </div>
+            <div id='myModalContent' style="padding-left:30px;">
                 Add <label id="lbleaddAccessory"></label> Count: <br />
-                 <input type="text" id="txtAddcount" class="text-info" placeholder="Enter Accessory Count"><br />
-               Remove <label id="lbleremoveAccessory"></label> Count: <br />
-                 <input type="text" id="txtRemovecount" class="text-info" placeholder="Remove Accessory Count">
-                 <br />
-                <label id="lblerrormsg" style="color:red;font-weight:600;">                 
-                </label>  ID:<label id="lblId" />  
+                <input type="text" id="txtAddcount" class="text-info" placeholder="Enter Accessory Count"><br />
+                Remove <label id="lbleremoveAccessory"></label> Count: <br />
+                <input type="text" id="txtRemovecount" class="text-info" placeholder="Remove Accessory Count">
+                <br />
+                <label id="lblerrormsg" style="color:red;font-weight:600;">
+                </label>  ID:<label id="lblId" />
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-default" data-dismiss="modal" onclick="UpdateAccessoriesCounts()" >Save Changes</button>
+                <button type="submit" class="btn btn-default" data-dismiss="modal" onclick="UpdateAccessoriesCounts()">Save Changes</button>
             </div>
         </div>
     </div>
 </div>
 
+
+<style>
+    div.dataTables_wrapper {
+        width: 100%;
+        margin: 0 auto;
+    }
+</style>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet" />
+
 <script>
     $(document).ready(function () {
-        $('#mainTable').DataTable();
+        $('#mainTable').DataTable({
+        });
         $('.dataTables_filter').addClass('pull-right');
     });
 
     function ShowOrderDetails(Id, AccessoryType) {
-     
+
         $('#lblId').text(Id);
         $('#lbleaddAccessory').text(AccessoryType);
         $('#lbleremoveAccessory').text(AccessoryType);
@@ -68,34 +96,30 @@
         $('#AccessoriesModal').show();
     }
 
-    function closeModelbutton()
-    {      
+    function closeModelbutton() {
         $('#AccessoriesModal').hide();
         $('.modal-backdrop').remove();
     }
 
-    function UpdateAccessoriesCounts()
-    {
+    function UpdateAccessoriesCounts() {
         var Id = $('#lblId').text();
         var AddAccessoriesCount = $('#txtAddcount').val();
         var RemoveAccessoriesCount = $('#txtRemovecount').val();
-        if (AddAccessoriesCount <= 0 && RemoveAccessoriesCount <= 0)
-        {   
+        if (AddAccessoriesCount <= 0 && RemoveAccessoriesCount <= 0) {
             $('#lblerrormsg').text("Please Enter Accessory Stock Value!");
             return false;
         }
 
         $.ajax({
             type: "POST",
-            url: "./ManageAccessories",            
+            url: "./ManageAccessories",
             data: { "AccessoryId": Id, "AddAccessoriesCount": AddAccessoriesCount, "RemoveAccessoriesCount": RemoveAccessoriesCount, },
-            datatype: "json"            
+            datatype: "json"
         });
-        
+
         location.reload();
         $('#AccessoriesModal').hide();
         $('.modal-backdrop').remove();
     }
 
 </script>
- 

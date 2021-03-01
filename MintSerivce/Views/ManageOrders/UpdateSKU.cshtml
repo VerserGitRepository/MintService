@@ -3,99 +3,112 @@
 
 @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        @using (Html.BeginForm("UpdateSKU", "ManageOrders", FormMethod.Post, new { id = "SKUCreateForm" }))
-        {
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="form-group">
-                @Html.Label("Select Editing SKU", htmlAttributes: new { @class = "control-label col-md-1" })
-                @Html.DropDownListFor(model => Model.SKUViewModel.EditingSKU, Model.ListItemModel, "Select SKU", new { @class = "control-label col-md-2", @id = "ddlRemoveSKUID", @multiple = "multiple" })<br>
-                <div class="col-md-10">
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.Label("New SKU", htmlAttributes: new { @class = "control-label col-md-1" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.SKUViewModel.SKU, "", new { style = "width:150px" })
-                    @Html.ValidationMessageFor(model => model.SKUViewModel.SKU, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.Label("Make", htmlAttributes: new { @class = "control-label col-md-1" })
-                <div class="col-md-10">      
 
-                    @Html.DropDownListFor(model => Model.SKUViewModel.Make, new List<SelectListItem>
-                                     {
-                                         new SelectListItem {Text = "Apple", Value = "Apple"},
-                                         new SelectListItem {Text = "Samsung", Value = "Samsung"}
-                                     }, "Makes", new { @class = "form-control", style = "Height:40px" })                  
-                    @Html.ValidationMessageFor(model => model.SKUViewModel.Make, "", new { @class = "text-danger" })
-                </div>
+
+<div class="form-horizontal">
+    @using (Html.BeginForm("UpdateSKU", "ManageOrders", FormMethod.Post, new { id = "SKUCreateForm" }))
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.Label("Select Editing SKU", htmlAttributes: new { @class = "control-label col-md-1" })
+            @Html.DropDownListFor(model => Model.SKUViewModel.EditingSKU, Model.ListItemModel, "Select SKU", new { @class = "control-label col-md-2", @id = "ddlRemoveSKUID", @multiple = "multiple" })<br>
+            <div class="col-md-10">
             </div>
-            <div class="form-group">
-                @Html.Label("Model", htmlAttributes: new { @class = "control-label col-md-1" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.SKUViewModel.Model, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.SKUViewModel.Model, "", new { @class = "text-danger" })
-                </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.Label("New SKU", htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SKUViewModel.SKU, "", new { style = "width:150px" })
+                @Html.ValidationMessageFor(model => model.SKUViewModel.SKU, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                @Html.Label("Capacity", htmlAttributes: new { @class = "control-label col-md-1" })
-                <div class="col-md-10">                 
-                    @Html.DropDownListFor(model => Model.SKUViewModel.Capacity, new List<SelectListItem>
-                             {
-                                 new SelectListItem {Text = "16GB", Value = "16GB"},
-                                 new SelectListItem {Text = "32GB", Value = "32GB"},
-                                 new SelectListItem {Text = "64GB", Value = "64GB"},
-                                  new SelectListItem {Text = "128GB", Value = "128GB"},
-                                 new SelectListItem {Text = "256GB", Value = "256GB"},
-                                 new SelectListItem {Text = "512GB", Value = "512GB"},
-                                  new SelectListItem {Text = "1TB", Value = "1TB"}
-                             }, "Capacity", new { @class = "form-control", style = "Height:40px" })   
-                    @Html.ValidationMessageFor(model => model.SKUViewModel.Capacity, "", new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Make", htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+
+                @Html.DropDownListFor(model => Model.SKUViewModel.Make, new List<SelectListItem>
+                                 {
+                                     new SelectListItem {Text = "Apple", Value = "Apple"},
+                                     new SelectListItem {Text = "Samsung", Value = "Samsung"}
+                                 }, "Makes", new { @class = "form-control", style = "Height:40px" })
+                @Html.ValidationMessageFor(model => model.SKUViewModel.Make, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                @Html.Label("Colour", htmlAttributes: new { @class = "control-label col-md-1" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.SKUViewModel.Colour, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.SKUViewModel.Colour, "", new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Model", htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SKUViewModel.Model, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SKUViewModel.Model, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                @Html.Label("SubGrade", htmlAttributes: new { @class = "control-label col-md-1" })
-                <div class="col-md-10">                
-                    @Html.DropDownListFor(model => Model.SKUViewModel.SubGrade, new List<SelectListItem>
-                                {
-                                    new SelectListItem {Text = "Good As Nu", Value = "Good As Nu"},
-                                    new SelectListItem {Text = "Minor Scuff", Value = "Minor Scuff"},
-                                    new SelectListItem {Text = "Inner beauty", Value = "Inner beauty"}
-                                }, "SubGrades", new { @class = "form-control", style = "Height:40px" })
-                    @Html.ValidationMessageFor(model => model.SKUViewModel.SubGrade, "", new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Capacity", htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => Model.SKUViewModel.Capacity, new List<SelectListItem>
+                         {
+                             new SelectListItem {Text = "16GB", Value = "16GB"},
+                             new SelectListItem {Text = "32GB", Value = "32GB"},
+                             new SelectListItem {Text = "64GB", Value = "64GB"},
+                              new SelectListItem {Text = "128GB", Value = "128GB"},
+                             new SelectListItem {Text = "256GB", Value = "256GB"},
+                             new SelectListItem {Text = "512GB", Value = "512GB"},
+                              new SelectListItem {Text = "1TB", Value = "1TB"}
+                         }, "Capacity", new { @class = "form-control", style = "Height:40px" })
+                @Html.ValidationMessageFor(model => model.SKUViewModel.Capacity, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                @Html.Label("SKUBuffer", htmlAttributes: new { @class = "control-label col-md-1" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.SKUViewModel.SKUBuffer, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.SKUViewModel.SKUBuffer, "", new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Colour", htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SKUViewModel.Colour, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SKUViewModel.Colour, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                @Html.Label("IsActive", htmlAttributes: new { @class = "control-label col-md-1" })
-                <div class="col-md-10">
-                    @Html.CheckBoxFor(model => model.SKUViewModel.IsActive, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.SKUViewModel.IsActive, "", new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("SubGrade", htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => Model.SKUViewModel.SubGrade, new List<SelectListItem>
+                            {
+                                new SelectListItem {Text = "Good As Nu", Value = "Good As Nu"},
+                                new SelectListItem {Text = "Minor Scuff", Value = "Minor Scuff"},
+                                new SelectListItem {Text = "Inner beauty", Value = "Inner beauty"}
+                            }, "SubGrades", new { @class = "form-control", style = "Height:40px" })
+                @Html.ValidationMessageFor(model => model.SKUViewModel.SubGrade, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <div class="col-md-offset-1 col-md-2">
-                    <input type="submit" value="Create New SKU" class="btn btn-primary" id="CreateSKUSubmit" />
-                </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("SKUBuffer", htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SKUViewModel.SKUBuffer, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SKUViewModel.SKUBuffer, "", new { @class = "text-danger" })
             </div>
-        }
-    </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("IsActive", htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.SKUViewModel.IsActive, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SKUViewModel.IsActive, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-2">
+                <input type="submit" value="Create New SKU" class="btn btn-primary" id="CreateSKUSubmit" />
+            </div>
+        </div>
+    }
+</div>s
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+<link href="~/Content/bootstrap-3.1.4.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />

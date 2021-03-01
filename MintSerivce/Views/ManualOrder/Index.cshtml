@@ -124,16 +124,18 @@
                     <div class="well">
                         <div class="row">
                             <div class="col-sm-3">
+                                <label>Customer ID:</label>
                                 @Html.EditorFor(model => model.ReturnReplacementModel.CustomerID, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus", placeholder = "Customer ID" } })
                                 @Html.ValidationMessageFor(model => model.ReturnReplacementModel.CustomerID, null, new { @class = "text-danger" })
                             </div>
                             <div class="col-sm-3">
+                                <label>Customer Tracking No.:</label>
                                 @Html.EditorFor(model => model.ReturnReplacementModel.TrackingNumberFromCustomerToVerser, new { htmlAttributes = new { @class = "form-control", placeholder = "Customer Tracking No." } })
                                 @Html.ValidationMessageFor(model => model.Postcode, null, new { @class = "text-danger" })
                             </div>
 
                             <div class="col-sm-6">
-                                @Html.DropDownListFor(model => Model.ReturnReplacementModel.VerserOrderID, Model.DispatchedOrderListItems, "Select Verser Order", new { @class = "form-control", placeholder = "VerserOrderID", @id = "ddlReturnOrderID", @multiple = "multiple", style = "width:80%;" })
+                                @Html.DropDownListFor(model => Model.ReturnReplacementModel.VerserOrderID, Model.DispatchedOrderListItems, "Select Verser Order", new { @class = "form-control col-md-2", placeholder = "VerserOrderID", @id = "ddlReturnOrderID", @multiple = "multiple", style = "width:80%;" })
                                 @Html.ValidationMessageFor(model => model.ReturnReplacementModel.VerserOrderID, null, new { @class = "text-danger" })
                             </div>
                         </div>
@@ -489,10 +491,12 @@
 
     <script src="~/Scripts/confirm.js"></script>
     <link href="~/Content/confirm.css" rel="stylesheet" />
+
     <script src="~/Scripts/bootstrap-multiselect.js"></script>
     <link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">*@
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
