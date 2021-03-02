@@ -6,7 +6,7 @@
     ViewBag.Title = "Returned Orders";
 }
 
-<div id="RETURNORDER" class="tab-pane fade in active" role="tabpanel" style="text-align:left;padding-left:20px;width:1000px; ">
+<div id="RETURNORDER" class="tab-pane fade in active" role="tabpanel" style="text-align:left;padding-left:20px; ">
     @using (Ajax.BeginForm("UpdateOrderAddress", "ManualOrder", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }))
     {
         @Html.AntiForgeryToken()
