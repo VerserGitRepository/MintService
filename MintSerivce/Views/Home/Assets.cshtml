@@ -4,34 +4,34 @@
 @{
     ViewBag.Title = "Assets";
 }
-<div class="row">
-    <Div style="padding-top:20px">
-        <div class="col-md-10 col-sm-offset-0">
 
-            <table class="table table-bordered" table-responsive table-hover" id="mainTable">
-                <thead style="background-color:#959ca1;color:white">
-                    <tr>
+<div style="padding-top:20px">
+    <div class="col-md-12">
 
-                        <th>Make</th>
-                        <th>Model</th>
-                        <th>Colour</th>
-                        <th>Capacity</th>
-                        <th>SKU</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>@Html.DisplayFor(model => model.Make)</td>
-                        <td>@Html.DisplayFor(model => model.Model)</td>
-                        <td>@Html.DisplayFor(model => model.Colour)</td>
-                        <td>@Html.DisplayFor(model => model.Capacity)</td>
-                        <td>@Html.DisplayFor(model => model.SKU)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </Div>
+        <table class="table table-bordered" table-responsive table-hover" id="mainTable">
+            <thead style="background-color:#959ca1;color:white">
+                <tr>
+
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Colour</th>
+                    <th>Capacity</th>
+                    <th>SKU</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Html.DisplayFor(model => model.Make)</td>
+                    <td>@Html.DisplayFor(model => model.Model)</td>
+                    <td>@Html.DisplayFor(model => model.Colour)</td>
+                    <td>@Html.DisplayFor(model => model.Capacity)</td>
+                    <td>@Html.DisplayFor(model => model.SKU)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

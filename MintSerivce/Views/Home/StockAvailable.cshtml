@@ -20,51 +20,51 @@
         {
             <div class="row" align="right">
                 <div class="col-md-12">
-                    <button type="submit" value="ExportToExcel" class="btn btn-primary" name="submitButton">
+                    <button type="submit" value="ExportToExcel" class="btn btn-primary btn-sm" name="submitButton">
                         <span class="glyphicon glyphicon-export">Export</span>
                     </button>
                 </div>
             </div>
         }
 
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-bordered table-hover" table-responsive table-hover" id="mainTable">
-                    <thead style="background-color:#959ca1;color:white">
-                        <tr style="background-color:darkorange">
-                            <th>SKU</th>
-                            <th>Make</th>
-                            <th>Model</th>
-                            <th>Colour</th>
-                            <th>Capacity</th>
-                            <th>Available</th>
-                            <th>Buffer</th>
-                            <th>On Hold</th>
-                            <th>On Order</th>
-                            <th>ShopifyStockCount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@Html.DisplayFor(modelItem => item.SKU)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Make)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Model)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Colour)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Capacity)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Count)</td>
-                                <td>@Html.DisplayFor(modelItem => item.SKUBuffer)</td>
-                                <td>@Html.DisplayFor(modelItem => item.OnHold)</td>
-                                <td>@Html.DisplayFor(modelItem => item.OnOrder)</td>
-                                <td width="5%">@Html.DisplayFor(modelItem => item.ShopifyStockCount)</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+        <div class="col-md-12">
+            <table class="table table-bordered table-hover" table-responsive table-hover" id="mainTable">
+                <thead style="background-color:#959ca1;color:white">
+                    <tr style="background-color:darkorange; font-size:smaller">
+                        <th>SKU</th>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Colour</th>
+                        <th>Capacity</th>
+                        <th>Available</th>
+                        <th>Buffer</th>
+                        <th>On Hold</th>
+                        <th>On Order</th>
+                        <th>ShopifyStockCount</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr style="font-size:smaller">
+                            <td>@Html.DisplayFor(modelItem => item.SKU)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Make)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Model)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Colour)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Capacity)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Count)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SKUBuffer)</td>
+                            <td>@Html.DisplayFor(modelItem => item.OnHold)</td>
+                            <td>@Html.DisplayFor(modelItem => item.OnOrder)</td>
+                            <td width="5%">@Html.DisplayFor(modelItem => item.ShopifyStockCount)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
+
     </div>
 
     <div id="REPORTS" class="tab-pane fade" role="tabpanel">
@@ -95,7 +95,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#mainTable').DataTable({
-            "scrollX": true
+            "pageLength": 15,
+            "lengthMenu": [15, 30, 60, 100]
         });
         $('.dataTables_filter').addClass('pull-right');
     });

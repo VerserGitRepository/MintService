@@ -8,7 +8,7 @@
 <div class="row pull-right">
     <div class="col-md-1">
         <div class="col-md-1" style="margin-bottom:5px">
-            <button type="submit" class="btn btn-primary btn-md" id="addProduct" data-toggle="tooltip" data-placement="left" onclick="">
+            <button type="submit" class="btn btn-warning btn-md" id="addProduct" data-toggle="tooltip" data-placement="left" onclick="">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
         </div>
@@ -19,17 +19,15 @@
 <div class="col-md-12">
     <table class="table table-bordered table-responsive table-hover display nowrap" align="center" id="mainTable">
         <thead style="background-color:darkorange;color:white">
-            <tr>
+            <tr style="font-size:small">
                 <th>ACCESSORIES TYPE</th>
                 <th>AVAILABLE STOCK COUNT</th>
-
-
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.AccessoriesStock)
             {
-                <tr>
+                <tr style="font-size:small">
                     <td>
                         <a href="javascript:ShowOrderDetails('@item.Id','@item.AccessoryType')">@item.AccessoryType</a>
                     </td>
@@ -58,7 +56,7 @@
                 </label>  ID:<label id="lblId" />
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-default" data-dismiss="modal" onclick="UpdateAccessoriesCounts()">Save Changes</button>
+                <button type="submit" class="btn btn-warning" data-dismiss="modal" onclick="UpdateAccessoriesCounts()">Save Changes</button>
             </div>
         </div>
     </div>

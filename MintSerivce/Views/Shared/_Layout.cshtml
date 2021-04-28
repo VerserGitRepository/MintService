@@ -11,10 +11,11 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-fixed-top" style="background-color:black; padding:0 10px; height:50px">
-
-        <div id="LogoImage" style="float: left; padding-right: 20px">
-            <img src="~/Images/verser.jpg" style="height:48px; width:140px; margin:0 15px;" />
+    <div class="navbar navbar-fixed-top" style="background-color:black; padding:0 10px;">
+        <div class="navbar-header pull-left">
+            <a href="@Url.Action("Index", "Home")">
+                <img class="" src="~/Images/Verser.jpg" style="height:50px; width:140px;" />
+            </a>
         </div>
 
         <div class="navbar-collapse collapse">
@@ -53,7 +54,7 @@
             </button>*@
         </div>
 
-    </nav>
+    </div>
 
     <div class="container-fluid">
         @RenderBody()
