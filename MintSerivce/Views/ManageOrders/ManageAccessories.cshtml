@@ -5,18 +5,18 @@
     ViewBag.Title = "Returned Orders";
 }
 
-<div class="row pull-right">
-    <div class="col-md-1">
-        <div class="col-md-1" style="margin-bottom:5px">
-            <button type="submit" class="btn btn-warning btn-md" id="addProduct" data-toggle="tooltip" data-placement="left" onclick="">
+<div class="col-md-12">
+    <div class="col-md-1 pull-right">
+
+            <button type="submit" class="btn btn-warning btn-sm pull-right" id="addProduct" data-toggle="tooltip" data-placement="left" onclick="">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
-        </div>
+
     </div>
-</div>
 
 
-<div class="col-md-12">
+
+
     <table class="table table-bordered table-responsive table-hover display nowrap" align="center" id="mainTable">
         <thead style="background-color:darkorange;color:white">
             <tr style="font-size:small">
@@ -67,6 +67,10 @@
     div.dataTables_wrapper {
         width: 100%;
         margin: 0 auto;
+    }
+
+    #mainTable_length {
+        margin-top: 40px;
     }
 </style>
 
