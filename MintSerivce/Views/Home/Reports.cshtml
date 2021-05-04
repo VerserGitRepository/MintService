@@ -6,8 +6,8 @@
 
 
 <table class="table table-bordered pull-left table-hover" id="FilesTable">
-    <thead style="background-color: darkorange; color:white">
-        <tr>
+    <thead style="background-color: darkorange; color:white;">
+        <tr style="font-size:smaller">
             <th>
                 FileName
             </th>
@@ -26,7 +26,7 @@
 
         @foreach (var _file in Model)
         {
-            <tr>
+            <tr style="font-size:smaller">
                 <td>@Html.ActionLink(_file.FileName, "DownloadFile", "Home", new { path = _file.FileFullPath, fileName = _file.FileName }, htmlAttributes: null)</td>
                 <td>@_file.FileSize KB</td>
                 <td>@_file.FileType</td>
@@ -54,7 +54,10 @@
 }
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#FilesTable').DataTable();
+        $('#FilesTable').DataTable({
+            "pageLength": 15,
+            "lengthMenu": [15, 30, 60, 100]
+        });
         $('.dataTables_filter').addClass('pull-right');
     });
 </script>

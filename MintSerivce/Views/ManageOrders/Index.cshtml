@@ -31,38 +31,39 @@
         </div>
 
 
-        <div id="RETURNORDER" class="tab-pane fade in active" role="tabpanel">
-            <div class="well">
-                @using (Html.BeginForm("UpdateOrderAddress", "ManageOrders", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })<br /><br />
-                    <label class="control-label">Address Line 1&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    @Html.EditorFor(model => model.AddressLine1, "", new { style = "width:150px" })
-                    @Html.ValidationMessageFor(model => Model.AddressLine1, "", new { @class = "text-danger" })
-                    <br /><br />
-                    <label class="control-label">Locality&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    @Html.EditorFor(model => model.Locality, "", new { style = "width:150px" })
-                    @Html.ValidationMessageFor(model => Model.Locality, "", new { @class = "text-danger" })
-                    <br /><br />
-                    <label class="control-label">State&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    @Html.EditorFor(model => model.State, "", new { style = "width:150px" })
-                    @Html.ValidationMessageFor(model => Model.State, "", new { @class = "text-danger" })
-                    <br /><br />
-                    <label class="control-label">Postal Code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    @Html.EditorFor(model => model.Postcode, "", new { style = "width:150px" })
-                    @Html.ValidationMessageFor(model => Model.Postcode, "", new { @class = "text-danger" })
-                    <br /><br />
-                    <input type="submit" class="btn btn-primary" id="update" style="margin:0" value="Update Address"> @*onclick="return ShowProgress();" onclick="DisplayProgressMessage(this,'Processing Order...')"*@
-                    <br /><br />
-                }
-            </div>
+    <div id="RETURNORDER" class="tab-pane fade in active" role="tabpanel" >
+        <div class="well">
+        @using (Html.BeginForm("UpdateOrderAddress", "ManageOrders", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })<br /><br />
+            <label class="control-label">Address Line 1&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            @Html.EditorFor(model => model.AddressLine1, "", new { style = "width:150px" })
+            @Html.ValidationMessageFor(model => Model.AddressLine1, "", new { @class = "text-danger" })
+            <br /><br />
+            <label class="control-label">Locality&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            @Html.EditorFor(model => model.Locality, "", new { style = "width:150px" })
+            @Html.ValidationMessageFor(model => Model.Locality, "", new { @class = "text-danger" })
+            <br /><br />
+            <label class="control-label">State&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            @Html.EditorFor(model => model.State, "", new { style = "width:150px" })
+            @Html.ValidationMessageFor(model => Model.State, "", new { @class = "text-danger" })
+            <br /><br />
+            <label class="control-label">Postal Code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            @Html.EditorFor(model => model.Postcode, "", new { style = "width:150px" })
+            @Html.ValidationMessageFor(model => Model.Postcode, "", new { @class = "text-danger" })
+            <br /><br />
+            <input type="submit" class="btn btn-warning" id="update" style="margin:0" value="Update Address"> @*onclick="return ShowProgress();" onclick="DisplayProgressMessage(this,'Processing Order...')"*@
+            <br /><br />
+        }
         </div>
 
-
-        <div id="MANAGEDISPATCHORDER" class="tab-pane fade">
-            <div class="well">
-                @using (Html.BeginForm("OrderSummary", "ManageOrders", FormMethod.Post))
+    <div id="MANAGEDISPATCHORDER" class="tab-pane fade">
+        <div class="well">
+            @using (Html.BeginForm("OrderSummary", "ManageOrders", FormMethod.Post))
+            {
+                <button type="submit" class="btn btn-warning" style="margin:0">PRINT TODAY ORDERS SUMMARY</button>
+                if (TempData["OrderFilePath"] != null)
                 {
                     <button type="submit" class="btn btn-primary" style="margin:0">PRINT TODAY ORDERS SUMMARY</button>
                     if (TempData["OrderFilePath"] != null)
@@ -71,34 +72,29 @@
                         <img style="width:45px" src="~/Images/PDF.png" /> <a href="javascript: w=window.open('@TempData["OrderFilePath"].ToString()');">Print Shipment Order Summary</a>
                     }
                 }
-                <br />
-                <input type="date" value="" placeholder="Enter Date in ddmmyyyy format" id="datevalueEnter" />
-                <br /> <br /> <br />
-                <p><a id="downloadfile" class="btn-primary btn-lg" href="downloadfile" target="_blank">Download File</a></p>
-            </div>
+            }
+            <br />
+            <input type="date" value="" placeholder="Enter Date in ddmmyyyy format" id="datevalueEnter" />
+            <br /> <br />
+            <p><a id="downloadfile" class="btn btn-warning" href="downloadfile" target="_blank" style="margin:0">Download File</a></p>
         </div>
 
-        <div id="MANAGESKU" class="tab-pane fade">
-            <div class="well">
-                @using (Html.BeginForm("UpdateSKUBuffer", "ManageOrders", FormMethod.Post))
-                {
-                    <div class="form-group" style="padding-left:20px;padding-top:15px">
-                        <label class="control-label">SKU ID</label><br>
-                        @Html.DropDownListFor(model => Model.ListItemModel, Model.ListItemModel, "Select SKU", new { @class = "form-control", @id = "ddlSKUID", @multiple = "multiple" })<br>
-                        <br><br><label class="control-label">SKU Buffer</label><br>
-                        <input type="text" id="SKUBufferID" name="SKUBuffer" class="form-control" /><br>
-                    </div>
-                    <div class="form-group" style="padding-left:20px;">
-                        <button type="submit" class="btn btn-primary">UPDATE SKU</button>
-                    </div>
-                }
-            </div>
+    <div id="MANAGESKU" class="tab-pane fade">
+        <div class="well">
+            @using (Html.BeginForm("UpdateSKUBuffer", "ManageOrders", FormMethod.Post))
+            {
+                <div class="form-group" style="padding-left:20px;padding-top:15px">
+                    <label class="control-label">SKU ID</label><br>
+                    @Html.DropDownListFor(model => Model.ListItemModel, Model.ListItemModel, "Select SKU", new { @class = "form-control", @id = "ddlSKUID", @multiple = "multiple" })<br>
+                    <br><br><label class="control-label">SKU Buffer</label><br>
+                    <input type="text" id="SKUBufferID" name="SKUBuffer" class="form-control" /><br>
+                </div>
+                <div class="form-group" style="padding-left:15px">
+                    <button type="submit" class="btn btn-warning">Update SKU</button>
+                </div>
+            }
         </div>
-
-
-        <div id="MANAGEACCESSORIES" class="tab-pane fade">
-
-            @Html.Partial("ManageAccessories")
+    </div>
 
         </div>
 

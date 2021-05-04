@@ -18,7 +18,7 @@
 <div class="col-md-12">
     <table class="table table-bordered display nowrap" table-responsive table-hover" id="mainTable" style="width:100%">
         <thead style="background-color:darkorange;color:white; margin-top:10px">
-            <tr>
+            <tr style="font-size:x-small">
                 <th>ORDER</th>
                 <th>TIAB-ORD</th>
                 <th>RP-ORDER</th>
@@ -51,7 +51,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr style="font-size:x-small">
                     <td>
                         <a href="javascript:ShowOrderDetails('@item.VerserOrderID')">@item.VerserOrderID</a>
                     </td>
@@ -110,7 +110,7 @@
     <script type="text/javascript">
     $(document).ready(function () {
         $('#mainTable').DataTable({
-            "scrollX": true
+
         });
         $('.dataTables_filter').addClass('pull-right');
     });
@@ -130,7 +130,7 @@
                 $description.append('<b>Colour:</b>' + data.Colour).append('&nbsp;&nbsp;&nbsp;&nbsp;');
 
         $.confirm({
-            boxWidth: '400px',
+            boxWidth: '60%',
             useBootstrap: false,
             title: '',
             content: $description,

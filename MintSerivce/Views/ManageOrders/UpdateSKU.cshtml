@@ -12,23 +12,21 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @Html.Label("Select Editing SKU", htmlAttributes: new { @class = "control-label col-md-1" })
+            @Html.Label("Select Editing SKU", htmlAttributes: new { @class = "control-label col-md-1", style = "text-align:center" })
             @Html.DropDownListFor(model => Model.SKUViewModel.EditingSKU, Model.ListItemModel, "Select SKU", new { @class = "control-label col-md-2", @id = "ddlRemoveSKUID", @multiple = "multiple" })<br>
-            <div class="col-md-10">
-            </div>
         </div>
 
 
 
         <div class="form-group">
-            @Html.Label("New SKU", htmlAttributes: new { @class = "control-label col-md-1" })
+            @Html.Label("New SKU", htmlAttributes: new { @class = "control-label col-md-1", style = "text-align:center" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SKUViewModel.SKU, "", new { style = "width:150px" })
                 @Html.ValidationMessageFor(model => model.SKUViewModel.SKU, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("Make", htmlAttributes: new { @class = "control-label col-md-1" })
+            @Html.Label("Make", htmlAttributes: new { @class = "control-label col-md-1", style = "text-align:center" })
             <div class="col-md-10">
 
                 @Html.DropDownListFor(model => Model.SKUViewModel.Make, new List<SelectListItem>
@@ -40,14 +38,14 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("Model", htmlAttributes: new { @class = "control-label col-md-1" })
+            @Html.Label("Model", htmlAttributes: new { @class = "control-label col-md-1", style = "text-align:center" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SKUViewModel.Model, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SKUViewModel.Model, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("Capacity", htmlAttributes: new { @class = "control-label col-md-1" })
+            @Html.Label("Capacity", htmlAttributes: new { @class = "control-label col-md-1", style = "text-align:center" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => Model.SKUViewModel.Capacity, new List<SelectListItem>
                          {
@@ -63,14 +61,14 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("Colour", htmlAttributes: new { @class = "control-label col-md-1" })
+            @Html.Label("Colour", htmlAttributes: new { @class = "control-label col-md-1", style = "text-align:center" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SKUViewModel.Colour, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SKUViewModel.Colour, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("SubGrade", htmlAttributes: new { @class = "control-label col-md-1" })
+            @Html.Label("SubGrade", htmlAttributes: new { @class = "control-label col-md-1", style = "text-align:center" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => Model.SKUViewModel.SubGrade, new List<SelectListItem>
                             {
@@ -82,29 +80,29 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("SKUBuffer", htmlAttributes: new { @class = "control-label col-md-1" })
+            @Html.Label("SKUBuffer", htmlAttributes: new { @class = "control-label col-md-1", style = "text-align:center" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SKUViewModel.SKUBuffer, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SKUViewModel.SKUBuffer, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("IsActive", htmlAttributes: new { @class = "control-label col-md-1" })
+            @Html.Label("IsActive", htmlAttributes: new { @class = "control-label col-md-1", style = "text-align:center" })
             <div class="col-md-10">
                 @Html.CheckBoxFor(model => model.SKUViewModel.IsActive, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SKUViewModel.IsActive, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-offset-1 col-md-2">
-                <input type="submit" value="Create New SKU" class="btn btn-primary" id="CreateSKUSubmit" />
+            <div class="col-md-offset-1 col-md-2" style="padding-right:35px">
+                <input type="submit" value="Create New SKU" class="btn btn-warning pull-right" id="CreateSKUSubmit" />
             </div>
         </div>
     }
-</div>s
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
 
 
 <link href="~/Content/bootstrap-3.1.4.css" rel="stylesheet" />

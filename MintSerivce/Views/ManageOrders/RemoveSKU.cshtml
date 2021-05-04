@@ -12,24 +12,21 @@
     {
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            <div class="col-md-6">
-                @Html.Label("SKU", htmlAttributes: new { @class = "control-label col-md-1" })
-                @Html.DropDownListFor(model => Model.ListItemModel, Model.ListItemModel, "Select SKU", new { @class = "control-label col-md-3", @id = "ddlRemoveSKUID", @multiple = "multiple" })<br>
-
-            </div>
+            @Html.Label("SKU", htmlAttributes: new { @class = "control-label col-md-1", style = "text-align:center" })
+            @Html.DropDownListFor(model => Model.ListItemModel, Model.ListItemModel, "Select SKU", new { @class = "control-label col-md-3", @id = "ddlRemoveSKUID2", @multiple = "multiple" })<br>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-1 col-md-1">
-                <input type="submit" value="Remove" class="btn btn-primary" />
+            <div class="col-md-offset-1 col-md-2" style="padding-right:35px">
+                <input type="submit" value="Remove" class="btn btn-warning pull-right" />
             </div>
         </div>
     }
 </div>
 
-<div>
+@*<div>
     @Html.ActionLink("Back to List", "Index")
-</div>
+</div>*@
 
 <link href="~/Content/bootstrap-3.1.4.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -46,4 +43,14 @@
     });
     $('#ddlRemoveSKUID').removeAttr('multiple')
     $('#ddlRemoveSKUID').multiselect('rebuild');
+
+    $('#ddlRemoveSKUID2').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 250,
+        buttonWidth: '280px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true
+    });
+    $('#ddlRemoveSKUID2').removeAttr('multiple')
+    $('#ddlRemoveSKUID2').multiselect('rebuild');
 </script>

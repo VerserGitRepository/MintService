@@ -18,7 +18,7 @@
 <div class="col-md-12">
     <table class="table table-bordered table-hover display nowrap" table-responsive table-hover" id="mainTable" style="width:100%">
         <thead style="background-color:darkorange;color:white">
-            <tr>
+            <tr style="font-size:smaller">
                 <th>Order</th>
                 <th>Job</th>
                 <th>TIABOrder</th>
@@ -40,7 +40,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr style="font-size:smaller">
                     <td>@Html.DisplayFor(modelItem => item.VerserOrderID)</td>
                     <td>@Html.DisplayFor(modelItem => item.JMS_JobNo)</td>
                     <td>@Html.DisplayFor(modelItem => item.TIABOrderID)</td>
@@ -84,7 +84,6 @@
     <script type="text/javascript">
                 $(document).ready(function () {
                     $('#mainTable').DataTable({
-                        "scrollX": true
                     });
                     $('.dataTables_filter').addClass('pull-right');
                 });
@@ -99,7 +98,7 @@
 
 
         $.confirm({
-            boxWidth: '470px',
+            boxWidth: '60%',
             useBootstrap: false,
             title: '',
             content: data,

@@ -21,8 +21,8 @@
 
 <div class="col-md-12">
     <table class="table table-bordered table-hover display nowrap" table-responsive table-hover" id="mainTable" style="width:100%">
-        <thead style="background-color:darkorange;color:white; ">
-            <tr>
+        <thead style="background-color:darkorange;color:white;">
+            <tr style="font-size:smaller">
                 <th>Order</th>
                 <th>Job</th>
                 <th>TIABOrder</th>
@@ -42,7 +42,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr style="font-size:smaller">
 
                     <td>@Html.DisplayFor(modelItem => item.VerserOrderID)</td>
 
@@ -58,16 +58,16 @@
                     <td>@Html.DisplayFor(modelItem => item.OrderType)</td>
                     <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
                     <td>@Html.DisplayFor(modelItem => item.OrderSource)</td>
-                    <td>
+                    <td width="10%" style="text-align:center">
                         @if (item.OrderStatus != "On Hold")
                         {
                             <a href="@Url.Action("ProcessOrder", "Home", new { VerserOrderID = item.VerserOrderID, OrderType = item.OrderType })">
-                                <input type="button" class="btn btn-success btn-sm" style="font-size:small;font-weight:500;height:40px;" value="Process Order">
+                                <input type="button" class="btn btn-success btn-sm" style="font-size:small;font-weight:500;" value="Process Order">
                             </a>
                         }
                         else
                         {
-                            <input type="button" class="btn btn-success btn-sm" style="font-size:small;font-weight:500;height:40px;" value="Process Order" onclick="ShowAlertMessage();">
+                            <input type="button" class="btn btn-success btn-sm" style="font-size:small;font-weight:500;" value="Process Order" onclick="ShowAlertMessage();">
                         }
                     </td>
                 </tr>
@@ -92,7 +92,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#mainTable').DataTable({
-                "scrollX": true,
             });
 
             $('.dataTables_filter').addClass('pull-right');
@@ -109,7 +108,7 @@
 
 
         $.confirm({
-            boxWidth: '30%',
+            boxWidth: '60%',
             useBootstrap: false,
             title: '',
             content: data,
