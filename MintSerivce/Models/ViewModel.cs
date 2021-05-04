@@ -10,6 +10,7 @@ namespace MintSerivce.Models
         {
             AccessoriesStock = new List<AccessoriesStockCountDto>();
             SKUViewModel = new SKUModel();
+            NewUserModel = new NewUserRegisterModel();           
         }
         public List<SelectListItem> ListItemModel { get; set; }
         public List<SelectListItem> OrdersListItemModel { get; set; }
@@ -20,6 +21,9 @@ namespace MintSerivce.Models
         public string Locality { get; set; }
         public string Postcode { get; set; }
         public List<AccessoriesStockCountDto> AccessoriesStock { get; set; }
-        public SKUModel SKUViewModel { get; set; }        
+        public SKUModel SKUViewModel { get; set; }
+        public NewUserRegisterModel NewUserModel { get; set; }
+        public string UNLockUserAccount { get; set; }
+
     }
 }

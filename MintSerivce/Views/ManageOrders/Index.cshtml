@@ -6,126 +6,188 @@
 }
 
 
-<ul class="nav nav-tabs" id="myTab">
-    <li class="active"><a data-toggle="tab" href="#RETURNORDER">UPDATE ADDRESS</a></li>
-    <li><a data-toggle="tab" href="#MANAGESKU">UPDATE BUFFER</a></li>
-    <li><a data-toggle="tab" href="#CreateSKU">CREATE NEW SKU</a></li>
-    <li><a data-toggle="tab" href="#UpdateSKU">UPDATE SKU</a></li>
-    <li><a data-toggle="tab" href="#RemoveSKU">REMOVE SKU</a></li>
-    <li><a data-toggle="tab" href="#MANAGEDISPATCHORDER">MANAGE DISPATCH</a></li>
-    <li><a data-toggle="tab" href="#MANAGEACCESSORIES">ACCESSORIES</a></li>
-    <li><a data-toggle="tab" href="#CHANGEORDERSKU">CHANGE SKU</a></li>
-</ul>
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a data-toggle="tab" href="#RETURNORDER">UPDATE ADDRESS</a></li>
+        <li><a data-toggle="tab" href="#MANAGESKU">UPDATE BUFFER</a></li>
+        <li><a data-toggle="tab" href="#CreateSKU">CREATE NEW SKU</a></li>
+        <li><a data-toggle="tab" href="#UpdateSKU">UPDATE SKU</a></li>
+        <li><a data-toggle="tab" href="#RemoveSKU">REMOVE SKU</a></li>
+        <li><a data-toggle="tab" href="#MANAGEDISPATCHORDER">MANAGE DISPATCH</a></li>
+        <li><a data-toggle="tab" href="#MANAGEACCESSORIES">ACCESSORIES</a></li>
+        <li><a data-toggle="tab" href="#CHANGEORDERSKU">CHANGE SKU</a></li>
+        <li><a data-toggle="tab" href="#IMPORTASSETS">IMPORT ASSETS</a></li>
+        <li><a data-toggle="tab" href="#CREATENEWUSER">CREATE NEW USER</a></li>
+        <li><a data-toggle="tab" href="#UPDATEUSERPASSWORD">RESET USER PASSWORD</a></li>
+        <li><a data-toggle="tab" href="#UNLOCKUSER">UNLOCK USER ACCOUNT</a></li>
+    </ul>
 
 
-<div class="tab-content" >
-    <div class="form-group" style="padding-left:10px;color:orange;width:auto;align-items:center;text-align:center;vertical-align:top">
-        @if (TempData["ValidationErrors"] != null)
-        {
-            <p><h6> @TempData["ValidationErrors"].ToString()</h6></p>
-        }
-    </div>
-
-
-    <div id="RETURNORDER" class="tab-pane fade in active" role="tabpanel" >
-        <div class="well">
-        @using (Html.BeginForm("UpdateOrderAddress", "ManageOrders", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })<br /><br />
-            <label class="control-label">Address Line 1&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            @Html.EditorFor(model => model.AddressLine1, "", new { style = "width:150px" })
-            @Html.ValidationMessageFor(model => Model.AddressLine1, "", new { @class = "text-danger" })
-            <br /><br />
-            <label class="control-label">Locality&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            @Html.EditorFor(model => model.Locality, "", new { style = "width:150px" })
-            @Html.ValidationMessageFor(model => Model.Locality, "", new { @class = "text-danger" })
-            <br /><br />
-            <label class="control-label">State&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            @Html.EditorFor(model => model.State, "", new { style = "width:150px" })
-            @Html.ValidationMessageFor(model => Model.State, "", new { @class = "text-danger" })
-            <br /><br />
-            <label class="control-label">Postal Code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            @Html.EditorFor(model => model.Postcode, "", new { style = "width:150px" })
-            @Html.ValidationMessageFor(model => Model.Postcode, "", new { @class = "text-danger" })
-            <br /><br />
-            <input type="submit" class="btn btn-primary" id="update" style="margin:0" value="Update Address"> @*onclick="return ShowProgress();" onclick="DisplayProgressMessage(this,'Processing Order...')"*@
-            <br /><br />
-        }
-        </div>
-    </div>
-
-
-    <div id="MANAGEDISPATCHORDER" class="tab-pane fade">
-        <div class="well">
-            @using (Html.BeginForm("OrderSummary", "ManageOrders", FormMethod.Post))
+    <div class="tab-content">
+        <div class="form-group" style="padding-left:10px;color:orange;width:auto;align-items:center;text-align:center;vertical-align:top">
+            @if (TempData["ValidationErrors"] != null)
             {
-                <button type="submit" class="btn btn-primary" style="margin:0">PRINT TODAY ORDERS SUMMARY</button>
-                if (TempData["OrderFilePath"] != null)
+                <p><h6> @TempData["ValidationErrors"].ToString()</h6></p>
+            }
+        </div>
+
+
+        <div id="RETURNORDER" class="tab-pane fade in active" role="tabpanel">
+            <div class="well">
+                @using (Html.BeginForm("UpdateOrderAddress", "ManageOrders", FormMethod.Post))
                 {
-                    <br />
-                    <img style="width:45px" src="~/Images/PDF.png" /> <a href="javascript: w=window.open('@TempData["OrderFilePath"].ToString()');">Print Shipment Order Summary</a>
+                    @Html.AntiForgeryToken()
+                    @Html.DropDownListFor(model => Model.VerserOrderID, Model.OrdersListItemModel, "Select Verser Order", new { @class = "form-control", @id = "ddlOrderID", @multiple = "multiple" })<br /><br />
+                    <label class="control-label">Address Line 1&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    @Html.EditorFor(model => model.AddressLine1, "", new { style = "width:150px" })
+                    @Html.ValidationMessageFor(model => Model.AddressLine1, "", new { @class = "text-danger" })
+                    <br /><br />
+                    <label class="control-label">Locality&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    @Html.EditorFor(model => model.Locality, "", new { style = "width:150px" })
+                    @Html.ValidationMessageFor(model => Model.Locality, "", new { @class = "text-danger" })
+                    <br /><br />
+                    <label class="control-label">State&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    @Html.EditorFor(model => model.State, "", new { style = "width:150px" })
+                    @Html.ValidationMessageFor(model => Model.State, "", new { @class = "text-danger" })
+                    <br /><br />
+                    <label class="control-label">Postal Code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    @Html.EditorFor(model => model.Postcode, "", new { style = "width:150px" })
+                    @Html.ValidationMessageFor(model => Model.Postcode, "", new { @class = "text-danger" })
+                    <br /><br />
+                    <input type="submit" class="btn btn-primary" id="update" style="margin:0" value="Update Address"> @*onclick="return ShowProgress();" onclick="DisplayProgressMessage(this,'Processing Order...')"*@
+                    <br /><br />
                 }
-            }
-            <br />
-            <input type="date" value="" placeholder="Enter Date in ddmmyyyy format" id="datevalueEnter" />
-            <br /> <br /> <br />
-            <p><a id="downloadfile" class="btn-primary btn-lg" href="downloadfile" target="_blank">Download File</a></p>
+            </div>
         </div>
-    </div>
 
 
-
-
-    <div id="MANAGESKU" class="tab-pane fade">
-        <div class="well">
-            @using (Html.BeginForm("UpdateSKUBuffer", "ManageOrders", FormMethod.Post))
-            {
-                <div class="form-group" style="padding-left:20px;padding-top:15px">
-                    <label class="control-label">SKU ID</label><br>
-                    @Html.DropDownListFor(model => Model.ListItemModel, Model.ListItemModel, "Select SKU", new { @class = "form-control", @id = "ddlSKUID", @multiple = "multiple" })<br>
-                    <br><br><label class="control-label">SKU Buffer</label><br>
-                    <input type="text" id="SKUBufferID" name="SKUBuffer" class="form-control" /><br>
-                </div>
-                <div class="form-group" style="padding-left:20px;">
-                    <button type="submit" class="btn btn-primary">UPDATE SKU</button>
-                </div>
-            }
+        <div id="MANAGEDISPATCHORDER" class="tab-pane fade">
+            <div class="well">
+                @using (Html.BeginForm("OrderSummary", "ManageOrders", FormMethod.Post))
+                {
+                    <button type="submit" class="btn btn-primary" style="margin:0">PRINT TODAY ORDERS SUMMARY</button>
+                    if (TempData["OrderFilePath"] != null)
+                    {
+                        <br />
+                        <img style="width:45px" src="~/Images/PDF.png" /> <a href="javascript: w=window.open('@TempData["OrderFilePath"].ToString()');">Print Shipment Order Summary</a>
+                    }
+                }
+                <br />
+                <input type="date" value="" placeholder="Enter Date in ddmmyyyy format" id="datevalueEnter" />
+                <br /> <br /> <br />
+                <p><a id="downloadfile" class="btn-primary btn-lg" href="downloadfile" target="_blank">Download File</a></p>
+            </div>
         </div>
-    </div>
 
-
-    <div id="MANAGEACCESSORIES" class="tab-pane fade">
-
-        @Html.Partial("ManageAccessories")
-
-    </div>
-
-    <div id="CreateSKU" class="tab-pane fade">
-        <div class="well">
-            @Html.Partial("CreateSKU")
+        <div id="MANAGESKU" class="tab-pane fade">
+            <div class="well">
+                @using (Html.BeginForm("UpdateSKUBuffer", "ManageOrders", FormMethod.Post))
+                {
+                    <div class="form-group" style="padding-left:20px;padding-top:15px">
+                        <label class="control-label">SKU ID</label><br>
+                        @Html.DropDownListFor(model => Model.ListItemModel, Model.ListItemModel, "Select SKU", new { @class = "form-control", @id = "ddlSKUID", @multiple = "multiple" })<br>
+                        <br><br><label class="control-label">SKU Buffer</label><br>
+                        <input type="text" id="SKUBufferID" name="SKUBuffer" class="form-control" /><br>
+                    </div>
+                    <div class="form-group" style="padding-left:20px;">
+                        <button type="submit" class="btn btn-primary">UPDATE SKU</button>
+                    </div>
+                }
+            </div>
         </div>
-    </div>
 
-    <div id="UpdateSKU" class="tab-pane fade">
-        <div class="well">
-            @Html.Partial("UpdateSKU")
+
+        <div id="MANAGEACCESSORIES" class="tab-pane fade">
+
+            @Html.Partial("ManageAccessories")
+
         </div>
-    </div>
 
-    <div id="RemoveSKU" class="tab-pane fade">
-        <div class="well">
-            @Html.Partial("RemoveSKU")
+        <div id="CreateSKU" class="tab-pane fade">
+            <div class="well">
+                @Html.Partial("CreateSKU")
+            </div>
         </div>
-    </div>
 
-    <div id="CHANGEORDERSKU" class="tab-pane fade">
-        <div class="well">
-            @Html.Partial("ChangeOrderSKU")
+        <div id="UpdateSKU" class="tab-pane fade">
+            <div class="well">
+                @Html.Partial("UpdateSKU")
+            </div>
         </div>
-    </div>
 
-</div>
+        <div id="RemoveSKU" class="tab-pane fade">
+            <div class="well">
+                @Html.Partial("RemoveSKU")
+            </div>
+        </div>
+
+        <div id="CHANGEORDERSKU" class="tab-pane fade">
+            <div class="well">
+                @Html.Partial("ChangeOrderSKU")
+            </div>
+        </div>
+
+        <div id="IMPORTASSETS" class="tab-pane fade">
+            <div class="well">
+                @using (Html.BeginForm("ImportAssets", "ManageOrders", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @*@Html.AntiForgeryToken()*@
+                    <div class="form-horizontal">
+
+                        @*@Html.HiddenFor(model => model.LoadId, htmlAttributes: new { @class = "hiddenloadid" })*@
+
+                        <div class="form-group">
+                            @Html.Label("File:", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <input type="file" name="file" id="file" value="ImportExcelAssets" data-val-required="Please Choose a Assets File.." />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="Submit" value="IMPORT" class="btn btn-default btn-primary" id="Submit" />
+                            </div>
+                        </div>
+
+                        <label style="color:orange;font-weight:700">Download The File Format And Fill The Records To Avoid The Errors</label>
+                        <a href="~/ExcelFile/NuMobileFeedImportFormat.xlsx"><u style="color:blue;font-weight:800">Download</u></a>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div id="CREATENEWUSER" class="tab-pane fade">
+            <div class="well">
+
+                @Html.Partial("CreateNewUser")
+            </div>
+        </div>
+
+        <div id="UPDATEUSERPASSWORD" class="tab-pane fade">
+            <div class="well">
+                @Html.Partial("UpdateUserPassword")
+            </div>
+        </div>
+        <div id="UNLOCKUSER" class="tab-pane fade">
+            <div class="well">
+                @using (Html.BeginForm("UnLockUserAccount", "ManageOrders", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="form-horizontal">                    
+
+                        <div class="form-group">
+                            @Html.Label("UNLockUserAccount:", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">                               
+                                @Html.EditorFor(model => model.UNLockUserAccount, "", new { style = "width:150px" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="Submit" value="UNLOCK" class="btn btn-default btn-primary" id="Submit" />
+                            </div>
+                        </div>
+                    </div>     
+                    }
+            </div>
+        </div>        
+    </div>
 
 
 <link href="~/Content/bootstrap-3.1.4.css" rel="stylesheet" />

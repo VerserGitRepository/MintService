@@ -20,6 +20,7 @@ namespace MintSerivce.Helper
                     var login = new Dictionary<string, string>
                    {
                        {"grant_type", "password"},
+                       {"Content-Type", "application/x-www-form-urlencoded"},
                        {"username", UserName},
                        {"password", Password},
                    };
